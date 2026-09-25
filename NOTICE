@@ -1,0 +1,36 @@
+agent-skills
+Copyright (c) 2026 Kenneth Johannes Fang, MIT (see LICENSE).
+
+skills/human-prose/references/ contains files copied from two MIT-licensed projects.
+Their notices follow. deslop.md was edited to point at tropes.fyi instead of a bundled
+tropes list, which is left out because tropes.fyi publishes no licence.
+
+--- skills/human-prose/references/deslop*.md
+From https://github.com/stephenturner/skill-deslop
+
+MIT License
+
+Copyright (c) 2026 Stephen D. Turner
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+--- skills/human-prose/references/unslop*.md
+From https://github.com/theclaymethod/unslop (author claytonkim), declared MIT in its
+SKILL.md frontmatter and README ("Licensed MIT"). The MIT permission notice above
+applies to these files with that author as copyright holder.

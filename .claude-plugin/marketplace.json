@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "Research-first and change-safety skills for Claude.",
-    "version": "1.0.0"
+    "version": "1.1.0"
   },
   "plugins": [
     {
@@ -99,6 +99,18 @@
       "source": "./skills/match-the-app",
       "strict": false,
       "version": "1.0.0",
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "human-prose",
+      "description": "Write prose people read, in any language, without the tells of model-written text.",
+      "source": "./skills/human-prose",
+      "strict": false,
+      "version": "1.1.0",
       "author": {
         "name": "kengomatsuo"
       },

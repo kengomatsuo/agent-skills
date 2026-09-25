@@ -13,6 +13,7 @@ Each works on its own; they name each other where one hands off to the next.
 | `refactor` | working code is hard to read or duplicated: reshape it without changing behaviour |
 | `match-the-app` | you are adding a screen to an existing app: read its sibling pages first |
 | `screen-review` | you changed UI: run the app, screenshot it, check it before calling it done |
+| `human-prose` | Claude writes anything a person reads (docs, UI copy, commits, emails), in any language: it removes the tells of model-written prose |
 | `product-video` | you need a promo film or App Store preview of your app; lives in [its own repo](https://github.com/kengomatsuo/product-video) and installs from this marketplace too |
 
 ## Install
@@ -49,4 +50,4 @@ To rebuild the ZIPs: `bash scripts/package.sh`.
 
 ## Licence
 
-MIT.
+MIT. `human-prose` bundles files from two MIT projects; see NOTICE.
