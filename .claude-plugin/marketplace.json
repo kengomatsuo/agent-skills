@@ -5,8 +5,7 @@
     "url": "https://github.com/kengomatsuo"
   },
   "metadata": {
-    "description": "Research-first and change-safety skills for Claude.",
-    "version": "1.1.0"
+    "description": "Research-first and change-safety skills for Claude."
   },
   "plugins": [
     {
@@ -14,7 +13,6 @@
       "description": "Research how real products built a screen (GitHub code, UI galleries, Mobbin, Dribbble) before mocking it.",
       "source": "./skills/design-research",
       "strict": false,
-      "version": "1.0.0",
       "author": {
         "name": "kengomatsuo"
       },
@@ -26,7 +24,6 @@
       "description": "Research how competitors and open-source apps modelled a backend feature before designing it.",
       "source": "./skills/backend-research",
       "strict": false,
-      "version": "1.0.0",
       "author": {
         "name": "kengomatsuo"
       },
@@ -38,7 +35,6 @@
       "description": "Decide deliberately whether to use, copy or build a subsystem, after finding who already solved it.",
       "source": "./skills/prior-art",
       "strict": false,
-      "version": "1.0.0",
       "author": {
         "name": "kengomatsuo"
       },
@@ -50,7 +46,6 @@
       "description": "Work out everything a change can break before making it: callers, policies, generated types, other apps, old clients.",
       "source": "./skills/blast-radius",
       "strict": false,
-      "version": "1.0.0",
       "author": {
         "name": "kengomatsuo"
       },
@@ -62,7 +57,6 @@
       "description": "Audit a subsystem against the promise its users were given, writing assertions before reading the code.",
       "source": "./skills/blind-audit",
       "strict": false,
-      "version": "1.0.0",
       "author": {
         "name": "kengomatsuo"
       },
@@ -74,7 +68,6 @@
       "description": "Change the shape of existing code without changing what it does: extract, rename, move, split, deduplicate.",
       "source": "./skills/refactor",
       "strict": false,
-      "version": "1.0.0",
       "author": {
         "name": "kengomatsuo"
       },
@@ -86,7 +79,6 @@
       "description": "Run the real app, screenshot the UI you changed, and check it against the repo's reference screens.",
       "source": "./skills/screen-review",
       "strict": false,
-      "version": "1.0.0",
       "author": {
         "name": "kengomatsuo"
       },
@@ -98,7 +90,6 @@
       "description": "Read the code of the app's existing pages before writing a new one, or open a design canvas when nothing is like it.",
       "source": "./skills/match-the-app",
       "strict": false,
-      "version": "1.0.0",
       "author": {
         "name": "kengomatsuo"
       },
@@ -110,7 +101,6 @@
       "description": "Write prose people read, in any language, without the tells of model-written text.",
       "source": "./skills/human-prose",
       "strict": false,
-      "version": "1.1.0",
       "author": {
         "name": "kengomatsuo"
       },

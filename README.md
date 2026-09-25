@@ -33,6 +33,23 @@ claude plugin install design-research@kengomatsuo-skills
 The full HTTPS URL matters: the `kengomatsuo/agent-skills` shorthand clones over SSH and
 fails without a GitHub SSH key.
 
+Claude Code only auto-updates Anthropic's own marketplaces unless told otherwise, so turn
+it on once: `/plugin`, then **Marketplaces**, pick `kengomatsuo-skills`, then **Enable auto-update**. Or
+add the marketplace to `~/.claude/settings.json` with auto-update already on:
+
+```json
+"extraKnownMarketplaces": {
+  "kengomatsuo-skills": {
+    "source": { "source": "git", "url": "https://github.com/kengomatsuo/agent-skills.git" },
+    "autoUpdate": true
+  }
+}
+```
+
+With it on, every push reaches you in a session or two. By hand:
+`claude plugin marketplace update kengomatsuo-skills && claude plugin update <skill>@kengomatsuo-skills`.
+
+
 ### Claude app (claude.ai, desktop, mobile)
 
 1. Download a skill's ZIP from the [latest release](https://github.com/kengomatsuo/agent-skills/releases/latest).
