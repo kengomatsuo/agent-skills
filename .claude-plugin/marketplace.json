@@ -19,10 +19,7 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
-      "repository": "https://github.com/kengomatsuo/agent-skills",
-      "skills": [
-        "./"
-      ]
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
       "name": "backend-research",
@@ -34,10 +31,7 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
-      "repository": "https://github.com/kengomatsuo/agent-skills",
-      "skills": [
-        "./"
-      ]
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
       "name": "prior-art",
@@ -49,10 +43,7 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
-      "repository": "https://github.com/kengomatsuo/agent-skills",
-      "skills": [
-        "./"
-      ]
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
       "name": "blast-radius",
@@ -64,10 +55,7 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
-      "repository": "https://github.com/kengomatsuo/agent-skills",
-      "skills": [
-        "./"
-      ]
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
       "name": "blind-audit",
@@ -79,10 +67,7 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
-      "repository": "https://github.com/kengomatsuo/agent-skills",
-      "skills": [
-        "./"
-      ]
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
       "name": "refactor",
@@ -94,10 +79,7 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
-      "repository": "https://github.com/kengomatsuo/agent-skills",
-      "skills": [
-        "./"
-      ]
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
       "name": "screen-review",
@@ -109,10 +91,7 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
-      "repository": "https://github.com/kengomatsuo/agent-skills",
-      "skills": [
-        "./"
-      ]
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
       "name": "match-the-app",
@@ -124,10 +103,7 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
-      "repository": "https://github.com/kengomatsuo/agent-skills",
-      "skills": [
-        "./"
-      ]
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     }
   ]
 }
