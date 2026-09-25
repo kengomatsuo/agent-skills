@@ -7,6 +7,10 @@ user-invocable: true
 
 # A refactor changes shape and nothing else
 
+> **Local notes.** If `~/.claude/skill-notes/refactor.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 Two rules decide almost every question here.
 
 **ONE COMMIT IS A REFACTOR OR A BEHAVIOUR CHANGE, NEVER BOTH.** A rename mixed into a bug

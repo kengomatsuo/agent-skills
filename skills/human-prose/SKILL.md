@@ -5,6 +5,10 @@ description: "Use BEFORE writing or reviewing any prose a person will read, in A
 
 # Human Prose (any language)
 
+> **Local notes.** If `~/.claude/skill-notes/human-prose.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 A ruleset for writing that a person will read. It exists because LLM prose has a
 recognisable voice, and readers notice it even when they cannot name what they noticed.
 

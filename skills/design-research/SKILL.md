@@ -7,6 +7,10 @@ user-invocable: true
 
 # Look at how others built it, then mock
 
+> **Local notes.** If `~/.claude/skill-notes/design-research.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 ## RESEARCH FIRST. NOTHING IS DRAWN UNTIL EVERY AGENT HAS REPORTED.
 
 The steps below run in order, and each one waits for the one before it. Until the last
@@ -51,7 +55,10 @@ folder outside every repo (the user's choice; default `~/design-research/`):
 
 Screenshots come from `bun <skill-dir>/shot.ts <url> <out.png> [w] [h] [selector]`
 (Playwright from the current project, or `PLAYWRIGHT=<path>`).
-Agents never fabricate a URL or an image. A gated source is written down as gated.
+When a site blocks it (bot wall, login, Cloudflare), open it in a real browser session
+such as Claude in Chrome and screenshot there; never write a blocked site off as blocked
+without trying one. Agents never fabricate a URL or an image. A gated source is written
+down as gated.
 In a repo that forbids agents from running heavy checks, say so in the brief.
 
 The folder sits outside the repo on purpose: the references stay out of the product's

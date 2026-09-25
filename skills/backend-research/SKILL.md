@@ -7,6 +7,10 @@ user-invocable: true
 
 # Read how others built the feature, then design
 
+> **Local notes.** If `~/.claude/skill-notes/backend-research.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 `prior-art` asks whether to use an existing system, copy its design, or build. This skill
 gathers the evidence for the second and third answers: how the mature products shaped the
 same data, and what broke for them. When the question is "should we adopt X", run
@@ -45,7 +49,7 @@ Primary sources only: the project's own repo and docs, never a comparison blog. 
 project is alive with `gh api repos/<owner>/<repo> --jq
 '{stars:.stargazers_count,pushed:.pushed_at,archived:.archived}'` before learning from it.
 A gated or paywalled source is written down as gated. JS-rendered docs are opened in a
-browser, never guessed. In a repo that forbids agents from running heavy checks, say so
+real browser session such as Claude in Chrome, never guessed. In a repo that forbids agents from running heavy checks, say so
 in the brief.
 
 The folder sits outside the repo for the same reason as in `design-research`: one

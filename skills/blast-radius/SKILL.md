@@ -7,6 +7,10 @@ user-invocable: true
 
 # The deploy is not atomic, and the tree is not the system
 
+> **Local notes.** If `~/.claude/skill-notes/blast-radius.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 **A ROUTE DELETED THIS MORNING CRASHED A DEVICE THIS AFTERNOON.** A change removed two
 routes from a board app; a device still holding the previous bundle asked for one of them
 and threw `Cannot read properties of undefined`. Nothing in the diff was wrong. The tree

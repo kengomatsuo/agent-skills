@@ -5,6 +5,10 @@ description: "Use when a product needs strings in a language it does not have ye
 
 # Blind translation
 
+> **Local notes.** If `~/.claude/skill-notes/blind-translation.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 A translated string keeps the source language's clause order, connector density and
 rhythm. Every word is native and the shape underneath is English, which is the thing a
 native reader flinches at. The repair is to never hand the writer the English sentence.

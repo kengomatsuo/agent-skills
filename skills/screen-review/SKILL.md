@@ -7,6 +7,10 @@ user-invocable: true
 
 # Reading the JSX is not looking at the screen
 
+> **Local notes.** If `~/.claude/skill-notes/screen-review.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 **A LAYOUT CLAIM MADE FROM SOURCE IS A HYPOTHESIS.** Overflow, contrast, a control the
 row swallows, a sheet that travels past the viewport, a skeleton the wrong height — none
 of them are visible in the diff. Run the app.

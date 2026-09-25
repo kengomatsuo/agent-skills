@@ -7,6 +7,10 @@ user-invocable: true
 
 # Look at what already works before designing
 
+> **Local notes.** If `~/.claude/skill-notes/prior-art.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 **THE DEFAULT IS NOT TO BUILD IT.** A project that switched a booking flow onto an
 off-the-shelf scheduling platform kept a `docs/booking-is-<choice>.md` record of what was
 rejected to get there — including its own earlier booking engine, with an exclusion

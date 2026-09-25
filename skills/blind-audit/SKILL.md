@@ -7,6 +7,10 @@ user-invocable: true
 
 # Assert the promise, then read the code — never the reverse
 
+> **Local notes.** If `~/.claude/skill-notes/blind-audit.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
 **A SUITE WRITTEN FROM THE CODE ASSERTS WHAT THE CODE ALREADY DOES.** It goes green on
 day one and finds nothing, forever. The method that works is the **blind suite**: state
 the promise made to the user in plain sentences, turn each clause into an assertion, and
