@@ -25,7 +25,7 @@ claude plugin marketplace add https://github.com/kengomatsuo/agent-skills.git
 Then install the ones you want, for example:
 
 ```bash
-claude plugin install design-research@agent-skills
+claude plugin install design-research@kengomatsuo-skills
 ```
 
 The full HTTPS URL matters: the `kengomatsuo/agent-skills` shorthand clones over SSH and
