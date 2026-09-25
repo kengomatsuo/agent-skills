@@ -104,6 +104,20 @@
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
       "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "product-video",
+      "description": "Promo videos and App Store previews of your own apps: gather and study references, propose a storyboard, wireframe it, then build from real recordings in Remotion.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/kengomatsuo/product-video.git",
+        "path": "skills/product-video"
+      },
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/product-video"
     }
   ]
 }
