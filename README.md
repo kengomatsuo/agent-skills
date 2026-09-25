@@ -8,6 +8,7 @@ Each works on its own; they name each other where one hands off to the next.
 | `design-research` | a screen is new or being redesigned: agents collect GitHub code, gallery and Mobbin screenshots, then you mock from them |
 | `backend-research` | a backend feature is new: agents collect competitors' schemas, APIs, bug history and specs before any migration |
 | `prior-art` | a plan proposes building something mature projects already solved: use, copy or build, decided and written down |
+| `code-to-copy` | you want open-source code to copy: search by topic and by the market's own words, read each project's schema, record what to take and what to leave |
 | `blast-radius` | you are about to delete, rename or change a signature: list everything it can break first |
 | `blind-audit` | a subsystem needs checking end to end: assertions come from its promise, before reading its code |
 | `refactor` | working code is hard to read or duplicated: reshape it without changing behaviour |

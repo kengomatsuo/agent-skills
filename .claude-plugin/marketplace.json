@@ -42,6 +42,17 @@
       "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
+      "name": "code-to-copy",
+      "description": "Find open-source projects worldwide that already built a feature, read their schema and code, and record what to copy and what to leave.",
+      "source": "./skills/code-to-copy",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
       "name": "blast-radius",
       "description": "Work out everything a change can break before making it: callers, policies, generated types, other apps, old clients.",
       "source": "./skills/blast-radius",
