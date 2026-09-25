@@ -1,6 +1,6 @@
 # agent-skills
 
-Eight skills for Claude that make it look before it builds and check before it changes.
+Skills for Claude that make it look before it builds and check before it changes.
 Each works on its own; they name each other where one hands off to the next.
 
 | Skill | Use it when |
@@ -13,6 +13,7 @@ Each works on its own; they name each other where one hands off to the next.
 | `refactor` | working code is hard to read or duplicated: reshape it without changing behaviour |
 | `match-the-app` | you are adding a screen to an existing app: read its sibling pages first |
 | `screen-review` | you changed UI: run the app, screenshot it, check it before calling it done |
+| `product-video` | you need a promo film or App Store preview of your app; lives in [its own repo](https://github.com/kengomatsuo/product-video) and installs from this marketplace too |
 
 ## Install
 
