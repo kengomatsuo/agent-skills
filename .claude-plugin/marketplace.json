@@ -108,6 +108,17 @@
       "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
+      "name": "blind-translation",
+      "description": "Localise an app by writing each language from the screen, never from the English string, then checking it back against the meaning.",
+      "source": "./skills/blind-translation",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
       "name": "product-video",
       "description": "Promo videos and App Store previews of your own apps: gather and study references, propose a storyboard, wireframe it, then build from real recordings in Remotion.",
       "source": {

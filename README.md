@@ -14,6 +14,7 @@ Each works on its own; they name each other where one hands off to the next.
 | `match-the-app` | you are adding a screen to an existing app: read its sibling pages first |
 | `screen-review` | you changed UI: run the app, screenshot it, check it before calling it done |
 | `human-prose` | Claude writes anything a person reads (docs, UI copy, commits, emails), in any language: it removes the tells of model-written prose |
+| `blind-translation` | you add a language to an app or a store listing: one writer per language works from the screen, never from the English |
 | `product-video` | you need a promo film or App Store preview of your app; lives in [its own repo](https://github.com/kengomatsuo/product-video) and installs from this marketplace too |
 
 ## Install
