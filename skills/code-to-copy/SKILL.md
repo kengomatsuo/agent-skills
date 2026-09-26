@@ -134,7 +134,7 @@ The code that ships is never the source's code, so no licence has to travel with
 | # | Step | Who | Output |
 |---|---|---|---|
 | 1 | **Spec.** Read the saved source and write pseudocode: each entity's fields and what they mean, states and allowed moves, invariants, locking and reversal mechanics, and the source's own tests and bug-record fixes as test scenarios | agent A, reads the source | `<research>/pseudocode/<module>.md`, citing the source file per entity |
-| 2 | **Cut.** Every field, state and rule must trace to a requirement, an owner policy, a screen that shows it, or an invariant that protects money or data. Anything else is dropped from the pseudocode, with the reason | agent A | the same file, with a dropped list |
+| 2 | **Cut.** Every field, state and rule must cite a numbered line of the requirements document. A mock, a regulation, a feature the source has, or good practice is not a requirement; an invariant stays only when it guards something the requirements ask for. Anything else is dropped, with the reason | agent A | the same file, with a dropped list |
 | 3 | **Write.** Code and tests from the pseudocode alone, in the project's own conventions (`match-the-app`, backend included) | agent B, never opens the source | code and tests |
 | 4 | **Blend.** One naming scheme and one idiom across all ported modules, matching the code already in the repo | agent B | a consistency pass |
 | 5 | **Verify.** The tests from step 1 run and pass; each unit's header names its pseudocode and says what changed from the source and why | the orchestrator | a passing check, headers checked by script |
@@ -142,6 +142,9 @@ The code that ships is never the source's code, so no licence has to travel with
 Agent B working from the pseudocode is what keeps the result from being the same code.
 An agent that has read the source writes its code again from memory, whatever it
 intends. Simplicity is part of the port: a smaller schema is less to maintain, so step 2
-removes whatever the source carries that the project does not need. (zhexiang,
-2026-09-26.)
+removes whatever the source carries that the requirements do not ask for. Briefs to
+agents at every step name the requirement numbers in scope and forbid the rest.
+(zhexiang, 2026-09-26: consent tables, room clashes, grade bands, teacher-pay workflow
+and tax withholding all came in through "policy", "screen" and "invariant" and had to
+be cut.)
 
