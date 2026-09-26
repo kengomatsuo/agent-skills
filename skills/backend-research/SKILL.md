@@ -58,7 +58,8 @@ Before reporting, each agent runs `bun <skill-dir>/check-notes.ts <its folder>` 
 only when it exits 0.
 
 Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
-batches navigate and read in one call, and never closes a tab it did not open. That
+batches navigate and read in one call, and never closes a tab it did not open. They share
+the scratch folder too: each works in its own subfolder and deletes only files it created. That
 browser is the user's own and logged in, so research in it is read-only: never click
 buy, add to cart, sign up, claim or any control that changes an account, and say so in
 every brief.

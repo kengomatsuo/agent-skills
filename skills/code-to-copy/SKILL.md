@@ -52,7 +52,8 @@ that nothing exists. Keep going until at least four candidates survive step 3 be
 ones already known.
 
 Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
-batches navigate and read in one call, and never closes a tab it did not open.
+batches navigate and read in one call, and never closes a tab it did not open. They share
+the scratch folder too: each works in its own subfolder and deletes only files it created.
 
 ## 3. Verify each candidate from its own repo
 
