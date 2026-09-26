@@ -32,6 +32,12 @@ runs first, unasked, every time a screen is new or is being redesigned.
 
 ## 1. Brief (one paragraph, you write it)
 
+For a new app or a redesign, first list EVERY screen the requirements imply (each role's
+list, detail, form, approval, report, printout, empty and error state), and brief the
+agents on the whole list. Mocking a sample of screens leaves the rest to be drawn from
+memory later. The research target is at least five saved references per screen, counted
+per screen in the notes, before anything is drawn.
+
 What the screen is for, who reads it, every state it must show (e.g. Paid, Due soon,
 Grace, Lapsed, Not enforced), the device widths, and the app's component kit (shadcn,
 the project's own UI package and so on). Every agent gets the same brief.
@@ -39,6 +45,9 @@ the project's own UI package and so on). Every agent gets the same brief.
 ## 2. Fan out: five agents in parallel, in the background (six for commerce)
 
 One agent per source:
+
+The notes table carries a `screen` column naming which screen(s) of the list each
+reference serves, so the count per screen can be checked.
 
 | Agent | Source | Best output |
 |---|---|---|
