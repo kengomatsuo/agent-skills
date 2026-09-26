@@ -184,6 +184,10 @@ admin shell, admin dashboard, admin order list) and one column per direction, ea
 more than half the rows are the same across two directions, they are one direction:
 rebuild one of them from a different card before anyone sees it. A direction whose cells
 cite no research file is built from memory.
+Run `bun <skill-dir>/check-siblings.ts <url>...` on every mock route: components of one
+kind sitting together (info cards, tiles, list items) must share one height and one inner
+layout, and a badge never repeats its card's title. `--selftest` must fail, proving the
+check can see. A screen that fails is fixed before it is shot.
 Render it with `shot.ts` at desktop and phone widths, save the PNGs beside the research as
 `mock-<name>-<width>.png`, and show them to the user **in the same turn**, with the
 reference each decision came from. Offer three or four directions, each copying a different kind of
