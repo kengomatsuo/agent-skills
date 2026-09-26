@@ -27,7 +27,8 @@ const browser = await chromium.launch();
 const page = await browser.newPage({ viewport: { width: +w, height: +h }, deviceScaleFactor: 2 });
 await page.goto(url, { waitUntil: "networkidle", timeout: 45_000 }).catch(() => {});
 await page.waitForTimeout(1500);
-if (selector) await page.locator(selector).first().screenshot({ path: out });
-else await page.screenshot({ path: out });
+// animations frozen: two shots of one page must match pixel for pixel
+if (selector) await page.locator(selector).first().screenshot({ path: out, animations: "disabled" });
+else await page.screenshot({ path: out, animations: "disabled" });
 console.log(await page.title());
 await browser.close();
