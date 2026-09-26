@@ -149,6 +149,12 @@ a font's narrow space, the framework's dev badge is off, and the route answers 2
 port you shot (another project's server may hold the default port; pin one). A style
 generator's suggested palette and fonts are input, never a direction: when they do not
 fit the audience, drop them and say so.
+Before rendering, write a skeleton table: one row per structural choice (header and
+navigation, home hero, category entry, product card, listing and filters, product page,
+admin shell) and one column per direction, each cell naming the file it came from. When
+more than half the rows are the same across two directions, they are one direction:
+rebuild one of them from a different card before anyone sees it. A direction whose cells
+cite no research file is built from memory.
 Render it with `shot.ts` at desktop and phone widths, save the PNGs beside the research as
 `mock-<name>-<width>.png`, and show them to the user **in the same turn**, with the
 reference each decision came from. For more than one direction, mock each one and let the
