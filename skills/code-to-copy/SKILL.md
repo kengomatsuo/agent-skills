@@ -64,7 +64,10 @@ gh api "repos/<o>/<r>/git/trees/<branch>?recursive=1" --jq '.tree[].path' \
 ```
 
 Copy each file worth reading into the research folder with its permalink at the commit
-SHA on the first line. Code is copied, never paraphrased.
+SHA on the first line. Code is copied, never paraphrased. For a candidate whose screens
+the project may copy, the UI goes in too: app shell and navigation, theme tokens, page
+layouts and the list, table and status components, plus its README or docs screenshots
+downloaded with `curl`. A file you read but did not save does not count.
 
 ## 5. Grep for the mechanics that break
 
@@ -90,4 +93,6 @@ opens in a real browser session. Quote the sentence; a summary from memory is a 
 |---|---|---|---|---|
 
 Then one line per dropped candidate with the reason, and the file each "take" came from.
+Every "take" names a file in the folder; run `bun <skill-dir>/check-notes.ts <folder>`
+on the notes table and fix what it lists before handing the table on.
 Hand the table to `prior-art` when the question becomes use, copy or build.

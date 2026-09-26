@@ -43,7 +43,19 @@ gateways, the runtime (serverless, edge, a queue or none). Every agent gets the 
 Each agent writes into `<research>/<project>-<topic>/<source>/`, where `<research>` is a
 folder outside every repo (the user's choice; default `~/backend-research/`):
 - `code/<repo>--<path-with-dashes>` for copied source, never paraphrased
-- `notes.md`: a table of # | URL | file | what to take, in one concrete sentence
+- `notes.md`: a table of # | URL | file | what to take, in one concrete sentence. The file
+  column names a file in this folder for EVERY row, or says `gated: <reason>`
+
+**Looked at is not captured.** Every source is saved before it is cited:
+- an issue: `gh issue view <n> --repo <o>/<r> --json number,title,state,createdAt,closedAt,url,body,comments > issues/<o>-<r>-<n>.json`
+- an API reference or doc page: its text as `<vendor>-<page>.md`, URL and date on line 1
+  (a JS-rendered page through Claude in Chrome `get_page_text`)
+- a regulation or spec: the PDF itself with `curl`, checked with `file` so an HTML error
+  page never lands as `.pdf`
+- code: the raw file at the commit SHA, never a paraphrase
+
+Before reporting, each agent runs `bun <skill-dir>/check-notes.ts <its folder>` and reports
+only when it exits 0.
 
 Primary sources only: the project's own repo and docs, never a comparison blog. Verify a
 project is alive with `gh api repos/<owner>/<repo> --jq
@@ -57,7 +69,9 @@ project's research serves the next.
 
 ## 3. Synthesise
 
-Read the four `notes.md` files and the strongest code. Write
+Run `bun <skill-dir>/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
+sends the agent that owns the missing rows back. Then read the four `notes.md` files and
+the strongest code. Write
 `<research>/<project>-<topic>/README.md` with:
 
 - a table, one row per product, showing how each models the core entity: its tables or

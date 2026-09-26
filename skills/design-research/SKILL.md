@@ -42,7 +42,7 @@ One agent per source:
 
 | Agent | Source | Best output |
 |---|---|---|
-| GitHub | open-source apps with the same screen (Lago, Polar, Cal.com, Supabase Studio, Twenty, Dub, shadcn examples, Tremor) | **component source code** in `code/`, with the URL and branch in a header comment |
+| GitHub | open-source apps with the same screen (Lago, Polar, Cal.com, Supabase Studio, Twenty, Dub, shadcn examples, Tremor) | **the whole look in `code/`**: app shell and navigation, theme tokens (colours, radius, fonts), page layout, and the screen's components, each with the permalink at the commit SHA in a header comment |
 | Galleries | ui.shadcn.com blocks, tremor.so, tailwindcss.com/plus previews, saaspo, nicelydone, and vendor docs that show real dashboards (Stripe, Chargebee, Paddle, Linear, Vercel) | screenshots, plus code when the gallery exposes it |
 | Mobbin | public mobbin.com pages and CDN images; when gated, the same apps' public help-centre screenshots | screenshots |
 | Dribbble | `dribbble.com/search/<terms>`, then the full-size image from each shot page | screenshots, skipping concept art no product would ship |
@@ -51,7 +51,22 @@ Each agent writes into `<research>/<project>-<topic>/<source>/`, where `<researc
 folder outside every repo (the user's choice; default `~/design-research/`):
 - `NN-<site>-<what>.png`, each opened with Read to confirm it shows the thing, junk deleted
 - `code/<repo>--<File>.tsx` when code is available (code beats a picture)
-- `notes.md`: a table of # | URL | file | what to take, in one concrete sentence
+- `notes.md`: a table of # | URL | file | what to take, in one concrete sentence. The
+  file column names a file in this folder for EVERY row, or says `gated: <reason>`
+- `../languages/<product>.md`: one card per real product seen (competitor, open-source app
+  or vendor): navigation, page skeleton, density, how figures, lists, tables and status
+  look, component shapes, type, colour, and 2–4 signature moves, each backed by a saved
+  image or code file. A mock direction copies one card end to end, so the cards are what
+  make directions differ in layout and not only in colour
+
+**Looked at is not captured.** A source counts only when its bytes are in the folder:
+- An image: download the original with `curl` (full resolution, not a thumbnail).
+- A page Playwright cannot load: open it in Claude in Chrome, read the image URLs with
+  `javascript_tool` (`[...document.images].map(i => i.currentSrc)`, CSS backgrounds too)
+  and `curl` them; for rendered text, save `get_page_text` output to a `.md` file with the
+  URL and date on line 1. A Chrome screenshot ID is not a file.
+- Code: the raw file from `gh api repos/<o>/<r>/contents/<path>?ref=<sha>`, never a
+  paraphrase.
 
 Screenshots come from `bun <skill-dir>/shot.ts <url> <out.png> [w] [h] [selector]`
 (Playwright from the current project, or `PLAYWRIGHT=<path>`).
@@ -61,20 +76,31 @@ without trying one. Agents never fabricate a URL or an image. A gated source is 
 down as gated.
 In a repo that forbids agents from running heavy checks, say so in the brief.
 
+Before reporting, each agent runs `bun <skill-dir>/check-notes.ts <its folder>`; it lists
+every row whose file is missing or empty and exits 1. An agent reports only after it
+exits 0.
+
 The folder sits outside the repo on purpose: the references stay out of the product's
 history, and one project's references are reusable in the next.
 
 ## 3. Synthesise
 
-Read the four `notes.md` files and the strongest images. Write
+Run `bun <skill-dir>/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
+sends the agent that owns the missing rows back. Then read the four `notes.md` files, the
+`languages/` cards and the strongest images. Write
 `<research>/<project>-<topic>/README.md` with the patterns worth copying, each named
 with the file it came from, and the ones rejected with the reason (it breaks one of the
 project's design rules, or suits a marketing page and not a working tool).
 
 ## 4. Mock, then show
 
-Only after step 3's README exists. Build the mock as a static HTML page that uses the app's real tokens and component
-classes (read the app's CSS and two sibling screens first, as `match-the-app` says).
+Only after step 3's README exists. Build the mock as a route in the app itself, from the
+files in `code/`: install the kit's primitives, port the saved components, and change
+tokens and copy (read the app's CSS and two sibling screens first, as `match-the-app`
+says). Never a hand-written static HTML page. When the app has no brand yet, each
+direction takes ONE `languages/` card whole, layout and navigation included; two
+directions sharing a skeleton are one direction, and the kit's stock neutral theme is not
+a direction.
 **Before shooting, check the mock against the project's own design rules**, not only its
 tokens: list rules, row targets, borders, how status is shown, and real brand marks
 (never a text lockup) when a payment method or partner has a logo. A mock that copied a
