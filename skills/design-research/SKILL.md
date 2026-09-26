@@ -36,7 +36,7 @@ What the screen is for, who reads it, every state it must show (e.g. Paid, Due s
 Grace, Lapsed, Not enforced), the device widths, and the app's component kit (shadcn,
 the project's own UI package and so on). Every agent gets the same brief.
 
-## 2. Fan out: five agents in parallel, in the background
+## 2. Fan out: five agents in parallel, in the background (six for commerce)
 
 One agent per source:
 
@@ -47,6 +47,18 @@ One agent per source:
 | Mobbin | public mobbin.com pages and CDN images; when gated, the same apps' public help-centre screenshots | screenshots |
 | Dribbble | `dribbble.com/search/<terms>`, then the full-size image from each shot page | screenshots, skipping concept art no product would ship |
 | Real products | the domain's competitors and the local apps the users already open daily (their help centres, docs and app-store listings carry real in-app screenshots) | one `languages/<product>.md` card each, the source a direction is built from; a shipped product outranks a Dribbble concept |
+| UX research (commerce and ordering screens) | Baymard Institute, Nielsen Norman Group, and primary market surveys on how local buyers pay and ship | a rule per step with a short quote and URL; a paywalled page is written down as gated |
+
+**For a shop, checkout or any ordering screen, the real-products agents study flows before
+looks.** One agent per market leader the users already know (the local marketplaces plus
+Amazon and eBay), each covering the buyer side (search, filters, product page, variant,
+cart, checkout, payment, tracking, review, return) and the seller side (new order to
+shipped, add a product with variants, stock, promotions, returns). Each writes `flow.md`:
+step | screen | what it shows, with the exact labels in the users' language | taps from the
+last step | source. Seller screens behind a login come from the platform's public seller
+education pages. The synthesis compares the app's own flow step by step against them;
+the look is chosen after the flow is settled. Brand sites and Dribbble alone produce a
+restyled screen with the wrong flow.
 
 Each agent writes into `<research>/<project>-<topic>/<source>/`, where `<research>` is a
 folder outside every repo (the user's choice; default `~/design-research/`):
@@ -72,6 +84,14 @@ folder outside every repo (the user's choice; default `~/design-research/`):
 Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
 batches navigate and read in one call, and never closes a tab it did not open.
 
+**That browser is the user's own, logged in to their real accounts, so research in it is
+read-only.** Every brief that sends an agent to Claude in Chrome says so in words:
+navigate, scroll, read and screenshot only; never click add to cart, buy, wishlist,
+follow, chat, claim a voucher, or anything that changes an account, cart or order; the
+flow behind such a button comes from the site's help centre. An agent that changed
+something undoes it and reports exactly what it did, and the coordinator checks the
+account page itself before telling the user it is clean.
+
 Screenshots come from `bun <skill-dir>/shot.ts <url> <out.png> [w] [h] [selector]`
 (Playwright from the current project, or `PLAYWRIGHT=<path>`).
 When a site blocks it (bot wall, login, Cloudflare), open it in a real browser session
@@ -90,7 +110,7 @@ history, and one project's references are reusable in the next.
 ## 3. Synthesise
 
 Run `bun <skill-dir>/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
-sends the agent that owns the missing rows back. Then read the five `notes.md` files, the
+sends the agent that owns the missing rows back. Then read every `notes.md` file and `flow.md`, the
 `languages/` cards and the strongest images. Write
 `<research>/<project>-<topic>/README.md` with the patterns worth copying, each named
 with the file it came from, and the ones rejected with the reason (it breaks one of the
@@ -101,7 +121,19 @@ project's design rules, or suits a marketing page and not a working tool).
 Only after step 3's README exists. Build the mock as a route in the app itself, from the
 files in `code/`: install the kit's primitives, port the saved components, and change
 tokens and copy (read the app's CSS and two sibling screens first, as `match-the-app`
-says). Never a hand-written static HTML page. When the app has no brand yet, each
+says). Never a hand-written static HTML page.
+A kit preset ships its own control heights, radius and weights: replace them with the
+project's tokens before the first screen is built on it, and screenshot one form beside the
+token sheet. Screens built on the preset's numbers read as the stock kit however the
+colours change.
+For a brand direction that touches every page, add a development-only switch instead of a
+separate route: a cookie set by a dev route, read in the root layout into a
+`data-brand` attribute, with each direction's tokens and fonts scoped under
+`html[data-brand="…"]`. Then one script shoots the same real pages, storefront and admin,
+in every direction, and the user can flip them live.
+Placeholder tiles make any direction look like a template: show real photos, from the
+client or from a free-licence library whose licence page you quoted, downloaded only with
+the user's yes and each file's source recorded. When the app has no brand yet, each
 direction takes ONE `languages/` card whole, layout and navigation included; two
 directions sharing a skeleton are one direction, and the kit's stock neutral theme is not
 a direction.
@@ -109,7 +141,9 @@ a direction.
 tokens: list rules, row targets, borders, how status is shown, and real brand marks
 (never a text lockup) when a payment method or partner has a logo. A mock that copied a
 screen which already broke them repeats the defect: fix the screen too.
-Then check the render itself: every script in the content has a glyph (a Latin-only font
+Then check the render itself: compute the contrast of each direction's accent against its
+backgrounds with a script (4.5:1 for text) and darken what fails before anyone sees it;
+every script in the content has a glyph (a Latin-only font
 shows Chinese or Arabic as empty boxes, so load a fallback), words are not run together by
 a font's narrow space, the framework's dev badge is off, and the route answers 200 on the
 port you shot (another project's server may hold the default port; pin one). A style

@@ -36,9 +36,9 @@ gateways, the runtime (serverless, edge, a queue or none). Every agent gets the 
 | Agent | Source | Best output |
 |---|---|---|
 | Open-source code | apps that ship the same feature, found with `gh search repos` and `gh search code` (for commerce and POS: Medusa, Saleor, Odoo, ERPNext, Invoice Ninja; for billing: Lago, Polar, Kill Bill; for booking: Cal.com, Hi.Events; for CRM and ops: Twenty, Chatwoot, Plane) | **their migrations, schema files and service code** in `code/`, each with the permalink at the commit SHA in a header comment |
-| Competitor APIs | public API and webhook references of the commercial products (Stripe, Square, Toast, Shopify, Adyen and whoever leads the domain) | the object model: fields, statuses and allowed transitions, idempotency keys, the webhook event list, versioning |
+| Competitor APIs | public API and webhook references of the commercial products (Stripe, Square, Toast, Shopify, Adyen and whoever leads the domain), plus the help centres of the platforms the users already use | the object model: fields, statuses and allowed transitions, idempotency keys, the webhook event list, versioning, and every "if nobody acts" rule with its number (auto-cancel after N hours, auto-complete after N days, a return approved when the seller is silent for N days) |
 | Failure record | issues, changelogs, migration guides and postmortems of the projects above, searched for `race`, `duplicate`, `double`, `timezone`, `rounding`, `refund`, `idempotent`, `offline`, `migration` | each bug they hit, dated and linked, with the fix they chose |
-| Specs | the rules the feature cannot negotiate: the payment network's or central bank's spec, tax and invoicing rules, the gateway's settlement rules, Standard Webhooks, ISO 4217 minor units | constraints, each quoted briefly with the link |
+| Specs | the rules the feature cannot negotiate: the payment network's or central bank's spec, tax and invoicing rules, the gateway's settlement rules, Standard Webhooks, ISO 4217 minor units; for anything buyers pay for, primary survey data on how the local market pays and ships (cash on delivery, e-wallets, transfer) | constraints, each quoted briefly with the link; a payment method most local buyers use and the design lacks is an open question for the user |
 
 Each agent writes into `<research>/<project>-<topic>/<source>/`, where `<research>` is a
 folder outside every repo (the user's choice; default `~/backend-research/`):
@@ -58,7 +58,10 @@ Before reporting, each agent runs `bun <skill-dir>/check-notes.ts <its folder>` 
 only when it exits 0.
 
 Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
-batches navigate and read in one call, and never closes a tab it did not open.
+batches navigate and read in one call, and never closes a tab it did not open. That
+browser is the user's own and logged in, so research in it is read-only: never click
+buy, add to cart, sign up, claim or any control that changes an account, and say so in
+every brief.
 
 Primary sources only: the project's own repo and docs, never a comparison blog. Verify a
 project is alive with `gh api repos/<owner>/<repo> --jq
@@ -88,6 +91,8 @@ the strongest code. Write
 - every edge case at least one of them handles, with the file it came from
 - what we take, and what we reject with the reason (it assumes one tenant, it needs a
   queue we do not run, it solves a scale we will not reach)
+- every timeout from the competitors, and for each one in the design: the number, the job
+  that enforces it, and the screen that tells the user the date
 - open questions only the user can answer
 
 ## 4. Design, then propose

@@ -99,6 +99,18 @@ These findings are what make a project worth copying or not.
 
 ## 6. Check every claim in the source's own words
 
+A paid service is compared on its pricing, API and terms pages: per-transaction fee,
+subscription, payout time, onboarding requirements (business registration, tax number,
+bank account), and whether the same API covers a second need (a shipping aggregator that
+collects cash on delivery also issues tracking numbers and labels). A cell nobody could
+confirm stays marked unconfirmed, and a number found only on a reseller's blog counts as
+unconfirmed. Signing up for an account is the user's step, never the agent's.
+
+Demo content follows the same free-first rule: seed photos come from a free-licence library
+(quote the licence page's commercial-use sentence), are downloaded only with the user's
+yes, and every file's page URL, author and licence go in a `sources.json` beside them.
+
+
 "Free" is checked on the vendor's page, "may get banned" in the library's README, a
 regulation's status in the official register. A page that will not load in a fetch tool
 opens in a real browser session. Quote the sentence; a summary from memory is a guess.
