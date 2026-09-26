@@ -1,6 +1,6 @@
 ---
 name: design-research
-description: Before designing or redesigning any screen, look at how real products solved it. Fan out parallel agents to GitHub (open-source apps' component code), UI galleries (shadcn, Tremor, Stripe and vendor docs), Mobbin and Dribbble, save the references as screenshots and code into a research folder outside the repo, then draw mocks from them and send the screenshots. Use whenever a screen is new, being redesigned, or the user says it looks unfinished, bare, half-baked or wrong.
+description: Before designing or redesigning any screen, look at how real products solved it. Fan out parallel agents to GitHub (open-source apps' component code), UI galleries (shadcn, Tremor, Stripe and vendor docs), Mobbin, Dribbble and the real products users already know, save the references as screenshots and code into a research folder outside the repo, then draw mocks from them and send the screenshots. Use whenever a screen is new, being redesigned, or the user says it looks unfinished, bare, half-baked or wrong.
 when_to_use: "Trigger phrases: half-baked, looks bad, looks unfinished, where is the colour-coding, redesign, make it look good, inspo, inspiration, references, how do others do it, mock it up, show me mocks, dribbble, mobbin."
 user-invocable: true
 ---
