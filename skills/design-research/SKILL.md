@@ -47,7 +47,9 @@ the project's own UI package and so on). Every agent gets the same brief.
 One agent per source:
 
 The notes table carries a `screen` column naming which screen(s) of the list each
-reference serves, so the count per screen can be checked.
+reference serves. Write the list as a table with IDs (`| S01 | ... |`) in `screens.md`,
+then `bun <skill-dir>/check-notes.ts <folder> --screens screens.md --min 5` prints every
+screen short of five saved references and exits 2; the next wave of agents targets those.
 
 | Agent | Source | Best output |
 |---|---|---|
