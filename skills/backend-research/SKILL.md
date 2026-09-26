@@ -57,6 +57,9 @@ folder outside every repo (the user's choice; default `~/backend-research/`):
 Before reporting, each agent runs `bun <skill-dir>/check-notes.ts <its folder>` and reports
 only when it exits 0.
 
+Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
+batches navigate and read in one call, and never closes a tab it did not open.
+
 Primary sources only: the project's own repo and docs, never a comparison blog. Verify a
 project is alive with `gh api repos/<owner>/<repo> --jq
 '{stars:.stargazers_count,pushed:.pushed_at,archived:.archived}'` before learning from it.

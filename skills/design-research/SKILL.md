@@ -68,6 +68,9 @@ folder outside every repo (the user's choice; default `~/design-research/`):
 - Code: the raw file from `gh api repos/<o>/<r>/contents/<path>?ref=<sha>`, never a
   paraphrase.
 
+Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
+batches navigate and read in one call, and never closes a tab it did not open.
+
 Screenshots come from `bun <skill-dir>/shot.ts <url> <out.png> [w] [h] [selector]`
 (Playwright from the current project, or `PLAYWRIGHT=<path>`).
 When a site blocks it (bot wall, login, Cloudflare), open it in a real browser session
@@ -108,6 +111,9 @@ screen which already broke them repeats the defect: fix the screen too.
 Render it with `shot.ts` at desktop and phone widths, save the PNGs beside the research as
 `mock-<name>-<width>.png`, and show them to the user **in the same turn**, with the
 reference each decision came from. For more than one direction, mock each one and let the
-user pick.
+user pick, as one contact sheet with each direction's name and source product printed above
+its row (rendered with `shot.ts`), never a batch of unlabelled PNGs under one caption.
+Name a direction by what the user sees ("red accent, Mekari Talenta"), not by an internal
+key.
 
 Only then propose the implementation, and wait for yes.

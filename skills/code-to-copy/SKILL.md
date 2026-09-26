@@ -41,8 +41,18 @@ Run many combinations in one sandboxed script and print only the table:
   for province, for cash on delivery). Regional projects never use the English term.
 - **Markets with the same problem:** another country with the same payment habit, courier
   landscape or regulation often solved it first.
+- **The business's own name in every big market:** the same kind of business goes by a
+  different word, and a different codebase, in each country (a cram school is a 培训机构
+  selling 课时包 in China, a 塾 in Japan, a 학원 in Korea, a bimbel in Indonesia). Search
+  each word, and the forges where that market publishes: Chinese projects mostly live on
+  Gitee, which `gh` cannot search, so open it in a real browser session.
 
-Keep going until at least four candidates survive step 3 beyond the ones already known.
+An English-only search that finds nothing close is a signal to go local, never a verdict
+that nothing exists. Keep going until at least four candidates survive step 3 beyond the
+ones already known.
+
+Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
+batches navigate and read in one call, and never closes a tab it did not open.
 
 ## 3. Verify each candidate from its own repo
 
