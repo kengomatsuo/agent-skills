@@ -1,6 +1,6 @@
 ---
 name: screen-review
-description: Look at the UI you just changed by running the real app and taking screenshots, then check what you see against the house rules and the repo's own reference screens. Use after any UI change, before saying a screen is done, when a layout is suspected of breaking at a width, and whenever a claim about how something looks would otherwise come from reading the code.
+description: Look at the UI you just changed by running the real app and taking screenshots, then check what you see against the project's own rules and the repo's own reference screens. Use after any UI change, before saying a screen is done, when a layout is suspected of breaking at a width, and whenever a claim about how something looks would otherwise come from reading the code.
 when_to_use: "Trigger phrases: does it look right, screenshot it, check it on a phone, is it responsive, does dark mode hold, at 320px."
 user-invocable: true
 ---

@@ -1,6 +1,6 @@
 ---
 name: code-to-copy
-description: Find open-source projects that already built what you need, worldwide, read their schema and service code, and write down exactly what to copy and what to leave. Use when the owner says "find open source we can copy", "search for more", "go wider", before designing a feature a hobby shop, template or regional platform has likely already shipped, and whenever a plan leans on a paid API that someone may have replaced with free code or data. Complements prior-art (decide use, copy or build) and backend-research (fan-out across competitors).
+description: Find open-source projects that already built what you need, worldwide, read their schema and service code, and write down exactly what to copy and what to leave. Use when the user says "find open source we can copy", "search for more", "go wider", before designing a feature a hobby shop, template or regional platform has likely already shipped, and whenever a plan leans on a paid API that someone may have replaced with free code or data. Complements prior-art (decide use, copy or build) and backend-research (fan-out across competitors).
 when_to_use: "Trigger phrases: find open source to copy, search for more, go wider, is there an open-source version, who else built this, free alternative, we don't want to pay for it."
 user-invocable: true
 ---
@@ -20,7 +20,7 @@ and say precisely what to take.
 
 One sentence for the need, without your solution in it. Then the constraints that filter
 candidates: runtime, database, ORM, auth library, hosting size, licence, and **what the
-owner will not pay for**. The free path is searched first; a paid service is listed only
+user will not pay for**. The free path is searched first; a paid service is listed only
 as a fact when no free one exists.
 
 ## 2. Search wide with topics, not phrases
