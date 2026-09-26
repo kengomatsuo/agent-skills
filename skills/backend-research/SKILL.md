@@ -98,13 +98,12 @@ the strongest code. Write
 
 ## 4. Design, then propose
 
-Only after the README exists. **The schema is a port of the saved code, never a fresh
-design from the README.** Open the file in `code/` that models each table, copy its
-columns, statuses, constraints and reversal mechanics, and translate them into the
-project's SQL conventions. Each table's header comment names its source file; a table
-with no saved source says `Source: none saved` and why. The README decides which source
-wins where they disagree; it never stands in for reading the code. (zhexiang, 2026-09-26:
-a whole schema drafted from the README summary while the code sat unread in `code/`.)
+Only after the README exists. **The schema is a clean-room port of the saved code,
+never a fresh design from the README:** run `code-to-copy` step 8 (spec from the source,
+cut to what the requirements need, code written by an agent that never read the source,
+blended with the app, verified by the source's own scenarios). The README decides which
+source wins where they disagree; it never stands in for reading the code. (zhexiang,
+2026-09-26: a whole schema drafted from the README summary while the code sat unread.)
 Present the design as a table, status diagram or API shape, never paragraphs. This is new work, so propose it and wait
 for yes. When the research ends in a use, copy or build decision, record it in
 `docs/<thing>-is-<choice>.md` as `prior-art` describes.

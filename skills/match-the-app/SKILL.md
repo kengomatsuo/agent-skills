@@ -1,6 +1,6 @@
 ---
 name: match-the-app
-description: Read the code of the app's existing pages before writing a new one — or, when nothing in the app is like it (a new page type or a new mechanic), open a design canvas first. Use BEFORE writing ANY new screen, page, view, component, dialog, sheet, form, list, tab or section in an existing codebase — open the siblings' source first, every time.
+description: Read the code of the app's existing pages, tables and services before writing a new one — or, when nothing in the app is like it (a new page type or a new mechanic), open a design canvas first. Use BEFORE writing ANY new screen, page, view, component, dialog, sheet, form, list, tab or section in an existing codebase — open the siblings' source first, every time.
 when_to_use: "Trigger phrases: any request for a screen, page, view, form, list, dialog, sheet, tab or component — add a screen, new page, build the X page, make a view for, put a form on, this looks off next to the others."
 user-invocable: true
 ---
@@ -69,6 +69,22 @@ recently added sibling. Read two, not one.
 
 Copy the CONTENT decisions, not only the skeleton. Getting the padding right while
 inventing the row's contents still produces a wrong screen.
+
+## Backend: tables, migrations, jobs, services
+
+The same rule holds under the screen. Before a new table, migration, trigger, job or
+server action, read two siblings of the same kind in the repo and take from them:
+
+- The column helpers, id and timestamp shapes, money type, and how a status is declared
+  and checked.
+- Constraint and index naming, and where guards live (a check, a trigger, app code).
+- How a state change, a reversal and an audit row are written.
+- Migration file naming, and how a migration is generated and applied.
+- Error shape and how a server action reports it.
+- Naming: tables, columns, functions, jobs. One word per meaning across the repo; a
+  ported module takes the repo's word, never its source's.
+
+A ported module (`code-to-copy` step 8) passes through this before it ships.
 
 ## Then
 

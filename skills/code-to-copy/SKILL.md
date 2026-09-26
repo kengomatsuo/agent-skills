@@ -125,3 +125,23 @@ Then one line per dropped candidate with the reason, and the file each "take" ca
 Every "take" names a file in the folder; run `bun <skill-dir>/check-notes.ts <folder>`
 on the notes table and fix what it lists before handing the table on.
 Hand the table to `prior-art` when the question becomes use, copy or build.
+
+## 8. Port it clean-room, then fit it to the app
+
+Ported logic is less likely to carry bugs than a fresh design, so the port is the start.
+The code that ships is never the source's code, so no licence has to travel with it:
+
+| # | Step | Who | Output |
+|---|---|---|---|
+| 1 | **Spec.** Read the saved source and write pseudocode: each entity's fields and what they mean, states and allowed moves, invariants, locking and reversal mechanics, and the source's own tests and bug-record fixes as test scenarios | agent A, reads the source | `<research>/pseudocode/<module>.md`, citing the source file per entity |
+| 2 | **Cut.** Every field, state and rule must trace to a requirement, an owner policy, a screen that shows it, or an invariant that protects money or data. Anything else is dropped from the pseudocode, with the reason | agent A | the same file, with a dropped list |
+| 3 | **Write.** Code and tests from the pseudocode alone, in the project's own conventions (`match-the-app`, backend included) | agent B, never opens the source | code and tests |
+| 4 | **Blend.** One naming scheme and one idiom across all ported modules, matching the code already in the repo | agent B | a consistency pass |
+| 5 | **Verify.** The tests from step 1 run and pass; each unit's header names its pseudocode and says what changed from the source and why | the orchestrator | a passing check, headers checked by script |
+
+Agent B working from the pseudocode is what keeps the result from being the same code.
+An agent that has read the source writes its code again from memory, whatever it
+intends. Simplicity is part of the port: a smaller schema is less to maintain, so step 2
+removes whatever the source carries that the project does not need. (zhexiang,
+2026-09-26.)
+
