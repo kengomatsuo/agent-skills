@@ -178,6 +178,10 @@ product the users know: the local marketplace, the global leader, a small-shop t
 specialist in the domain. Mock each one and let the
 user pick, as one contact sheet with each direction's name and source product printed above
 its row (rendered with `shot.ts`), never a batch of unlabelled PNGs under one caption.
+The sheet shows every page the product has, not a chosen few, and labels each one as
+copied from the source ("own layout") or only restyled ("shell and colours only"). A
+summary never says a direction "copies" a product when only some pages do; it names the
+pages that do. Overclaiming coverage reads as a lie.
 Name a direction by what the user sees ("red accent, Mekari Talenta"), not by an internal
 key.
 
