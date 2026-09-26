@@ -161,9 +161,13 @@ a font's narrow space, the framework's dev badge is off, and the route answers 2
 port you shot (another project's server may hold the default port; pin one). A style
 generator's suggested palette and fonts are input, never a direction: when they do not
 fit the audience, drop them and say so.
+A direction covers every surface the product has. When the app has a back office, each
+direction's admin copies the SAME product's seller or merchant side (its seller centre,
+merchant admin or partner app), captured into its own `languages/admin-<product>.md` card;
+recolouring one shared admin is not a direction.
 Before rendering, write a skeleton table: one row per structural choice (header and
 navigation, home hero, category entry, product card, listing and filters, product page,
-admin shell) and one column per direction, each cell naming the file it came from. When
+admin shell, admin dashboard, admin order list) and one column per direction, each cell naming the file it came from. When
 more than half the rows are the same across two directions, they are one direction:
 rebuild one of them from a different card before anyone sees it. A direction whose cells
 cite no research file is built from memory.
