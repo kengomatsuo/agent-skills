@@ -90,7 +90,7 @@ history, and one project's references are reusable in the next.
 ## 3. Synthesise
 
 Run `bun <skill-dir>/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
-sends the agent that owns the missing rows back. Then read the four `notes.md` files, the
+sends the agent that owns the missing rows back. Then read the five `notes.md` files, the
 `languages/` cards and the strongest images. Write
 `<research>/<project>-<topic>/README.md` with the patterns worth copying, each named
 with the file it came from, and the ones rejected with the reason (it breaks one of the
