@@ -157,7 +157,9 @@ rebuild one of them from a different card before anyone sees it. A direction who
 cite no research file is built from memory.
 Render it with `shot.ts` at desktop and phone widths, save the PNGs beside the research as
 `mock-<name>-<width>.png`, and show them to the user **in the same turn**, with the
-reference each decision came from. For more than one direction, mock each one and let the
+reference each decision came from. Offer three or four directions, each copying a different kind of
+product the users know: the local marketplace, the global leader, a small-shop theme, a
+specialist in the domain. Mock each one and let the
 user pick, as one contact sheet with each direction's name and source product printed above
 its row (rendered with `shot.ts`), never a batch of unlabelled PNGs under one caption.
 Name a direction by what the user sees ("red accent, Mekari Talenta"), not by an internal
