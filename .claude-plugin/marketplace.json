@@ -130,6 +130,17 @@
       "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
+      "name": "ui-copy",
+      "description": "Decide which text may exist on an app screen, and delete the rest: budgets per element, one sentence per state, errors that name what happened.",
+      "source": "./skills/ui-copy",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
       "name": "product-video",
       "description": "Promo videos and App Store previews of your own apps: gather and study references, propose a storyboard, wireframe it, then build from real recordings in Remotion.",
       "source": {
