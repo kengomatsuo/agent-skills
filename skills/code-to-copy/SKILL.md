@@ -64,6 +64,12 @@ Drop it, with the reason written down, when it is archived, stale for a year, un
 or when its schema turns out not to cover the feature (a template with 1.5k stars can have
 no orders table).
 
+Judge a fork against the project's own stack. A close domain match on a different ORM or
+auth library is a set of modules to copy, never a base to fork: moving it costs a rewrite
+before the first feature. Read the licence per package: a monorepo can ship an AGPL app
+beside MIT UI packages, so the app is layout reference only while the packages can be
+copied.
+
 ## 4. Read the tree, then the files
 
 The README says what the project wants to be. The tree says what it is:

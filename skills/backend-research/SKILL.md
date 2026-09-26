@@ -73,7 +73,13 @@ project's research serves the next.
 ## 3. Synthesise
 
 Run `bun <skill-dir>/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
-sends the agent that owns the missing rows back. Then read the four `notes.md` files and
+sends the agent that owns the missing rows back. A row an agent marked "unconfirmed" goes
+back to it once, with a real browser session, before synthesis starts. Every number and
+rule in the README is re-read from the saved source, never from an agent's summary:
+summaries drift (a refund window reported as 30 days read 7 in the vendor's own article).
+A known bug in the failure record that touches the project's own stack (its driver, ORM,
+runtime) gets a short probe against the installed version before it changes a decision;
+the probe decides, the issue title does not. Then read the four `notes.md` files and
 the strongest code. Write
 `<research>/<project>-<topic>/README.md` with:
 

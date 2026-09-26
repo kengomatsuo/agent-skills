@@ -36,7 +36,7 @@ What the screen is for, who reads it, every state it must show (e.g. Paid, Due s
 Grace, Lapsed, Not enforced), the device widths, and the app's component kit (shadcn,
 the project's own UI package and so on). Every agent gets the same brief.
 
-## 2. Fan out: four agents in parallel, in the background
+## 2. Fan out: five agents in parallel, in the background
 
 One agent per source:
 
@@ -46,6 +46,7 @@ One agent per source:
 | Galleries | ui.shadcn.com blocks, tremor.so, tailwindcss.com/plus previews, saaspo, nicelydone, and vendor docs that show real dashboards (Stripe, Chargebee, Paddle, Linear, Vercel) | screenshots, plus code when the gallery exposes it |
 | Mobbin | public mobbin.com pages and CDN images; when gated, the same apps' public help-centre screenshots | screenshots |
 | Dribbble | `dribbble.com/search/<terms>`, then the full-size image from each shot page | screenshots, skipping concept art no product would ship |
+| Real products | the domain's competitors and the local apps the users already open daily (their help centres, docs and app-store listings carry real in-app screenshots) | one `languages/<product>.md` card each, the source a direction is built from; a shipped product outranks a Dribbble concept |
 
 Each agent writes into `<research>/<project>-<topic>/<source>/`, where `<research>` is a
 folder outside every repo (the user's choice; default `~/design-research/`):
@@ -108,6 +109,12 @@ a direction.
 tokens: list rules, row targets, borders, how status is shown, and real brand marks
 (never a text lockup) when a payment method or partner has a logo. A mock that copied a
 screen which already broke them repeats the defect: fix the screen too.
+Then check the render itself: every script in the content has a glyph (a Latin-only font
+shows Chinese or Arabic as empty boxes, so load a fallback), words are not run together by
+a font's narrow space, the framework's dev badge is off, and the route answers 200 on the
+port you shot (another project's server may hold the default port; pin one). A style
+generator's suggested palette and fonts are input, never a direction: when they do not
+fit the audience, drop them and say so.
 Render it with `shot.ts` at desktop and phone widths, save the PNGs beside the research as
 `mock-<name>-<width>.png`, and show them to the user **in the same turn**, with the
 reference each decision came from. For more than one direction, mock each one and let the
