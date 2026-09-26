@@ -165,6 +165,12 @@ A direction covers every surface the product has. When the app has a back office
 direction's admin copies the SAME product's seller or merchant side (its seller centre,
 merchant admin or partner app), captured into its own `languages/admin-<product>.md` card;
 recolouring one shared admin is not a direction.
+**No page of any direction is built until `bun <skill-dir>/check-directions.ts
+<research>/<project>-<topic>` exits 0.** It reads `directions.md`: one row per page the
+product has (storefront and back office, every route), one column per direction, each cell
+citing the saved file(s) that page copies, in backticks. A cell with no saved source, a
+missing file, or the same source as another direction fails. A page with no captured
+source gets a capture agent, never a shared fallback layout.
 Before rendering, write a skeleton table: one row per structural choice (header and
 navigation, home hero, category entry, product card, listing and filters, product page,
 admin shell, admin dashboard, admin order list) and one column per direction, each cell naming the file it came from. When
