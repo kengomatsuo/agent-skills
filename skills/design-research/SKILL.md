@@ -171,6 +171,13 @@ product has (storefront and back office, every route), one column per direction,
 citing the saved file(s) that page copies, in backticks. A cell with no saved source, a
 missing file, or the same source as another direction fails. A page with no captured
 source gets a capture agent, never a shared fallback layout.
+The checker proves sources exist, never that the build copied them. Build agents drift
+to one shared component with a note added or a section renamed per direction; the brief
+says in words that this is restyling, and that each page rebuilds its source's structure
+(sections, order, columns, controls) on one shared data layer. After every build round,
+shoot each page in every direction and run `bun <skill-dir>/review-grid.ts <shots>
+<dir1,dir2,...> <page>...`, then open every sheet. Two columns with the same structure
+send that page back with its source files named, before anyone else sees it.
 Before rendering, write a skeleton table: one row per structural choice (header and
 navigation, home hero, category entry, product card, listing and filters, product page,
 admin shell, admin dashboard, admin order list) and one column per direction, each cell naming the file it came from. When
