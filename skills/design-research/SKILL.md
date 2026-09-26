@@ -199,3 +199,11 @@ Name a direction by what the user sees ("red accent, Mekari Talenta"), not by an
 key.
 
 Only then propose the implementation, and wait for yes.
+
+Once a direction is approved, the mock code IS the spec. Write the whole plan to disk in the
+repo (every screen with its mock file, the tokens, each approved revision in the owner's
+words and the exact code change, the build order, and the parity check) so any later
+session builds the same thing. Production screens are ports of the mock files and are
+checked code against code: the same tree, classes and copy, then a pixel comparison of the
+production route and the mock route rendered from one shared seed. Rebuilding a screen from
+its screenshot is how differences creep in, so never do it.
