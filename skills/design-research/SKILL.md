@@ -1,6 +1,6 @@
 ---
 name: design-research
-description: "Researches how real products solved a screen before it is designed or redesigned: fans out parallel agents to open-source apps (component code), UI galleries, Mobbin, Dribbble and the real products the users already know, saves the references as screenshots and code into a research folder outside the repo, then draws mocks from them and sends the screenshots. Use whenever a screen is new or being redesigned, or the user says it looks unfinished, bare, half-baked or wrong."
+description: "Use BEFORE designing, redesigning or restyling any screen, and whenever a screen looks unfinished, bare, half-baked or wrong. Researches how real products solved it: fans out parallel agents to open-source apps (component code), UI galleries, Mobbin, Dribbble and the products the users already know, saves the references as screenshots and code into a research folder outside the repo, then draws mocks from them and sends the screenshots."
 when_to_use: "Triggers: complaints about how a screen looks (half-baked, looks bad, where is the colour-coding), requests for a redesign, mocks, inspiration or references (inspo, dribbble, mobbin), and questions about how other products do it."
 user-invocable: true
 ---

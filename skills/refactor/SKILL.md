@@ -1,6 +1,6 @@
 ---
 name: refactor
-description: "Changes the shape of existing code without changing what it does: extract, rename, move, split, deduplicate, simplify. Use when code works but is hard to read or extend, when the same logic exists twice, when a file has grown past its subject, and before building on top of something confusing. Covers what may be touched in one commit and what must wait."
+description: "Use BEFORE cleaning up, simplifying, splitting or deduplicating existing code: a file that has grown too big, the same logic in two places, confusing names, or code about to be built on. Changes the shape of the code without changing what it does (extract, rename, move, split, deduplicate, simplify), and decides what may change in one commit and what must wait."
 when_to_use: "Triggers: requests to clean up, simplify, extract, split a large file, deduplicate logic or tidy naming."
 user-invocable: true
 ---

@@ -1,6 +1,6 @@
 ---
 name: "human-prose"
-description: "Strips LLM tells from prose a person will read, in any language, and applies human editorial patterns. Use BEFORE writing or reviewing docs, README files, UI copy, error messages, commit messages, release notes, teaching material, articles, emails, slide decks and marketing pages. Covers the tells (antithesis, rule of three, negative anaphora, staccato fragments, copula avoidance, participle tails, significance inflation, dash and footnote clutter, inflated vocabulary, translationese, decorative formatting, leftover model markup) with concrete surface forms for English, Japanese, Indonesian, Korean, Chinese and Spanish, and a method for any other language. Also use when a draft \"sounds like AI\" or the user asks for a style or copy review."
+description: "Use BEFORE writing, rewriting or reviewing any prose a person will read, in any language: docs, README files, UI copy, error messages, commit messages, release notes, articles, emails, slide decks, marketing pages, and any draft that \"sounds like AI\" or ChatGPT. Strips the LLM tells (antithesis, rule of three, negative anaphora, staccato fragments, copula avoidance, participle tails, significance inflation, dash and footnote clutter, inflated vocabulary, translationese, decorative formatting, leftover model markup) and applies human editorial patterns, with surface forms for English, Japanese, Indonesian, Korean, Chinese and Spanish and a method for any other language."
 ---
 
 # Human Prose (any language)
