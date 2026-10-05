@@ -1,5 +1,24 @@
 # Phrases to Remove or Replace
 
+## Contents
+
+- Throat-Clearing Openers
+- Emphasis Crutches
+- Pedagogical Hand-Holding
+- Business Jargon
+- AI Vocabulary Tells
+- The "Serves As" Dodge
+- Adverbs
+- Meta-Commentary
+- Performative Emphasis
+- False Vulnerability
+- Telling Instead of Showing
+- "The Truth Is Simple"
+- Self-Certifying Candor
+- Vague Declaratives
+- Vague Attributions
+- Grandiose Stakes Inflation
+
 ## Throat-Clearing Openers
 
 Remove these. State the content directly.

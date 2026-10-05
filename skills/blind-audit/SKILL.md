@@ -1,7 +1,7 @@
 ---
 name: blind-audit
-description: Audit a whole subsystem against the promise its users were given, by writing assertions BEFORE reading the code underneath. Use when asked to audit, sweep, or check a system end to end, when a subsystem has grown past what anyone has verified, before a release that touches money or access, and whenever every existing test passes and the behaviour is still suspect. Produces findings, not reassurance.
-when_to_use: "Trigger phrases: audit it, sweep the whole thing, go through every, check it end to end, all the tests pass and I still do not trust it."
+description: Audits a whole subsystem against the promise its users were given, by writing assertions BEFORE reading the code underneath. Use when asked to audit, sweep or check a system end to end, when a subsystem has grown past what anyone has verified, before a release that touches money or access, and whenever every existing test passes and the behaviour is still suspect. Produces findings, not reassurance.
+when_to_use: "Triggers: requests to audit, sweep or check a whole system end to end, and distrust of a system whose tests all pass."
 user-invocable: true
 ---
 
@@ -20,6 +20,18 @@ One project's set of six such suites yielded, across three rounds: a tax posted 
 instead of a liability across three venues, a package a guest could buy for the price of a
 tea, a stranger who could read every table's key, and eleven other findings — in a
 codebase where every test was already passing.
+
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] 1. Promise written verbatim as the file header, taken from the user's words
+- [ ] 2. Every clause has a case: happy path, named boundary, what the actor may write, the other tenant
+- [ ] 3. Every assertion reads the stored value back
+- [ ] 4. Every assertion names a figure (one that cannot fail: rewrite it)
+- [ ] 5. Every failing assertion is marked [RED] and left red
+- [ ] 6. Report written before any fix; one fix per finding; suite re-run
+        (a RED neither green nor re-marked with a reason: return to step 5)
+```
 
 ## 1. Write the promise first, in the user's words
 

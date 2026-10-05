@@ -1,7 +1,7 @@
 ---
 name: prior-art
-description: Before building a subsystem, find the mature systems that already solved it and decide deliberately whether to use one, copy its design, or build. Use at the start of any non-trivial feature — booking, auth, payments, search, scheduling, PDF, sync, queueing, i18n — and whenever a plan proposes writing something a well-known project already does. Records the decision so it is not relitigated.
-when_to_use: "Trigger phrases: should we build this or use something, is there a library for it, how do other people solve this, roll our own."
+description: Finds the mature systems that already solved a subsystem, then decides on the record whether to use one, copy its design, or build. Use at the start of any non-trivial feature (booking, auth, payments, search, scheduling, PDF, sync, queueing, i18n) and whenever a plan proposes writing something a well-known project already does. Records the decision so it is not relitigated.
+when_to_use: "Triggers: questions about building versus using a library or service, whether a package exists for something, and how others solve a problem."
 user-invocable: true
 ---
 
@@ -18,6 +18,17 @@ constraint stopping two parties holding one slot at once, rate bands, and an ano
 offer RPC. The decision is dated, signed off by whoever owns the product, and marked *do not relitigate without new
 evidence*. That page is the shape this skill produces.
 
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] 1. Problem named in one sentence, without a solution in it
+- [ ] 2. Mature implementations found; stars and pushed_at verified with gh api
+- [ ] 3. Their hard-won constraints written down (a project bigger than one library: run backend-research)
+- [ ] 4. Choice made: use, copy its design, or build, with the cost named
+- [ ] 5. docs/<thing>-is-<choice>.md written and one headline added to the rules file
+        (no search recorded: Build is not yet a legitimate answer, return to step 2)
+```
+
 ## 1. Name the problem in one sentence, without your solution in it
 
 "Guests pick a time and a table, and cannot double-book." Not "build a booking table with
@@ -28,7 +39,7 @@ a range type". The sentence is what you search with.
 - GitHub, sorted by stars, then **verify the numbers with `gh api repos/<owner>/<name>`**.
   Listicles and comparison sites invent them: one blog reported 143.7k stars for a repo
   that has 58.
-- Check `pushed_at`. A 40k-star project last pushed in 2025 is a museum piece.
+- Check `pushed_at`. A 40k-star project last pushed more than a year ago is a museum piece.
 - Read the project's OWN docs and source, never an SEO comparison page.
 - For an installed dependency, `node_modules/` beats every docs site — the `exports` map
   for the real import path, the `.d.ts` for the typed API, the compiled JS for runtime
@@ -55,7 +66,7 @@ up at scale. Write those down even when you decide to build.
 
 ## 5. Write the page
 
-`docs/<thing>-is-<choice>.md`, in the shape of `booking-is-calcom.md`:
+`docs/<thing>-is-<choice>.md`, in the shape the opening paragraph describes:
 
 - **The decision, the date, who directed it, and "do not relitigate without new evidence".**
 - **What was rejected**, in detail — including your own existing systems. That section is

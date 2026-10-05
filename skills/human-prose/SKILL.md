@@ -1,6 +1,6 @@
 ---
 name: "human-prose"
-description: "Use BEFORE writing or reviewing any prose a person will read, in ANY language: docs, README files, UI copy, error messages, commit messages, release notes, teaching material, articles, emails, slide decks, marketing pages. Strips the LLM tells (antithesis, rule-of-three, negative anaphora \"no X no Y\", staccato fragments, copula avoidance, present-participle tails, significance inflation, dash clutter, footnote clutter, inflated vocabulary, translationese, decorative formatting, leftover model markup) and applies human editorial patterns. Carries concrete surface forms for English, Japanese, Indonesian, Korean, Chinese and Spanish, plus a method for deriving them in any other language. Also use when the user says a draft \"sounds like AI\", asks to make writing sound human, or asks for a style/copy review."
+description: "Strips LLM tells from prose a person will read, in any language, and applies human editorial patterns. Use BEFORE writing or reviewing docs, README files, UI copy, error messages, commit messages, release notes, teaching material, articles, emails, slide decks and marketing pages. Covers the tells (antithesis, rule of three, negative anaphora, staccato fragments, copula avoidance, participle tails, significance inflation, dash and footnote clutter, inflated vocabulary, translationese, decorative formatting, leftover model markup) with concrete surface forms for English, Japanese, Indonesian, Korean, Chinese and Spanish, and a method for any other language. Also use when a draft \"sounds like AI\" or the user asks for a style or copy review."
 ---
 
 # Human Prose (any language)
@@ -21,24 +21,6 @@ this skill works from. Use each device once when it earns its place, and not oth
 Apply this to prose only. Do not apply it to code, config, data, or quoted material.
 
 ---
-
-
-## Absorbed catalogues
-
-Two third-party prose skills were merged in here rather than left competing for the same
-trigger. Their files are copied verbatim under `references/`, and they load only when
-opened:
-
-- `references/deslop*.md` — the deslop catalogue: structures, phrases, worked examples.
-  Copied from `stephenturner/skill-deslop` (MIT), 2026-09-10. Its tropes list comes from
-  tropes.fyi, which carries no licence, so it is not bundled: read it at https://tropes.fyi.
-- `references/unslop*.md` — the unslop two-pass flow: core contract, pipeline, rubric,
-  edit library, taboo phrases, calibration, mimicry, fact preservation. Copied from
-  `theclaymethod/unslop` (MIT), 2026-09-10.
-
-They are ENGLISH-ONLY and they do not outrank this file. Where one disagrees with this
-file, this file stands. Reach for them when you want a longer catalogue of a specific
-tell, or a worked before/after; the taboo-phrase list is the densest of them.
 
 ## Part 0 — The pattern is universal, the surface form is local
 
@@ -63,15 +45,15 @@ Three consequences for how you work:
 1. **Never translate the English draft.** Compose in the target language, from the
    meaning. A translated sentence keeps English clause order, English connector
    density, and English paragraph rhythm, which is the whole problem.
-2. **Do not port this file's fixes literally.** The pattern transfers; the repair does
-   not. Splitting a sentence at an em dash is an English repair. In Japanese the same
+2. **Do not port this file's fixes literally.** The pattern carries over to any language,
+   and each language needs its own repair. Splitting a sentence at an em dash is an English repair. In Japanese the same
    idea is repaired by moving the load into ので or ため.
 3. **A rule about a specific glyph or word is local, not universal.** See the dash rule
    in Part 1 §5: the same character is a foreign import in one language and standard
    punctuation in another.
 
 If the target language is not covered in this file, derive its surface forms with the
-method in Part 5 before you start.
+method in `references/language-surface-forms.md` before you start.
 
 ---
 
@@ -134,7 +116,7 @@ headings.
 The mirror image is just as bad and is the dominant failure in Indonesian and Chinese:
 every sentence the SAME middling length. Chinese readers describe AI text as 每句都是
 20字上下. Indonesian readers describe monotonous, uniformly long formal sentences. The
-tell is uniformity in either direction, not shortness.
+tell is uniformity in either direction.
 
 ### 4. Stacked parallelism
 
@@ -157,7 +139,7 @@ is not merely AI-flavoured but incorrect.
 - **Korean and Indonesian:** the dash is not a normal connector. Prefer a comma, a
   colon, or a new sentence.
 - **Any other language:** ask whether the mark is native to its punctuation system
-  before writing a rule about it. See Part 5.
+  before writing a rule about it (method in `references/language-surface-forms.md`).
 
 The underlying universal is: **do not carry a clause on punctuation that the language
 would carry on a conjunction.**
@@ -168,27 +150,8 @@ would carry on a conjunction.**
 navigate (figurative), landscape (figurative), realm, testament to, at its core,
 it's worth noting, in today's fast-paced world, let's dive in.
 
-**Japanese:** 〜に他なりません、まさに〜こそが、〜という側面があります、〜と言えるでしょう、
-〜ではないでしょうか（as rhetoric rather than a real question）、〜していきましょう（cheerleading）.
-Also avoid loading Japanese with unnecessary katakana loanwords (ソリューション, バリュー,
-コミットする) when a native word exists.
-
-**Indonesian:** di era digital yang serba cepat, tak dapat dipungkiri, tak lepas dari,
-merupakan salah satu, mari kita simak, semoga bermanfaat. Also the nominalisation habit
-(pelaksanaan, penggunaan, pengoptimalan) where a verb would do, and needless English
-loans where a native word exists.
-
-**Korean:** 물론, 확실히, 좋은 질문입니다, 살펴보겠습니다, 〜라고 할 수 있습니다,
-〜인 것 같습니다 (hedging where the writer actually knows), 〜에 대한 and 〜을 통해 used as
-all-purpose English-preposition substitutes, and the double passive 〜되어집니다.
-
-**Chinese:** 赋能, 重塑, 深度融合, 切实推动, 有效赋能, 在某种意义上说, 从更深层次来看,
-值得进一步思考的是. Chinese readers call these 假大空 — impressive-sounding, hollow, and
-usually hiding who actually does the thing.
-
-**Spanish:** hedges used as a reflex (a menudo, generalmente), worn metaphors (como una
-máquina bien engrasada), and the motivational register (emocionante, descubrimiento,
-aprendizaje) applied to material that does not need it.
+**Other languages:** read `references/language-surface-forms.md` for the Japanese, Indonesian,
+Korean, Chinese and Spanish word lists before writing or reviewing in those languages.
 
 ### 7. Over-scaffolding and footnote clutter
 
@@ -222,17 +185,10 @@ same length. Vary it. Some points need one line, some need six.
 ### 10. Register drift and misjudged formality
 
 The model picks a register and then fails to hold it, or picks the wrong one for the
-language entirely. This barely shows in English and is glaring elsewhere.
-
-- **Korean:** mixing 합니다체 and 해요체 and casual endings inside one piece. Pick one
-  speech level and hold it to the last sentence. Also avoid ending three consecutive
-  sentences with the same form.
-- **Japanese:** same problem across です・ます and だ・である. Do not mix.
-- **Indonesian:** defaulting to stiff academic register with heavy passive
-  constructions (dilakukan, dapat dilakukan dengan cara) for text a person reads while
-  working. Indonesian AI text reads as a school essay by default. Choose the person
-  (`kamu` for a friendly product) and use active verbs.
-- **Chinese:** blending bureaucratic register (切实推动, 有效赋能) into ordinary prose.
+language entirely. This barely shows in English and is glaring elsewhere (Korean speech
+levels, Japanese です・ます against だ・である, Indonesian school-essay passives, Chinese
+bureaucratic phrasing). Pick one register, hold it to the last sentence, and read
+`references/language-surface-forms.md` for the per-language rules.
 
 ### 11. Borrowed authority
 
@@ -334,21 +290,9 @@ of them do.
 
 ### 19. Machine markup and citation damage (when reviewing pasted text)
 
-Not style problems. These are proof that text came out of a model and was never read
-before it was pasted:
-
-| Source | Residue |
-|---|---|
-| ChatGPT | `contentReference`, `oaicite` tags |
-| Gemini | `[cite: 1]`, `[span_1]` |
-| Grok | `grok_card` tags |
-| DeepSeek | stray lenticular brackets 【】, dagger symbols |
-
-Alongside them, check citations: invalid DOIs and ISBNs, book references with no page
-number, `utm_source=` left in URLs, and links that resolve to nothing. Strip the markup
-and verify every citation before the text ships. A fabricated reference in correct
-format is worse than no reference (§11).
-
+Leftover model markup (`oaicite`, `[cite: 1]`, `grok_card`, stray 【】) and broken citations prove the
+text was never read before it was pasted. Read [references/machine-markup-and-citations.md](references/machine-markup-and-citations.md)
+for the per-model residue table and the citation checks, then strip and verify before shipping.
 
 ---
 
@@ -456,8 +400,9 @@ win on structure; this file governs voice.
 
 ## Part 4 — Revision checklist
 
-Run this over any draft before shipping. Items marked [L] need the target language's
-own forms from Part 1 or Part 5.
+Run this over any draft before shipping. Fix every hit by restructuring, then run the list again on
+the rewritten text, and ship only when a pass finds nothing. Items marked [L] need the target language's
+own forms from Part 1 or `references/language-surface-forms.md`.
 
 - [ ] [L] Search the antithesis forms. English `not just`, `it's not`, `isn't about`;
       Japanese `ではなく`, `ではありません`, `というより`; Indonesian `bukan`, `melainkan`;
@@ -496,31 +441,6 @@ own forms from Part 1 or Part 5.
 
 ---
 
-## Part 5 — Deriving the forms for a language not covered here
-
-Six languages are spelled out above. Products often ship in far more (one app
-here carries 59). For any language not listed, spend a few minutes deriving its forms
-before writing, and add them here if the language recurs.
-
-1. **Find what its readers call the translation accent.** Search the language's own web
-   for the equivalent of 翻译腔 / 번역투 / "AI 味" / "ciri tulisan AI". Native speakers
-   have almost always already named the problem, with examples.
-2. **Ask how the language does the antithesis.** Every language has a "not X but Y"
-   frame. Find it, then avoid it.
-3. **Ask which joints the language marks.** Some mark relations with connectors, some
-   with verb endings, some with order alone. AI text over-marks in every one of them.
-4. **Ask whether the language has grammatical politeness or register levels.** If it
-   does, register drift (§10) becomes a top-three tell rather than a minor one.
-5. **Ask which punctuation is native.** Do not import an English punctuation rule into a
-   language whose standard says otherwise (the Chinese 破折号 is the worked example).
-6. **Check its clichés for calques.** Translated English filler is the fastest tell to
-   find and the fastest to fix.
-
-If you cannot research the language, say so and write plainly rather than guessing at
-its idiom. Plain and slightly foreign beats confident and wrong.
-
----
-
 ## When the user pushes back
 
 If someone says a draft still sounds like AI, do not reword the same sentence. Find which
@@ -533,52 +453,39 @@ will fix that.
 
 ---
 
-## Sources
+## Reference files
 
-Gorrie, C. (2025). *Why ChatGPT writes like that: a rhetorical analysis of AI "slop"*.
-Dead Language Society. https://www.deadlanguagesociety.com/p/rhetorical-analysis-ai
+Read these only when the task needs them. Every file is linked here, so none of them needs another one.
 
-Proofed. *AI editing checklist: how to spot and fix AI writing patterns*.
-https://proofed.com/knowledge-hub/ai-editing-checklist-how-to-spot-and-fix-ai-writing-patterns/
+- [references/language-surface-forms.md](references/language-surface-forms.md): inflated vocabulary and register rules for Japanese, Indonesian, Korean, Chinese and Spanish, and the method for deriving the forms of any other language (the six-step method that Part 0 points to). Read before writing or reviewing non-English prose.
+- [references/machine-markup-and-citations.md](references/machine-markup-and-citations.md): per-model markup residue and citation checks for pasted text.
+- [references/sources.md](references/sources.md): the articles and standards this skill was built from.
 
-GPTZero. *How to break free from GPT's rule of three in writing*.
-https://gptzero.me/news/the-rule-of-three/
+### Absorbed catalogues
 
-Guskaroska, A., Zawadzki, Z., Levis, J. M., Challis, K., & Prikazchikov, M. (2024).
-*Teaching Pronunciation with Confidence*. Iowa State University Digital Press.
-https://iastate.pressbooks.pub/teachingpronunciation/chapter/7-rhythm/
+Two third-party prose skills were merged in rather than left competing for the same trigger. They are
+English-only and do not outrank this file; where one disagrees with it, this file stands. Reach for them
+when you want a longer catalogue of a specific tell or a worked before/after. The unslop entry file routes
+to `commands/`, `presets/`, `scripts/` and `maintenance` files that are not bundled: skip those routes and
+use the files listed here.
 
-*一眼看穿AI：AI中文写作的常见特征*. Sohu. https://www.sohu.com/a/1014931596_523187
-(Chinese: 排比/对偶 overuse, 不是……而是……, 破折号 density as 翻译腔, uniform ~20字
-sentences, 假大空 vocabulary, evidence-free authority phrases.)
+deslop (from `stephenturner/skill-deslop`, MIT, copied 2026-09-10; its tropes list comes from tropes.fyi,
+which carries no licence, so read it at https://tropes.fyi instead):
 
-GB/T 15834-2011 《标点符号用法》 (Chinese national standard on punctuation; defines the
-破折号 as a two-character-width mark for annotation and supplement).
-https://www2.abc.edu.cn/xbbjb/upload/2025-09/25092916252720.pdf
+- [references/deslop.md](references/deslop.md): entry point, the short rules and a quick scoring check.
+- [references/deslop-structures.md](references/deslop-structures.md): structures to avoid (binary contrasts, negative listings, fragmentation, rhetorical setups).
+- [references/deslop-phrases.md](references/deslop-phrases.md): phrases to remove or replace.
+- [references/deslop-examples.md](references/deslop-examples.md): before/after transformations.
 
-*AI vs 인간의 글쓰기: ChatGPT의 가장 흔한 100가지 표현*. Rebrandb.
-https://www.rebrandb.com/special/ai-vs-인간의-글쓰기-chatgpt의-가장-흔한-100가지-표현
-(Korean: mechanical connectives, adverb overuse, formality inconsistency, filler openers.)
+unslop (from `theclaymethod/unslop`, MIT, copied 2026-09-10), a two-pass diagnose-then-rewrite flow:
 
-*4 Ciri Tulisan yang Dihasilkan oleh ChatGPT*. Tempo.
-https://www.tempo.co/digital/4-ciri-tulisan-yang-dihasilkan-oleh-chatgpt-2025609
-and *Cara Mendeteksi Tulisan Hasil ChatGPT*. CNN Indonesia.
-https://www.cnnindonesia.com/teknologi/20250711135904-185-1249601/cara-mendeteksi-tulisan-hasil-chatgpt-ini-ciri-cirinya
-(Indonesian: passive-heavy formal register, uniform sentence length, calqued clichés.)
-
-Wikipedia. *Signs of AI writing* (WikiProject AI Cleanup).
-https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
-(English: copula avoidance, present-participle tails, significance inflation,
-promotional adjectives, section formulas, formatting tells, per-model leftover markup,
-citation damage. The most complete English catalogue available, maintained by editors
-who clean up this text daily.)
-
-Doherty, T. E. *Is your AI writing suffering from anaphora?* Medium.
-https://medium.com/@tdoherty_96508/is-your-ai-writing-suffering-from-anaphora-e123e754e7a9
-(Names the "no X, no Y" pattern as anaphora plus asyndeton, and explains why oral
-rhetoric transplanted to the page reads as performance.)
-
-*11 señales de que ChatGPT escribió tu texto*.
-https://luisorlandolencarpio.substack.com/p/11-senales-de-que-chatgpt-escribio
-(Spanish: "lógica anglosajona" in sentence construction, forced connectors, hedge
-reflexes, worn metaphors, motivational tone.)
+- [references/unslop.md](references/unslop.md): entry point and routing.
+- [references/unslop-core-contract.md](references/unslop-core-contract.md): the rewrite contract; read for every audit or rewrite.
+- [references/unslop-pipeline.md](references/unslop-pipeline.md): tiered execution for multi-agent harnesses.
+- [references/unslop-rubric.md](references/unslop-rubric.md): strict 8-criterion scoring.
+- [references/unslop-edit-library.md](references/unslop-edit-library.md): before/after edit patterns.
+- [references/unslop-taboo-phrases.md](references/unslop-taboo-phrases.md): the densest phrase catalogue.
+- [references/unslop-fact-preservation.md](references/unslop-fact-preservation.md): what a rewrite must leave unchanged.
+- [references/unslop-rewrite-examples.md](references/unslop-rewrite-examples.md): compact executable examples.
+- [references/unslop-personality-guide.md](references/unslop-personality-guide.md): restoring voice after the tells are removed.
+- [references/unslop-calibrate.md](references/unslop-calibrate.md) and [references/unslop-mimic.md](references/unslop-mimic.md): voice calibration and mimicry internals.

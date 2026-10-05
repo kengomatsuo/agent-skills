@@ -1,6 +1,7 @@
 ---
 name: "app-store-aso"
-description: "Use when an app's App Store listing needs to be found: writing or rewriting the name, subtitle, keyword field, promo text, screenshots captions, custom product pages or release notes for one or many storefronts, before a release, when an app ranks for nothing, or when the store copy was written without research. Measures what people actually type and how crowded each query is per country, reads competitors' real listings, follows Apple's indexing rules and practitioners' tactics, then has every non-English line written blind. Trigger phrases: ASO, app store optimization, keywords, nobody finds the app, rank higher, subtitle, keyword field, store listing, custom product page, localise the listing."
+description: "Researches and writes an app's App Store listing so people can find it: the name, subtitle, keyword field, promo text, screenshot captions, custom product pages and release notes for one or many storefronts. Measures what people actually type and how crowded each query is per country, reads competitors' real listings, follows Apple's indexing rules and practitioners' tactics, then has every non-English line written blind. Use before a release, when an app ranks for nothing, or when the store copy was written without research."
+when_to_use: "Triggers: ASO or app store optimization requests, complaints that nobody finds the app or it needs to rank higher, and any work on the subtitle, keyword field, store listing, custom product pages or per-storefront localisation."
 ---
 
 # App Store optimization
@@ -15,16 +16,23 @@ current source in the session before acting on it, and cite it.
 
 ## The order. No step is skipped
 
-| # | Step | Output |
-|---|---|---|
-| 1 | **Apple's rules**, fetched live | `docs/aso/sources.md` |
-| 2 | **Practitioner tactics** | `docs/aso/research.md` |
-| 3 | **Measure** what people type and how crowded it is, per storefront | `docs/aso/data/` |
-| 4 | **Competitors'** real listings | `docs/aso/research.md` |
-| 5 | **Propose** per locale | `docs/aso/proposal.json`, `keywords.md` |
-| 6 | **Write blind** every non-English visible line | per-locale drafts |
-| 7 | **Screenshots and pages** | sets per device per locale, custom product pages |
-| 8 | **Ship and read back**; re-measure at 48 hours and 3 to 4 weeks | read-back, `data/` reruns |
+Dependencies: Python 3 with the standard library only for the scripts; `curl` for fetches.
+
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] 1. Apple's rules fetched live            -> docs/aso/sources.md
+- [ ] 2. Practitioner tactics                  -> docs/aso/research.md
+- [ ] 3. Measured what people type and how crowded it is, per storefront -> docs/aso/data/
+        (a seed with no type-ahead and no results: drop it or reseed, return to 3)
+- [ ] 4. Competitors' real listings            -> docs/aso/research.md
+- [ ] 5. Proposed per locale                   -> docs/aso/proposal.json, keywords.md
+- [ ] 6. Every non-English visible line written blind -> per-locale drafts
+        (a length over its limit: rewrite the line, return to 6)
+- [ ] 7. Screenshots and custom product pages  -> sets per device per locale
+- [ ] 8. Shipped and read back; re-measured at 48 hours and 3 to 4 weeks -> read-back, data/ reruns
+        (a field that reads back differently: fix the upload, return to 8)
+```
 
 "Don't ask questions" never skips research. A name change, a rating prompt and custom
 product pages are the owner's decisions: propose them with the evidence, then build.
@@ -62,16 +70,16 @@ Record where they disagree. Points they agreed on in 2026, to re-check:
 
 ## 3. Measure
 
-`scripts/hints.py seeds.json hints.json`: Apple's type-ahead per storefront. It shows what
+`python3 ${CLAUDE_SKILL_DIR}/scripts/hints.py seeds.json hints.json`: Apple's type-ahead per storefront. It shows what
 people type and in what order, not volume. Seed each country with short stems in its own
 language and script, plus the English stems locals use.
 
-`scripts/rank.py APP_ID queries.json ranks.json`: the live App Store search per country.
+`python3 ${CLAUDE_SKILL_DIR}/scripts/rank.py APP_ID queries.json ranks.json`: the live App Store search per country.
 For each query: result count (crowding; Apple caps near 250), the app's rank, the top 15
 with rating counts. A query returning few apps is open; one returning 250 led by apps with
 tens of thousands of ratings is closed to a new app. Keep both files and rerun later.
 
-Store ids are in `scripts/storefronts.py`; add one only after checking it live.
+Store ids are in `${CLAUDE_SKILL_DIR}/scripts/storefronts.py`; add one only after checking it live.
 
 ## 4. Competitors
 
@@ -100,8 +108,10 @@ Every non-English visible line (subtitle, promo, captions, release notes) is com
 native writer subagent who sees only the meaning, the must-contain terms and that
 language's existing store copy, never an English line. Use the `blind-translation` and
 `human-prose` skills. Then a second native pass on any subtitle that reads as a keyword
-list. Check every length with code: name and subtitle 30 characters, promo 170, keywords
-100 bytes.
+list. Check every length with code, and rewrite until it passes:
+`python3 ${CLAUDE_SKILL_DIR}/scripts/check-lengths.py docs/aso/proposal.json` (name and
+subtitle 30 characters, promo 170, keywords 100 bytes, no keyword already in the name or
+subtitle; exit 0 means every field fits).
 
 ## 7. Screenshots and custom product pages
 

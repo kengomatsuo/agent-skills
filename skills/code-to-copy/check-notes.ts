@@ -35,7 +35,7 @@ for (const file of notes) {
     const cells = row.split("|").map((c) => c.trim());
     const fileCell = cells[3] ?? "";
     if (/gated/i.test(row)) { gated++; continue; }
-    const paths = [...fileCell.matchAll(/`([^`]+)`|([\w./-]+\.(?:png|jpe?g|webp|gif|svg|pdf|txt|html?|csv|tsx?|jsx?|css|md|json|sql|prisma|py|rb|php|java|kt|vue|ya?ml))/gi)]
+    const paths = [...fileCell.matchAll(/`([^`]+)`|([\w./-]+\.(?:png|jpe?g|webp|gif|svg|pdf|txt|html?|csv|tsx?|jsx?|css|md|json|sql|prisma|py|rb|php|java|kt|vue|ya?ml)\b)/gi)]
       .map((m) => (m[1] ?? m[2]).replace(/\.\.\.$/, ""));
     const found = paths.some((p) => {
       const candidates = [join(dirname(file), p), join(root, p)];

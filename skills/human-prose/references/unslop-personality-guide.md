@@ -1,5 +1,12 @@
 # Personality & Voice Guide
 
+## Contents
+
+- Signs of Soulless Writing
+- How to Add Voice
+- Before/After: Full Passage
+- Scoring Integration
+
 Removing AI patterns is necessary but not sufficient. Text that's clean of AI tells can still read as sterile, voiceless, and institutional. This guide covers the positive dimension: what makes writing feel like a person wrote it.
 
 > **Two guardrails before you use any of this.**

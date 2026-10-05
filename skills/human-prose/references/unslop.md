@@ -11,44 +11,27 @@ metadata:
 
 # Unslop
 
+## Contents
+
+- Routing
+- Interface
+- Output Format
+- Reference Files
+
+> **Bundled copy.** Only the files under Reference Files are included; the original's command files, presets, scripts and evals are not.
+
 Humanize AI-generated prose. Audit first. Rewrite only when the user asks for a rewrite.
 
-For every audit or rewrite, read [references/core-contract.md](references/core-contract.md).
+For every audit or rewrite, read [references/unslop-core-contract.md](references/unslop-core-contract.md).
 It is the single behavior contract. Command files define routing and mechanics;
 presets supply optional voice, but neither can override the core contract.
 
 ## Routing
 
-**When the user invokes a sub-command (`/unslop teach ...`, `/unslop cleanup
-...`), you MUST read `references/commands/<command>.md` before acting.
-Non-optional — the command file defines the flow, and skipping it drops steps the
-user expects.** A bare `/unslop <text>` with no leading command word defaults to
-`rewrite`. If the first word does not match a command but the intent clearly maps
-to one (e.g. "flag the AI tells, don't change anything" → `cleanup` report-only),
-load that command file and proceed as if invoked.
-
-| Command | Purpose | File |
-|---------|---------|------|
-| `rewrite` | Default two-pass de-slop: diagnose, reconstruct under the guards, validate. | [references/commands/rewrite.md](references/commands/rewrite.md) |
-| `cleanup` | Co-writer: cheap detection, reviewable suggestions with contract gates; includes report-only "flag, change nothing". | [references/commands/cleanup.md](references/commands/cleanup.md) |
-| `teach` | Agent-driven voice building: harvest, approve, profile, layered card, scored demo. | [references/commands/teach.md](references/commands/teach.md) |
-| `mimic` | Voiced drafting or rewriting under the full gates; refine loop when one pass falls short. | [references/commands/mimic.md](references/commands/mimic.md) |
-| _maintenance_ | Turn a wild AI-ism into an eval row and a PR (not a top-level verb). | [references/commands/contribute.md](references/commands/contribute.md) |
-
-### Routing by phrase
-
-Sub-flows are reachable by their natural names without being top-level verbs.
-When the user says any of these, load the named file and jump to the flow:
-
-| The user says | Go to |
-|---------------|-------|
-| `audit` / "just flag it" / "don't change anything" | [references/commands/cleanup.md](references/commands/cleanup.md#report-only) |
-| `review` / "review this before I publish" | [references/commands/cleanup.md](references/commands/cleanup.md#report-only) |
-| `harvest` / "what writing of mine do you have?" | [references/commands/teach.md](references/commands/teach.md#1-gather-samples-harvest) |
-| `calibrate` / "the A/B game" / "quiz me on my voice" | [references/commands/teach.md](references/commands/teach.md#calibrate) |
-| `refine` / "keep pushing until it sounds like me" | [references/commands/mimic.md](references/commands/mimic.md#refine) |
-| voice check / "does this sound like me?" | [references/commands/mimic.md](references/commands/mimic.md#voice-check) |
-| "found a new AI-ism" / "add this tell" | [references/commands/contribute.md](references/commands/contribute.md) |
+This bundled copy has no command files. Audit is the default, and a rewrite happens only on
+request, both under `references/unslop-core-contract.md`. For voice work ("does this sound like
+me", "keep pushing until it sounds like me", the A/B game), read `references/unslop-mimic.md`
+and `references/unslop-calibrate.md`. For strict scoring, read `references/unslop-rubric.md`.
 
 ## Interface
 
@@ -59,7 +42,7 @@ When the user says any of these, load the named file and jump to the flow:
 | `--report` | Flag AI patterns without changing the text (cleanup) | false |
 | Input | Text to transform (argument, file path, or stdin) | required |
 
-Read one preset from `presets/` before writing.
+The preset files are not bundled; take the style from the table below.
 
 | Preset | Style | Best For |
 |--------|-------|----------|
@@ -69,7 +52,7 @@ Read one preset from `presets/` before writing.
 | `story` | Narrative flow, show don't tell | Case studies, personal posts |
 
 Rewrite, preservation, register, and validation behavior lives only in
-`references/core-contract.md`; do not recreate or override those rules here.
+`references/unslop-core-contract.md`; do not recreate or override those rules here.
 
 ## Output Format
 
@@ -108,24 +91,10 @@ For strict or requested analysis:
 
 | File | When to Read |
 |------|-------------|
-| `references/commands/*.md` | The routed command flows (rewrite, cleanup, teach, mimic, contribute). |
-| `references/pipeline.md` | Orchestrated tiered execution for multi-agent harnesses. |
-| `references/taboo-phrases.md` | Authoritative phrase catalog and scanner categories. |
-| `references/fact-preservation.md` | Constraint preservation rules. |
-| `references/rewrite-examples.md` | Executable before/after examples. |
-| `references/{mimic,harvest,calibrate}.md` | Voice-tool internals loaded by their routed command. |
-| `references/{rubric,edit-library,maintenance}.md` | Strict scoring, examples, and contribution procedures. |
-| `presets/*.md` | Voice-specific deltas. |
+| `references/unslop-pipeline.md` | Orchestrated tiered execution for multi-agent harnesses. |
+| `references/unslop-taboo-phrases.md` | Authoritative phrase catalog and scanner categories. |
+| `references/unslop-fact-preservation.md` | Constraint preservation rules. |
+| `references/unslop-rewrite-examples.md` | Executable before/after examples. |
+| `references/unslop-{mimic,calibrate}.md` | Voice matching and the A/B calibration game. |
+| `references/unslop-{rubric,edit-library}.md` | Strict scoring and worked edits. |
 
-## Maintenance
-
-The eval contracts define the product. Add scanner examples eval-first in
-`evals/fixtures/contracts/scanner-examples.json`; use
-`evals/adversarial-evals.json` for agent behavior and routing. Do not edit legacy
-`evals/evals.json`. New patterns need a false-negative example and a
-false-positive protection example. Agent behavior changes need a `skill` row
-and a regenerated shared benchmark. For the
-concrete procedures (add a phrase or structure, list current patterns, sync with
-Wikipedia's signs-of-AI-writing page), read `references/maintenance.md`. Found a
-new AI-ism in the wild? `references/commands/contribute.md` turns the exact
-snippet into a contract example and a structured PR, keeping both user-confirmation gates.

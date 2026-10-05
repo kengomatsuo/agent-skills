@@ -1,5 +1,12 @@
 # Teach Calibration Game (A/B Preference Elicitation)
 
+## Contents
+
+- Deterministic set
+- Game flow
+- Voice overrides defaults
+- Provenance discipline
+
 An agent-hosted micro-game that calibrates voice preferences the user can state but
 never bothered to write samples for. Far lower effort than `teach`: harvest bootstraps
 samples, the A/B game calibrates dimension preferences, and both feed the voice card.
@@ -21,7 +28,7 @@ guarantees this script gives for free.
 
 ## Game flow
 
-1. Pick base passages from the user's own harvested samples (`references/harvest.md`)
+1. Pick base passages from the user's own harvested samples (the harvest reference (not bundled))
    when available; otherwise fall back to neutral seed texts. Paragraph-sized (60-150
    words) so a round takes seconds to read.
 2. For the dimension needing the most attention, run:

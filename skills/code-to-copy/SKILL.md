@@ -1,7 +1,7 @@
 ---
 name: code-to-copy
-description: Find open-source projects that already built what you need, worldwide, read their schema and service code, and write down exactly what to copy and what to leave. Use when the user says "find open source we can copy", "search for more", "go wider", before designing a feature a hobby shop, template or regional platform has likely already shipped, and whenever a plan leans on a paid API that someone may have replaced with free code or data. Complements prior-art (decide use, copy or build) and backend-research (fan-out across competitors).
-when_to_use: "Trigger phrases: find open source to copy, search for more, go wider, is there an open-source version, who else built this, free alternative, we don't want to pay for it."
+description: Finds open-source projects worldwide that already built what is needed, reads their schema and service code, and writes down exactly what to copy and what to leave. Use before designing a feature that a hobby shop, template or regional platform has likely already shipped, when the user asks to find open source to copy or to go wider, and whenever a plan leans on a paid API that free code or data may replace. Complements prior-art (decide use, copy or build) and backend-research (fan-out across competitors).
+when_to_use: "Triggers: requests to find open source to copy or search wider, questions about whether an open-source version or free alternative exists or who else built this, and any reluctance to pay for a service."
 user-invocable: true
 ---
 
@@ -10,6 +10,21 @@ user-invocable: true
 > **Local notes.** If `~/.claude/skill-notes/code-to-copy.md` exists, read it before starting.
 > It holds this user's own folders and constraints, and where it disagrees with this file,
 > it wins.
+
+Dependencies: `gh` (`brew install gh`, then `gh auth login`), `curl`, `bun`.
+
+Copy this checklist into your reply and tick items off as they pass:
+
+```
+- [ ] 1. Need written without a solution in it; constraints listed, including what the user will not pay for
+- [ ] 2. Searched by stack, domain, local-language and same-problem-market topics
+- [ ] 3. At least four new candidates survive verification (fewer: return to step 2 with other words)
+- [ ] 4. Files saved with permalinks at the commit SHA
+- [ ] 5. Concurrency, state, idempotency and money quoted per candidate
+- [ ] 6. Every claim about a paid service or "free" quoted from the vendor's own page
+- [ ] 7. Table written; check-notes.ts exits 0 (non-zero: save the missing files or mark the row gated)
+- [ ] 8. Port: pseudocode, cut, write, blend, verify (a failing test sends you back to the port's Write step)
+```
 
 The famous platforms are rarely the best thing to copy. A 68-star shop engine built for
 the same country on the same ORM, or a 295-star delivery app from a market with the same
@@ -111,7 +126,6 @@ Demo content follows the same free-first rule: seed photos come from a free-lice
 (quote the licence page's commercial-use sentence), are downloaded only with the user's
 yes, and every file's page URL, author and licence go in a `sources.json` beside them.
 
-
 "Free" is checked on the vendor's page, "may get banned" in the library's README, a
 regulation's status in the official register. A page that will not load in a fetch tool
 opens in a real browser session. Quote the sentence; a summary from memory is a guess.
@@ -122,7 +136,7 @@ opens in a real browser session. Quote the sentence; a summary from memory is a 
 |---|---|---|---|---|
 
 Then one line per dropped candidate with the reason, and the file each "take" came from.
-Every "take" names a file in the folder; run `bun <skill-dir>/check-notes.ts <folder>`
+Every "take" names a file in the folder; run `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <folder>`
 on the notes table and fix what it lists before handing the table on.
 Hand the table to `prior-art` when the question becomes use, copy or build.
 
@@ -144,7 +158,7 @@ An agent that has read the source writes its code again from memory, whatever it
 intends. Simplicity is part of the port: a smaller schema is less to maintain, so step 2
 removes whatever the source carries that the requirements do not ask for. Briefs to
 agents at every step name the requirement numbers in scope and forbid the rest.
-(zhexiang, 2026-09-26: consent tables, room clashes, grade bands, teacher-pay workflow
-and tax withholding all came in through "policy", "screen" and "invariant" and had to
-be cut.)
+(2026-09-26, a tutoring-centre project: consent tables, room clashes, grade bands,
+teacher-pay workflow and tax withholding all came in through "policy", "screen" and
+"invariant" and had to be cut.)
 

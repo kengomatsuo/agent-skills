@@ -1,5 +1,33 @@
 # Edit Library
 
+## Contents
+
+- Pattern 1: Throat-Clearing Removal
+- Pattern 2: Filler + Unnecessary Reassurance
+- Pattern 3: Business Jargon Stack
+- Pattern 4: Dramatic Fragmentation
+- Pattern 5: Rhetorical Setup
+- Pattern 6: Hedging Stack
+- Pattern 7: Absolute Claims Softened
+- Pattern 8: Meta-Commentary Removal
+- Pattern 9: Binary Contrast Collapse
+- Pattern 10: List Compression
+- Pattern 11: Intensifier Reduction
+- Pattern 12: Passive to Active
+- Pattern 13: Fact-Heavy Preservation
+- Pattern 14: Conditional Simplification
+- Pattern 15: Question + Immediate Answer
+- Pattern 16: Significance Inflation
+- Pattern 17: Promotional Language
+- Pattern 18: Superficial -ing Analysis
+- Pattern 19: Copula Avoidance
+- Pattern 20: Negative Parallelism
+- Pattern 21: Communication Artifacts
+- Pattern 22: False Ranges
+- Pattern 23: Generic Positive Conclusion
+- Pattern 24: Compound Example (Multiple Pattern Types)
+- Transformation Principles
+
 Before/after transformation examples showing specific edit patterns.
 
 ---

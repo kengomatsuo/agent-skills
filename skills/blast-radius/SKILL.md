@@ -1,7 +1,7 @@
 ---
 name: blast-radius
-description: Work out everything a change can break before making it — callers, policies, generated types, other apps in the monorepo, other tenants, and the clients still running last week's bundle. Use before deleting or renaming anything, before changing an RPC signature or a database column, before a refactor, and whenever a change looks local but the thing being changed is reached from more than one place.
-when_to_use: "Trigger phrases: can I delete this, is this used anywhere, rename it, what breaks if, is anything still calling this."
+description: "Works out everything a change can break before it is made: callers, policies, generated types, other apps in the monorepo, other tenants, and the clients still running last week's bundle. Use before deleting or renaming anything, before changing an RPC signature or a database column, before a refactor, and whenever a change looks local but the thing being changed is reached from more than one place."
+when_to_use: "Triggers: questions about whether something can be deleted or renamed, whether it is still used, and what a change would break."
 user-invocable: true
 ---
 
@@ -16,7 +16,17 @@ routes from a board app; a device still holding the previous bundle asked for on
 and threw `Cannot read properties of undefined`. Nothing in the diff was wrong. The tree
 was consistent with itself and inconsistent with what was running.
 
-Answer all six questions before the change, and write the answers down.
+Answer all six questions before the change, and write the answers down. Copy this
+checklist into your reply and tick items off:
+
+```
+- [ ] 1. Callers searched across every app and package, strings included
+- [ ] 2. Database objects that name it listed (policies, triggers, functions, views, types, pgTAP)
+- [ ] 3. Old clients named, and the change planned as two deploys where needed
+- [ ] 4. Tenants named, each with what it holds today
+- [ ] 5. Generated artefacts listed and regenerated in the same change
+- [ ] 6. A named check would fail on a miss (none would: write that check, then return to question 1)
+```
 
 ## 1. Who calls it, in this repo?
 

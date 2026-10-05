@@ -7,6 +7,15 @@ metadata:
 
 # Deslop: Remove AI Writing Patterns from Prose
 
+## Contents
+
+- When to Apply
+- Core Rules
+- Quick Checks
+- Scoring
+- Reference Files
+- Examples
+
 Strip predictable AI patterns from writing. Make prose sound like a specific human wrote it, not like a language model generated it.
 
 ## When to Apply
@@ -20,11 +29,11 @@ Strip predictable AI patterns from writing. Make prose sound like a specific hum
 
 ### 1. Cut filler phrases
 
-Remove throat-clearing openers ("Here's the thing:"), emphasis crutches ("Let that sink in."), business jargon ("navigate the landscape"), and meta-commentary ("In this section, we'll explore..."). See [references/phrases.md](references/phrases.md) for the full catalog.
+Remove throat-clearing openers ("Here's the thing:"), emphasis crutches ("Let that sink in."), business jargon ("navigate the landscape"), and meta-commentary ("In this section, we'll explore..."). See [references/deslop-phrases.md](references/deslop-phrases.md) for the full catalog.
 
 ### 2. Break formulaic structures
 
-Avoid binary contrasts ("Not X. Y."), negative listings ("Not a X. Not a Y. A Z."), dramatic fragmentation ("Speed. That's it. That's the tradeoff."), self-posed rhetorical questions ("The result? Devastating."), and anaphora/tricolon abuse. See [references/structures.md](references/structures.md) for patterns and fixes.
+Avoid binary contrasts ("Not X. Y."), negative listings ("Not a X. Not a Y. A Z."), dramatic fragmentation ("Speed. That's it. That's the tradeoff."), self-posed rhetorical questions ("The result? Devastating."), and anaphora/tricolon abuse. See [references/deslop-structures.md](references/deslop-structures.md) for patterns and fixes.
 
 ### 3. Eliminate AI tropes
 
@@ -103,14 +112,14 @@ Below 35/50: revise.
 
 Consult these for detailed catalogs when writing or editing:
 
-- [references/phrases.md](references/phrases.md): Phrases to remove or replace (throat-clearing, emphasis crutches, business jargon, adverbs, meta-commentary, vague declaratives)
-- [references/structures.md](references/structures.md): Structural patterns to avoid (binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, passive voice, rhythm problems)
+- [references/deslop-phrases.md](references/deslop-phrases.md): Phrases to remove or replace (throat-clearing, emphasis crutches, business jargon, adverbs, meta-commentary, vague declaratives)
+- [references/deslop-structures.md](references/deslop-structures.md): Structural patterns to avoid (binary contrasts, negative listings, dramatic fragmentation, rhetorical setups, false agency, passive voice, rhythm problems)
 - [tropes.fyi](https://tropes.fyi) (not bundled, no licence): Full catalog of AI writing tropes (word choice, sentence structure, paragraph structure, tone, formatting, composition)
-- [references/examples.md](references/examples.md): Before/after transformations showing how to fix common patterns
+- [references/deslop-examples.md](references/deslop-examples.md): Before/after transformations showing how to fix common patterns
 
 ## Examples
 
-See [references/examples.md](references/examples.md) for before/after transformations.
+See [references/deslop-examples.md](references/deslop-examples.md) for before/after transformations.
 
 **Quick inline example (scientific writing):**
 

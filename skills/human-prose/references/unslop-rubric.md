@@ -1,5 +1,18 @@
 # Scoring Rubric
 
+## Contents
+
+- 1. Directness (1-5)
+- 2. Natural Rhythm (1-5)
+- 3. Concrete Verbs (1-5)
+- 4. Reader Trust (1-5)
+- 5. Human Authenticity (1-5)
+- 6. Content Density (1-5)
+- 7. Fact Preservation (1-5)
+- 8. Template Avoidance (1-5)
+- Scoring Guide
+- Quick Scoring Checklist
+
 Score transformed text on 8 criteria (1-5 scale each). Minimum passing: 32/40 (80%).
 
 ---
@@ -84,7 +97,7 @@ Does the text sound like a person wrote it, or an AI performing humanity? This c
 
 **Red flags (AI tells):** "Full stop." "Period." "Let me be clear." Stacked short sentences for effect. Rhetorical questions answered immediately. Significance inflation ("stands as a testament"). Promotional language ("nestled", "boasts"). Superficial -ing analyses. Vague attributions ("experts argue"). Copula avoidance ("serves as a"). Communication artifacts ("I hope this helps").
 
-**Red flags (soulless):** No opinions stated. No first person. Every claim hedged. Uniform sentence rhythm. No specific names, numbers, or dates. Balanced-to-a-fault framing. Sanitized vocabulary only. See `references/personality-guide.md` for detailed guidance.
+**Red flags (soulless):** No opinions stated. No first person. Every claim hedged. Uniform sentence rhythm. No specific names, numbers, or dates. Balanced-to-a-fault framing. Sanitized vocabulary only. See `references/unslop-personality-guide.md` for detailed guidance.
 
 ---
 

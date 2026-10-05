@@ -1,7 +1,7 @@
 ---
 name: ui-copy
-description: Use BEFORE writing or editing ANY string a user reads inside an app — labels, buttons, empty states, errors, toasts, settings rows, placeholders, onboarding, tooltips — in any language. Decides what text is ALLOWED TO EXIST on a screen, and deletes the rest. Also use to audit a repo's existing strings with scripts/copy-audit.mjs, or when the user says the UI is verbose, chatty, over-explained, or reads like a conversation between the agent and the developer.
-when_to_use: "Trigger phrases: too wordy, chatty, verbose, over-explained, the empty state says too much, rewrite this label, what should the button say, the error message is useless."
+description: Decides what text is allowed to exist on a screen and deletes the rest, for every string a user reads inside an app (labels, buttons, empty states, errors, toasts, settings rows, placeholders, onboarding, tooltips) in any language. Also audits a repo's existing strings with scripts/copy-audit.mjs. Use BEFORE writing or editing any such string, and whenever the user says the UI is verbose, chatty, over-explained, or reads like a conversation between the agent and the developer.
+when_to_use: "Triggers: complaints about wordy or chatty UI text, requests to rewrite a label, button, empty state or error message, and questions about what a control should say."
 user-invocable: true
 ---
 
@@ -29,14 +29,14 @@ Run this one FIRST. Text you delete needs no voice.
 ## The audit — run it before you claim a screen is done
 
 ```bash
-bun <skill-dir>/scripts/copy-audit.mjs src/
+bun ${CLAUDE_SKILL_DIR}/scripts/copy-audit.mjs src/
 ```
 
-It flags six patterns and exits non-zero when any string is left. On its first run across
-five production apps it found between 5 and 113 strings each to rewrite.
+It flags six patterns and exits non-zero when any string is left.
 
 It is a grep, so it produces false positives on prose-shaped constants. Read each hit;
-never bulk-rewrite from the report.
+never bulk-rewrite from the report. The loop: run it, rewrite or delete each real hit,
+run it again, and finish when it exits 0 or every remaining hit is a named false positive.
 
 ## The rules, each with the string that paid for it
 
@@ -113,10 +113,15 @@ narrating what a field does is not.
 
 ## Before you ship a screen
 
-1. Read every string on it aloud as if you were the user, not the builder.
-2. Delete every sentence whose only reader is someone who knows the code.
-3. Run `copy-audit.mjs` on the files you touched.
-4. Then check the project's design rules, then run `human-prose` on what survived.
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] Read every string aloud as the user, not the builder
+- [ ] Deleted every sentence whose only reader knows the code
+- [ ] copy-audit.mjs on the touched files exits 0 (hits left: return to the line above)
+- [ ] Every string is inside its budget (over budget: cut, then re-run the audit)
+- [ ] Project design rules checked, then human-prose run on what survived
+```
 
 **Non-English strings are composed in that language.** A translated sentence keeps English
 clause order and lands as foreign. This applies to the rewrite too: shortening an

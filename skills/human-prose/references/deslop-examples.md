@@ -1,5 +1,23 @@
 # Before/After Examples
 
+## Contents
+
+- Example 1: Throat-Clearing + Binary Contrast (Scientific)
+- Example 2: Filler + "Despite These Challenges" (Cover Letter)
+- Example 3: Grandiose Stakes + Landscape (Scientific)
+- Example 4: Passive Voice + False Agency (Discussion Section)
+- Example 5: Self-Posed Rhetorical Question (Blog Post)
+- Example 6: "Serves As" + Superficial Participle Analysis (Abstract)
+- Example 7: Narrator Distance + Vague Declarative (Blog Post)
+- Example 8: Listicle in a Trench Coat (Discussion Section)
+- Example 9: One-Point Dilution (Blog Post)
+- Example 10: Historical Analogy Stacking (General)
+- Example 11: Anaphora Abuse (Grant Narrative)
+- Example 12: Dramatic Fragmentation (General)
+- Example 13: False Vulnerability + Meta-Commentary (Blog Post)
+- Example 14: "It's Worth Noting" + Invented Concept Label (Scientific)
+- Example 15: "Imagine a World" + Patronizing Analogy (General)
+
 ## Example 1: Throat-Clearing + Binary Contrast (Scientific)
 
 **Before:**

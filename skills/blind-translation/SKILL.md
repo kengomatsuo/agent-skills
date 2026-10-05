@@ -1,6 +1,7 @@
 ---
 name: "blind-translation"
-description: "Use when a product needs strings in a language it does not have yet, or when existing non-English strings read as translated: localising an app or site, adding a locale, filling a String Catalog or _locales folder, writing App Store copy per storefront, or reviewing a locale someone says sounds off. Each language is written from the SCREEN, by a writer who never sees the English string, then checked back against meaning. Trigger phrases: localise this, add Japanese, translate the app, this Indonesian sounds like Google Translate, fill the string catalog, per-storefront listing."
+description: "Localises a product by having each language written from the screen by a writer who never sees the source string, then checks the draft back against meaning, for the tells of translation and for fit. Use when a product needs strings in a language it does not have yet, when existing non-English strings read as translated, when filling a String Catalog or _locales folder, when writing App Store copy per storefront, or when someone says a locale sounds off."
+when_to_use: "Triggers: requests to localise, translate or add a language, complaints that a locale sounds machine-translated, and per-storefront or per-locale copy."
 ---
 
 # Blind translation
@@ -28,6 +29,18 @@ way, never the master the others descend from. Write that down in the repo: no l
 the source the others are translated from.
 
 ## The loop
+
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] 1. Brief built per key, in a file
+- [ ] 2. One parallel writer per language, no source string given
+- [ ] 3. Drafts collected with back-translations
+- [ ] 4. Back-translation matches the brief (mismatch: fix the brief, re-run that key)
+- [ ] 5. human-prose Part 1 clean for each language (a tell found: return to step 2 for that language)
+- [ ] 6. Every locale rendered on the real surface (clipped or broken: return to step 2 with the length budget)
+- [ ] 7. Review table handed over
+```
 
 1. **Build the brief, once per key.** For each string: which screen, what the person
    just did, what happens when they act, the control's role (title, button, error,
@@ -65,9 +78,8 @@ the source the others are translated from.
 
 A locale is only correct until the next contributor edits it. Leave a test, not a
 promise: pin the known-wrong spellings of each language in a test, and scan punctuation
-the language does not use. One project added both after a brand page broke the
-language's own spelling rules in four places at once, all invisible because that page
-sat outside the copy guards.
+the language does not use. A page outside the copy guards otherwise breaks the language's
+own spelling rules unseen.
 
 Per language, pin what a native reader would catch instantly: the wrong member of a
 spelling family, the space where the orthography wants a hyphen, the honorific the

@@ -1,7 +1,7 @@
 ---
 name: backend-research
-description: Before designing any backend feature (tables, statuses, an API, a webhook, a job, permissions, billing or stock logic), look at how competitors and open-source apps with the same feature built it. Fan out parallel agents to open-source codebases (their migrations, schema and service code), competitors' public API and webhook references, the bug and incident record of both, and the specs that bind the feature; save everything into a research folder outside the repo, then design from it. The backend twin of design-research. Use whenever a backend feature is new or being reworked.
-when_to_use: "Trigger phrases: how do others model this, what does Stripe or Square or Toast do, look at competitors, design the tables, schema for, status flow, state machine, webhook, refunds, subscriptions, inventory, split bill, loyalty points, multi-tenant, how should the API look."
+description: "Researches how competitors and open-source apps built a backend feature (tables, statuses, an API, a webhook, a job, permissions, billing or stock logic) before it is designed: fans out parallel agents to open-source codebases (migrations, schema and service code), competitors' public API and webhook references, the bug and incident record of both, and the specs that bind the feature, saves everything into a research folder outside the repo, then designs from it. The backend twin of design-research. Use whenever a backend feature is new or being reworked."
+when_to_use: "Triggers: questions about how others or named products (Stripe, Square, Toast) model a feature, requests to look at competitors, and designing tables, schema, status flows, state machines, webhooks, refunds, subscriptions, inventory, loyalty, multi-tenancy or an API shape."
 user-invocable: true
 ---
 
@@ -22,6 +22,19 @@ Until the last agent is back AND `README.md` (step 3) exists, you do not write a
 migration, a table sketch, an RPC signature or a status enum. A schema drafted in parallel
 is built from memory and the research then only decorates it, the same failure
 `design-research` exists to stop. Count the agents launched against the completion notices.
+
+Dependencies: `gh` (`brew install gh`, then `gh auth login`), `curl`, `bun`.
+
+Copy this checklist into your reply and tick items off as they pass:
+
+```
+- [ ] 1. Brief written without a solution in it; every agent gets the same one
+- [ ] 2. Agents launched: N. Completion notices received: N (numbers must match)
+- [ ] 2. Each agent's check-notes.ts exited 0 before it reported
+- [ ] 3. check-notes.ts on the whole folder exits 0 (non-zero: send the owning agent back to step 2)
+- [ ] 3. Every number in the README re-read from the saved source; README.md written
+- [ ] 4. Schema ported clean-room from the saved code; design shown as a table, diagram or API shape; yes received
+```
 
 ## 1. Brief (one paragraph, you write it)
 
@@ -54,7 +67,7 @@ folder outside every repo (the user's choice; default `~/backend-research/`):
   page never lands as `.pdf`
 - code: the raw file at the commit SHA, never a paraphrase
 
-Before reporting, each agent runs `bun <skill-dir>/check-notes.ts <its folder>` and reports
+Before reporting, each agent runs `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <its folder>` and reports
 only when it exits 0.
 
 Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
@@ -68,15 +81,15 @@ Primary sources only: the project's own repo and docs, never a comparison blog. 
 project is alive with `gh api repos/<owner>/<repo> --jq
 '{stars:.stargazers_count,pushed:.pushed_at,archived:.archived}'` before learning from it.
 A gated or paywalled source is written down as gated. JS-rendered docs are opened in a
-real browser session such as Claude in Chrome, never guessed. In a repo that forbids agents from running heavy checks, say so
-in the brief.
+real browser session such as Claude in Chrome, never guessed. In a repo that forbids
+agents from running heavy checks, say so in the brief.
 
 The folder sits outside the repo for the same reason as in `design-research`: one
 project's research serves the next.
 
 ## 3. Synthesise
 
-Run `bun <skill-dir>/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
+Run `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
 sends the agent that owns the missing rows back. A row an agent marked "unconfirmed" goes
 back to it once, with a real browser session, before synthesis starts. Every number and
 rule in the README is re-read from the saved source, never from an agent's summary:
@@ -102,8 +115,10 @@ Only after the README exists. **The schema is a clean-room port of the saved cod
 never a fresh design from the README:** run `code-to-copy` step 8 (spec from the source,
 cut to what the requirements need, code written by an agent that never read the source,
 blended with the app, verified by the source's own scenarios). The README decides which
-source wins where they disagree; it never stands in for reading the code. (zhexiang,
-2026-09-26: a whole schema drafted from the README summary while the code sat unread.)
-Present the design as a table, status diagram or API shape, never paragraphs. This is new work, so propose it and wait
-for yes. When the research ends in a use, copy or build decision, record it in
+source wins where they disagree; it never stands in for reading the code. (2026-09-26,
+a tutoring-centre project: a whole schema drafted from the README summary while the code
+sat unread.)
+
+Present the design as a table, status diagram or API shape, never paragraphs. This is new
+work, so propose it and wait for yes. When the research ends in a use, copy or build decision, record it in
 `docs/<thing>-is-<choice>.md` as `prior-art` describes.

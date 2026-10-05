@@ -1,5 +1,16 @@
 # Tiered Execution Pipeline
 
+## Contents
+
+- Core release protocol: Luna versus Luna
+- Tier 0: Deterministic Gates
+- Tier 1: Small Detector Agents
+- Tier 2: Rewriter
+- Model Tiers
+- Model Parity
+- Macro structure under the climb — 2026-07-07
+- Cost Note
+
 ## Core release protocol: Luna versus Luna
 
 The product comparison uses `gpt-5.6-luna` for both arms on the same unfamiliar

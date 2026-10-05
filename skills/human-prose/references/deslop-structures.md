@@ -1,5 +1,30 @@
 # Structures to Avoid
 
+## Contents
+
+- Binary Contrasts (Negative Parallelism)
+- Negative Listing
+- Dramatic Fragmentation
+- Self-Posed Rhetorical Questions
+- Anaphora Abuse
+- Tricolon Abuse
+- False Agency
+- Narrator-from-a-Distance
+- Passive Voice
+- Listicle in a Trench Coat
+- Superficial Participle Analyses
+- False Ranges
+- Historical Analogy Stacking
+- "Despite Its Challenges..."
+- Sentence Starters to Avoid
+- Formulaic Constructions
+- Rhythm Patterns
+- Formatting Tells
+- One-Point Dilution
+- The Dead Metaphor
+- Invented Concept Labels
+- Word Patterns
+
 ## Binary Contrasts (Negative Parallelism)
 
 The single most commonly identified AI writing tell. Creates false drama by framing everything as a surprising reframe. One in a piece can work; multiple instances per piece is a strong AI signal. Before LLMs, people did not write like this at scale.
@@ -254,4 +279,4 @@ AI clusters invented compound labels that sound analytical without being grounde
 | Pattern | Problem |
 |---------|---------|
 | Lazy extremes (every, always, never, everyone, everybody, nobody) | False authority. Use specifics instead of sweeping claims. |
-| All adverbs (-ly words, "really," "just," "literally," "genuinely," "honestly," "simply," "actually") | Empty emphasis. See phrases.md for full list. |
+| All adverbs (-ly words, "really," "just," "literally," "genuinely," "honestly," "simply," "actually") | Empty emphasis. See deslop-phrases.md for full list. |

@@ -1,5 +1,16 @@
 # Teach & Mimic — internals
 
+## Contents
+
+- Teach — the artifacts
+- The voice card (layered)
+- `--refine` — the internal hill-climb
+- Scoring
+- Baselines
+- Statistics
+- Cost
+- Failure modes and the gate that catches each
+
 The routed flows live in `references/commands/teach.md`,
 `references/commands/mimic.md`, and the refine section of that mimic command
 file. This file holds the deep material those flows link to: card anatomy,
@@ -191,4 +202,4 @@ not-improved.
 | Slop reintroduced | AI tells creep back into voiced prose | banned-phrase / structure gates |
 
 For chunking long documents and the tiered execution architecture around these
-steps, see `pipeline.md`.
+steps, see `unslop-pipeline.md`.

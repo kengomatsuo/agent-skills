@@ -1,7 +1,7 @@
 ---
 name: design-research
-description: Before designing or redesigning any screen, look at how real products solved it. Fan out parallel agents to GitHub (open-source apps' component code), UI galleries (shadcn, Tremor, Stripe and vendor docs), Mobbin, Dribbble and the real products users already know, save the references as screenshots and code into a research folder outside the repo, then draw mocks from them and send the screenshots. Use whenever a screen is new, being redesigned, or the user says it looks unfinished, bare, half-baked or wrong.
-when_to_use: "Trigger phrases: half-baked, looks bad, looks unfinished, where is the colour-coding, redesign, make it look good, inspo, inspiration, references, how do others do it, mock it up, show me mocks, dribbble, mobbin."
+description: "Researches how real products solved a screen before it is designed or redesigned: fans out parallel agents to open-source apps (component code), UI galleries, Mobbin, Dribbble and the real products the users already know, saves the references as screenshots and code into a research folder outside the repo, then draws mocks from them and sends the screenshots. Use whenever a screen is new or being redesigned, or the user says it looks unfinished, bare, half-baked or wrong."
+when_to_use: "Triggers: complaints about how a screen looks (half-baked, looks bad, where is the colour-coding), requests for a redesign, mocks, inspiration or references (inspo, dribbble, mobbin), and questions about how other products do it."
 user-invocable: true
 ---
 
@@ -24,11 +24,27 @@ While the agents run, the only allowed work is unrelated to this screen, or noth
 A mock started in parallel is built from memory, and the research then only decorates
 it: that is the failure this skill exists to stop.
 
-Count the agents you launched, count the completion notices, and start step 3 only
-when the two numbers match.
-
 A screen proposed from memory comes out as a table with a word in each cell. Research
 runs first, unasked, every time a screen is new or is being redesigned.
+
+Copy this checklist into your reply and tick items off as they pass:
+
+```
+- [ ] 1. Brief written; every screen of the app listed in screens.md with an ID
+- [ ] 2. Agents launched: N. Completion notices received: N (numbers must match)
+- [ ] 2. check-notes.ts --screens screens.md --min 5 exits 0
+        (exit 2: launch the next wave on the screens it lists, return to step 2)
+- [ ] 3. check-notes.ts on the whole folder exits 0 (non-zero: send the owning agent back to step 2)
+- [ ] 3. README.md written, each pattern named with its source file
+- [ ] 4. directions.md filled; check-directions.ts exits 0 (a page with no source gets a capture agent: return to step 2)
+- [ ] 4. Every build round shot; review-grid.ts sheets opened (same structure in two columns: rebuild from a different card)
+- [ ] 4. check-siblings.ts passes on every mock route (--selftest fails first)
+- [ ] 4. Contact sheet shown in this turn; implementation proposed; yes received
+```
+
+Dependencies: `bun`, `gh` (`brew install gh`), `curl`, and Playwright for the scripts
+(`bun add -d playwright && bunx playwright install chromium` in the project, or
+`PLAYWRIGHT=<path to playwright/index.js>`).
 
 ## 1. Brief (one paragraph, you write it)
 
@@ -44,12 +60,12 @@ the project's own UI package and so on). Every agent gets the same brief.
 
 ## 2. Fan out: five agents in parallel, in the background (six for commerce)
 
-One agent per source:
-
 The notes table carries a `screen` column naming which screen(s) of the list each
 reference serves. Write the list as a table with IDs (`| S01 | ... |`) in `screens.md`,
-then `bun <skill-dir>/check-notes.ts <folder> --screens screens.md --min 5` prints every
+then `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <folder> --screens screens.md --min 5` prints every
 screen short of five saved references and exits 2; the next wave of agents targets those.
+
+One agent per source:
 
 | Agent | Source | Best output |
 |---|---|---|
@@ -104,7 +120,7 @@ flow behind such a button comes from the site's help centre. An agent that chang
 something undoes it and reports exactly what it did, and the coordinator checks the
 account page itself before telling the user it is clean.
 
-Screenshots come from `bun <skill-dir>/shot.ts <url> <out.png> [w] [h] [selector]`
+Screenshots come from `bun ${CLAUDE_SKILL_DIR}/shot.ts <url> <out.png> [w] [h] [selector]`
 (Playwright from the current project, or `PLAYWRIGHT=<path>`).
 When a site blocks it (bot wall, login, Cloudflare), open it in a real browser session
 such as Claude in Chrome and screenshot there; never write a blocked site off as blocked
@@ -112,7 +128,7 @@ without trying one. Agents never fabricate a URL or an image. A gated source is 
 down as gated.
 In a repo that forbids agents from running heavy checks, say so in the brief.
 
-Before reporting, each agent runs `bun <skill-dir>/check-notes.ts <its folder>`; it lists
+Before reporting, each agent runs `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <its folder>`; it lists
 every row whose file is missing or empty and exits 1. An agent reports only after it
 exits 0.
 
@@ -121,7 +137,7 @@ history, and one project's references are reusable in the next.
 
 ## 3. Synthesise
 
-Run `bun <skill-dir>/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
+Run `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
 sends the agent that owns the missing rows back. Then read every `notes.md` file and `flow.md`, the
 `languages/` cards and the strongest images. Write
 `<research>/<project>-<topic>/README.md` with the patterns worth copying, each named
@@ -165,7 +181,7 @@ A direction covers every surface the product has. When the app has a back office
 direction's admin copies the SAME product's seller or merchant side (its seller centre,
 merchant admin or partner app), captured into its own `languages/admin-<product>.md` card;
 recolouring one shared admin is not a direction.
-**No page of any direction is built until `bun <skill-dir>/check-directions.ts
+**No page of any direction is built until `bun ${CLAUDE_SKILL_DIR}/check-directions.ts
 <research>/<project>-<topic>` exits 0.** It reads `directions.md`: one row per page the
 product has (storefront and back office, every route), one column per direction, each cell
 citing the saved file(s) that page copies, in backticks. A cell with no saved source, a
@@ -175,7 +191,7 @@ The checker proves sources exist, never that the build copied them. Build agents
 to one shared component with a note added or a section renamed per direction; the brief
 says in words that this is restyling, and that each page rebuilds its source's structure
 (sections, order, columns, controls) on one shared data layer. After every build round,
-shoot each page in every direction and run `bun <skill-dir>/review-grid.ts <shots>
+shoot each page in every direction and run `bun ${CLAUDE_SKILL_DIR}/review-grid.ts <shots>
 <dir1,dir2,...> <page>...`, then open every sheet. Two columns with the same structure
 send that page back with its source files named, before anyone else sees it.
 Before rendering, write a skeleton table: one row per structural choice (header and
@@ -184,7 +200,7 @@ admin shell, admin dashboard, admin order list) and one column per direction, ea
 more than half the rows are the same across two directions, they are one direction:
 rebuild one of them from a different card before anyone sees it. A direction whose cells
 cite no research file is built from memory.
-Run `bun <skill-dir>/check-siblings.ts <url>...` on every mock route: components of one
+Run `bun ${CLAUDE_SKILL_DIR}/check-siblings.ts <url>...` on every mock route: components of one
 kind sitting together (info cards, tiles, list items) must share one height and one inner
 layout, and a badge never repeats its card's title. `--selftest` must fail, proving the
 check can see. A screen that fails is fixed before it is shot.

@@ -1,5 +1,14 @@
 # Fact Preservation Rules
 
+## Contents
+
+- Absolute Preservation (Never Modify)
+- Semantic Preservation (Keep Meaning)
+- Constraint Extraction
+- Verification Process
+- Special Cases
+- Quick Reference
+
 Certain content must survive transformation unchanged. This reference defines what to protect.
 
 ---

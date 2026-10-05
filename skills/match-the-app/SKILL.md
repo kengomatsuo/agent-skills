@@ -1,7 +1,7 @@
 ---
 name: match-the-app
-description: Read the code of the app's existing pages, tables and services before writing a new one — or, when nothing in the app is like it (a new page type or a new mechanic), open a design canvas first. Use BEFORE writing ANY new screen, page, view, component, dialog, sheet, form, list, tab or section in an existing codebase — open the siblings' source first, every time.
-when_to_use: "Trigger phrases: any request for a screen, page, view, form, list, dialog, sheet, tab or component — add a screen, new page, build the X page, make a view for, put a form on, this looks off next to the others."
+description: Reads the code of an app's existing pages, tables and services before a new one is written, or opens a design canvas first when nothing in the app resembles it (a new page type or a new mechanic). Use BEFORE writing any new screen, page, view, component, dialog, sheet, form, list, tab or section in an existing codebase, and open the siblings' source first every time.
+when_to_use: "Triggers: any request to add or build a screen, page, view, form, list, dialog, sheet, tab or component, and complaints that a new screen looks off next to the others."
 user-invocable: true
 ---
 
@@ -31,9 +31,9 @@ in code. Open a canvas first:
    markup element by element and carry over its structure, element order, labels, column
    headers and concrete values (rail width, row heights, header grid columns, the button
    list and its order). A brief that hands a builder pictures plus prose gets back a
-   screen that is defensible alone and unlike the canvas — one project measured a rebuild
-   from screenshots and prose alone missing an icon rail, missing document tabs, renamed
-   columns, and a collapsed lines area. Screenshots are the final sanity check. Anything
+   screen that is defensible alone and unlike the canvas (a measured rebuild from
+   screenshots and prose lost an icon rail and document tabs, renamed columns and collapsed
+   a lines area). Screenshots are the final sanity check. Anything
    you deviate from, name it and say which rule or token forced it.
 
 Same archetype AND the same mechanics already exist: skip this and read the code below.
@@ -91,5 +91,6 @@ A ported module (`code-to-copy` step 8) passes through this before it ships.
 Check behaviour against the project's own UI rules, check every string, then
 `screen-review` to look at it running.
 
-To make this fire on writes rather than trust it: `templates/check-screen.template.ts`
-blocks a screen write until the archetype blueprint has been injected.
+To make this fire on writes rather than trust it: `${CLAUDE_SKILL_DIR}/templates/check-screen.template.ts`
+is a hook template (copy it to `<repo>/.claude/hooks/check-screen.ts` and fill in the
+marked settings) that blocks a screen write until the archetype blueprint has been injected.

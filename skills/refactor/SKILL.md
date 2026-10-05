@@ -1,7 +1,7 @@
 ---
 name: refactor
-description: Change the shape of existing code without changing what it does — extract, rename, move, split, deduplicate, simplify. Use when code works but is hard to read or extend, when the same logic exists twice, when a file has grown past its subject, and before building on top of something confusing. Covers what may be touched in one commit and what must wait.
-when_to_use: "Trigger phrases: clean this up, simplify it, extract that, this file is too big, we have the same logic twice, tidy the naming."
+description: "Changes the shape of existing code without changing what it does: extract, rename, move, split, deduplicate, simplify. Use when code works but is hard to read or extend, when the same logic exists twice, when a file has grown past its subject, and before building on top of something confusing. Covers what may be touched in one commit and what must wait."
+when_to_use: "Triggers: requests to clean up, simplify, extract, split a large file, deduplicate logic or tidy naming."
 user-invocable: true
 ---
 
@@ -22,6 +22,17 @@ dependency-wide migration: propose it, name the file count, and wait. When joini
 codebase that already mixes two conventions, match the file you are editing and say so.
 This is a global rule, written because painful rename sweeps were needed after somebody
 started one on their own judgment.
+
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] blast-radius answered
+- [ ] Behaviour pinned by a passing test, numbers recorded (no test: write it first)
+- [ ] Sibling modules read
+- [ ] Each step run green (red: undo that step, return to it)
+- [ ] The project's full check passes
+- [ ] The diff is shape-only (an output changed: move that change to its own commit)
+```
 
 ## Before
 

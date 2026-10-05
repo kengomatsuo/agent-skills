@@ -1,7 +1,7 @@
 ---
 name: screen-review
-description: Look at the UI you just changed by running the real app and taking screenshots, then check what you see against the project's own rules and the repo's own reference screens. Use after any UI change, before saying a screen is done, when a layout is suspected of breaking at a width, and whenever a claim about how something looks would otherwise come from reading the code.
-when_to_use: "Trigger phrases: does it look right, screenshot it, check it on a phone, is it responsive, does dark mode hold, at 320px."
+description: Looks at the UI that was just changed by running the real app and taking screenshots, then checks what shows against the project's own rules and the repo's own reference screens. Use after any UI change, before saying a screen is done, when a layout is suspected of breaking at a width, and whenever a claim about how something looks would otherwise come from reading the code.
+when_to_use: "Triggers: questions about whether a screen looks right, requests for a screenshot or a phone, width or dark-mode check."
 user-invocable: true
 ---
 
@@ -24,8 +24,9 @@ of them are visible in the diff. Run the app.
    is for and which session it belongs to — the entries pile up without it.
 3. Walk the screen: `navigate`, then `computer` for the interactions, `read_page` to check
    text and structure, `screenshot` for anything visual.
-4. `resize_window` with `preset: "mobile"` (375×812) and `tablet`, then back to `desktop`.
-   Reload after switching so load-time device gates re-run.
+4. `resize_window` with `preset: "mobile"` (375×812) and `tablet` (768×1024); a custom width
+   and height covers 320, 1024 and 1440. Then back to `desktop`. Reload after switching so
+   load-time device gates re-run.
 5. `resize_window` with `colorScheme: "dark"` and look again.
 
 ## iOS
@@ -36,6 +37,15 @@ panel is already open. Screenshots and taps are headless and need no panel.
 For Swift edited outside Xcode, a phantom `No such module 'UIKit'` is a missing or stale
 build-server config, never a code fault — check the project's own editor setup docs for
 the fix.
+
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] App running; the screen walked in every state
+- [ ] Shot at every width in the table below, then in dark
+- [ ] Every row of the checks table passed (a failure: fix it, return to the walk, shoot again)
+- [ ] Report names what was seen and which state was not looked at, with the reason
+```
 
 ## What to check, in this order
 
