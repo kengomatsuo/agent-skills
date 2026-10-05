@@ -8,7 +8,7 @@ endorses something a heuristic flags, drop the finding.
 
 Look for:
 
-1. **Size past the point of one idea.** A function over ~80 lines or a file over ~800 that
+1. **Size past the point of one idea.** A function over ~50 lines or a file over ~800 that
    holds more than one concept. Size alone is not a finding: a 120-line table of data or a
    flat switch over 40 message kinds is fine. The finding is "this holds A and B, which change
    for different reasons" (divergent change), with both reasons named.

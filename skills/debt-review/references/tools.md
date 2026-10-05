@@ -2,6 +2,7 @@
 
 ## Contents
 - What measure.ts runs
+- model.ts
 - When a number is wrong
 - Optional tools
 - Versions checked
@@ -13,6 +14,7 @@
 | Hotspots | git | `git log --since=6.months --name-only`, lines per file | where change concentrates; commits × lines ranks it |
 | Unused code | knip 6 | `bunx knip@6 --reporter json --no-exit-code --no-progress` | unused files, exports, types, dependencies, duplicate exports |
 | Clones | jscpd 5 | `bunx jscpd@5 <paths> --min-tokens 50 --min-lines 5 --reporters json --output <dir>` | copy-pasted blocks |
+| Cycles | knip 6 | `bunx knip@6 --cycles --reporter json` | import loops touching the scope |
 | Limits | the project's ESLint | `bunx eslint -f json --rule '{"complexity":["warn",20]}' …` on the scope or top hotspots | functions over complexity, depth, parameter and length limits |
 
 Every result is filtered to files git tracks and that are not generated (a path under `dist*/`,
@@ -33,6 +35,14 @@ pass stays cheap.
   header and the scan skips it.
 - **A JSX component over the length limit.** Most screens are. Length is a question, never a
   finding: the structure lens decides whether it has two reasons to change.
+
+## model.ts
+
+`model.ts` runs dependency-cruiser 18 with `--no-config -T mermaid`: once with `--collapse`
+to one box per top-level folder (`packages.mmd`), once with `--focus <path> --focus-depth 1`
+for the scope and its neighbours (`focus.mmd`). dependency-cruiser reads TypeScript only when
+the `typescript` package sits beside it, which `bunx` does not arrange, so the script installs
+both once into `~/.cache/debt-review-tools`.
 
 ## Optional tools
 

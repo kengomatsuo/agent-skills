@@ -87,7 +87,7 @@
     },
     {
       "name": "debt-review",
-      "description": "Measure hotspots, clones, dead code and cycles, review with four lenses against KISS, DRY, YAGNI and SOLID, rank by cost, fix one commit at a time.",
+      "description": "Measure and diagram code debt, review it with five lenses (KISS, DRY, YAGNI, SOLID, slop, JSDoc), then spec, design twice, plan and refactor one commit at a time.",
       "source": "./skills/debt-review",
       "strict": false,
       "author": {

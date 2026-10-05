@@ -12,7 +12,7 @@ Each works on its own; they name each other where one hands off to the next.
 | `blast-radius` | you are about to delete, rename or change a signature: list everything it can break first |
 | `blind-audit` | a subsystem needs checking end to end: assertions come from its promise, before reading its code |
 | `refactor` | working code is hard to read or duplicated: reshape it without changing behaviour |
-| `debt-review` | code is hard to change or someone asks to clean it up: measure where the debt costs most, review it with four lenses, fix it one commit at a time |
+| `debt-review` | code is hard to change or someone asks to clean it up: measure and diagram it, review it with five lenses, then spec, design twice, plan and refactor one commit at a time |
 | `match-the-app` | you are adding a screen to an existing app: read its sibling pages first |
 | `screen-review` | you changed UI: run the app, screenshot it, check it before calling it done |
 | `human-prose` | Claude writes anything a person reads (docs, UI copy, commits, emails), in any language: it removes the tells of model-written prose |

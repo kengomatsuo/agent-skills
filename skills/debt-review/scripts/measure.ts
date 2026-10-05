@@ -46,7 +46,7 @@ if (isJsProject) {
     notes.push(`knip could not load ${loadErrors.length} config file(s); entries they declare are missing, so "unused" there is unreliable:\n${loadErrors.slice(0, 5).map((l) => `  - ${l.slice(7)}`).join("\n")}`);
   try {
     const issues: Record<string, unknown>[] = JSON.parse(k.stdout).issues ?? [];
-    const kinds = ["files", "exports", "types", "dependencies", "devDependencies", "duplicates", "cycles"] as const;
+    const kinds = ["files", "exports", "types", "dependencies", "devDependencies", "duplicates"] as const;
     const counts: Record<string, number> = {};
     const rows: string[] = [];
     for (const issue of issues) {
@@ -62,6 +62,15 @@ if (isJsProject) {
         if (rows.length < 60) rows.push(`| ${kind} | ${file} | ${kind === "files" ? "" : names} |`);
       }
     }
+    const c = run(["bunx", "knip@6", "--cycles", "--reporter", "json", "--no-exit-code", "--no-progress"]);
+    writeFileSync(join(out, "knip-cycles.json"), c.stdout);
+    type Hop = { name: string; line: number };
+    const loops = new Set<string>();
+    for (const issue of JSON.parse(c.stdout || "{}").issues ?? [])
+      for (const loop of (issue.cycles ?? []) as Hop[][])
+        if (loop.some((h) => inScope(h.name))) loops.add(loop.map((h) => `${h.name}:${h.line}`).join(" → "));
+    counts.cycles = loops.size;
+    report.push(`## Import cycles (knip)`, ``, `${loops.size} cycles.`, ``, ...[...loops].slice(0, 30).map((l) => `- ${l}`), ``);
     report.push(`## Unused code (knip)`, ``, Object.entries(counts).map(([k2, v]) => `${k2}: ${v}`).join(", ") || "none", ``);
     if (rows.length) report.push(`| kind | file | names |`, `|---|---|---|`, ...rows, ``);
   } catch {
@@ -99,7 +108,7 @@ if (hasEslint) {
     complexity: ["warn", 20],
     "max-depth": ["warn", 4],
     "max-params": ["warn", 4],
-    "max-lines-per-function": ["warn", { max: 80, skipBlankLines: true, skipComments: true }],
+    "max-lines-per-function": ["warn", { max: 50, skipBlankLines: true, skipComments: true }],
   };
   const e = run(["bunx", "eslint", "-f", "json", "--no-warn-ignored", ...Object.entries(rules).flatMap(([r, v]) => ["--rule", JSON.stringify({ [r]: v })]), ...files]);
   writeFileSync(join(out, "eslint.json"), e.stdout);
