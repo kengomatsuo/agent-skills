@@ -52,20 +52,27 @@ flowchart LR
 
 Say the path in one line at the start. The owner may raise it; it never drops mid-job. Every
 stage writes one numbered file into the job folder ([references/pipeline.md](references/pipeline.md)
-says where, and holds the spec and plan templates). Anything over 100 lines goes to a file,
-never into chat.
+holds the spec and plan templates). Anything over 100 lines goes to a file, never into chat.
+
+**THE REPO IS THE ONLY MEMORY EVERY SESSION SHARES.** Findings, plan and a kanban board
+(`BOARD.md`) live in the job folder, committed and pushed, so any session on any account can
+pick the job up at any moment. Every task commit carries the code, the card's move and a fresh
+Handoff block together. Picking up: `git pull`, then
+`bun ${CLAUDE_SKILL_DIR}/scripts/board.ts <job>/BOARD.md`, then pull the next card.
+[references/tracking.md](references/tracking.md) has the board, the claim rule and the
+handoff block.
 
 Copy this checklist into your reply and tick items off:
 
 ```
-- [ ] 0. Path chosen and said; project rules read (CLAUDE.md, AGENTS.md, .claude/rules, lint config)
+- [ ] 0. git pull; existing BOARD.md read if any; path said; project rules read
 - [ ] 1. measure.ts and model.ts run once; 01-current.md with diagrams
-- [ ] 2. Five lenses run; findings verified; 02-findings.md ranked     (path A stops)
+- [ ] 2. Five lenses run; findings verified; 02-findings.md ranked; BOARD.md backlog; pushed (A stops)
 - [ ] 3. 03-spec.md written and self-reviewed              → GATE 1: owner approves
 - [ ] 4. 04-target.md: 2-3 designs, wireframe, comparison  → GATE 2: owner picks
 - [ ] 5. 05-plan.md: Mikado graph, tasks                    → GATE 3: owner approves
 - [ ] 6. Draft committed: new interfaces compile, behaviour unchanged
-- [ ] 7. Tasks done one commit each, green each time (red: revert, return to 5)
+- [ ] 7. Pull a card, claim, push; one commit per task with board + handoff; green (red: revert, return to 5)
 - [ ] 8. Re-measured, re-modelled, guard rule added, decision recorded
 ```
 

@@ -16,10 +16,10 @@
 
 ## Where the files go
 
-One folder per job: the project's own plans folder if it has one (`docs/plans/`,
-`docs/refactor/`), else `docs/refactor/<slug>/`. Each stage writes one numbered file, so the
-next stage, a reviewer, or a session after compaction can pick up from disk. Anything over 100
-lines goes to a file, never into chat; chat gets the path and the decision needed.
+The job folder, the board and the handoff are in [tracking.md](tracking.md). Each stage
+writes one numbered file there and pushes it, so the next stage, a reviewer, or another
+session after a hard stop picks up from the repo. Anything over 100 lines goes to a file,
+never into chat; chat gets the path and the decision needed.
 
 ## Stage 0: pick the path
 
@@ -112,8 +112,8 @@ Task by task, in plan order:
 4. Green: commit with the task's message. Red: revert, write the new prerequisite into the
    plan, return to stage 5 for that branch of the graph.
 
-Keep a ledger at the bottom of `05-plan.md`: task, commit, status (done, done with concerns,
-blocked), and any `Ruling:` where reality forced a change to the plan.
+The board tracks every task (tracking.md). Where reality forces a change to the plan, write a
+`Ruling:` line under the task in `05-plan.md` in the same commit.
 
 ## Stage 8: verify and record
 
@@ -186,7 +186,4 @@ flowchart BT
 - Revert if: <what red means>
 - Commit: <message>
 
-## Ledger
-| Task | Commit | Status | Ruling |
-|---|---|---|---|
 ```
