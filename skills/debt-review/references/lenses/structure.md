@@ -33,9 +33,10 @@ Look for:
 9. **Magic values.** A number or string literal that encodes a rule (a limit, a rate, a
    status) written inline in more than one place, or once where a named constant already
    exists. Fix: name it once, or read it from config.
-10. **Comments that say what, not why.** A comment restating the line below it, step-number
-   scaffolding, commented-out code. Keep every comment that explains a reason or a past
-   incident.
+10. **Comments the code could say.** A comment restating the line below it, step-number
+   scaffolding, commented-out code, and a multi-line block that narrates history. Fix: a better
+   name or an extracted function; a public contract goes in JSDoc; the history goes in the
+   commit message or the project's docs. At most one short line of why stays in the code.
 11. **Feature envy and message chains.** A function that reads another module's fields more
    than its own; `a.b.c.d` walks a caller should not depend on.
 
