@@ -1,6 +1,6 @@
 ---
 name: match-the-app
-description: Reads the code of an app's existing pages, tables and services before a new one is written, or opens a design canvas first when nothing in the app resembles it (a new page type or a new mechanic). Use BEFORE writing any new screen, page, view, component, dialog, sheet, form, list, tab or section in an existing codebase, and open the siblings' source first every time.
+description: "Use BEFORE adding or building any new page, screen, view, component, dialog, sheet, form, list, tab or section in an existing app, and when a new screen looks off next to the others. Reads the code of the app's existing pages, tables and services first and builds the new one from them, or opens a design canvas first when nothing in the app resembles it (a new page type or a new mechanic)."
 when_to_use: "Triggers: any request to add or build a screen, page, view, form, list, dialog, sheet, tab or component, and complaints that a new screen looks off next to the others."
 user-invocable: true
 ---

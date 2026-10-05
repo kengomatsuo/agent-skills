@@ -1,6 +1,6 @@
 ---
 name: screen-review
-description: Looks at the UI that was just changed by running the real app and taking screenshots, then checks what shows against the project's own rules and the repo's own reference screens. Use after any UI change, before saying a screen is done, when a layout is suspected of breaking at a width, and whenever a claim about how something looks would otherwise come from reading the code.
+description: "Use AFTER any UI change and BEFORE saying a screen is done, and whenever someone asks whether a screen looks right on a phone, at a width or in dark mode. Runs the real app, takes screenshots at the widths and themes that matter, and checks what shows against the project's own rules and the repo's reference screens, so no claim about how something looks rests on reading the code."
 when_to_use: "Triggers: questions about whether a screen looks right, requests for a screenshot or a phone, width or dark-mode check."
 user-invocable: true
 ---
