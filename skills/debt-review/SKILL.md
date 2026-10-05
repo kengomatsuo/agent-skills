@@ -1,7 +1,7 @@
 ---
 name: debt-review
 description: "Use BEFORE merging a large change, when code feels like spaghetti or every change touches too many files, and when asked to clean up, optimise, minimise, DRY up, de-slop or simplify code or review it for maintainability. Runs a gated pipeline: measures hotspots, clones, dead code, cycles and complexity; draws the current structure as Mermaid diagrams; reviews with five lenses (structure, duplication, dead code, types and state, slop) against KISS, DRY, YAGNI, SOLID and Fowler's smells; then spec, two target designs with a signature wireframe, a Mikado plan, a compiling draft, one commit per step, and re-measurement. Holds code to readable-without-comments, with JSDoc for contracts."
-when_to_use: "Triggers: spaghetti code, tech debt, maintainability review, KISS, DRY, YAGNI, SOLID, clean code, code smells, slop, dead code, duplicated logic, too many comments, JSDoc, a file too big to work in, refactor plan, unspaghettify, optimise or minimise code."
+when_to_use: "Triggers: spaghetti code, tech debt, maintainability review, KISS, DRY, YAGNI, SOLID, clean code, code smells, slop, dead code, duplicated logic, too many comments, JSDoc, a file too big to work in, refactor plan, kanban board, handoff or resume a refactor job, unspaghettify, optimise or minimise code."
 user-invocable: true
 ---
 
