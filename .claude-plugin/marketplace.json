@@ -86,6 +86,17 @@
       "repository": "https://github.com/kengomatsuo/agent-skills"
     },
     {
+      "name": "debt-review",
+      "description": "Measure hotspots, clones, dead code and cycles, review with four lenses against KISS, DRY, YAGNI and SOLID, rank by cost, fix one commit at a time.",
+      "source": "./skills/debt-review",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
       "name": "screen-review",
       "description": "Run the real app, screenshot the UI you changed, and check it against the repo's reference screens.",
       "source": "./skills/screen-review",
