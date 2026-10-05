@@ -82,13 +82,27 @@ paraphrase), the scope, the report path, and the rules files from step 2.
 
 | Lens | Prompt | Finds |
 |---|---|---|
-| Structure | [references/lenses/structure.md](references/lenses/structure.md) | size, nesting, parameter sprawl, shallow modules, cycles, divergent change |
+| Structure | [references/lenses/structure.md](references/lenses/structure.md) | size, nesting, parameter sprawl, names, magic values, what-comments, shallow modules, cycles, divergent change |
 | Duplication and abstraction | [references/lenses/duplication.md](references/lenses/duplication.md) | one rule in two places, missed reuse, wrong abstractions, speculative generality |
 | Dead and stale | [references/lenses/dead-code.md](references/lenses/dead-code.md) | unused code, flags that stopped deciding, stale comments, needless guards |
 | Types, state and errors | [references/lenses/types-and-state.md](references/lenses/types-and-state.md) | type escapes, illegal states, redundant state, swallowed errors |
 
 Small scope (one file, a diff under ~300 lines): run the four prompts yourself in sequence
 instead of spawning agents.
+
+Where each principle is checked:
+
+| Principle | Lens |
+|---|---|
+| KISS | structure (needless layers, nesting), duplication (speculative generality) |
+| DRY, rule of three, wrong abstraction | duplication |
+| YAGNI | duplication (speculative generality), dead code (flags and options nothing sets) |
+| SOLID: single responsibility | structure (divergent change) |
+| SOLID: open-closed | duplication (repeated switches) |
+| SOLID: Liskov, interface segregation, dependency inversion | structure (shallow modules, wrong-direction dependencies), duplication (single-implementation seams) |
+| Command-query separation | types and state |
+| Fowler's smells | split across all four, by name |
+| Clean code: names, functions, comments | structure |
 
 The principles behind every lens, with sources and the cases where each one is WRONG, are in
 [references/principles.md](references/principles.md). Read it when a finding rests on one and

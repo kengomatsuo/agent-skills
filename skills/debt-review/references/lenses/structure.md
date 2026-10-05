@@ -27,7 +27,16 @@ Look for:
    if deleting it and inlining its body into callers makes nothing harder, it is a finding.
 7. **Wrong-direction dependencies and cycles.** Domain logic importing UI or framework code,
    a shared package importing an app, any import cycle in the report.
-8. **Feature envy and message chains.** A function that reads another module's fields more
+8. **Names that hide intent.** `data`, `result`, `temp`, `item`, `info`, `manager`, `utils`,
+   `handle*`/`process*` with no object; a name that says less than the body does, or lies
+   about it (a `get` that writes). If no honest name comes, the function does two things.
+9. **Magic values.** A number or string literal that encodes a rule (a limit, a rate, a
+   status) written inline in more than one place, or once where a named constant already
+   exists. Fix: name it once, or read it from config.
+10. **Comments that say what, not why.** A comment restating the line below it, step-number
+   scaffolding, commented-out code. Keep every comment that explains a reason or a past
+   incident.
+11. **Feature envy and message chains.** A function that reads another module's fields more
    than its own; `a.b.c.d` walks a caller should not depend on.
 
 Each finding: `file:line`, the smell's name, the evidence (a count, a quote of at most three
