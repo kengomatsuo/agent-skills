@@ -41,6 +41,8 @@ and each column caps how much may sit in it at once. `BOARD.md`:
 ```markdown
 # <job>: board
 
+Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on this file.
+
 ## Handoff
 - Updated: 2026-10-05T14:20Z by <session name> on <machine>
 - Last commit: abc1234 T3 Move rental quoting into pos/rental/quote.ts

@@ -6,11 +6,12 @@
 // Cycles come from measure.ts (knip --cycles).
 import { existsSync, mkdirSync, writeFileSync } from "node:fs";
 import { homedir } from "node:os";
-import { join, resolve } from "node:path";
+import { join } from "node:path";
+import { outsideRepo } from "./out-dir.ts";
 
 const args = process.argv.slice(2);
 const flag = (name: string) => args.find((a) => a.startsWith(`--${name}=`))?.split("=").slice(1).join("=");
-const out = resolve(flag("out") ?? "debt-model");
+const out = outsideRepo(flag("out"), "model");
 const focus = flag("focus");
 const roots = args.filter((a) => !a.startsWith("--"));
 if (!roots.length) throw new Error("name at least one root folder, e.g. packages apps");

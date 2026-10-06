@@ -4,13 +4,14 @@
 // --baseline exits 1 when any count grew: the ratchet.
 // Needs git and bun. knip, jscpd and eslint run through bunx when the project fits.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join, resolve } from "node:path";
+import { join } from "node:path";
 import { isGenerated } from "./generated.ts";
+import { outsideRepo } from "./out-dir.ts";
 
 const args = process.argv.slice(2);
 const flag = (name: string, fallback: string) =>
   args.find((a) => a.startsWith(`--${name}=`))?.split("=").slice(1).join("=") ?? fallback;
-const out = resolve(flag("out", join(process.env.TMPDIR ?? "/tmp", "debt-review", String(Date.now()))));
+const out = outsideRepo(flag("out", "") || undefined, "measure");
 const since = flag("since", "6.months");
 const top = Number(flag("top", "20"));
 const scope = args.filter((a) => !a.startsWith("--"));

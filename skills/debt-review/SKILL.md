@@ -1,7 +1,7 @@
 ---
 name: debt-review
-description: "Use BEFORE cleaning up, simplifying, de-duplicating or splitting code that has turned into spaghetti, a file too big to work in, or code every change has to touch; before merging a large change; and when asked to apply KISS, DRY, YAGNI or SOLID, remove slop or dead code, or plan a refactor. Runs a gated pipeline: measures hotspots, clones, dead code, cycles and complexity; draws the structure as Mermaid diagrams; reviews with five lenses (structure, duplication, dead code, types and state, slop); then spec, two target designs with a signature wireframe, a Mikado plan, a compiling draft, one commit per task on a kanban board any session can resume, and re-measurement. Holds code to readable-without-comments, with JSDoc for contracts."
-when_to_use: "Triggers: tech debt, maintainability review, code smells, too many comments, JSDoc, resume or hand off a refactor job, unspaghettify, optimise or minimise code."
+description: "Use BEFORE cleaning up, simplifying, de-duplicating or splitting code that has turned into spaghetti, a file too big to work in, or code every change has to touch; when reviewing a diff or PR for maintainability, comments or slop (correctness bugs belong to code-review); and when asked to apply KISS, DRY, YAGNI or SOLID, remove slop or dead code, or plan a refactor; and when continuing a job folder that holds a BOARD.md. Runs a gated pipeline: measures hotspots, clones, dead code, cycles and complexity; draws the structure as Mermaid diagrams; reviews with five lenses (structure, duplication, dead code, types and state, slop); then spec, two target designs with a signature wireframe, a Mikado plan, a compiling draft, one commit per task on a kanban board any session can resume, and re-measurement. Holds code to readable-without-comments, with JSDoc for contracts."
+when_to_use: "Triggers: tech debt, maintainability review, code smells, too many comments, JSDoc, hand off a refactor, unspaghettify, optimise or minimise code."
 user-invocable: true
 ---
 
@@ -81,11 +81,12 @@ An approval covers only what was shown at that gate. Never run past a gate on an
 ## 1. Measure and model
 
 ```bash
-bun ${CLAUDE_SKILL_DIR}/scripts/measure.ts --out=<job>/measure [path...]
-bun ${CLAUDE_SKILL_DIR}/scripts/model.ts --out=<job>/model --focus=<path> <root-folders...>
+bun ${CLAUDE_SKILL_DIR}/scripts/measure.ts [path...]
+bun ${CLAUDE_SKILL_DIR}/scripts/model.ts --focus=<path> <root-folders...>
 ```
 
-`measure.ts` writes `report.md`: hotspots (commits × lines), import cycles, unused files,
+Both write outside the repo (the temp folder; an `--out` inside the repo is redirected) and
+print where. `measure.ts` writes `report.md` and `summary.json`: hotspots (commits × lines), import cycles, unused files,
 exports and dependencies, copy-paste clones, and functions over the limits. `model.ts` writes
 Mermaid graphs of the packages and of the scope's neighbourhood. Both need `git`, `bun` and,
 on the first run, the network; [references/tools.md](references/tools.md) lists what they run and what to do when a
