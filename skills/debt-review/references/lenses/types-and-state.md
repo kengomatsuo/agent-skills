@@ -31,4 +31,5 @@ Look for:
    or one that both returns a value and changes something the caller cannot see.
 
 Each finding: `file:line`, the problem, the wrong state or lost error it allows (a concrete
-example input), and the fix. If nothing qualifies, say so. Under 600 words.
+example input), and the fix. If nothing qualifies, say so. The coordinator merges five
+reports, so give each finding once, in these fields, and nothing else.

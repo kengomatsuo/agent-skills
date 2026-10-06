@@ -35,5 +35,5 @@ Look for:
    the variant.
 
 Each finding: every location as `file:line`, the rule or shape that repeats, evidence (quote
-the drift if any), the fix and the single source it should end in. If nothing qualifies, say
-so. Under 600 words.
+the drift if any), the fix and the single source it should end in. If nothing qualifies, say so. The coordinator merges five
+reports, so give each finding once, in these fields, and nothing else.

@@ -42,5 +42,5 @@ Look for:
 
 Each finding: `file:line`, the smell's name, the evidence (a count, a quote of at most three
 lines, or the two reasons for change), the concrete fix, and what it costs to leave it (who
-pays, when). Mark it HIGH only when the file also appears in the report's hotspot list. If
-nothing qualifies, say so. Under 600 words.
+pays, when). Mark it HIGH only when the file also appears in the report's hotspot list. If nothing qualifies, say so. The coordinator merges five
+reports, so give each finding once, in these fields, and nothing else.

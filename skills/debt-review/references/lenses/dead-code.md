@@ -30,4 +30,5 @@ Look for:
    real defect (report it as one) or it is noise (delete it).
 
 Each finding: `file:line`, what is dead or stale, the searches you ran to prove it (the exact
-patterns), and the deletion. If nothing qualifies, say so. Under 600 words.
+patterns), and the deletion. If nothing qualifies, say so. The coordinator merges five
+reports, so give each finding once, in these fields, and nothing else.

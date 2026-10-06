@@ -37,5 +37,5 @@ Look for:
    goes through the public interface and checks an observable result.
 
 Each finding: `file:line`, the slop, the tier with its evidence (or the named gap), and the
-deletion. Default budget: the fix adds no dependency, no abstraction and no test. If nothing
-qualifies, say so. Under 600 words.
+deletion. Default budget: the fix adds no dependency, no abstraction and no test. If nothing qualifies, say so. The coordinator merges five
+reports, so give each finding once, in these fields, and nothing else.

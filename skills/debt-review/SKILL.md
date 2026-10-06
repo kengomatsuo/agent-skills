@@ -106,8 +106,8 @@ state diagram wherever the code holds a real state machine. Rules for diagrams a
 
 ## 2. Five lenses, in parallel
 
-Spawn one subagent per lens. Pass each the FULL text of its prompt file (read it, do not
-paraphrase), the scope, the report and model paths, the rules files, and
+Spawn one subagent per lens. Pass each the whole text of its prompt file, since a summary
+drops the rules that keep its findings honest, the scope, the report and model paths, the rules files, and
 [references/conventions.md](references/conventions.md).
 
 | Lens | Prompt | Finds |
@@ -219,5 +219,4 @@ A threshold opens a question; the finding is the answer to it.
 ## Evaluations
 
 `evals/evals.json` holds three scenarios (a spaghetti module, a PR review, resuming a job)
-with the behaviour each must show. Trigger test, 2026-10-06: the first scenario's prompt picked
-this skill in 9 of 9 runs across Haiku, Sonnet and Opus.
+with the behaviour each must show; `evals/results.md` records each run.
