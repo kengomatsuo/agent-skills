@@ -1,0 +1,34 @@
+[
+  {
+    "skills": ["debt-review"],
+    "query": "our data.ts is 6000 lines and every feature touches it, it's turned into spaghetti. can you clean it up, apply DRY and KISS, and plan how to split it?",
+    "files": ["a TS monorepo with git history and one 2,000+ line module"],
+    "expected_behavior": [
+      "Says path C in one line and reads the project's rules before judging",
+      "Runs scripts/measure.ts and scripts/model.ts once and quotes the hotspot rank of the file",
+      "Writes 02-findings.md with verified findings ranked by cost to keep, each naming a principle",
+      "Stops at gate 1 with 03-spec.md and edits no source file before the owner approves"
+    ]
+  },
+  {
+    "skills": ["debt-review"],
+    "query": "review this PR for maintainability before I merge it: too many comments, any slop?",
+    "files": ["a branch whose diff adds a 120-line function with a try/catch returning [] and multi-line comments narrating history"],
+    "expected_behavior": [
+      "Scopes to git diff <base>...HEAD, path A or B",
+      "The slop lens flags the swallowed error as HIGH and the history comments, proposing JSDoc @remarks or the commit message instead",
+      "Every finding gives file:line and a concrete fix; nothing is reported as a quality score"
+    ]
+  },
+  {
+    "skills": ["debt-review"],
+    "query": "continue the debt-review job in docs/plans/0130-split-pos-data",
+    "files": ["a job folder with 05-plan.md and a BOARD.md whose Handoff names an in-hand task and whose Ready column holds T5"],
+    "expected_behavior": [
+      "Runs git pull, then scripts/board.ts on BOARD.md before anything else",
+      "Resumes the in-hand task named in the Handoff block before pulling T5",
+      "Claims the card in a commit of BOARD.md alone and pushes it before editing code",
+      "Each task commit carries the code, the card's move and a rewritten Handoff block"
+    ]
+  }
+]

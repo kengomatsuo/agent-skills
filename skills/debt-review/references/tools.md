@@ -2,6 +2,7 @@
 
 ## Contents
 - What measure.ts runs
+- Requirements and defaults
 - model.ts
 - When a number is wrong
 - Optional tools
@@ -21,6 +22,19 @@ Every result is filtered to files git tracks and that are not generated (a path 
 a `.gen.`/`.d.ts` file, or a header saying generated, do not edit, or database dump; see
 `scripts/generated.ts`). ESLint runs only on the scope or the top hotspots, so a whole-repo
 pass stays cheap.
+
+## Requirements and defaults
+
+`git` and `bun` must be installed. knip, jscpd and dependency-cruiser are fetched on first use
+(`bunx`, and `~/.cache/debt-review-tools` for dependency-cruiser), so the first run needs the
+network. Defaults and why:
+
+| Default | Why |
+|---|---|
+| `--since=6.months` | long enough to see which files every feature touches, short enough to ignore code that has settled |
+| `--top=20` | the top of the list holds most of the churn; a longer list buries it |
+| generated-header check reads the first 600 characters | generators write their banner on the first lines |
+| board claim stale after 2 hours | a task is sized to finish well inside that; longer means the session died |
 
 ## When a number is wrong
 

@@ -1,7 +1,7 @@
 ---
 name: debt-review
-description: "Use BEFORE merging a large change, when code feels like spaghetti or every change touches too many files, and when asked to clean up, optimise, minimise, DRY up, de-slop or simplify code or review it for maintainability. Runs a gated pipeline: measures hotspots, clones, dead code, cycles and complexity; draws the current structure as Mermaid diagrams; reviews with five lenses (structure, duplication, dead code, types and state, slop) against KISS, DRY, YAGNI, SOLID and Fowler's smells; then spec, two target designs with a signature wireframe, a Mikado plan, a compiling draft, one commit per step, and re-measurement. Holds code to readable-without-comments, with JSDoc for contracts."
-when_to_use: "Triggers: spaghetti code, tech debt, maintainability review, KISS, DRY, YAGNI, SOLID, clean code, code smells, slop, dead code, duplicated logic, too many comments, JSDoc, a file too big to work in, refactor plan, kanban board, handoff or resume a refactor job, unspaghettify, optimise or minimise code."
+description: "Use BEFORE cleaning up, simplifying, de-duplicating or splitting code that has turned into spaghetti, a file too big to work in, or code every change has to touch; before merging a large change; and when asked to apply KISS, DRY, YAGNI or SOLID, remove slop or dead code, or plan a refactor. Runs a gated pipeline: measures hotspots, clones, dead code, cycles and complexity; draws the structure as Mermaid diagrams; reviews with five lenses (structure, duplication, dead code, types and state, slop); then spec, two target designs with a signature wireframe, a Mikado plan, a compiling draft, one commit per task on a kanban board any session can resume, and re-measurement. Holds code to readable-without-comments, with JSDoc for contracts."
+when_to_use: "Triggers: tech debt, maintainability review, code smells, too many comments, JSDoc, resume or hand off a refactor job, unspaghettify, optimise or minimise code."
 user-invocable: true
 ---
 
@@ -87,8 +87,8 @@ bun ${CLAUDE_SKILL_DIR}/scripts/model.ts --out=<job>/model --focus=<path> <root-
 
 `measure.ts` writes `report.md`: hotspots (commits × lines), import cycles, unused files,
 exports and dependencies, copy-paste clones, and functions over the limits. `model.ts` writes
-Mermaid graphs of the packages and of the scope's neighbourhood. Both need only `git` and
-`bun`; [references/tools.md](references/tools.md) lists what they run and what to do when a
+Mermaid graphs of the packages and of the scope's neighbourhood. Both need `git`, `bun` and,
+on the first run, the network; [references/tools.md](references/tools.md) lists what they run and what to do when a
 number looks wrong. Run them ONCE and hand the output to every lens; lenses never run heavy
 checks of their own.
 
@@ -215,3 +215,9 @@ A threshold opens a question; the finding is the answer to it.
 | A guard at a trust boundary | the floor |
 | Code nobody will change this year | cost is near zero; note it, fix nothing |
 | A rewrite that "would be cleaner" | a rewrite is a project: path C, proposed separately |
+
+## Evaluations
+
+`evals/evals.json` holds three scenarios (a spaghetti module, a PR review, resuming a job)
+with the behaviour each must show. Trigger test, 2026-10-06: the first scenario's prompt picked
+this skill in 9 of 9 runs across Haiku, Sonnet and Opus.
