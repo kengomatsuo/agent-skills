@@ -1,6 +1,7 @@
 #!/usr/bin/env bun
 // Measures debt once; lenses read the saved report.
-// Usage: bun measure.ts --out=<dir> [--since=6.months] [--top=20] [path...]
+// Usage: bun measure.ts --out=<dir> [--since=6.months] [--top=20] [--baseline=<summary.json>] [path...]
+// --baseline exits 1 when any count grew: the ratchet.
 // Needs git and bun. knip, jscpd and eslint run through bunx when the project fits.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { join, resolve } from "node:path";
@@ -25,6 +26,8 @@ const inScope = (file: string) =>
   tracked.has(file) && !isGenerated(file) && (scope.length === 0 || scope.some((p) => file.startsWith(p.replace(/^\.\//, ""))));
 const report: string[] = [`# Debt measurement`, ``, `Scope: ${scope.join(", ") || "whole repo"}. Raw JSON beside this file.`, ``];
 const notes: string[] = [];
+const summary: Record<string, number> = {};
+const baseline = flag("baseline", "");
 
 // 1. Hotspots: commits × lines
 const hot = run(["bun", join(here, "hotspots.ts"), `--since=${since}`, `--top=${top}`, "--json", ...scope]);
@@ -51,13 +54,14 @@ if (isJsProject) {
     const rows: string[] = [];
     for (const issue of issues) {
       const file = String(issue.file);
-      const isManifest = file.endsWith("package.json");
-      if (!isManifest && !inScope(file)) continue;
+      const manifestInScope = file.endsWith("package.json") && (scope.length === 0 || scope.some((p) => file.startsWith(p.replace(/^\.\//, ""))));
+      if (!manifestInScope && !inScope(file)) continue;
       for (const kind of kinds) {
         const list = issue[kind];
         const n = Array.isArray(list) ? list.length : 0;
         if (!n) continue;
         counts[kind] = (counts[kind] ?? 0) + n;
+        summary[`unused ${kind}`] = counts[kind];
         const names = (list as { name: string }[]).map((x) => x.name).slice(0, 6).join(", ");
         if (rows.length < 60) rows.push(`| ${kind} | ${file} | ${kind === "files" ? "" : names} |`);
       }
@@ -70,6 +74,7 @@ if (isJsProject) {
       for (const loop of (issue.cycles ?? []) as Hop[][])
         if (loop.some((h) => inScope(h.name))) loops.add(loop.map((h) => `${h.name}:${h.line}`).join(" → "));
     counts.cycles = loops.size;
+    summary.cycles = loops.size;
     report.push(`## Import cycles (knip)`, ``, `${loops.size} cycles.`, ``, ...[...loops].slice(0, 30).map((l) => `- ${l}`), ``);
     report.push(`## Unused code (knip)`, ``, Object.entries(counts).map(([k2, v]) => `${k2}: ${v}`).join(", ") || "none", ``);
     if (rows.length) report.push(`| kind | file | names |`, `|---|---|---|`, ...rows, ``);
@@ -92,6 +97,7 @@ if (isJsProject) {
     type Clone = { lines: number; firstFile: { name: string; start: number }; secondFile: { name: string; start: number } };
     const clones: Clone[] = (data.duplicates ?? []).filter((d: Clone) => inScope(d.firstFile.name) && inScope(d.secondFile.name));
     clones.sort((a, b) => b.lines - a.lines);
+    summary["cloned lines"] = clones.reduce((n, c) => n + c.lines, 0);
     report.push(`## Clones (jscpd, ≥50 tokens and ≥5 lines)`, ``,
       `${clones.length} clones in tracked, hand-written files, ${clones.reduce((n, c) => n + c.lines, 0)} cloned lines.`, ``,
       `| lines | first | second |`, `|---|---|---|`,
@@ -119,6 +125,7 @@ if (hasEslint) {
       r.messages.filter((m) => m.ruleId in rules).map((m) => ({ file: r.filePath.replace(root, ""), ...m })));
     const byRule: Record<string, number> = {};
     for (const h of hits) byRule[h.ruleId] = (byRule[h.ruleId] ?? 0) + 1;
+    for (const [rule, n] of Object.entries(byRule)) summary[rule] = n;
     report.push(`## Over the limits (ESLint, ${files.length} files)`, ``,
       Object.entries(byRule).map(([r, n]) => `${r}: ${n}`).join(", ") || "none", ``,
       `| rule | where | message |`, `|---|---|---|`,
@@ -127,9 +134,23 @@ if (hasEslint) {
     notes.push(`eslint produced no JSON: ${e.stderr.split("\n").slice(0, 3).join(" ")}`);
   }
 } else if (!isJsProject) {
-  notes.push("Not a JS/TS project: run lizard for per-function complexity (`pipx run lizard -C 15 -w .`).");
+  const hasJs = [...tracked].some((f) => /\.(ts|tsx|js|jsx|mjs)$/.test(f));
+  notes.push(hasJs
+    ? "No package.json or ESLint config: knip and the complexity limits were skipped."
+    : "No JS/TS: run lizard for per-function complexity (`pipx run lizard -C 15 -w .`).");
 }
 
 if (notes.length) report.push(`## Measurement notes`, ``, ...notes.map((n) => `- ${n}`), ``);
+writeFileSync(join(out, "summary.json"), JSON.stringify(summary, null, 2));
+let grew: string[] = [];
+if (baseline) {
+  const before: Record<string, number> = JSON.parse(readFileSync(baseline, "utf8"));
+  grew = Object.entries(summary).filter(([k, v]) => v > (before[k] ?? 0)).map(([k, v]) => `${k}: ${before[k] ?? 0} → ${v}`);
+  report.push(`## Against the baseline`, ``, grew.length ? grew.map((g) => `- grew: ${g}`).join("\n") : "Nothing grew.", ``);
+}
 writeFileSync(join(out, "report.md"), report.join("\n"));
 console.log(`report: ${join(out, "report.md")}`);
+if (grew.length) {
+  console.log(`debt grew:\n${grew.join("\n")}`);
+  process.exit(1);
+}

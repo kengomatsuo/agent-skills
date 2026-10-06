@@ -59,6 +59,13 @@ that must not change, the invariants, what is out of scope, and how the result w
 checked. Self-review it for placeholders, contradictions and anything two readers could take
 two ways.
 
+For every "must not change" line with no test, write a **characterisation test** before
+stage 7: run the code as it is today, record what it actually returns or writes, and assert
+exactly that, odd results included (Michael Feathers' term; it pins what the code does, not
+what it should do). Through the public interface, on real inputs taken from the code's
+callers, fixtures or the database. A bug it reveals goes on the board as its own card; the
+test keeps asserting the current behaviour until that card is done.
+
 **Gate 1: the owner approves the spec.** An approval covers only what was shown.
 
 ## Stage 4: design it twice
@@ -120,6 +127,11 @@ The board tracks every task (tracking.md). Where reality forces a change to the 
 Re-run `measure.ts` and `model.ts`. `08-verify.md` sets the new diagrams beside the target and
 the numbers beside stage 1's. Then make the target permanent:
 
+- **the ratchet**: commit the new `summary.json` as `baseline.json` in the job folder, and run
+  `measure.ts --baseline=<job>/baseline.json <scope>` in the project's pre-push or ship check.
+  It exits 1 when any count (unused code, cycles, cloned lines, functions over a limit) grew,
+  so the debt paid cannot quietly come back; a deliberate rise updates the baseline in the
+  same commit, with the reason in its message;
 - a dependency-cruiser rule (or the project's lint) that forbids the old import directions, so
   the structure cannot drift back;
 - the architecture decision in the project's docs (the one-line rule where the project keeps

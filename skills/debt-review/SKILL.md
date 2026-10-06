@@ -73,7 +73,7 @@ Copy this checklist into your reply and tick items off:
 - [ ] 5. 05-plan.md: Mikado graph, tasks                    → GATE 3: owner approves
 - [ ] 6. Draft committed: new interfaces compile, behaviour unchanged
 - [ ] 7. Pull a card, claim, push; one commit per task with board + handoff; green (red: revert, return to 5)
-- [ ] 8. Re-measured, re-modelled, guard rule added, decision recorded
+- [ ] 8. Re-measured, re-modelled, baseline ratchet + guard rule added, decision recorded
 ```
 
 An approval covers only what was shown at that gate. Never run past a gate on an earlier yes.
@@ -181,9 +181,13 @@ Path C only, except 7 and 8, which path B also runs. The detail and templates ar
   test before changing it. Green after every step; red means revert and add a prerequisite.
   Delete the old shape once nothing reaches it. Never start a sweep the owner did not ask for.
   Use the project's `refactor` skill where it has one.
+- **Pin untested behaviour with characterisation tests** (record what the code does today,
+  assert exactly that) before anything moves.
 - **Verify and lock in.** Re-measure and re-model; set the new diagrams beside the target;
-  add a lint or dependency-cruiser rule forbidding the old import direction; record the
-  decision where the project keeps its rules. Never report a quality score.
+  commit `summary.json` as the job's `baseline.json` and run `measure.ts --baseline=…` in the
+  project's pre-push or ship check so no count can grow back; add a rule forbidding the old
+  import direction; record the decision where the project keeps its rules. Never report a
+  quality score.
 
 ## Thresholds
 

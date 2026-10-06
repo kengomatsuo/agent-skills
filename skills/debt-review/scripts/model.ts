@@ -27,7 +27,8 @@ if (!existsSync(depcruise)) {
 }
 
 const cruise = (extra: string[]) => {
-  const r = Bun.spawnSync([depcruise, ...roots, "--no-config", "--exclude", "(node_modules|/dist/|\\.test\\.|/test/)", ...extra], {
+  const only = `^(${roots.map((r) => r.replace(/\/$/, "")).join("|")})/`;
+  const r = Bun.spawnSync([depcruise, ...roots, "--no-config", "--include-only", only, "--exclude", "(node_modules|/dist/|\\.test\\.|/test/)", ...extra], {
     stdout: "pipe",
     stderr: "pipe",
   });
