@@ -4,6 +4,7 @@
 - What measure.ts runs
 - Requirements and defaults
 - model.ts
+- chunks.ts
 - When a number is wrong
 - Optional tools
 - Versions checked
@@ -57,6 +58,14 @@ to one box per top-level folder (`packages.mmd`), once with `--focus <path> --fo
 for the scope and its neighbours (`focus.mmd`). dependency-cruiser reads TypeScript only when
 the `typescript` package sits beside it, which `bunx` does not arrange, so the script installs
 both once into `~/.cache/debt-review-tools`.
+
+## chunks.ts
+
+`chunks.ts <file> --size=1500` prints non-overlapping line ranges for one big file, each ending
+just before a top-level declaration (a declaration starting at column 0, with its leading
+comment block), so no function is cut between two readers. It only reads. A chunk over 1.5x the
+size is a very long declaration or a run the pattern does not recognise (an indented file, SQL
+statements it does not list); cut that one by hand. [line-pass.md](line-pass.md) uses it.
 
 ## Optional tools
 

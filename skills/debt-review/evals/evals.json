@@ -1,8 +1,12 @@
 [
   {
-    "skills": ["debt-review"],
+    "skills": [
+      "debt-review"
+    ],
     "query": "our data.ts is 6000 lines and every feature touches it, it's turned into spaghetti. can you clean it up, apply DRY and KISS, and plan how to split it?",
-    "files": ["a TS monorepo with git history and one 2,000+ line module"],
+    "files": [
+      "a TS monorepo with git history and one 2,000+ line module"
+    ],
     "expected_behavior": [
       "Says path C in one line and reads the project's rules before judging",
       "Runs scripts/measure.ts and scripts/model.ts once and quotes the hotspot rank of the file",
@@ -11,9 +15,13 @@
     ]
   },
   {
-    "skills": ["debt-review"],
+    "skills": [
+      "debt-review"
+    ],
     "query": "review this PR for maintainability before I merge it: too many comments, any slop?",
-    "files": ["a branch whose diff adds a 120-line function with a try/catch returning [] and multi-line comments narrating history"],
+    "files": [
+      "a branch whose diff adds a 120-line function with a try/catch returning [] and multi-line comments narrating history"
+    ],
     "expected_behavior": [
       "Scopes to git diff <base>...HEAD, path A or B",
       "The slop lens flags the swallowed error as HIGH and the history comments, proposing JSDoc @remarks or the commit message instead",
@@ -21,14 +29,67 @@
     ]
   },
   {
-    "skills": ["debt-review"],
+    "skills": [
+      "debt-review"
+    ],
     "query": "continue the debt-review job in docs/plans/0130-split-pos-data",
-    "files": ["a job folder with 05-plan.md and a BOARD.md whose Handoff names an in-hand task and whose Ready column holds T5"],
+    "files": [
+      "a job folder with 05-plan.md and a BOARD.md whose Handoff names an in-hand task and whose Ready column holds T5"
+    ],
     "expected_behavior": [
       "Runs git pull, then scripts/board.ts on BOARD.md before anything else",
       "Resumes the in-hand task named in the Handoff block before pulling T5",
       "Claims the card in a commit of BOARD.md alone and pushes it before editing code",
       "Each task commit carries the code, the card's move and a rewritten Handoff block"
+    ]
+  },
+  {
+    "skills": [
+      "debt-review"
+    ],
+    "query": "audit this whole app, deeper than maintainability: every function, wasted network calls, layout shifts, how the plan and flag gating works. I want no inefficiency tolerated.",
+    "files": [
+      "a React + TanStack Query + Supabase monorepo with git history, a shared dev server, a flag resolver in two packages and SQL, and one 50,000-line file the project forbids splitting"
+    ],
+    "expected_behavior": [
+      "Says path A with the line pass, reads the project's rules and design documents first, and runs measure.ts and model.ts once",
+      "Runs the core five, bandages, network, layout stability, model and product over the top hotspots, and the data-layer lens over ALL database functions, policies and triggers",
+      "Cuts the huge file for reading with scripts/chunks.ts into non-overlapping ranges that cover every line, starts at most four readers at once, and never splits the file in the repo",
+      "Every function in the line pass has one verdict (keep, simplify, delete, merge with) with line numbers or searches as evidence, in a per-file table",
+      "The model lens lists every site that decides a flag or plan gate (place, inputs, precedence, default) and proposes one resolver with a signature",
+      "Every finding states how it was measured and an end state; none is a quality score"
+    ]
+  },
+  {
+    "skills": [
+      "debt-review"
+    ],
+    "query": "audit this app for wasted network calls and layout shifts on the order screen",
+    "files": [
+      "a running app whose order screen loads a list, then one request per row, then a banner that mounts above the list"
+    ],
+    "expected_behavior": [
+      "Runs only the network and layout-stability lenses (and the core tier the scope needs), and drives the shared dev server instead of starting a private one",
+      "Reports requests per screen load from the network panel or resource timing, naming each call site, with the N+1 as list length and a target count",
+      "Measures layout shifts with a PerformanceObserver on layout-shift entries (value and sources) or the DevTools Performance panel, and ignores shifts with hadRecentInput",
+      "Names the banner and the loading-to-loaded size difference as sources, with the fix (reserve space or take the banner out of flow) and a target of CLS 0.00 for that transition",
+      "Does not remove a request that guards money or freshness, and does not guess a number it did not measure"
+    ]
+  },
+  {
+    "skills": [
+      "debt-review"
+    ],
+    "query": "we keep fixing the same QRIS and offline bugs. find what we are patching instead of fixing",
+    "files": [
+      "a repo with a findings ledger, a guard test with a growing reviewed-exceptions list, and a predicate copied into ten functions"
+    ],
+    "expected_behavior": [
+      "Runs the bandages lens with git history first (git log -L on the hot functions, churn per file, git log -S on the copied predicate) and cites the output",
+      "Each finding has the five fields: the bandage, the symptom it hides, the root cause as a chain of whys ending in a design decision, the root fix with a verifiable end state, and which bandages go away with it",
+      "Treats the ten copies of the predicate as one root (a rule with no name) and proposes one function and one test, listing every copy to remove",
+      "Reports the growing exceptions list as a symptom of a rule that does not fit the code, not as a list to maintain",
+      "Does not invent a root for a third-party defect: names an owner and a date to re-check"
     ]
   }
 ]
