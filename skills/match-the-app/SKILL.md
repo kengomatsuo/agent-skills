@@ -63,7 +63,11 @@ recently added sibling. Read two, not one.
 - The screen container, and how it is configured.
 - Where state comes from, and what is passed straight through rather than derived.
 - The row or section anatomy: which fact is on which line, what is left, what is right.
-- Loading, empty and error, and which component renders each.
+- Loading, empty and error, and which component renders each. A new page in an app with
+  per-page loading files (Next.js `loading.tsx`) gets its own, mirroring that page's title and
+  sections from the app's skeleton kit; a shared generic fallback is not a skeleton (zhixing
+  2026-10-07: one stood in for 73 of 80 pages). A list sends one page of rows, never all of
+  them, and a sibling's header keeps its actions in one container.
 - Tokens for every colour, space, radius, duration. Never a literal.
 - Naming: file, component, props, handlers.
 
