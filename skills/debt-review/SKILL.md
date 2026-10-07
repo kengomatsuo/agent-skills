@@ -223,6 +223,10 @@ Path C only, except 7 and 8, which path B also runs. The detail and templates ar
   project's pre-push or ship check so no count can grow back; add a rule forbidding the old
   import direction; record the decision where the project keeps its rules. Never report a
   quality score.
+- **Teach the next build.** Every path, A included, ends by adding each finding that holds
+  beyond this project as one line, with project and date, under its area in
+  `claude-house-rules/docs/build-checklist.md`, which the building skills read before writing;
+  the project's own copy goes in a path-scoped rule pointing at `02-findings.md`.
 
 ## Thresholds
 
