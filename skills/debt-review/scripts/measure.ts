@@ -4,7 +4,7 @@
 // --baseline exits 1 when any count grew: the ratchet.
 // Needs git and bun. knip, jscpd and eslint run through bunx when the project fits.
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { join, resolve } from "node:path";
 import { isGenerated } from "./generated.ts";
 import { outsideRepo } from "./out-dir.ts";
 
@@ -40,6 +40,17 @@ hotspots.forEach((h, i) => report.push(`| ${i + 1} | ${h.file} | ${h.commits} | 
 report.push(``);
 
 const isJsProject = existsSync("package.json");
+
+// A script path outside the repo roots knip's glob at the shared parent (zhixing 2026-10-07: it
+// crawled the home folder for hours). Stop with the fix instead of hanging.
+const outsidePaths = isJsProject
+  ? Object.entries((JSON.parse(readFileSync("package.json", "utf8")).scripts ?? {}) as Record<string, string>).flatMap(([name, cmd]) =>
+      cmd.split(/\s+/).filter((w) => /\.(c|m)?[jt]sx?$/.test(w) && !resolve(w).startsWith(resolve(".") + "/")).map((w) => `${name}: ${w}`))
+  : [];
+if (outsidePaths.length) {
+  console.error(`package.json runs files outside the repo, which makes knip walk their common parent folder:\n${outsidePaths.map((p) => `  - ${p}`).join("\n")}\nRun each through a script inside the repo that finds the file at run time (zhixing scripts/check-debt.ts).`);
+  process.exit(2);
+}
 
 // 2. knip: unused files, exports, dependencies, cycles
 if (isJsProject) {
