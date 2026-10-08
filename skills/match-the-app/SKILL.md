@@ -76,7 +76,7 @@ inventing the row's contents still produces a wrong screen.
 
 ## Backend: tables, migrations, jobs, services
 
-The same rule holds under the screen. Before a new table, migration, trigger, job or
+The same rule holds under the screen. A rule other systems have shipped (pricing, billing, booking, stock, auth, sync) also gets `backend-research` or `code-to-copy` before the first table is drawn: siblings in the repo show the house style, never whether the rule is right. Before a new table, migration, trigger, job or
 server action, read two siblings of the same kind in the repo and take from them:
 
 - The column helpers, id and timestamp shapes, money type, and how a status is declared
