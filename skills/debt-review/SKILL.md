@@ -69,7 +69,7 @@ Copy this checklist into your reply and tick items off:
 - [ ] 1. measure.ts and model.ts run once; 01-current.md with diagrams
 - [ ] 2. Lenses run for the scope; line pass if asked; findings verified; 02-findings.md ranked; BOARD.md backlog; pushed (A stops)
 - [ ] 3. 03-spec.md written and self-reviewed              → GATE 1: owner approves
-- [ ] 4. 04-target.md: 2-3 designs, wireframe, comparison  → GATE 2: owner picks
+- [ ] 4. Prior art researched and saved; 04-target.md opens with `## Prior art`, then 2-3 designs, wireframe, comparison  → GATE 2: owner picks
 - [ ] 5. 05-plan.md: Mikado graph, tasks                    → GATE 3: owner approves
 - [ ] 6. Draft committed: new interfaces compile, behaviour unchanged
 - [ ] 7. Pull a card, claim, push; one commit per task with board + handoff; green (red: revert, return to 5)
@@ -204,6 +204,7 @@ Path C only, except 7 and 8, which path B also runs. The detail and templates ar
 [references/pipeline.md](references/pipeline.md). The rules that matter:
 
 - **Spec before design.** What must not change is written down, with the test that pins it.
+- **Prior art before any design.** A path C job on a rule or feature other systems have shipped (pricing, billing, booking, stock, auth, queues, sync) runs `prior-art`, and `backend-research` or `code-to-copy` when the answer is code, BEFORE a design is drawn. `04-target.md` opens with `## Prior art`: the saved folder, one row per project (how it shapes the thing, which file), what we take and reject. One design is the shape the mature projects use. `board.ts` fails a job whose `04-target.md` has no such section (2026-10-08, plan 0120 designed its shapes from the codebase alone).
 - **Design twice.** At least two target shapes, each with a module diagram, a wireframe of
   exported signatures with JSDoc (no bodies), and a sequence diagram of the flows that cross
   new seams. Delete any module that fails the deletion test, and any seam with one

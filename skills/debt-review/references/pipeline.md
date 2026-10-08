@@ -70,8 +70,10 @@ test keeps asserting the current behaviour until that card is done.
 
 ## Stage 4: design it twice
 
+**Research first.** Run `prior-art` (and `backend-research` or `code-to-copy` when the answer is code) on the feature the job touches, and save the sources outside the repo. Start `04-target.md` with `## Prior art`: the folder path, a table of project | how it shapes the thing | file, what we take, what we reject and why. A job nothing else has shipped says `## Prior art` then `none found:` and the searches run. `scripts/board.ts` fails without the heading.
+
 Draw the target at least two ways, ideally three, each under a different pull: smallest
-interface; easiest for the most common caller; the shape the codebase already uses elsewhere.
+interface; easiest for the most common caller; the shape the codebase already uses elsewhere; the shape the mature projects in `## Prior art` use.
 Spawn one subagent per design when the scope is large. Each design gives:
 
 - a target module diagram (`flowchart`) with the allowed import direction;

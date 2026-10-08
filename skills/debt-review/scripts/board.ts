@@ -1,7 +1,8 @@
 #!/usr/bin/env bun
 // Reads a debt-review BOARD.md: handoff, next card, problems.
 // Usage: bun board.ts <path/to/BOARD.md> [--stale-hours=2]
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
 
 const args = process.argv.slice(2);
 const file = args.find((a) => !a.startsWith("--"));
@@ -45,6 +46,9 @@ for (const card of cards) {
   if (card.claimedAt && Date.now() - card.claimedAt.getTime() > staleHours * 3_600_000)
     problems.push(`${card.id} claim by ${card.claim} is over ${staleHours}h old: stale, may be taken over`);
 }
+const target = join(dirname(file), "04-target.md");
+if (existsSync(target) && !/^## Prior art\s*\n+\S/m.test(readFileSync(target, "utf8")))
+  problems.push("04-target.md has no filled '## Prior art' section: run prior-art/backend-research first, or write 'none found:' with the searches run");
 const perClaimant = new Map<string, string[]>();
 for (const card of cards.filter((c) => c.column === "doing" && c.claim))
   perClaimant.set(card.claim!, [...(perClaimant.get(card.claim!) ?? []), card.id]);
