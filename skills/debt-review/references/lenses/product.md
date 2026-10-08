@@ -59,7 +59,17 @@ Look for:
    Messages); content that reflows at narrow width without two-dimensional scrolling (1.4.10);
    a name for each control and image. These are the floor: report a miss, never remove an
    affordance to tidy a screen.
-9. **Screens that do not say where they are.** A screen with no title or back path, two
+9. **Figures a person must be able to read at a glance.** Every price, total, duration, clock
+    time and date on screen. For each one, check:
+    - it equals the stored or server figure for the same thing;
+    - it is printed by the project's one formatter for its kind (money, duration, time of day,
+      date), with the same unit, rounding and time zone as every sibling screen;
+    - its label says what it counts (so far, still owed, per hour, until when), and a total
+      shows what it adds up when parts change it (a band, a discount, a deposit, tax);
+    - two figures side by side never seem to disagree without the reason shown next to them.
+    Put the figures for one ticket from every screen and the receipt in one table. A figure
+    the reader can only explain from the code is a finding, even when it is correct.
+10. **Screens that do not say where they are.** A screen with no title or back path, two
    screens with the same title, a navigation entry that lands on something else. Compare the
    screen inventory with the navigation.
 
