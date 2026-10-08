@@ -49,6 +49,9 @@ for (const card of cards) {
 const target = join(dirname(file), "04-target.md");
 if (existsSync(target) && !/^## Prior art\s*\n+\S/m.test(readFileSync(target, "utf8")))
   problems.push("04-target.md has no filled '## Prior art' section: run prior-art/backend-research first, or write 'none found:' with the searches run");
+const handoffText = (sections.get("handoff") ?? []).join("\n");
+if (/await(s|ing)? the owner|blocked on:[^\n]*owner/i.test(handoffText) && !/asked (via|through) the choices UI/i.test(handoffText))
+  problems.push("the Handoff waits on the owner but never says 'asked via the choices UI at <time>': ask the gate through AskUserQuestion now");
 const findings = join(dirname(file), "02-findings.md");
 if (existsSync(findings)) {
   const text = readFileSync(findings, "utf8");

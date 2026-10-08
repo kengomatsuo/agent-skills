@@ -78,6 +78,12 @@ Copy this checklist into your reply and tick items off:
 
 An approval covers only what was shown at that gate. Never run past a gate on an earlier yes.
 
+**Ask each gate through the choices UI (AskUserQuestion) the moment it is reached, with the
+content in the question in plain words.** The owner reads only the chat, so a board line "awaits
+the owner" is a stall nobody sees. Record in the Handoff `asked via the choices UI at <time>`
+and, once answered, the answer. `board.ts` fails a Handoff that waits on the owner with no
+such line.
+
 ## 1. Measure and model
 
 ```bash
