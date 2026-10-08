@@ -211,6 +211,7 @@ Path C only, except 7 and 8, which path B also runs. The detail and templates ar
 
 - **Spec before design.** What must not change is written down, with the test that pins it.
 - **Prior art before any design.** A path C job on a rule or feature other systems have shipped (pricing, billing, booking, stock, auth, queues, sync) runs `prior-art`, and `backend-research` or `code-to-copy` when the answer is code, BEFORE a design is drawn. `04-target.md` opens with `## Prior art`: the saved folder, one row per project (how it shapes the thing, which file), what we take and reject. One design is the shape the mature projects use. `board.ts` fails a job whose `04-target.md` has no such section (2026-10-08, plan 0120 designed its shapes from the codebase alone).
+- **The recommendation ranks by future debt, never by rewrite size** (owner, 2026-10-08: "I never care about rewrites, I just care about future potential debt"): pick the shape that leaves the fewest places a rule can drift and the least for the next feature to know; backfills and migration count are handled by characterisation tests and staging, not by choosing the smaller shape.
 - **Design twice.** At least two target shapes, each with a module diagram, a wireframe of
   exported signatures with JSDoc (no bodies), and a sequence diagram of the flows that cross
   new seams. Delete any module that fails the deletion test, and any seam with one
