@@ -1,6 +1,6 @@
 ---
 name: debt-review
-description: "Use BEFORE cleaning up, simplifying, de-duplicating or splitting code that has turned into spaghetti, a file too big to work in, or code every change has to touch; when reviewing a diff or PR for maintainability, comments or slop (correctness bugs belong to code-review); and when asked to apply KISS, DRY, YAGNI or SOLID, remove slop or dead code, or plan a refactor; and when continuing a job folder that holds a BOARD.md. Runs a gated pipeline: measures hotspots, clones, dead code, cycles and complexity; draws the structure in Mermaid; reviews with eleven lenses (the core five: structure, duplication, dead code, types and state, slop; and the depth six: network, layout stability, data layer, model, product, bandages) and, on request, a line-by-line pass over the hotspots; then spec, two target designs with a signature wireframe, a Mikado plan, a compiling draft, one commit per task on a kanban board any session can resume, and re-measurement. Holds code to readable-without-comments, with JSDoc for contracts."
+description: "Use BEFORE cleaning up, simplifying, de-duplicating or splitting code that has turned into spaghetti, a file too big to work in, or code every change has to touch; when reviewing a diff or PR for maintainability, comments or slop (correctness bugs belong to code-review); and when asked to apply KISS, DRY, YAGNI or SOLID, remove slop or dead code, or plan a refactor; and when resuming a job folder with a BOARD.md. Runs a gated pipeline: measures hotspots, clones, dead code, cycles and complexity; draws the structure in Mermaid; reviews with twelve lenses (the core five: structure, duplication, dead code, types and state, slop; and the depth seven: network, layout stability, data layer, backend structure, model, product, bandages) and, on request, a line-by-line pass over the hotspots; then spec, two target designs with a signature wireframe, a Mikado plan, a compiling draft, one commit per task on a kanban board any session can resume, and re-measurement. Code reads without comments; JSDoc holds contracts."
 when_to_use: "Triggers: tech debt, maintainability review, code smells, too many comments, JSDoc, hand off a refactor, unspaghettify, optimise or minimise code, audit the whole app, wasted network calls, layout shifts, slow queries, flag or plan gating sprawl, fixes that keep coming back (bandages), review every line."
 user-invocable: true
 ---
@@ -124,13 +124,14 @@ drops the rules that keep its findings honest, the scope, the report and model p
 | Network | [references/lenses/network.md](references/lenses/network.md) | request waterfalls, duplicate and N+1 requests, over-fetching, refetch storms, polling beside a push, missing prefetch, cache keys that defeat dedupe, critical-path weight, effects used for data flow; each counted per screen or action |
 | Layout stability | [references/lenses/layout-stability.md](references/lenses/layout-stability.md) | content inserted above content, media and skeletons without matching size, font swaps, layout-triggering animation, long tasks on interaction, useless memoisation; each measured |
 | Data layer | [references/lenses/data-layer.md](references/lenses/data-layer.md) | per-call SQL cost, missing and unused indexes, RLS cost per row, volatility labels, trigger chains, predicates copied across migrations, round trips one RPC could replace, locking order |
+| Backend structure | [references/lenses/backend-structure.md](references/lenses/backend-structure.md) | handlers that do every job, one rule decided in several entry points, duplicate webhook deliveries running a side effect twice, work before the acknowledgement, several writes that should be one transaction, more than one error shape, jobs that copy handlers; each counted |
 | Model | [references/lenses/model.md](references/lenses/model.md) | concepts that should be one or two, status spread over flags, illegal states the schema allows, flag and plan gating resolved in several places (proposes the single resolver), settings that decide nothing |
 | Product | [references/lenses/product.md](references/lenses/product.md) | one job done two ways, breaks of the design language and personality, copy drift, extra presses, accessibility misses, features that do not connect |
 | Bandages | [references/lenses/bandages.md](references/lenses/bandages.md) | fixes that patch a symptom: sleeps and retries over races, swallowed errors, special cases, growing exception lists, copied predicates, flags set to dodge a bug; bandages are grouped by shared root, SQL history is traced by `git log -S` over migrations, churn is a ratio over 30 days, and each root is traced by five whys to a design decision or a process with no feedback loop |
 
 **Tiers.** The core five and bandages run on every scope (bandages costs one `git log`).
 Network and layout stability run when the scope holds client code, and need the app running.
-Data layer runs when it holds SQL, policies or server functions. Model and product run when
+Data layer runs when it holds SQL, policies or server functions. Backend structure runs when it holds edge functions, route handlers, webhooks or jobs, and weighs as much as the client lenses: a server that is spaghetti costs every feature, a render that wastes a frame costs one screen. Model and product run when
 the scope crosses features or screens, and read the project's design and feature documents
 first. Which lenses ran, and why the others did not, goes in `02-findings.md`. The research
 behind this set, and what each source checks, is in [references/research.md](references/research.md).
@@ -161,6 +162,7 @@ Where each principle is checked:
 | Web Vitals (loading, interactivity, visual stability) | network, layout stability |
 | Effects and state (React) | network (effects for data flow), model (redundant and contradictory state) |
 | Query cost, RLS cost, locking | data layer |
+| Service layer, idempotent webhooks, one rule one decider | backend structure |
 | Consistency, one source of truth for a decision | model (gating), product (screens and copy), duplication |
 | Accessibility (WCAG 2.2) | product; the floor in every lens |
 | Root cause (five whys), a fix that prevents recurrence | bandages |

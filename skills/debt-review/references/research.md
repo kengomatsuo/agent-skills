@@ -58,6 +58,17 @@ what the original five (structure, duplication, dead code, types and state, slop
 6. **Every finding names a verifiable end state** (SRE workbook): a count that must fall, a
    plan that must show an index scan, a metric that must stay under a limit.
 
+## Backend structure lens (added 2026-10-08)
+
+- Fowler, Service Layer (https://martinfowler.com/eaaCatalog/serviceLayer.html): a layer that
+  defines the application's boundary, its operations and their transactions; logic encoded
+  separately in each interface causes duplication. Basis for the handler-does-the-work check.
+- Supabase, Edge Functions development tips: recommends "fat functions", few large functions
+  with shared code under `_shared`. Basis for "the number of functions is not a finding".
+- Standard Webhooks 1.0.0: `webhook-id` as an idempotency key, timestamp tolerance, constant-time
+  signature comparison, 15 to 30 second request timeout, retries with backoff and jitter. Basis
+  for the duplicate-delivery and acknowledgement checks.
+
 ## Not fetched
 
 - `rules.sonarsource.com` (the rule catalogue): DNS lookup failed from this machine. The rule
