@@ -129,11 +129,15 @@ drops the rules that keep its findings honest, the scope, the report and model p
 | Product | [references/lenses/product.md](references/lenses/product.md) | one job done two ways, breaks of the design language and personality, copy drift, extra presses, accessibility misses, features that do not connect |
 | Bandages | [references/lenses/bandages.md](references/lenses/bandages.md) | fixes that patch a symptom: sleeps and retries over races, swallowed errors, special cases, growing exception lists, copied predicates, flags set to dodge a bug; bandages are grouped by shared root, SQL history is traced by `git log -S` over migrations, churn is a ratio over 30 days, and each root is traced by five whys to a design decision or a process with no feedback loop |
 
-**Tiers.** The core five and bandages run on every scope (bandages costs one `git log`).
-Network and layout stability run when the scope holds client code, and need the app running.
-Data layer runs when it holds SQL, policies or server functions. Backend structure runs when it holds edge functions, route handlers, webhooks or jobs, and weighs as much as the client lenses: a server that is spaghetti costs every feature, a render that wastes a frame costs one screen. Model and product run when
-the scope crosses features or screens, and read the project's design and feature documents
-first. Which lenses ran, and why the others did not, goes in `02-findings.md`. The research
+**Every lens runs on a path C job and on any request for the whole app (owner, 2026-10-08: all twelve).**
+Paths A and B run the lenses their scope touches: the core five and bandages always, the rest
+when the scope holds client code, SQL, server handlers or crossing screens. A lens with nothing
+in scope still reports "nothing in scope". A lens that needs the running app or the database
+and cannot run now (the machine is held, no app is up) becomes a board card with an id, done
+before gate 1, never dropped; "not asked for in the brief" is not a reason. Model and product
+read the project's design and feature documents first. `02-findings.md` has a `## Which lenses
+ran` section naming all twelve, and `board.ts` fails a path C job that omits one or lists a
+skipped lens with no card. The research
 behind this set, and what each source checks, is in [references/research.md](references/research.md).
 
 The measuring lenses (network, layout stability, data layer) use the running app and the

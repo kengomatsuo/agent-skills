@@ -49,6 +49,19 @@ for (const card of cards) {
 const target = join(dirname(file), "04-target.md");
 if (existsSync(target) && !/^## Prior art\s*\n+\S/m.test(readFileSync(target, "utf8")))
   problems.push("04-target.md has no filled '## Prior art' section: run prior-art/backend-research first, or write 'none found:' with the searches run");
+const findings = join(dirname(file), "02-findings.md");
+if (existsSync(findings)) {
+  const text = readFileSync(findings, "utf8");
+  const ranSection = text.split(/^## /m).find((x) => /^Which lenses ran/i.test(x)) ?? "";
+  const lenses = ["structure", "duplication", "dead code", "types and state", "slop", "network", "layout stability", "data layer", "backend structure", "model", "product", "bandages"];
+  for (const lens of lenses)
+    if (!new RegExp(lens, "i").test(ranSection)) problems.push(`02-findings.md does not name the ${lens} lens under 'Which lenses ran': all twelve run`);
+  for (const lens of lenses) {
+    const line = ranSection.split("\n").find((l) => new RegExp(lens, "i").test(l));
+    if (line && !/\.md|\b[A-Z]\d{1,3}\b|nothing in scope/.test(line))
+      problems.push(`the ${lens} lens has neither a report file nor a board card: ${line.trim().slice(0, 80)}`);
+  }
+}
 const perClaimant = new Map<string, string[]>();
 for (const card of cards.filter((c) => c.column === "doing" && c.claim))
   perClaimant.set(card.claim!, [...(perClaimant.get(card.claim!) ?? []), card.id]);
