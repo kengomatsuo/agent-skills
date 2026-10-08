@@ -5,6 +5,12 @@ pretends to be needed. Report; do not edit.
 
 A documented project convention beats every heuristic below.
 
+**A switch that is off everywhere is not dead until you read why it exists.** Open the commit,
+plan or note that added it. A feature built ahead of its launch, or opt-in and off by default,
+is dormant by design: report it as "dormant by design" with the reason, never as dead code,
+and never recommend deleting it. Whether to keep it is the owner's call about the roadmap;
+ask without a recommendation to retire. (Example: a saved-hours feature built for a product that has not launched, off on every table, was ranked as dead and recommended for deletion.)
+
 **A tool's "unused" is a lead, never a verdict.** Before a finding says something is dead,
 search the whole repository for its name as a STRING too: route tables, RPC and database
 function names, i18n keys, `import()` with a computed path, config files, scripts, test
