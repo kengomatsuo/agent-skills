@@ -116,7 +116,7 @@ state diagram wherever the code holds a real state machine. Rules for diagrams a
 
 ## 2. Lenses, in parallel
 
-Spawn one subagent per lens in the tier below. Pass each the whole text of its prompt file, since a summary
+Spawn one read-only subagent per lens in the tier below, on a mid-tier model with Read, Grep, Glob and Bash only (a lens never edits). Pass each the whole text of its prompt file, since a summary
 drops the rules that keep its findings honest, the scope, the report and model paths, the rules files, and
 [references/conventions.md](references/conventions.md).
 

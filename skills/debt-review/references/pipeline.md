@@ -74,7 +74,7 @@ test keeps asserting the current behaviour until that card is done.
 
 Draw the target at least two ways, ideally three, each under a different pull: smallest
 interface; easiest for the most common caller; the shape the codebase already uses elsewhere; the shape the mature projects in `## Prior art` use.
-Spawn one subagent per design when the scope is large. Each design gives:
+Spawn one subagent per design when the scope is large, on the strongest model, allowed to write plan files and nothing else. Each design gives:
 
 - a target module diagram (`flowchart`) with the allowed import direction;
 - the **wireframe**: every new or changed module's exported signatures with their JSDoc
