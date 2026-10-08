@@ -69,6 +69,13 @@ what the original five (structure, duplication, dead code, types and state, slop
   signature comparison, 15 to 30 second request timeout, retries with backoff and jitter. Basis
   for the duplicate-delivery and acknowledgement checks.
 
+## ACID in the data-layer lens (added 2026-10-08)
+
+- PostgreSQL, 3.4 Transactions: atomic ("all-or-nothing"), and durable ("permanently recorded and
+  won't be lost even if a crash ensues"). PostgreSQL, 13.2 Transaction Isolation: Read Committed
+  lets two successive selects see different data; Repeatable Read and Serializable need a retry
+  on serialization failure. Consistency rests on constraints; no new source quoted for it.
+
 ## Not fetched
 
 - `rules.sonarsource.com` (the rule catalogue): DNS lookup failed from this machine. The rule

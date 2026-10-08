@@ -4,6 +4,11 @@ measurement report, and the project's own rules files. Find SQL that costs more 
 to, rules written more than once in the database, and round trips one call could replace.
 Report; do not edit.
 
+## Contents
+- Measure, never guess
+- What to look for, items 1 to 11 (item 11 is ACID)
+- Report fields
+
 Read the project's rules first (CLAUDE.md, `.claude/rules/`, the schema docs, the migration
 rules). A documented convention beats every heuristic below. Migrations that already shipped
 are append-only: a finding on one proposes a new migration, never an edit.
@@ -84,6 +89,28 @@ Look for:
 10. **Unbounded work.** A query with no `limit` on a growing table, a function that scans a whole
     history to answer "latest", a report computed live that a summary table or a materialised
     view would serve. Give the row count now and in a year.
+
+11. **ACID, one question per letter** (PostgreSQL docs, https://www.postgresql.org/docs/current/tutorial-transactions.html
+    and https://www.postgresql.org/docs/current/transaction-iso.html):
+    - **Atomic.** The docs: a transaction "bundles multiple steps into a single, all-or-nothing
+      operation". Find the multi-step change (debit and credit, sell and cover, cancel and
+      restate) done as separate calls or with a `catch` that carries on after a failed step.
+      Fix: one function or RPC, so the steps commit or roll back together.
+    - **Consistent.** The rule the data must always obey lives in a constraint, a foreign key or
+      a trigger in the database, not only in the screen that writes it. Hand the illegal states
+      the schema still allows to the model lens.
+    - **Isolated.** The docs: under Read Committed "two successive `SELECT` commands can see
+      different data" in one transaction. A read-then-write on a balance, a stock count or a
+      slot needs a lock that excludes its peers (`FOR UPDATE`), a constraint (an exclusion
+      constraint for overlaps), or Repeatable Read or Serializable, whose docs say "applications
+      using this level must be prepared to retry transactions due to serialization failures".
+      Check the caller retries, and that two functions take the same locks in the same order.
+    - **Durable.** The docs: once "acknowledged by the database system" a committed transaction
+      "won't be lost even if a crash ensues". Flag a reply sent before the commit, an effect
+      (a mail, a push, a charge) fired inside a transaction that can still roll back, state kept
+      only in memory or a temp folder, and a setting that trades the guarantee for speed.
+    End state: each flagged path has a test that fails a step midway and shows no half-done row,
+    or two concurrent calls and shows one winner.
 
 Never trade a security rule for speed. A check that is slow is made faster in place (an index,
 a `select` wrapper, a helper), and the policy's meaning is pinned by its test before and after.
