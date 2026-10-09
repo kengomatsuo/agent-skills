@@ -48,6 +48,17 @@ for (const card of cards) {
   if (card.claimedAt && Date.now() - card.claimedAt.getTime() > staleHours * 3_600_000)
     problems.push(`${card.id} claim by ${card.claim} is over ${staleHours}h old: stale, may be taken over`);
 }
+/* EVERY ACTION IS WALKED (owner, 2026-10-09): a hotspot sample skipped the
+   ticket move, built as two client writes no mature POS uses. */
+const inventory = join(dirname(file), "00-inventory.md");
+if (existsSync(inventory)) {
+  const rows = readFileSync(inventory, "utf8").split("\n").filter((l) => /^\| `/.test(l));
+  const open = rows.filter((l) => {
+    const c = l.split("|").map((s) => s.trim());
+    return !c[5] || !c[6];
+  });
+  if (open.length) problems.push(`00-inventory.md: ${open.length} of ${rows.length} rows have no verdict or no prior art yet; walk them`);
+}
 const target = join(dirname(file), "04-target.md");
 if (existsSync(target) && !/^## Prior art\s*\n+\S/m.test(readFileSync(target, "utf8")))
   problems.push("04-target.md has no filled '## Prior art' section: run prior-art/backend-research first, or write 'none found:' with the searches run");

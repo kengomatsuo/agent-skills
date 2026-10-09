@@ -66,6 +66,7 @@ Copy this checklist into your reply and tick items off:
 
 ```
 - [ ] 0. git pull; existing BOARD.md read if any; path said; project rules read
+- [ ] 0b. inventory.ts run; every row of 00-inventory.md walked: verdict, prior art, findings (board.ts fails on a blank row)
 - [ ] 1. measure.ts and model.ts run once; 01-current.md with diagrams
 - [ ] 2. Lenses run for the scope; line pass if asked; findings verified; 02-findings.md ranked; BOARD.md backlog; pushed (A stops)
 - [ ] 3. 03-spec.md written and self-reviewed              → GATE 1: owner approves
@@ -83,6 +84,36 @@ content in the question in plain words.** The owner reads only the chat, so a bo
 the owner" is a stall nobody sees. Record in the Handoff `asked via the choices UI at <time>`
 and, once answered, the answer. `board.ts` fails a Handoff that waits on the owner with no
 such line.
+
+## 0b. Inventory: every action, walked once
+
+**A HOTSPOT RANKING DECIDES THE ORDER, NEVER THE SCOPE.** Sampling the busiest files skipped
+a feature that every review then missed (2026-10-09: a ticket move built as two client
+writes with a half-done state no mature POS has). So every job whose scope is a whole app, a
+core, or "every feature" starts from a list of every action, made by a script so it is the same
+every run:
+
+```bash
+bun ${CLAUDE_SKILL_DIR}/scripts/inventory.ts --sql <schema snapshot> --src apps --src packages --out <job>/00-inventory.md
+```
+
+One row per server function a client can call, and one per client hook that writes a table
+directly, each with the hooks that call it and the screens that use them. Rerunning keeps what
+reviewers wrote. Then walk the rows, hottest first, in batches an agent can finish (about ten
+related rows: one feature):
+
+1. Read the action end to end: the screen, the hook, the server function, the tables and
+   triggers it writes, and the tests that pin it.
+2. Compare it with how shipped systems do the same thing, from a saved prior-art note
+   (`prior-art`, `backend-research`, or their saved folder): one transaction or several, which
+   row is the truth, what a second device or a lost answer does, how it is undone.
+3. Write the verdict in the row: **keep**, **refactor** (a shape that drifts, a second door, a
+   half-state only a client-side sequence creates), **defect** (a wrong answer, with its
+   sequence), or **dead** (nothing calls it). Give the prior-art path, or `n/a: <why>`, and the
+   findings, each also filed in `02-findings.md`.
+
+`board.ts` fails while any row has a blank verdict or prior-art cell. A row is never marked
+from its name alone.
 
 ## 1. Measure and model
 
