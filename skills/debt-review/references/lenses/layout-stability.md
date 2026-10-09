@@ -3,6 +3,12 @@ receive a scope (screens, components or a diff), the measurement report, and the
 rules files. Find content that moves after the user has seen it, and interactions that take
 longer to answer than they should. Report; do not edit.
 
+## Contents
+- Measure, never guess
+- What to look for
+- Report fields
+- Measuring shift on a running web build
+
 Read the project's rules first (CLAUDE.md, `.claude/rules/`, the design language, the screen
 contract). A documented project convention beats every heuristic below.
 
@@ -97,3 +103,11 @@ Each finding: `file:line`, the screen and state transition, the measurement (shi
 the node that moved, or interaction time and what ran), the fix, and the number it must reach
 (for example "CLS 0.00 on the loading to loaded swap"). If nothing qualifies, say so. The
 coordinator merges the reports, so give each finding once, in these fields, and nothing else.
+
+## Measuring shift on a running web build
+
+Measuring shift on a running web build: reload, wait for the data to land, then read the
+buffered entries: `new PerformanceObserver(l => ...).observe({type: 'layout-shift',
+buffered: true})`, summing `value` where `hadRecentInput` is false and listing the moved
+nodes from `sources`. A cold load right after a role or account switch is the worst case
+(empty local cache) and is the one to measure.

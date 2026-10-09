@@ -103,7 +103,14 @@ stranger to continue with no transcript:
 - anything waiting on the owner.
 
 Uncommitted work at a hard stop is lost by design: steps are small enough that losing one
-costs minutes. When a session sees its budget running low, it finishes or reverts the current
+costs minutes.
+
+Everything another session needs lives in the job folder from the start, never in the
+session's scratchpad: agent briefs (`briefs/`), exported source notes, generator scripts.
+A scratchpad dies with the session and the next account cannot read it. When the budget
+runs low, stop every background agent first (they keep spending), write `HANDOFF.md` beside
+the board with state, next actions, owner decisions and gotchas, and point the Handoff block
+at it. When a session sees its budget running low, it finishes or reverts the current
 step, commits the board, and pushes.
 
 The next session, on any account, starts with "continue the debt-review job in

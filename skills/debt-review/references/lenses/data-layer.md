@@ -119,3 +119,14 @@ Each finding: `file:line` or migration name, the statement or path, the measurem
 excerpt, `calls`, time, or the query to run), the fix as a new migration, and the number it must
 reach. If nothing qualifies, say so. The coordinator merges the reports, so give each finding
 once, in these fields, and nothing else.
+
+## Measuring at production size without touching data
+
+Seed the volume inside one transaction and roll it back: `begin`, `set local
+session_replication_role = replica` (skips triggers and FK checks for the bulk insert; it
+also skips FK cascades, so never rely on it for cleanup), insert with `generate_series`
+(20,000 parents, a few children each, respecting CHECKs such as per-day serial ranges),
+`set local ... = origin`, `analyze`, then `set local role authenticated` with the JWT claims
+of a seeded user (and a session row if writes assert one), and time each call with `explain
+(analyze, format json)`. Load a candidate function body into the same transaction to compare
+before and after with no reset. Record the table in the findings.

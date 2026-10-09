@@ -65,7 +65,7 @@ handoff block.
 Copy this checklist into your reply and tick items off:
 
 ```
-- [ ] 0. git pull; existing BOARD.md read if any; path said; project rules read
+- [ ] 0. git pull; existing BOARD.md read if any; path said; project rules read; the owner's requirement sources found and read (notes, department analyses, client briefs)
 - [ ] 0b. inventory.ts run; every row of 00-inventory.md walked: verdict, prior art, findings (board.ts fails on a blank row)
 - [ ] 1. measure.ts and model.ts run once; 01-current.md with diagrams
 - [ ] 2. Lenses run for the scope; line pass if asked; findings verified; 02-findings.md ranked; BOARD.md backlog; pushed (A stops)

@@ -92,3 +92,8 @@ Each finding: `file:line` of every call site, the screen or action, the count no
 target, how you counted, the fix, and the behaviour it must keep. If nothing qualifies, say so.
 The coordinator merges the reports, so give each finding once, in these fields, and nothing
 else.
+
+Counting on a running web build: clear the browser's network log, perform the action (sign
+in, cold reload of a screen), then read requests filtered to the API host; a count that only
+doubles once and does not reproduce after a cleared session is noise, said as such. A
+single-tab app (one SQLite worker per origin) is never probed with iframes or a second tab.

@@ -31,6 +31,16 @@ never into chat; chat gets the path and the decision needed.
 
 Say the path in one line. The owner may move it up; it never moves down mid-job.
 
+**Read the owner's requirement sources before any lens.** The repo's plans say what was
+decided; the owner's own notes (Apple Notes per department, an analysis sheet, a client
+brief) say what is still wanted, and they move faster than the plans. Find them (ask the
+project's memory and rules where they live), map them one line per row against the code
+(covered, partial, conflicts, missing, context), and hand the map to every lens. A finding
+that contradicts a note line is a conflict card, and so is code the job is about to cement.
+PreventedOceanPlastic 2026-10-09: a 100-card review moved nothing against six department
+notes it never read, and one fix hardened "office admin sorts" while the Operations note gave
+sorting to the field admin.
+
 ## Stage 1: measure and model the current structure
 
 Run `measure.ts` and `model.ts` ([tools.md](tools.md)). Write `01-current.md` holding:
@@ -125,6 +135,11 @@ The board tracks every task (tracking.md). Where reality forces a change to the 
 `Ruling:` line under the task in `05-plan.md` in the same commit.
 
 ## Stage 8: verify and record
+
+**A report page for the owner is rendered before it is called done.** Serve it locally,
+open it in the browser, and count rendered diagrams against `pre.mermaid` blocks with no
+error SVG (`svg[aria-roledescription=error]`); a second colon inside a state-diagram
+transition label is the usual break. Stop the local server afterwards.
 
 Re-run `measure.ts` and `model.ts`. `08-verify.md` sets the new diagrams beside the target and
 the numbers beside stage 1's. Then make the target permanent:
