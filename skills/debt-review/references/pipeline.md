@@ -34,7 +34,7 @@ Say the path in one line. The owner may move it up; it never moves down mid-job.
 **Read the owner's requirement sources before any lens.** The repo's plans say what was
 decided; the owner's own notes (Apple Notes per department, an analysis sheet, a client
 brief) say what is still wanted, and they move faster than the plans. Find them (ask the
-project's memory and rules where they live), map them one line per row against the code
+project's memory and rules where they live) and map them with the house `notes-to-cards` skill, one line per row against the code
 (covered, partial, conflicts, missing, context), and hand the map to every lens. A finding
 that contradicts a note line is a conflict card, and so is code the job is about to cement.
 PreventedOceanPlastic 2026-10-09: a 100-card review moved nothing against six department

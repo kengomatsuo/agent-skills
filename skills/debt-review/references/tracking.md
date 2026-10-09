@@ -108,7 +108,7 @@ costs minutes.
 Everything another session needs lives in the job folder from the start, never in the
 session's scratchpad: agent briefs (`briefs/`), exported source notes, generator scripts.
 A scratchpad dies with the session and the next account cannot read it. When the budget
-runs low, stop every background agent first (they keep spending), write `HANDOFF.md` beside
+runs low, follow the house `session-handoff` skill: stop every background agent first (they keep spending), write `HANDOFF.md` beside
 the board with state, next actions, owner decisions and gotchas, and point the Handoff block
 at it. When a session sees its budget running low, it finishes or reverts the current
 step, commits the board, and pushes.
