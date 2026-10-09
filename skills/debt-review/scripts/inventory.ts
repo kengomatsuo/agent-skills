@@ -6,6 +6,9 @@
  * Usage:
  *   bun inventory.ts --sql <schema.sql> --src <dir> [--src <dir> ...] --out <job>/00-inventory.md
  *
+ * Pass every place a caller can live as --src, server functions and jobs too
+ * (a walk marked an edge-function caller dead when only the apps were passed).
+ *
  * One row per server function in the `public` schema (what a client can call),
  * plus one row per client hook that writes a table directly. Each row names
  * the hooks that call it and the files that use those hooks, found by text
@@ -68,12 +71,14 @@ const rows: Row[] = [];
 for (const r of rpcs) {
   const callers = hooks.filter((h) => new RegExp(`rpc\\(\\s*['"\`]${r}['"\`]`).test(h.body));
   const direct = src.filter(({ text }) => new RegExp(`rpc\\(\\s*['"\`]${r}['"\`]`).test(text)).map(({ f }) => f);
+  /* A FUNCTION OTHER SQL CALLS IS NOT DEAD: count calls outside its own definition */
+  const sqlCalls = (schema.match(new RegExp(`(?<!FUNCTION )"?public"?\\."?${r}"?\\(`, 'g')) ?? []).length;
   rows.push({
     id: `rpc:${r}`,
     kind: 'server function',
     target: r,
     hooks: callers.map((h) => `${h.name} (${h.file})`),
-    screens: [...new Set([...callers.flatMap((h) => usersOf(h.name)), ...direct])].sort(),
+    screens: [...new Set([...callers.flatMap((h) => usersOf(h.name)), ...direct, ...(sqlCalls > 0 ? [`(called in SQL ${sqlCalls}x)`] : [])])].sort(),
   });
 }
 for (const h of hooks) {
