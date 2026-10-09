@@ -74,6 +74,9 @@ Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on th
 | Review | committed, waiting for the checkpoint checks or the owner | the checkpoint passes |
 | Done | finished tasks with their commit | never |
 
+A project whose rules forbid the agent to commit keeps finished cards in Review with
+`commit: owner`; the owner's commit moves them to Done with its sha.
+
 ## Pulling a card
 
 1. `git pull --rebase`. Read `BOARD.md`, the Handoff block first.

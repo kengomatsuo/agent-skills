@@ -38,8 +38,10 @@ for (const column of ["backlog", "ready", "doing", "review", "done"])
 const problems: string[] = [];
 const commitExists = (sha: string) => Bun.spawnSync(["git", "cat-file", "-e", `${sha}^{commit}`]).exitCode === 0;
 for (const card of cards) {
-  if ((card.column === "done" || card.column === "review") && !card.commit)
-    problems.push(`${card.id} is in ${card.column} with no commit`);
+  // a project whose rules forbid agent commits marks the card "commit: owner"
+  const ownerCommits = card.column === "review" && /commit: owner\b/.test(card.line);
+  if ((card.column === "done" || card.column === "review") && !card.commit && !ownerCommits)
+    problems.push(`${card.id} is in ${card.column} with no commit (write "commit: owner" if the project forbids agent commits)`);
   if (card.commit && !commitExists(card.commit))
     problems.push(`${card.id} names commit ${card.commit}, which this clone does not have (pull?)`);
   if (card.column === "doing" && !card.claim) problems.push(`${card.id} is in doing with no claim`);
