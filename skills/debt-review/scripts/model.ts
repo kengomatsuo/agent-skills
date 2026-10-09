@@ -27,9 +27,12 @@ if (!existsSync(depcruise)) {
   if (add.exitCode !== 0) throw new Error(`could not install dependency-cruiser: ${add.stderr}`);
 }
 
+// path aliases (@/…) resolve only through the tsconfig
+const tsConfig = existsSync("tsconfig.json") ? ["--ts-config", "tsconfig.json"] : [];
+
 const cruise = (extra: string[]) => {
   const only = `^(${roots.map((r) => r.replace(/\/$/, "")).join("|")})/`;
-  const r = Bun.spawnSync([depcruise, ...roots, "--no-config", "--include-only", only, "--exclude", "(node_modules|/dist/|\\.test\\.|/test/)", ...extra], {
+  const r = Bun.spawnSync([depcruise, ...roots, "--no-config", ...tsConfig, "--include-only", only, "--exclude", "(node_modules|/dist/|\\.(i?test|spec)\\.|/test/)", ...extra], {
     stdout: "pipe",
     stderr: "pipe",
   });
