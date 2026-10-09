@@ -36,6 +36,9 @@ for (const column of ["backlog", "ready", "doing", "review", "done"])
   }
 
 const problems: string[] = [];
+// a card written in another shape is counted by nobody (2026-10-09: 32 "- [ ] W1" cards read as 0)
+const stray = readFileSync(file, "utf8").split("\n").filter((l) => /^- \[[ x]\] \w+\d/.test(l)).length;
+if (stray) problems.push(`${stray} card(s) written as "- [ ] ID"; write "- **ID** ..." under ## Backlog/Ready/Doing/Review/Done`);
 const commitExists = (sha: string) => Bun.spawnSync(["git", "cat-file", "-e", `${sha}^{commit}`]).exitCode === 0;
 for (const card of cards) {
   // a project whose rules forbid agent commits marks the card "commit: owner"
