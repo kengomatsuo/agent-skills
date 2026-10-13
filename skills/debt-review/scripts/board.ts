@@ -39,6 +39,11 @@ const problems: string[] = [];
 // a card written in another shape is counted by nobody (2026-10-09: 32 "- [ ] W1" cards read as 0)
 const stray = readFileSync(file, "utf8").split("\n").filter((l) => /^- \[[ x]\] \w+\d/.test(l)).length;
 if (stray) problems.push(`${stray} card(s) written as "- [ ] ID"; write "- **ID** ..." under ## Backlog/Ready/Doing/Review/Done`);
+/* A CARD MOVES WITH card.ts, NEVER BY AN INLINE MARK (2026-10-13): " · done" written in place
+   left done cards in Backlog, and every count of the board disagreed */
+for (const card of cards)
+  if (card.column !== "done" && /\s·\sdone\b/.test(card.line))
+    problems.push(`${card.id} says done but sits in ${card.column}: run bun card.ts move <BOARD.md> ${card.id} done --commit <sha>`);
 const commitExists = (sha: string) => Bun.spawnSync(["git", "cat-file", "-e", `${sha}^{commit}`]).exitCode === 0;
 for (const card of cards) {
   // a project whose rules forbid agent commits marks the card "commit: owner"
