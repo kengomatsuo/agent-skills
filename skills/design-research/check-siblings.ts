@@ -13,7 +13,13 @@ let total = 0;
 const selftest = `<div style="display:flex;gap:8px"><div class="t" style="padding:8px"><h2 class="h">One</h2><p class="v">1</p></div><div class="t" style="padding:8px"><h2 class="h">Two lines<br>wrap</h2><p class="v">2</p></div></div>`;
 for (const id of ids) {
   if (id === "selftest") await page.setContent(selftest);
-  else await page.goto(id, { waitUntil: "networkidle" });
+  else {
+    await page.goto(id, { waitUntil: "load" });
+    // client-rendered apps paint after load; wait for text and fonts
+    await page.waitForFunction(() => document.body.innerText.trim().length > 0, null, { timeout: 15000 }).catch(() => {});
+    await page.evaluate(() => document.fonts.ready);
+    await page.waitForTimeout(300);
+  }
   const { issues, rows: compared, cards }: { issues: string[]; rows: number; cards: number } = await page.evaluate(() => {
     const out: string[] = [];
     let compared = 0;
