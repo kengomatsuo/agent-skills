@@ -120,6 +120,9 @@ Look for:
     again in SQL, each for the same bug. Root: the one place that must hold it, and it is
     usually the database or the single writer. Keep the check that is the floor; remove the
     echoes only after the root check has a test.
+10a. **A behaviour patched into one door.** A read, write or refusal that one entry path lacked,
+    added to that path alone. Root: the path kept its own copy of the rule. Move it onto the one
+    function and run every path to the same fact through one case table, boundaries included.
 11. **A workaround for a library or platform.** A patch or wrapper around a dependency's
     behaviour. Check the dependency's current docs and issue state before judging; a workaround
     for a fixed issue is dead, for an open one it needs a named owner and an exit condition.
