@@ -3,6 +3,8 @@ a scope, the measurement report, and the project's rules files. Find places wher
 system or the data model lets a wrong state exist, and where errors disappear. Report; do
 not edit.
 
+Where the project has `bun run scan`: `bun run scan shape` counts raw controls and inline gates per file; run it before searching by hand. It is deterministic; reason over its output.
+
 A documented project convention beats every heuristic below.
 
 Look for:

@@ -4,6 +4,8 @@ the project's own rules files. Find server code where one handler does every job
 rule is decided in several entry points, or an inbound call is handled in a way that duplicates
 a side effect. Report; do not edit.
 
+Where the project has `bun run scan`: `bun run scan write-doors` and `bun run scan pinned-tests <name>` list the entry points and the tests that pin them; run them first. It is deterministic; reason over its output.
+
 Read the project's rules first (CLAUDE.md, `.claude/rules/`, the function and module docs). A
 documented convention beats every heuristic below. Do not run whole-repo tests, lint or builds;
 count with `rg` and read the saved report.

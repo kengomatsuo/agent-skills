@@ -3,6 +3,8 @@ measurement report, the git history of the scope, and the project's own rules fi
 that patch a symptom instead of the cause, and trace each one to the root so the root is fixed
 and the bandage removed. Report; do not edit.
 
+Where the project has `bun run scan`: `bun run scan ledger <term>` and `bun run scan callers <symbol>` list the past rows and the call sites; run them before searching by hand. It is deterministic; reason over its output.
+
 Read the project's rules first, and the project's ledger of past defects and its list of
 regressions caused by fixes, if it keeps them (the local notes file names them).
 A documented project decision that a guard stays is not a bandage; say so and move on, but

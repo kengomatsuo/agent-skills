@@ -4,6 +4,8 @@ project's own rules and design documents. Find places where the app does one thi
 where a screen breaks the app's own design language, where copy drifts, and where a task takes
 more presses than it needs. Report; do not edit.
 
+Where the project has `bun run scan`: `bun run scan context-gates` lists choice lists with no plan, flag or op-level gate; run it before searching by hand. It is deterministic; reason over its output.
+
 **READ THE DESIGN DOCUMENTS FIRST, AND QUOTE THEM.** The yardstick is the project's own: its
 design language, the screen inventory, the feature map, the copy rules, the reference screens.
 (The local notes file names the project's own documents.) A finding that says "this breaks the design language" quotes the rule

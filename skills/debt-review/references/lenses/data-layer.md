@@ -4,6 +4,8 @@ measurement report, and the project's own rules files. Find SQL that costs more 
 to, rules written more than once in the database, and round trips one call could replace.
 Report; do not edit.
 
+Where the project has `bun run scan`: `bun run scan write-doors [--table t]` lists every client write and `bun run scan shape` totals reads, writes and SQL inline checks per file; run them before searching by hand. It is deterministic; reason over its output.
+
 ## Contents
 - Measure, never guess
 - What to look for, items 1 to 11 (item 11 is ACID)

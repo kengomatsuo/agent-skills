@@ -3,6 +3,8 @@ receive a scope, the measurement report (including copy-paste clones), and the p
 rules files. Find knowledge that lives in more than one place, and abstractions that cost more
 than they save. Report; do not edit.
 
+Where the project has `bun run scan`: `bun run scan shape` lists duplicated blocks per file and SQL inline staff and lock checks; run it before searching by hand. It is deterministic; reason over its output.
+
 A documented project convention beats every heuristic below.
 
 **DRY is about knowledge, never about text.** Two blocks that look alike but encode different

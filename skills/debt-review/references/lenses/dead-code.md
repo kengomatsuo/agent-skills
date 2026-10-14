@@ -3,6 +3,8 @@ scope, the measurement report (including the unused files, exports and dependenc
 found), and the project's rules files. Find code nothing needs any more, and code that
 pretends to be needed. Report; do not edit.
 
+Where the project has `bun run scan`: `bun run scan callers <symbol>` lists every call site of an export or SQL function; run it before declaring a symbol dead. It is deterministic; reason over its output.
+
 A documented project convention beats every heuristic below.
 
 **A switch that is off everywhere is not dead until you read why it exists.** Open the commit,
