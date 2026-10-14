@@ -72,6 +72,12 @@ Look for:
 10. **Screens that do not say where they are.** A screen with no title or back path, two
    screens with the same title, a navigation entry that lands on something else. Compare the
    screen inventory with the navigation.
+11. **A choice the account cannot use.** Every option list, tab, filter and form section that
+   offers something tied to what the customer bought (a plan, a tier, an add-on, a module) is
+   drawn under each kind of account the product sells: an option the account cannot use is
+   absent unless it is the saved value. A data gate ("has rental types") is not a plan gate.
+   Walk the screen once per account kind, not once on the richest fixture.
+
 
 Each finding: the screens and `file:line`, the screenshots or press counts, the rule quoted
 from the project's documents (or the sibling screen that sets the pattern), the fix, and
