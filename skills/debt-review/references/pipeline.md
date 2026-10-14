@@ -100,7 +100,7 @@ the deletion test to every new module, and drop any seam with only one implement
 
 ## Stage 5: plan
 
-Work backwards from the target with a Mikado graph: the goal at the top, and under it each
+Before the graph, answer `~/claude-house-rules/docs/design-questions.md` for the target: its contexts and the neighbours of every write it adds. Each answer lands on the card that builds it. Work backwards from the target with a Mikado graph: the goal at the top, and under it each
 change that must happen first. Try the goal; whatever breaks becomes a prerequisite; revert;
 repeat until the leaves can be done without breaking anything. Draw it as `flowchart BT`.
 
@@ -210,6 +210,8 @@ flowchart BT
 - Blocked by: none
 - Files: [NEW] path, [MODIFY] path:lines, [DELETE] path
 - Interfaces: consumes `…`, produces `…`
+- Contexts: <each context it opens in, or n/a: why> (design-questions.md §1)
+- Neighbours: <exits, other routes, ownership, replay, partial failure, lock order, time, old client; each a check or n/a: why> (§2)
 - Done when: <at most three checks>
 - Verify: `<command>` → <expected>
 - Revert if: <what red means>
