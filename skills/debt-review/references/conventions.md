@@ -34,6 +34,10 @@ first.
 What may stay inline: one short line giving a reason the code cannot show (a browser bug, a
 law, an ordering constraint), seven words or so. Commented-out code never stays.
 
+## The five units
+
+Every unit a debt job touches leaves in one of the five shapes in ~/claude-house-rules/docs/creation-pattern.md (rule, data, screen, server act, server rule); a finding names the shape it breaks, and the fix moves the code into that shape, never a sixth one.
+
 ## Size and shape
 
 | Measure | Limit |

@@ -79,3 +79,5 @@ Copy this checklist into your reply and tick items off:
 For the mechanics of simplifying a specific function — nesting, naming, early returns —
 a dedicated simplification skill, where the project has one, carries the catalogue. This
 skill is about what may be touched and when.
+
+**Target shape:** a refactor moves code toward the five units in ~/claude-house-rules/docs/creation-pattern.md; name the unit each moved piece becomes.
