@@ -212,6 +212,7 @@ flowchart BT
 - Interfaces: consumes `…`, produces `…`
 - Contexts: <each context it opens in, or n/a: why> (design-questions.md §1)
 - Neighbours: <exits, other routes, ownership, replay, partial failure, lock order, time, old client; each a check or n/a: why> (§2)
+- Doors: <every path that reads or writes the fact this card touches (live, after the fact, offline, another app, a job), the one function they all call, and the case table that runs them all on the same inputs, boundaries included; or one door: why> (a second copy of a rule is how a door drifts, 2026-10-15)
 - Done when: <at most three checks>
 - Verify: `<command>` → <expected>
 - Revert if: <what red means>
