@@ -38,7 +38,7 @@ function files(dir: string, acc: string[] = []): string[] {
     if (SKIP.has(e)) continue;
     const f = join(dir, e);
     if (statSync(f).isDirectory()) files(f, acc);
-    else if (/\.(tsx?|jsx?)$/.test(e) && !/\.(test|spec|d)\.[tj]sx?$/.test(e)) acc.push(f);
+    else if (/\.(tsx?|jsx?)$/.test(e) && !/\.(test|spec|itest|e2e|d)\.[tj]sx?$/.test(e)) acc.push(f);
   }
   return acc;
 }
@@ -46,17 +46,24 @@ function files(dir: string, acc: string[] = []): string[] {
 const schema = readFileSync(sql, 'utf8');
 const rpcs = [
   ...new Set(
-    [...schema.matchAll(/CREATE (?:OR REPLACE )?FUNCTION "public"\."([a-z0-9_]+)"\(/gi)].map((m) => m[1]),
+    /* pg_dump quotes the names ("public"."x"); hand-written migrations often do not (public.x) */
+    [...schema.matchAll(/CREATE (?:OR REPLACE )?FUNCTION "?public"?\."?([a-z0-9_]+)"?\s*\(/gi)].map((m) => m[1].toLowerCase()),
   ),
 ].sort();
 
 const src = srcs.flatMap((d) => files(d)).map((f) => ({ f: relative(root, f), text: readFileSync(f, 'utf8') }));
 
-/** exported hooks per file, with the text of each hook's body */
+/**
+ * Every exported function per file (hooks and repository functions alike), with its body.
+ * Covers `export function x(`, `export async function x(` and `export const x = (...) =>`.
+ */
 type Hook = { name: string; file: string; body: string };
 const hooks: Hook[] = [];
 for (const { f, text } of src) {
-  const starts = [...text.matchAll(/export (?:async )?function (use[A-Z]\w*)\s*\(/g)];
+  const starts = [
+    ...text.matchAll(/export (?:async )?function ([A-Za-z_]\w*)\s*[<(]/g),
+    ...text.matchAll(/export const ([A-Za-z_]\w*)\s*(?::[^=]+)?=\s*(?:async\s*)?(?:<[^>]*>\s*)?\(/g),
+  ].sort((a, b) => a.index! - b.index!);
   starts.forEach((m, i) => {
     const end = i + 1 < starts.length ? starts[i + 1].index! : text.length;
     hooks.push({ name: m[1], file: f, body: text.slice(m.index!, end) });
@@ -65,6 +72,15 @@ for (const { f, text } of src) {
 
 const usersOf = (name: string) =>
   src.filter(({ text }) => new RegExp(`\\b${name}\\b`).test(text)).map(({ f }) => f);
+
+/* A REPOSITORY FUNCTION IS REACHED THROUGH THE HOOKS THAT CALL IT: follow one more hop to the screens */
+const reach = (name: string, file: string) => {
+  const direct = usersOf(name).filter((f) => f !== file);
+  const viaHooks = hooks
+    .filter((h) => h.name !== name && h.file !== file && new RegExp(`\\b${name}\\b`).test(h.body))
+    .flatMap((h) => usersOf(h.name).filter((f) => f !== h.file));
+  return [...new Set([...direct, ...viaHooks])];
+};
 
 type Row = { id: string; kind: string; target: string; hooks: string[]; screens: string[] };
 const rows: Row[] = [];
@@ -78,7 +94,7 @@ for (const r of rpcs) {
     kind: 'server function',
     target: r,
     hooks: callers.map((h) => `${h.name} (${h.file})`),
-    screens: [...new Set([...callers.flatMap((h) => usersOf(h.name)), ...direct, ...(sqlCalls > 0 ? [`(called in SQL ${sqlCalls}x)`] : [])])].sort(),
+    screens: [...new Set([...callers.flatMap((h) => reach(h.name, h.file)), ...direct.filter((f) => !callers.some((h) => h.file === f)), ...(sqlCalls > 0 ? [`(called in SQL ${sqlCalls}x)`] : [])])].sort(),
   });
 }
 for (const h of hooks) {
@@ -89,8 +105,19 @@ for (const h of hooks) {
       kind: 'client write',
       target: t,
       hooks: [`${h.name} (${h.file})`],
-      screens: usersOf(h.name).filter((f) => f !== h.file).sort(),
+      screens: reach(h.name, h.file).sort(),
     });
+  }
+}
+
+/* A WRITE INSIDE A PROVIDER OR A CALLBACK IS STILL A WRITE: catch the ones no exported function holds */
+const WRITE = /from\(\s*['"`]([a-z0-9_]+)['"`]\s*\)[\s\S]{0,200}?\.(insert|update|upsert|delete)\(/g;
+for (const { f, text } of src) {
+  for (const w of text.matchAll(WRITE)) {
+    const target = `${w[1]}.${w[2]}`;
+    if (rows.some((r) => r.kind === 'client write' && r.target === target && r.hooks.some((h) => h.endsWith(`(${f})`)))) continue;
+    if (rows.some((r) => r.id === `write:${f}:${target}`)) continue;
+    rows.push({ id: `write:${f}:${target}`, kind: 'client write', target, hooks: [f], screens: [] });
   }
 }
 
