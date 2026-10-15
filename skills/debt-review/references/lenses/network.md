@@ -93,6 +93,12 @@ Look for:
     already in a local database pages from it with no request. Measure: fling a seeded list of
     a few thousand rows and count the waits and requests per page turn (owner, 2026-10-15:
     a whole-app review never looked at this).
+13. **The detail screen is cold when a row is tapped.** Three layers, each checked: the list
+    fetch carries every row the detail reads, so the tap makes no request; the detail's first
+    render reads the local copy synchronously, so it paints with no placeholder; and the
+    detail screen mounts while the finger is still down (the router's preload or prefetch
+    call, fired from press-in). Measure tap-to-content on the three busiest list-to-detail
+    pairs, and count the requests and placeholder frames after the tap (owner, 2026-10-16).
 
 Do not trade correctness for count. A request that guards money, authorisation or freshness of
 a figure the user acts on stays; say so and move on. Cutting a request that would make the
