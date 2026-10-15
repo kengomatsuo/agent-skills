@@ -62,6 +62,11 @@ Handoff block together. Picking up: `git pull`, then
 [references/tracking.md](references/tracking.md) has the board, the claim rule and the
 handoff block.
 
+**The progress bar follows the board.** When the `mcp__savvy-progress__progress` tool exists,
+call it with `title`, `total` (every card) and `done` (cards in Review or Done) when the job
+starts, and again in the same turn as every card move; it reads nothing on its own and sat at
+0% for a whole day's loop (owner, 2026-10-15).
+
 Copy this checklist into your reply and tick items off:
 
 ```
