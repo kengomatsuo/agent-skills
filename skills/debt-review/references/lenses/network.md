@@ -3,6 +3,10 @@ a feature, an app or a diff), the measurement report, and the project's own rule
 requests the app makes that it does not need to make, and requests that start later than they
 could. Report; do not edit.
 
+## Contents
+- Count, never guess
+- What to look for, items 1 to 12 (item 12 is the next page)
+
 Read the project's rules first (CLAUDE.md, AGENTS.md, `.claude/rules/`, CONTRIBUTING, the
 data-layer notes). A documented project convention beats every heuristic below: where the
 project endorses something a heuristic flags (a poll kept because a push channel is
@@ -83,6 +87,12 @@ Look for:
 11. **Retries and timeouts that multiply load.** A retry with no backoff, a retry on a
     non-idempotent write, a default retry stacked on a hand-written one. Count requests in the
     failure case as well as the success case.
+12. **The next page is not ready when the user reaches it.** A paged list that asks for page
+    N+1 only near the end (read the list component's end threshold and its unit in the
+    installed package's types) makes a fast fling stop on a spinner. A list whose rows are
+    already in a local database pages from it with no request. Measure: fling a seeded list of
+    a few thousand rows and count the waits and requests per page turn (owner, 2026-10-15:
+    a whole-app review never looked at this).
 
 Do not trade correctness for count. A request that guards money, authorisation or freshness of
 a figure the user acts on stays; say so and move on. Cutting a request that would make the

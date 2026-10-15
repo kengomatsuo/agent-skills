@@ -8,7 +8,7 @@ Where the project has `bun run scan`: `bun run scan write-doors [--table t]` lis
 
 ## Contents
 - Measure, never guess
-- What to look for, items 1 to 11 (item 11 is ACID)
+- What to look for, items 1 to 12 (item 11 is ACID, item 12 the local database)
 - Report fields
 
 Read the project's rules first (CLAUDE.md, `.claude/rules/`, the schema docs, the migration
@@ -91,6 +91,12 @@ Look for:
 10. **Unbounded work.** A query with no `limit` on a growing table, a function that scans a whole
     history to answer "latest", a report computed live that a summary table or a materialised
     view would serve. Give the row count now and in a year.
+12. **The device's own database.** An app that keeps a local SQLite (or IndexedDB) copy runs its
+    lists and details there, so each list query gets the same check as a server one: run
+    `EXPLAIN QUERY PLAN` on a seeded local copy (https://sqlite.org/eqp.html) and flag a `SCAN`
+    of a large table or `USE TEMP B-TREE FOR ORDER BY`; every join key and every list's filter,
+    order and tie columns need an index (owner, 2026-10-15: a whole-app review checked only
+    Postgres while every list had moved onto local joins with almost no local indexes).
 
 11. **ACID, one question per letter** (PostgreSQL docs, https://www.postgresql.org/docs/current/tutorial-transactions.html
     and https://www.postgresql.org/docs/current/transaction-iso.html):
