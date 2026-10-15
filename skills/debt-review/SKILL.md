@@ -62,10 +62,11 @@ Handoff block together. Picking up: `git pull`, then
 [references/tracking.md](references/tracking.md) has the board, the claim rule and the
 handoff block.
 
-**The progress bar follows the board.** When the `mcp__savvy-progress__progress` tool exists,
-call it with `title`, `total` (every card) and `done` (cards in Review or Done) when the job
-starts, and again in the same turn as every card move; it reads nothing on its own and sat at
-0% for a whole day's loop (owner, 2026-10-15).
+**The progress bar follows the board.** When the savvy-progress mod is installed, give the
+project a `scripts/progress.sh` that prints `all open plans <done>/<total> <pct>%` from
+`BOARD.md` (Review and Done count as done); the mod reads it every minute. A manual
+`mcp__savvy-progress__progress` flow replaces that figure, so close one with `finished: true`
+(owner, 2026-10-15: the bar sat at 0% for a day's loop).
 
 Copy this checklist into your reply and tick items off:
 
