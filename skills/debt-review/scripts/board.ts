@@ -22,7 +22,7 @@ for (const line of readFileSync(file, "utf8").split("\n")) {
 const cards: Card[] = [];
 for (const column of ["backlog", "ready", "doing", "review", "done"])
   for (const line of sections.get(column) ?? []) {
-    const id = line.match(/^- \*\*([\w-]+)\*\*/)?.[1];
+    const id = line.match(/^- \*\*([\w.-]+)\*\*/)?.[1];
     if (!id) continue;
     const claim = line.match(/claim: (\S+) (\S+Z)/);
     cards.push({

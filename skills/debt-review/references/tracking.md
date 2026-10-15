@@ -74,14 +74,13 @@ Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on th
 | Review | committed, waiting for the checkpoint checks or the owner | the checkpoint passes |
 | Done | finished tasks with their commit | never |
 
-**A card changes column only through `card.ts`**, never by editing its line:
-`bun <skill>/scripts/card.ts move BOARD.md T4 done --commit abc1234 --note "what it delivered"`
-takes the card out of whatever column it sits in and writes it once under the target heading
-(Done and Review carry `commit:`). `bun card.ts migrate BOARD.md` moves cards an older session
-marked " · done" in place. `board.ts` fails a card that says done outside Done, and a project
-may refuse such a commit too (2026-10-13: in-place marks left done cards in Backlog, and every
-count of the board disagreed). An agent never moves cards; the coordinator does, after the
-commit lands.
+**A card changes only through the house `board` skill's script**, never by editing its line:
+`bun ~/.claude/skills/board/scripts/board.ts --board BOARD.md move T4 done --commit abc1234 --check "what ran"`,
+and `add`, `claim`, `note`, `next`, `merge-named`, `progress` the same way; the `board-guard`
+hook refuses any other write to a `BOARD.md` (2026-10-13: in-place marks left done cards in
+Backlog; 2026-10-15: hand edits by python left 61 finished cards unmarked). `scripts/card.ts
+move` still works and calls it. An agent never moves cards; the coordinator does, after the
+work lands.
 
 A project whose rules forbid the agent to commit keeps finished cards in Review with
 `commit: owner`; the owner's commit moves them to Done with its sha.

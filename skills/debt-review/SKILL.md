@@ -58,15 +58,15 @@ holds the spec and plan templates). Anything over 100 lines goes to a file, neve
 (`BOARD.md`) live in the job folder, committed and pushed, so any session on any account can
 pick the job up at any moment. Every task commit carries the code, the card's move and a fresh
 Handoff block together. Picking up: `git pull`, then
-`bun ${CLAUDE_SKILL_DIR}/scripts/board.ts <job>/BOARD.md`, then pull the next card.
+`bun ${CLAUDE_SKILL_DIR}/scripts/board.ts <job>/BOARD.md` (the job checks), then pull the next
+card. Every card change (`add`, `claim`, `move`, `note`, `next`, `progress`) goes through the
+house **board** skill's script, never a hand edit; its hook refuses one.
 [references/tracking.md](references/tracking.md) has the board, the claim rule and the
 handoff block.
 
-**The progress bar follows the board.** When the savvy-progress mod is installed, give the
-project a `scripts/progress.sh` that prints `all open plans <done>/<total> <pct>%` from
-`BOARD.md` (Review and Done count as done); the mod reads it every minute. A manual
-`mcp__savvy-progress__progress` flow replaces that figure, so close one with `finished: true`
-(owner, 2026-10-15: the bar sat at 0% for a day's loop).
+**The progress bar follows the board.** Give the project the board skill's one-line
+`scripts/progress.sh`; the savvy-progress mod reads it every minute. Never open a manual
+`mcp__savvy-progress__progress` flow over it (owner, 2026-10-15: the bar sat at 0% for a day).
 
 Copy this checklist into your reply and tick items off:
 
