@@ -97,7 +97,8 @@ Look for:
     fetch carries every row the detail reads, so the tap makes no request; the detail's first
     render reads the local copy synchronously, so it paints with no placeholder; and the
     detail screen mounts while the finger is still down (the router's preload or prefetch
-    call, fired from press-in). Measure tap-to-content on the three busiest list-to-detail
+    call, fired from press-in, and on the web from hover after a short delay and from keyboard
+    focus). Measure tap-to-content on the three busiest list-to-detail
     pairs, and count the requests and placeholder frames after the tap (owner, 2026-10-16).
 
 Do not trade correctness for count. A request that guards money, authorisation or freshness of
