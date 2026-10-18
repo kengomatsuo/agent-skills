@@ -10,6 +10,7 @@ Each works on its own; they name each other where one hands off to the next.
 | `prior-art` | a plan proposes building something mature projects already solved: use, copy or build, decided and written down |
 | `code-to-copy` | you want open-source code to copy: search by topic and by the market's own words, read each project's schema, record what to take and what to leave |
 | `blast-radius` | you are about to delete, rename or change a signature: list everything it can break first |
+| `lean-search` | you search a codebase or run a command with unknown output: count before reading, batch searches, ast-grep for call sites, reduce big output in a script |
 | `blind-audit` | a subsystem needs checking end to end: assertions come from its promise, before reading its code |
 | `refactor` | working code is hard to read or duplicated: reshape it without changing behaviour |
 | `debt-review` | code is hard to change or someone asks to clean it up: measure and diagram it, review it with five lenses, then spec, design twice, plan and refactor one commit at a time |

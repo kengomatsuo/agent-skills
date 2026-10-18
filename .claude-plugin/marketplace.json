@@ -164,6 +164,17 @@
         "name": "kengomatsuo"
       },
       "homepage": "https://github.com/kengomatsuo/product-video"
+    },
+    {
+      "name": "lean-search",
+      "description": "Search a codebase in few calls and few tokens: counts before content, batched searches, ast-grep for call sites, big output reduced in a script.",
+      "source": "./skills/lean-search",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     }
   ]
 }

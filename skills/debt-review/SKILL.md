@@ -1,6 +1,6 @@
 ---
 name: debt-review
-description: "Use BEFORE cleaning up, simplifying, de-duplicating or splitting code that has turned into spaghetti, a file too big to work in, or code every change has to touch; when reviewing a diff or PR for maintainability, comments or slop (correctness bugs belong to code-review); and when asked to apply KISS, DRY, YAGNI or SOLID, remove slop or dead code, or plan a refactor; and when resuming a job folder with a BOARD.md. Runs a gated pipeline: measures hotspots, clones, dead code, cycles and complexity; draws the structure in Mermaid; reviews with twelve lenses (the core five: structure, duplication, dead code, types and state, slop; and the depth seven: network, layout stability, data layer, backend structure, model, product, bandages) and, on request, a line-by-line pass over the hotspots; then spec, two target designs with a signature wireframe, a Mikado plan, a compiling draft, one commit per task on a kanban board any session can resume, and re-measurement. Code reads without comments; JSDoc holds contracts."
+description: "Use BEFORE auditing or reviewing code for maintainability: spaghetti, a file too big to work in, code every change has to touch, a diff or PR review for slop or comments (correctness bugs belong to code-review), KISS, DRY, YAGNI or SOLID, dead code, a refactor plan across several files, and resuming a job folder with a BOARD.md. Runs a gated pipeline: measures, diagrams, reviews with twelve lenses, then a spec, two target designs, a Mikado plan and one commit per task on a board any session can resume. One known cleanup in one place belongs to refactor."
 when_to_use: "Triggers: tech debt, maintainability review, code smells, too many comments, JSDoc, hand off a refactor, unspaghettify, optimise or minimise code, audit the whole app, wasted network calls, layout shifts, slow queries, flag or plan gating sprawl, fixes that keep coming back (bandages), review every line."
 user-invocable: true
 ---
@@ -52,7 +52,7 @@ flowchart LR
 
 Say the path in one line at the start. The owner may raise it; it never drops mid-job. Every
 stage writes one numbered file into the job folder ([references/pipeline.md](references/pipeline.md)
-holds the spec and plan templates). Anything over 100 lines goes to a file, never into chat.
+holds the spec and plan templates). Anything over 100 lines goes to a file, and its point goes into chat in plain words, because the owner reads only the chat.
 
 **THE REPO IS THE ONLY MEMORY EVERY SESSION SHARES.** Findings, plan and a kanban board
 (`BOARD.md`) live in the job folder, committed and pushed, so any session on any account can
@@ -86,7 +86,8 @@ Copy this checklist into your reply and tick items off:
 An approval covers only what was shown at that gate. Never run past a gate on an earlier yes.
 
 **Ask each gate through the choices UI (AskUserQuestion) the moment it is reached, with the
-content in the question in plain words.** The owner reads only the chat, so a board line "awaits
+content in the question in plain words.** A gate decides direction and scope; a defect found
+along the way is fixed in the same turn without one. The owner reads only the chat, so a board line "awaits
 the owner" is a stall nobody sees. Record in the Handoff `asked via the choices UI at <time>`
 and, once answered, the answer. `board.ts` fails a Handoff that waits on the owner with no
 such line.

@@ -1,0 +1,65 @@
+---
+name: lean-search
+description: "Use BEFORE searching a codebase or running a command whose output size is unknown (grep, rg, find, logs, test runs, JSON, git log), and when a code-graph index (graphify, Graphicle) or a context sandbox (context-mode) is suggested. Finds code with counts before content, batches searches into one call, answers structure questions with ast-grep, and reduces big output to the answer in a script."
+when_to_use: "Triggers: a search that returned too much, a session that feels slow or expensive, questions about who calls a function or where something is defined, and any proposal to install a code graph or an output sandbox."
+user-invocable: true
+---
+
+# Search for the answer
+
+> **Local notes.** If `~/.claude/skill-notes/lean-search.md` exists, read it before starting.
+> Where it disagrees with this file, it wins.
+
+A search costs twice: the bytes it returns stay in context for every later turn, and each call
+is a full round trip. In one owner's 30 longest sessions grep returned about 200 tokens a call,
+but there were 7,829 calls. Fewer calls save more than shorter output. Graph indexes and
+sandboxes measured no better than this (see [references/research.md](references/research.md)).
+
+## The five habits
+
+1. **Count, then read.** Ask how many and where before asking what.
+   - `rg -c 'pattern' src | sort -t: -k2 -nr | head -20` gives files by match count.
+   - `rg -l 'pattern'` lists files only. The Grep tool's default `output_mode` is already
+     `files_with_matches`; switch to `content` only for the few files that matter.
+   - Read content once the list is under about 20 files. Over that, narrow the pattern or the path.
+
+2. **Read only the lines you need.** Locate with `rg -n -m 5 -M 200 'pattern' file`
+   (`-m` caps matches per file, `-M` cuts minified lines), then `Read` with `offset` and `limit`
+   of 40 to 80 lines around the hit. Add `-C 2` only when the match alone does not answer.
+
+3. **One call, several questions.** Independent searches go in one message as parallel tool
+   calls, or in one Bash call with a label each:
+   ```bash
+   rg -l 'useAuth' src; echo '== callers'; rg -n 'useAuth\(' src | head -20; echo '== tests'; rg -l 'useAuth' tests
+   ```
+
+4. **Structure questions go to ast-grep.** "Who calls X", "where is X defined" and "which files
+   import X" are syntax questions, and a text grep also hits comments, strings and look-alikes.
+   ast-grep matches the parse tree with no index to rebuild, for TypeScript, TSX, Swift and
+   the other languages it parses:
+   ```bash
+   bunx @ast-grep/cli run -l ts -p 'refund($$$A)' --files-with-matches src
+   bunx @ast-grep/cli run -l tsx -p 'import { $$$A } from "@/lib/money"' src
+   bunx @ast-grep/cli run -l swift -p 'func load($$$A) { $$$B }' Sources
+   ```
+   Before deleting or renaming, hand the call sites to the `blast-radius` skill.
+
+5. **Big output becomes an answer in a script.** When a command can print more than a screen
+   (a test run, a log, an API listing, `git log`), pipe it to what you want to know:
+   - counts by name: `bun test 2>&1 | grep -E '^\s*[0-9]+ (pass|fail)'`
+   - JSON: `gh api ... | jq '[.[] | select(.state=="open")] | length'`
+   - anything else: `| bun -e 'const t = await Bun.stdin.text(); console.log(...)'`
+
+   Claude Code already saves Bash output over 30,000 characters to a file and shows a
+   2,000-character preview. Search that file with `rg` instead of running the command again.
+
+## What not to install
+
+| Tool | What its own sources say | Verdict |
+|---|---|---|
+| graphify | tree-sitter graph plus a hook on every search; tied grep on 100 SWE-bench tasks and used 29% more tokens | skip |
+| Graphicle | Rust port of graphify, a week old; "tied grep on finding code, and we do not claim it saves tokens"; 16% more tokens | skip |
+| context-mode | two node processes on nearly every tool call, about 1,050 tokens at session start, redirects WebFetch; its 96% saving is on chosen fixtures | replaced by habit 5 |
+
+Re-check the graph tools when a benchmark from someone other than their authors shows a win on
+code like yours.

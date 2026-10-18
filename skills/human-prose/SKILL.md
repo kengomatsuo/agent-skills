@@ -1,6 +1,6 @@
 ---
 name: "human-prose"
-description: "Use BEFORE writing, rewriting or reviewing any prose a person will read, in any language: docs, README files, UI copy, error messages, commit messages, release notes, articles, emails, slide decks, marketing pages, and any draft that \"sounds like AI\" or ChatGPT. Strips the LLM tells (antithesis, rule of three, negative anaphora, staccato fragments, copula avoidance, participle tails, significance inflation, dash and footnote clutter, inflated vocabulary, translationese, decorative formatting, leftover model markup) and applies human editorial patterns, with surface forms for English, Japanese, Indonesian, Korean, Chinese and Spanish and a method for any other language."
+description: "Use BEFORE writing, rewriting or reviewing any prose a person will read, in any language: docs, README files, UI copy, error messages, commit messages, release notes, articles, emails, slides, marketing pages, and any draft that \"sounds like AI\" or ChatGPT. Strips the LLM tells (antithesis, rule of three, negative anaphora, participle tails, copula avoidance, inflated vocabulary, translationese and more) and applies human editorial patterns for English, Japanese, Indonesian, Korean, Chinese, Spanish and any other language."
 ---
 
 # Human Prose (any language)
