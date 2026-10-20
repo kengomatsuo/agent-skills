@@ -1,7 +1,7 @@
 ---
 name: lean-search
-description: "Use BEFORE searching a codebase or running a command whose output size is unknown (grep, rg, find, logs, test runs, JSON, git log), and when a code-graph index (graphify, Graphicle) or a context sandbox (context-mode) is suggested. Finds code with counts before content, batches searches into one call, answers structure questions with ast-grep, and reduces big output to the answer in a script."
-when_to_use: "Triggers: a search that returned too much, a session that feels slow or expensive, questions about who calls a function or where something is defined, and any proposal to install a code graph or an output sandbox."
+description: "Use BEFORE searching a codebase or running a command whose output size is unknown (grep, rg, find, logs, test runs, JSON, git log), and when a code-graph index (graphify, Graphicle, Graft or Trail-code), an LSP plugin or a context sandbox (context-mode) is suggested. Finds code with counts before content, batches searches into one call, answers structure questions with ast-grep, and reduces big output to the answer in a script."
+when_to_use: "Triggers: a search that returned too much, a session that feels slow or expensive, questions about who calls a function or where something is defined, and any proposal to install a code graph, a language server plugin or an output sandbox."
 user-invocable: true
 ---
 
@@ -12,10 +12,10 @@ user-invocable: true
 
 A search costs twice: the bytes it returns stay in context for every later turn, and each call
 is a full round trip. In one owner's 30 longest sessions grep returned about 200 tokens a call,
-but there were 7,829 calls. Fewer calls save more than shorter output. Graph indexes and
-sandboxes measured no better than this (see [references/research.md](references/research.md)).
+but there were 7,829 calls. Fewer calls save more than shorter output. graphify, Graphicle and the
+context-mode sandbox measured no better than this (see [references/research.md](references/research.md)).
 
-## The five habits
+## The six habits
 
 1. **Count, then read.** Ask how many and where before asking what.
    - `rg -c 'pattern' src | sort -t: -k2 -nr | head -20` gives files by match count.
@@ -44,6 +44,19 @@ sandboxes measured no better than this (see [references/research.md](references/
    ```
    Before deleting or renaming, hand the call sites to the `blast-radius` skill.
 
+   Ask the LSP tool first: one call returns a symbol's definition or every reference, and
+   after each edit Claude Code reports the type errors it introduced, so no build runs to find
+   them. Every house machine has it: the `house-lsp` plugin (TypeScript, Swift, Python servers)
+   from claude-house-rules `mods/`, with the binaries `install.sh` puts on the PATH and a
+   session-start check that reinstalls them. Cloud sessions start no language server, so there
+   ast-grep stays.
+
+6. **"Which files does this task touch" goes to Trail-code.** The house build (`trail`, from
+   claude-house-rules `scripts/trail-code.sh`, usage stats removed) keeps a tree-sitter map of
+   every function and caller: `trail ask "<task>"` lists the matching files and functions,
+   `trail callers <symbol> -d 3` gives the blast radius, `trail skeleton <file>` every signature
+   without bodies. Run `trail init --agents claude` once per repo to add its prompt hooks.
+
 5. **Big output becomes an answer in a script.** When a command can print more than a screen
    (a test run, a log, an API listing, `git log`), pipe it to what you want to know:
    - counts by name: `bun test 2>&1 | grep -E '^\s*[0-9]+ (pass|fail)'`
@@ -53,7 +66,14 @@ sandboxes measured no better than this (see [references/research.md](references/
    Claude Code already saves Bash output over 30,000 characters to a file and shows a
    2,000-character preview. Search that file with `rg` instead of running the command again.
 
-## What not to install
+## What is installed, and what not
+
+| Tool | What its own sources say | Verdict |
+|---|---|---|
+| house-lsp | Anthropic's typescript-lsp, swift-lsp and pyright-lsp configs in one house plugin | installed everywhere (owner, 2026-10-20) |
+| Trail-code (was Graft) | tree-sitter map whose hooks add matching files to every prompt; 42% fewer tokens (8,070 to 4,650) and 4.2 to 2.3 calls on its authors' own 162-run benchmark | house build, usage stats, update check and npx launch removed (owner, 2026-10-20) |
+
+Not installed:
 
 | Tool | What its own sources say | Verdict |
 |---|---|---|
