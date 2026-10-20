@@ -78,6 +78,20 @@ One agent per source:
 | Real products | the domain's competitors and the local apps the users already open daily (their help centres, docs and app-store listings carry real in-app screenshots) | one `languages/<product>.md` card each, the source a direction is built from; a shipped product outranks a Dribbble concept |
 | UX research (commerce and ordering screens) | Baymard Institute, Nielsen Norman Group, and primary market surveys on how local buyers pay and ship | a rule per step with a short quote and URL; a paywalled page is written down as gated |
 
+**A screen meant to feel like a named product starts with that product's DESIGN.md.**
+[VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) (MIT) holds
+84 brand files in Google Stitch's DESIGN.md format (Vercel, Linear, Stripe, Apple, Airbnb,
+Notion, Supabase, Expo and more); the full file is `design-md/<brand>/DESIGN.md` in the
+repo, and getdesign.md hosts the same with previews. When the user names a product the
+screen should resemble, the real-products agent reads that file's `## Layout` section
+(spacing base, container width, gutters, columns per section, breakpoints, collapse
+order) as a first measurement, saves it as `<brand>-DESIGN.md` with the URL and commit on
+line 1, and checks each number against a screenshot of the live site before the language
+card uses it. VoltAgent wrote these from the public sites, so a file is a secondary
+source: the live site wins where they differ. The project's own tokens and `ui-patterns`
+still win over both. Never copy one in as a project's `docs/design.md`: it is another
+company's look.
+
 **For a shop, checkout or any ordering screen, the real-products agents study flows before
 looks.** One agent per market leader the users already know (the local marketplaces plus
 Amazon and eBay), each covering the buyer side (search, filters, product page, variant,
