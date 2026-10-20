@@ -291,7 +291,7 @@ async function toggle($: EngineInterface) {
 
 export const register: Register = (on, options) => {
   on('session.start', async ($, e, next) => {
-    await $.command.register({ name: 'kanban', description: "Show or hide the project's kanban board" }).catch(() => undefined)
+    await $.command.register({ name: 'kanban', description: "Show or hide the project's kanban board" }).catch((err: unknown) => $.ui.toast(`/kanban not registered: ${err instanceof Error ? err.message : String(err)}`))
     const started = await next(e)
     await refresh($)
     if (options.openOnStart !== false && cache?.kind === 'ready') void $.ui.open({ id: PANE, title: 'Board', columns: 180 })
