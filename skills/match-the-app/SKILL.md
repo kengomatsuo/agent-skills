@@ -11,6 +11,8 @@ user-invocable: true
 > holds this user's own folders, project rules and examples, and where it disagrees with
 > this file, it wins.
 
+**If the `ui-patterns` skill is installed, read it first** (its Step 0 and the component's reference file) for the motion, easing, state-coverage and token numbers; the project's own tokens win over them.
+
 **NEVER WRITE A SCREEN FROM MEMORY. Read the source of the ones already there first.**
 That is the whole skill. An agent that writes a list page from its own idea of a list page
 produces one that is defensible alone and wrong beside the four already in the app.

@@ -11,6 +11,8 @@ user-invocable: true
 > holds this user's own folders, project rules and examples, and where it disagrees with
 > this file, it wins.
 
+**If the `ui-patterns` skill is installed, read it first** (its Step 0 and the component's reference file) for the motion, easing, state-coverage and token numbers; the project's own tokens win over them.
+
 **THE APP IS NOT TALKING TO THE DEVELOPER.** Verbose text that explains the build makes
 an app read like a conversation between the agent and the developer. An agent that just built a feature knows why the feature is
 odd, and puts that knowledge on the screen. The user did not ask. Every sentence that
