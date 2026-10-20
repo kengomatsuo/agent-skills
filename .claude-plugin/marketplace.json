@@ -175,6 +175,16 @@
       },
       "homepage": "https://github.com/kengomatsuo/agent-skills",
       "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "board-view",
+      "description": "A Claude Code mod that shows the project's kanban board (docs/plans/**/BOARD.md) in a pane: lanes, counts, progress, each card opened whole. Reads the file itself, so it spends no tokens.",
+      "source": "./mods/board-view",
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills/tree/main/mods/board-view",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
     }
   ]
 }

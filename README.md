@@ -22,6 +22,14 @@ Each works on its own; they name each other where one hands off to the next.
 | `ui-copy` | you write any string inside an app: it decides what text may exist at all, then how short |
 | `product-video` | you need a promo film or App Store preview of your app; lives in [its own repo](https://github.com/kengomatsuo/product-video) and installs from this marketplace too |
 
+## Mods
+
+A mod is a Claude Code plugin that runs code in the session (panes, commands) instead of giving the model instructions.
+
+| Mod | What it shows |
+|---|---|
+| [`board-view`](mods/board-view/README.md) | the project's kanban board (`docs/plans/**/BOARD.md`) in a pane: one lane per section with its count, done/total, each card opened whole; `/kanban` toggles it |
+
 ## Install
 
 ### Claude Code
