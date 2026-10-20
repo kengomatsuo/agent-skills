@@ -1,7 +1,7 @@
 ---
 name: lean-search
-description: "Use BEFORE searching a codebase or running a command whose output size is unknown (grep, rg, find, logs, test runs, JSON, git log), and when a code-graph index (graphify, Graphicle) or a context sandbox (context-mode) is suggested. Finds code with counts before content, batches searches into one call, answers structure questions with ast-grep, and reduces big output to the answer in a script."
-when_to_use: "Triggers: a search that returned too much, a session that feels slow or expensive, questions about who calls a function or where something is defined, and any proposal to install a code graph or an output sandbox."
+description: "Use BEFORE searching a codebase or running a command whose output size is unknown (grep, rg, find, logs, test runs, JSON, git log), and when a code-graph index (graphify, Graphicle, Graft or Trail-code), an LSP plugin or a context sandbox (context-mode) is suggested. Finds code with counts before content, batches searches into one call, answers structure questions with ast-grep, and reduces big output to the answer in a script."
+when_to_use: "Triggers: a search that returned too much, a session that feels slow or expensive, questions about who calls a function or where something is defined, and any proposal to install a code graph, a language server plugin or an output sandbox."
 user-invocable: true
 ---
 
@@ -44,6 +44,13 @@ sandboxes measured no better than this (see [references/research.md](references/
    ```
    Before deleting or renaming, hand the call sites to the `blast-radius` skill.
 
+   When the session has the LSP tool, ask it first: one call returns a symbol's definition or
+   every reference, and after each edit Claude Code reports the type errors it introduced, so
+   no build runs to find them. That tool comes from a code intelligence plugin, installed in two
+   steps: the language server binary on the PATH (`typescript-language-server`, `sourcekit-lsp`,
+   `pyright-langserver`...), then `/plugin install typescript-lsp@claude-plugins-official` (or
+   `swift-lsp`, `pyright-lsp`). Cloud sessions start no language server, so there ast-grep stays.
+
 5. **Big output becomes an answer in a script.** When a command can print more than a screen
    (a test run, a log, an API listing, `git log`), pipe it to what you want to know:
    - counts by name: `bun test 2>&1 | grep -E '^\s*[0-9]+ (pass|fail)'`
@@ -59,6 +66,7 @@ sandboxes measured no better than this (see [references/research.md](references/
 |---|---|---|
 | graphify | tree-sitter graph plus a hook on every search; tied grep on 100 SWE-bench tasks and used 29% more tokens | skip |
 | Graphicle | Rust port of graphify, a week old; "tied grep on finding code, and we do not claim it saves tokens"; 16% more tokens | skip |
+| Trail-code (was Graft) | tree-sitter map whose hooks add matching files to every prompt; its 42% fewer tokens (8,070 to 4,650) and 4.2 to 2.3 calls come from its authors' 162-run benchmark; installs four hooks in `~/.claude/settings.json`, reads past transcripts, sends usage stats unless disabled | skip |
 | context-mode | two node processes on nearly every tool call, about 1,050 tokens at session start, redirects WebFetch; its 96% saving is on chosen fixtures | replaced by habit 5 |
 
 Re-check the graph tools when a benchmark from someone other than their authors shows a win on
