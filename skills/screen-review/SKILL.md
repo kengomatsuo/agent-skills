@@ -31,6 +31,14 @@ of them are visible in the diff. Run the app.
    load-time device gates re-run.
 5. `resize_window` with `colorScheme: "dark"` and look again.
 
+**Without the Browser pane, or for the same widths again after every fix,** use
+[playwright-cli](https://github.com/microsoft/playwright-cli) headless when it is
+installed: `playwright-cli open <url>`, then per width `playwright-cli resize <w> <h>` and
+`playwright-cli screenshot --filename=<width>.png`, then `playwright-cli set-color-scheme
+dark` and shoot again, and `playwright-cli close` at the end. Open each file with Read; a
+screenshot nobody looked at checks nothing. A role walk signed in to a real account is not
+this: that belongs to the project's walk notes or a real browser session.
+
 ## iOS
 
 `mcp__Claude_Code_iOS_Simulator__control` — call `attach` FIRST, before the build, so the
@@ -45,6 +53,7 @@ Copy this checklist into your reply and tick items off:
 ```
 - [ ] App running; the screen walked in every state
 - [ ] Shot at every width in the table below, then in dark
+- [ ] Built to a reference: compared side by side at its viewport, differences listed
 - [ ] Every row of the checks table passed (a failure: fix it, return to the walk, shoot again)
 - [ ] Report names what was seen and which state was not looked at, with the reason
 ```
@@ -61,6 +70,22 @@ Copy this checklist into your reply and tick items off:
 | Dark | contrast holds, no token defined only inside a media query |
 | Keyboard | tab through it; a focus ring is visible on every stop |
 | Touch rows | any pressable row, chip or radio row is shorter than 44px on a phone, or shorter than its sibling controls in the same sheet (2026-10-20: a discarder list at 31px under 50px winner chips passed a walk) |
+
+## Matching a reference
+
+When the screen was built to match a reference (a mock, a design image, a screenshot of
+another product), "it looks like it" is decided side by side, never from memory:
+
+1. Read the reference's pixel size and device pixel ratio, and shoot the build at that
+   same viewport and ratio. A width that differs means the shots are not comparable: fix
+   the viewport, never scale either image to fit.
+2. Put the two next to each other (one image, reference left), plus crops of the parts
+   that matter most: the header, the first card, the primary button.
+3. List each difference in position, size, spacing, colour, type and missing content,
+   with the measured number ("title 32px in the reference, 28px built"). Fix, shoot again
+   at the same viewport, compare again.
+4. A pixel-diff score can point at where to look; it never passes a screen. The eye on
+   the side-by-side does.
 
 ## Say what you saw
 
