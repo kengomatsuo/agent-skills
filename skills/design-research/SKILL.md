@@ -1,7 +1,7 @@
 ---
 name: design-research
 description: "Use BEFORE designing, redesigning or restyling any screen, and whenever a screen looks unfinished, bare, half-baked or wrong. Researches how real products solved it: fans out parallel agents to open-source apps (component code), UI galleries, Mobbin, Dribbble and the products the users already know, saves the references as screenshots and code into a research folder outside the repo, then draws mocks from them and sends the screenshots. A new screen in an existing app starts at match-the-app."
-when_to_use: "Triggers: complaints about how a screen looks (half-baked, looks bad, where is the colour-coding), requests for a redesign, mocks, inspiration or references (inspo, dribbble, mobbin), and questions about how other products do it."
+when_to_use: "Triggers: complaints about how a screen looks (half-baked, looks bad, where is the colour-coding), requests for a redesign, mocks, inspiration or references (inspo, dribbble, mobbin, refero), and questions about how other products do it."
 user-invocable: true
 ---
 
@@ -73,7 +73,7 @@ One agent per source:
 |---|---|---|
 | GitHub | open-source apps with the same screen (Lago, Polar, Cal.com, Supabase Studio, Twenty, Dub, shadcn examples, Tremor) | **the whole look in `code/`**: app shell and navigation, theme tokens (colours, radius, fonts), page layout, and the screen's components, each with the permalink at the commit SHA in a header comment |
 | Galleries | ui.shadcn.com blocks, tremor.so, tailwindcss.com/plus previews, saaspo, nicelydone, and vendor docs that show real dashboards (Stripe, Chargebee, Paddle, Linear, Vercel) | screenshots, plus code when the gallery exposes it |
-| Mobbin | public mobbin.com pages and CDN images; when gated, the same apps' public help-centre screenshots | screenshots |
+| Mobbin and Refero | public mobbin.com pages and CDN images; Refero's MCP (`api.refero.design/mcp`, Pro plan only) when it is connected, searched by screen or flow; when gated, the same apps' public help-centre screenshots | screenshots |
 | Dribbble | `dribbble.com/search/<terms>`, then the full-size image from each shot page | screenshots, skipping concept art no product would ship |
 | Real products | the domain's competitors and the local apps the users already open daily (their help centres, docs and app-store listings carry real in-app screenshots) | one `languages/<product>.md` card each, the source a direction is built from; a shipped product outranks a Dribbble concept |
 | UX research (commerce and ordering screens) | Baymard Institute, Nielsen Norman Group, and primary market surveys on how local buyers pay and ship | a rule per step with a short quote and URL; a paywalled page is written down as gated |
@@ -87,7 +87,9 @@ screen should resemble, the real-products agent reads that file's `## Layout` se
 (spacing base, container width, gutters, columns per section, breakpoints, collapse
 order) as a first measurement, saves it as `<brand>-DESIGN.md` with the URL and commit on
 line 1, and checks each number against a screenshot of the live site before the language
-card uses it. VoltAgent wrote these from the public sites, so a file is a secondary
+card uses it. When VoltAgent has no file for the brand, Refero Styles
+(styles.refero.design) has 2,000+ more, opened one at a time and copied with its Copy
+button, never scraped (Refero's terms forbid it). Both sets were written from the public sites, so a file is a secondary
 source: the live site wins where they differ. The project's own tokens and `ui-patterns`
 still win over both. Never copy one in as a project's `docs/design.md`: it is another
 company's look.
