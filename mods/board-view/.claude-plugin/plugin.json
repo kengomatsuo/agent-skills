@@ -10,5 +10,12 @@
       "description": "Open the board pane when a session starts in a project that has a board",
       "default": true
     }
-  }
+  },
+  "author": {
+    "name": "kengomatsuo",
+    "url": "https://github.com/kengomatsuo"
+  },
+  "homepage": "https://github.com/kengomatsuo/agent-skills/tree/main/mods/board-view",
+  "repository": "https://github.com/kengomatsuo/agent-skills",
+  "license": "MIT"
 }
