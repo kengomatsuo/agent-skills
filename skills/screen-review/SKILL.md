@@ -31,6 +31,14 @@ of them are visible in the diff. Run the app.
    load-time device gates re-run.
 5. `resize_window` with `colorScheme: "dark"` and look again.
 
+**Without the Browser pane, or for the same widths again after every fix,** use
+[playwright-cli](https://github.com/microsoft/playwright-cli) headless when it is
+installed: `playwright-cli open <url>`, then per width `playwright-cli resize <w> <h>` and
+`playwright-cli screenshot --filename=<width>.png`, then `playwright-cli set-color-scheme
+dark` and shoot again, and `playwright-cli close` at the end. Open each file with Read; a
+screenshot nobody looked at checks nothing. A role walk signed in to a real account is not
+this: that belongs to the project's walk notes or a real browser session.
+
 ## iOS
 
 `mcp__Claude_Code_iOS_Simulator__control` — call `attach` FIRST, before the build, so the
