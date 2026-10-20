@@ -1,7 +1,7 @@
 ---
 name: blast-radius
-description: "Works out everything a change can break before it is made: callers, policies, generated types, other apps in the monorepo, other tenants, and the clients still running last week's bundle. Use before deleting or renaming anything, before changing an RPC signature or a database column, before a refactor, and whenever a change looks local but the thing being changed is reached from more than one place."
-when_to_use: "Triggers: questions about whether something can be deleted or renamed, whether it is still used, and what a change would break."
+description: "Use before deleting, renaming, deprecating or replacing anything, before changing an RPC signature or a database column, before a refactor, and whenever a change looks local but the thing being changed is reached from more than one place. Works out everything the change can break (callers, policies, generated types, other apps in the monorepo, other tenants, the clients still running last week's bundle), then moves the old thing's users off it before it goes."
+when_to_use: "Triggers: questions about whether something can be deleted or renamed, whether it is still used, and what a change would break; requests to deprecate, sunset or retire a feature, API, library or service, or to migrate users from one implementation to another."
 user-invocable: true
 ---
 
@@ -63,6 +63,10 @@ The clients that outlive a deploy, in descending patience:
 
 A removal is therefore two deploys: stop producing it, wait out the clients, then delete —
 add the new path, run both in parallel, and only then remove the old one.
+
+Removing or replacing a feature, an API, a library or a service follows
+[references/deprecation-and-migration.md](references/deprecation-and-migration.md): decide,
+move each user, then remove. A column or a table follows `schema-change`.
 
 ## 4. Which tenants does it touch?
 

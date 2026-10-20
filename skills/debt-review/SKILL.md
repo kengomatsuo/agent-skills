@@ -1,7 +1,7 @@
 ---
 name: debt-review
-description: "Use BEFORE auditing or reviewing code for maintainability: spaghetti, a file too big to work in, code every change has to touch, a diff or PR review for slop or comments (correctness bugs belong to code-review), KISS, DRY, YAGNI or SOLID, dead code, a refactor plan across several files, and resuming a job folder with a BOARD.md. Runs a gated pipeline: measures, diagrams, reviews with twelve lenses, then a spec, two target designs, a Mikado plan and one commit per task on a board any session can resume. One known cleanup in one place belongs to refactor."
-when_to_use: "Triggers: tech debt, maintainability review, code smells, too many comments, JSDoc, hand off a refactor, unspaghettify, optimise or minimise code, audit the whole app, wasted network calls, layout shifts, slow queries, flag or plan gating sprawl, fixes that keep coming back (bandages), review every line."
+description: "Use BEFORE reviewing a diff or PR before merge (\"review this PR\", \"code review\", \"review before merge\") and before auditing code for maintainability: spaghetti, a file too big to work in, code every change has to touch, slop or comments, KISS, DRY, YAGNI or SOLID, dead code, a refactor plan across several files, and resuming a job folder with a BOARD.md. A PR review reads tests first, runs a mutation check and sizes the change; correctness bugs may also go to /code-review. Runs a gated pipeline: measures, diagrams, reviews with twelve lenses, then a spec, two target designs, a Mikado plan and one commit per task on a board any session can resume. One known cleanup in one place belongs to refactor."
+when_to_use: "Triggers: review this PR, review before merge, code review, review this diff, is this ready to merge, tech debt, maintainability review, code smells, too many comments, JSDoc, hand off a refactor, unspaghettify, optimise or minimise code, audit the whole app, wasted network calls, layout shifts, slow queries, flag or plan gating sprawl, fixes that keep coming back (bandages), review every line."
 user-invocable: true
 ---
 
@@ -48,6 +48,7 @@ flowchart LR
 |---|---|---|
 | A, answer | "how healthy is this?" | 0, 1, 2, report; optionally the [line pass](references/line-pass.md) over the hotspots |
 | B, small fix | one file or finding, effort S, no interface changes | 0, 1, 2, 7, 8 |
+| PR, one diff before merge | "review this PR", "code review", "before I merge" | 0, 1 on the diff, 2 on the lenses the diff touches, then the [PR review reference](references/pr-review.md): tests first, mutation check, change sizing, labelled findings, verdict. No gates; it edits nothing unless the owner asks for the fixes (then path B). |
 | C, full | interfaces change, several files, a hotspot split, effort M or L | all, three gates |
 
 Say the path in one line at the start. The owner may raise it; it never drops mid-job. Every
@@ -141,7 +142,7 @@ Scope by request:
 
 | Asked for | Scope |
 |---|---|
-| Review a change, a PR, "before I merge" | `git diff <base>...HEAD`, plus the files it touches |
+| Review a change, a PR, "before I merge" | `git diff <base>...HEAD`, plus the files it touches; method in [references/pr-review.md](references/pr-review.md) |
 | Clean up a folder, a module, a feature | that path |
 | "The codebase", "optimise everything" | the top 10 to 20 hotspots, never the whole tree |
 | "The whole app", "audit it deeper", "every line" | every lens over the top 10 to 20 hotspots, the [line pass](references/line-pass.md) over the same files, and the data-layer lens over ALL database functions, policies and triggers (they are few lines each and nothing ranks them by churn) |
@@ -192,7 +193,7 @@ verdict per function (keep, simplify, delete, merge) over the top hotspots, cut 
 non-overlapping ranges with `scripts/chunks.ts` when a file is too big for one reader. Offer
 it on path A, and run it whenever the request says "every line" or "the whole app".
 
-Small scope (one file, a diff under ~300 lines): run the prompts of the tiers that apply yourself in sequence.
+Small scope (one file, a diff under ~300 lines; a PR review follows [references/pr-review.md](references/pr-review.md)): run the prompts of the tiers that apply yourself in sequence.
 
 Where each principle is checked:
 
