@@ -30,7 +30,7 @@ Copy this checklist into your reply and tick items off:
 - [ ] Behaviour pinned by a passing test, numbers recorded (no test: write it first)
 - [ ] Sibling modules read
 - [ ] Each step run green (red: undo that step, return to it)
-- [ ] The project's full check passes
+- [ ] The project's full check passes, with no new warnings and no test edited to pass
 - [ ] The diff is shape-only (an output changed: move that change to its own commit)
 ```
 
@@ -54,7 +54,17 @@ Copy this checklist into your reply and tick items off:
   localised.
 - Delete the old path in the same change once nothing reaches it. A refactor that leaves
   both shapes standing has doubled the surface, not simplified it.
-- Comments: seven words. Names: four. If the name needs more, the thing does too much.
+- The code explains itself, and JSDoc documents the contract (`debt-review`,
+  [its JSDoc convention](../debt-review/references/jsdoc.md)). An inline comment stays only for
+  a hazard no name can carry, in one short line of seven words or fewer. Names: four words.
+  If the name needs more, the thing does too much.
+- Simplify what the task touched or is about to build on, and leave other code as it is. The
+  catalogue of signals, the equivalence traps and the TypeScript, Python and React examples
+  are in [references/simplification.md](references/simplification.md).
+- Understand before removing: what calls it, which test pins it, what `git blame` says. A guard
+  with no known reason stays until you find one.
+- A change that would touch more than 500 lines by hand gets a codemod or AST transform, and
+  as a sweep it is proposed first.
 - Values keep coming from tokens and config. A refactor is not the moment a literal
   appears.
 
@@ -76,8 +86,11 @@ Copy this checklist into your reply and tick items off:
 - The commit subject says what the shape now is: `Move scanCue to scan-dedup, which imports
   nothing`.
 
-For the mechanics of simplifying a specific function — nesting, naming, early returns —
-a dedicated simplification skill, where the project has one, carries the catalogue. This
-skill is about what may be touched and when.
+For the mechanics of simplifying a specific function (nesting, naming, early returns, which
+rewrites change behaviour), read [references/simplification.md](references/simplification.md).
+This file decides what may be touched and when.
+
+Revert a step when a test needed editing to pass, the result reads harder than the original,
+or error handling went missing. Not every attempt succeeds.
 
 **Target shape:** a refactor moves code toward the five units in ~/claude-house-rules/docs/creation-pattern.md; name the unit each moved piece becomes.

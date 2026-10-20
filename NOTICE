@@ -34,3 +34,10 @@ SOFTWARE.
 From https://github.com/theclaymethod/unslop (author claytonkim), declared MIT in its
 SKILL.md frontmatter and README ("Licensed MIT"). The MIT permission notice above
 applies to these files with that author as copyright holder.
+
+--- skills/refactor/references/simplification.md, skills/debt-review/references/pr-review.md,
+--- skills/blast-radius/references/deprecation-and-migration.md, skills/backend-research/references/interface-design.md
+Adapted from https://github.com/addyosmani/agent-skills at aeac41d (code-simplification,
+code-review-and-quality, deprecation-and-migration, api-and-interface-design), rewritten and
+merged with house rules. The MIT permission notice above applies with
+"Copyright (c) 2025 Addy Osmani" as the copyright holder.

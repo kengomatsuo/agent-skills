@@ -1,7 +1,7 @@
 ---
 name: backend-research
-description: "Researches how competitors and open-source apps built a backend feature (tables, statuses, an API, a webhook, a job, permissions, billing or stock logic) before it is designed: fans out parallel agents to open-source codebases (migrations, schema and service code), competitors' public API and webhook references, the bug and incident record of both, and the specs that bind the feature, saves everything into a research folder outside the repo, then designs from it. The backend twin of design-research. Use whenever a backend feature is new or being reworked."
-when_to_use: "Triggers: questions about how others or named products (Stripe, Square, Toast) model a feature, requests to look at competitors, and designing tables, schema, status flows, state machines, webhooks, refunds, subscriptions, inventory, loyalty, multi-tenancy or an API shape."
+description: "Use when designing a backend feature or its API: tables, statuses, an endpoint, an RPC, a webhook, a module boundary or a type contract. Researches how competitors and open-source apps built a backend feature (tables, statuses, an API, a webhook, a job, permissions, billing or stock logic) before it is designed: fans out parallel agents to open-source codebases (migrations, schema and service code), competitors' public API and webhook references, the bug and incident record of both, and the specs that bind the feature, saves everything into a research folder outside the repo, then designs from it. The backend twin of design-research. Its design step links the house reference for designing an API or interface (contract first, errors, boundary validation, idempotency, additive changes, type contracts). Use whenever a backend feature is new or being reworked."
+when_to_use: "Triggers: questions about how others or named products (Stripe, Square, Toast) model a feature, requests to look at competitors, and designing tables, schema, status flows, state machines, webhooks, refunds, subscriptions, inventory, loyalty, multi-tenancy, an API shape, \"design an API\", an endpoint, a module boundary, a type contract, error shape, pagination or versioning."
 user-invocable: true
 ---
 
@@ -118,6 +118,8 @@ blended with the app, verified by the source's own scenarios). The README decide
 source wins where they disagree; it never stands in for reading the code. (2026-09-26,
 a tutoring-centre project: a whole schema drafted from the README summary while the code
 sat unread.)
+
+Design any API, RPC, webhook or module interface with [references/interface-design.md](references/interface-design.md): it holds the contract, error, validation, idempotency and type rules, and defers to `supabase-conventions` and `lessons-money-ledger` where they rule.
 
 Present the design as a table, status diagram or API shape, never paragraphs. This is new
 work, so propose it and wait for yes. When the research ends in a use, copy or build decision, record it in
