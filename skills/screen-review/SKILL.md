@@ -69,7 +69,7 @@ Copy this checklist into your reply and tick items off:
 | Width | 320, 375, 768, 1024, 1440. Nothing scrolls sideways |
 | Dark | contrast holds, no token defined only inside a media query |
 | Keyboard | tab through it; a focus ring is visible on every stop |
-| Touch rows | any pressable row, chip or radio row is shorter than 44px on a phone, or shorter than its sibling controls in the same sheet (2026-10-20: a discarder list at 31px under 50px winner chips passed a walk) |
+| Touch rows | any pressable row, chip or radio row has a hit area (the box that takes the tap, padding and `hitSlop` included, not the drawn shape) under 44 pt on iOS, 48 dp on Android or 44 CSS px on a phone browser, or shorter than its sibling controls in the same sheet (2026-10-20: a discarder list at 31px under 50px winner chips passed a walk) |
 
 ## Matching a reference
 
