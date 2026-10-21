@@ -41,3 +41,8 @@ Adapted from https://github.com/addyosmani/agent-skills at aeac41d (code-simplif
 code-review-and-quality, deprecation-and-migration, api-and-interface-design), rewritten and
 merged with house rules. The MIT permission notice above applies with
 "Copyright (c) 2025 Addy Osmani" as the copyright holder.
+
+--- skills/app-store-aso/references/screenshots.md
+Derived from hypershots (https://hypershots.dev, hypersocialinc/agent-skills, copy of 2026-09-10), rewritten in own words; no code or fonts copied. MIT, Copyright (c) 2026 HyperSocial Incorporated.
+--- skills/app-store-aso/references/apple-search-ads.md, skills/app-store-aso/references/audit.md
+Rewritten from two third-party skills with no licence (apple-search-ads, aso-audit, copies of 2026-09-10); no text copied.

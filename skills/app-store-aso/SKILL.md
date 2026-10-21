@@ -1,7 +1,7 @@
 ---
 name: "app-store-aso"
-description: "Researches and writes an app's App Store listing so people can find it: the name, subtitle, keyword field, promo text, screenshot captions, custom product pages and release notes for one or many storefronts. Measures what people actually type and how crowded each query is per country, reads competitors' real listings, follows Apple's indexing rules and practitioners' tactics, then has every non-English line written blind. Use before a release, when an app ranks for nothing, or when the store copy was written without research."
-when_to_use: "Triggers: ASO or app store optimization requests, complaints that nobody finds the app or it needs to rank higher, and any work on the subtitle, keyword field, store listing, custom product pages or per-storefront localisation."
+description: "Researches and writes an app's App Store listing so people can find it: the name, subtitle, keyword field, promo text, screenshot captions, custom product pages and release notes for one or many storefronts. Measures what people actually type and how crowded each query is per country, reads competitors' real listings, follows Apple's indexing rules and practitioners' tactics, then has every non-English line written blind. Also covers Apple Search Ads campaigns, a scored ASO audit of a live listing, and the App Store screenshot panels with Apple's sizes. Use before a release, when an app ranks for nothing, or when the store copy was written without research."
+when_to_use: "Triggers: ASO or app store optimization requests, complaints that nobody finds the app or it needs to rank higher, and any work on the subtitle, keyword field, store listing, custom product pages or per-storefront localisation; Apple Search Ads, ASA, search ads bidding, match types, Search Match, TTR or CPT; an ASO audit, ASO score or listing review; App Store screenshots, screenshot sizes, device frames or translating screenshots."
 ---
 
 # App Store optimization
@@ -123,8 +123,15 @@ subtitle; exit 0 means every field fits).
   search words on screen early (the `product-video` skill makes it).
 - Custom product pages: one per clear search intent the research found, each with its own
   screenshots, promo and deep link, in every locale.
+- Sizes, file rules, the HTML-panel method, captures, localising and uploading: [references/screenshots.md](references/screenshots.md).
 - A rating prompt (SwiftUI `requestReview`) after a real moment of value, never at launch
   or from a button, once per version.
+
+## Paid search, audits and screenshot panels
+
+- Apple Search Ads (campaign structure, match types, bids, custom product page routing, ROAS): [references/apple-search-ads.md](references/apple-search-ads.md). Spend and campaign changes are shown to the owner first.
+- A scored health audit of a live listing: [references/audit.md](references/audit.md).
+- Screenshot panels and Apple's sizes: [references/screenshots.md](references/screenshots.md).
 
 ## 8. Ship and read back
 
@@ -132,3 +139,7 @@ Upload to the editable version only, never the version on sale, and never submit
 review: that is the owner's call. Read every field back from App Store Connect (names and
 subtitles live on the app-info record, keywords and promo on the version). Rerun
 `rank.py` at 48 hours and at 3 to 4 weeks into new files and compare.
+
+## Sources
+
+The three references were distilled on 2026-10-21 from third-party skills the house no longer installs. `apple-search-ads.md` and `audit.md` come from the `apple-search-ads` and `aso-audit` skills (no author, repository or licence stated; copied 2026-09-10; written in own words, no text copied). `screenshots.md` comes from `hypershots` by HyperSocial Incorporated (MIT; see NOTICE). Each file ends with what was unsourced or dropped.
