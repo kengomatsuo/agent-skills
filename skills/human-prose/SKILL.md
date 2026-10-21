@@ -1,6 +1,6 @@
 ---
 name: "human-prose"
-description: "Use BEFORE writing, rewriting or reviewing any prose a person will read, in any language: docs, README files, UI copy, error messages, commit messages, release notes, articles, emails, slides, marketing pages, and any draft that \"sounds like AI\" or ChatGPT. Strips the LLM tells (antithesis, rule of three, negative anaphora, participle tails, copula avoidance, inflated vocabulary, translationese and more) and applies human editorial patterns for English, Japanese, Indonesian, Korean, Chinese, Spanish and any other language."
+description: "Use BEFORE writing, rewriting or reviewing any prose a person will read, in any language: docs, README files, UI copy, error messages, commit messages, release notes, articles, emails, slides, marketing pages, and any draft that \"sounds like AI\" or ChatGPT. Strips the LLM tells (antithesis, rule of three, negative anaphora, participle tails, copula avoidance, inflated vocabulary, translationese and more) and applies human editorial patterns for English, Japanese, Indonesian, Korean, Chinese, Spanish and any other language. Also covers text an agent or program parses (tool descriptions, error strings, inter-agent instructions): STE100, disambiguate, rewrite so an agent cannot misread."
 ---
 
 # Human Prose (any language)
@@ -458,6 +458,7 @@ will fix that.
 Read these only when the task needs them. Every file is linked here, so none of them needs another one.
 
 - [references/language-surface-forms.md](references/language-surface-forms.md): inflated vocabulary and register rules for Japanese, Indonesian, Korean, Chinese and Spanish, and the method for deriving the forms of any other language (the six-step method that Part 0 points to). Read before writing or reviewing non-English prose.
+- [references/machine-read-text.md](references/machine-read-text.md): Simplified Technical English rules for text an agent or program parses with no human to resolve ambiguity (tool descriptions, error strings, inter-agent instructions, status lines). Read before writing or rewriting such text.
 - [references/machine-markup-and-citations.md](references/machine-markup-and-citations.md): per-model markup residue and citation checks for pasted text.
 - [references/sources.md](references/sources.md): the articles and standards this skill was built from.
 

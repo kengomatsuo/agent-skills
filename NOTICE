@@ -46,3 +46,9 @@ merged with house rules. The MIT permission notice above applies with
 Derived from hypershots (https://hypershots.dev, hypersocialinc/agent-skills, copy of 2026-09-10), rewritten in own words; no code or fonts copied. MIT, Copyright (c) 2026 HyperSocial Incorporated.
 --- skills/app-store-aso/references/apple-search-ads.md, skills/app-store-aso/references/audit.md
 Rewritten from two third-party skills with no licence (apple-search-ads, aso-audit, copies of 2026-09-10); no text copied.
+
+--- skills/human-prose/references/machine-read-text.md
+Distilled in own words from https://github.com/danyuchn/asd-ste100-skill at e4d64d1 (version 0.4.0),
+MIT, Copyright (c) 2026 Dustin Yuchen Teng; the MIT permission notice above applies with that
+copyright holder. The rules come from ASD-STE100 Issue 9, whose text and ~900-word dictionary
+are not reproduced.
