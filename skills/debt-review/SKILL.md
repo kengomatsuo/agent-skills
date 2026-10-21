@@ -48,7 +48,7 @@ flowchart LR
 |---|---|---|
 | A, answer | "how healthy is this?" | 0, 1, 2, report; optionally the [line pass](references/line-pass.md) over the hotspots |
 | B, small fix | one file or finding, effort S, no interface changes | 0, 1, 2, 7, 8 |
-| PR, one diff before merge | "review this PR", "code review", "before I merge" | 0, 1 on the diff, 2 on the lenses the diff touches, then the [PR review reference](references/pr-review.md): tests first, mutation check, change sizing, labelled findings, verdict. No gates; it edits nothing unless the owner asks for the fixes (then path B). |
+| PR, one diff before merge | "review this PR", "code review", "before I merge" | 0, 1 on the diff, 2 on the lenses the diff touches, then the [PR review reference](references/pr-review.md): tests first, mutation check, change sizing, labelled findings, verdict. No gates; it edits nothing unless the owner asks for the fixes (then path B, with the merge-ready pass in that reference: update from base, parallel axes, a verifier per blocker, logical fix commits, PR body, never merge). |
 | C, full | interfaces change, several files, a hotspot split, effort M or L | all, three gates |
 
 Say the path in one line at the start. The owner may raise it; it never drops mid-job. Every
