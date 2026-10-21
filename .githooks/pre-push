@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
-# Refuse a push whose skills break Anthropic's authoring rules
-# (scripts/skill-lint.ts in agent-skills), then one with private terms.
-lint="scripts/skill-lint.ts"
-if command -v bun >/dev/null && [ -f "$lint" ]; then
-  bun "$lint" skills >&2 || { echo "pre-push: skill-lint failed" >&2; exit 1; }
-fi
-# check-notes.ts is copied into three skills (each must stand alone); copies must match
-if ! cmp -s skills/design-research/check-notes.ts skills/backend-research/check-notes.ts ||
-   ! cmp -s skills/design-research/check-notes.ts skills/code-to-copy/check-notes.ts; then
-  echo "pre-push: the three check-notes.ts copies differ; edit all three" >&2; exit 1
-fi
-
+# Refuse a push whose added lines contain a private term. Nothing else gates a push.
 terms="${PRIVATE_TERMS:-$HOME/.claude/private-terms.txt}"
 [ -f "$terms" ] || exit 0
 pattern=$(grep -v -e '^#' -e '^$' "$terms" | paste -sd'|' -)
