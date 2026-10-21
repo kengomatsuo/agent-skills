@@ -72,7 +72,7 @@ Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on th
 | Ready | tasks (T) whose "blocked by" are all Done | a session claims it |
 | Doing | claimed tasks, one per session | its commit lands green |
 | Review | committed, waiting for the checkpoint checks or the owner | the checkpoint passes |
-| Done | finished tasks with their commit | never |
+| Done | finished tasks with their commit | 7 days after its `done:` date the card moves to `ARCHIVE.md` beside the board; the board script does this on every write (`BOARD_ARCHIVE_DAYS` sets the days, 0 turns it off), and `progress` still counts archived cards |
 
 **A card changes only through the house `board` skill's script**, never by editing its line:
 `bun ~/.claude/skills/board/scripts/board.ts --board BOARD.md move T4 done --commit abc1234 --check "what ran"`,
@@ -80,7 +80,7 @@ and `add`, `claim`, `note`, `next`, `merge-named`, `progress` the same way; the 
 hook refuses any other write to a `BOARD.md` (2026-10-13: in-place marks left done cards in
 Backlog; 2026-10-15: hand edits by python left 61 finished cards unmarked). `scripts/card.ts
 move` still works and calls it. An agent never moves cards; the coordinator does, after the
-work lands.
+work lands. From a git worktree the script writes the main checkout's board (a relative `--board` path resolves against the main checkout), so a session in a worktree moves cards on the shared board.
 
 A project whose rules forbid the agent to commit keeps finished cards in Review with
 `commit: owner`; the owner's commit moves them to Done with its sha.
@@ -94,7 +94,7 @@ A project whose rules forbid the agent to commit keeps finished cards in Review 
 3. Work the task as the plan says.
 4. The task's commit carries the code AND the board move to Review (with the check that
    passed) AND a fresh Handoff block. One commit, so board and code never disagree.
-5. At a checkpoint, run the checks for every card in Review and move them to Done.
+5. At a checkpoint, run the checks for every card in Review and move them to Done. The coordinator (the session that runs the job, or the orchestrator for sub-sessions) owns this move; when the owner commits Review cards marked `commit: owner`, the coordinator moves them to Done with that commit's sha the same day.
 
 A claim older than two hours with no commit after it is stale; another session may take it
 over, writing `taken over from <old claim>` on the card.
