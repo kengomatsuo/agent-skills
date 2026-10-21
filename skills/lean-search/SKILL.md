@@ -1,6 +1,6 @@
 ---
 name: lean-search
-description: "Use BEFORE searching a codebase or running a command whose output size is unknown (grep, rg, find, logs, test runs, JSON, git log), and when a code-graph index (graphify, Graphicle, Graft or Trail-code), an LSP plugin or a context sandbox (context-mode) is suggested. Finds code with counts before content, batches searches into one call, answers structure questions with ast-grep, and reduces big output to the answer in a script."
+description: "Use BEFORE searching a codebase or running a command whose output size is unknown (grep, rg, find, logs, test runs, JSON, git log), and when a code-graph index (graphify, Graphicle, Graft or Trail-code), an LSP plugin or an output sandbox plugin is suggested. Finds code with counts before content, batches searches into one call, answers structure questions with ast-grep, and reduces many files or big output to the answer in one script."
 when_to_use: "Triggers: a search that returned too much, a session that feels slow or expensive, questions about who calls a function or where something is defined, and any proposal to install a code graph, a language server plugin or an output sandbox."
 user-invocable: true
 ---
@@ -12,10 +12,11 @@ user-invocable: true
 
 A search costs twice: the bytes it returns stay in context for every later turn, and each call
 is a full round trip. In one owner's 30 longest sessions grep returned about 200 tokens a call,
-but there were 7,829 calls. Fewer calls save more than shorter output. graphify, Graphicle and the
-context-mode sandbox measured no better than this (see [references/research.md](references/research.md)).
+but there were 7,829 calls. Fewer calls save more than shorter output. graphify, Graphicle and
+the context-mode sandbox plugin (removed 2026-10-21) measured no better than this (see
+[references/research.md](references/research.md)).
 
-## The six habits
+## The habits
 
 1. **Count, then read.** Ask how many and where before asking what.
    - `rg -c 'pattern' src | sort -t: -k2 -nr | head -20` gives files by match count.
@@ -66,6 +67,25 @@ context-mode sandbox measured no better than this (see [references/research.md](
    Claude Code already saves Bash output over 30,000 characters to a file and shows a
    2,000-character preview. Search that file with `rg` instead of running the command again.
 
+7. **Think in code: one script for many files.** A question that needs 20 files read one by one
+   (every route without an auth check, every `TODO` with its owner, the exports nothing
+   imports) is one script that walks the files, tests each, and prints only the hits with
+   `file:line`:
+   ```bash
+   bun -e 'for await (const f of new Bun.Glob("src/**/*.ts").scan()) { const t = await Bun.file(f).text(); if (/fetch\(/.test(t) && !/AbortSignal/.test(t)) console.log(f) }'
+   ```
+   Print findings with ids, lines and exact values, never the raw data: a script that dumps
+   JSON has moved the cost, not removed it. A file you will edit still goes through `Read`.
+
+8. **Save a big result once, then query the file.** A browser snapshot, a console or network
+   dump, an MCP listing or a fetched page is saved to a file the first time (most browser
+   tools take a filename; otherwise redirect into the session scratchpad) and then
+   searched with `rg -n -m 5` or a script, as many times as the questions need. Re-running the
+   call pays its bytes again each time. For a corpus queried over many turns (a doc set, a long
+   log), load it once into `bun:sqlite` with an FTS5 table (it works on macOS as shipped; call
+   `db.clearQueryCache()` before dropping or renaming the table) and ask ranked questions
+   with `MATCH` and `ORDER BY rank`; put all the terms of one question in one query.
+
 ## What is installed, and what not
 
 | Tool | What its own sources say | Verdict |
@@ -73,13 +93,16 @@ context-mode sandbox measured no better than this (see [references/research.md](
 | house-lsp | Anthropic's typescript-lsp, swift-lsp and pyright-lsp configs in one house plugin | installed everywhere (owner, 2026-10-20) |
 | Trail-code (was Graft) | tree-sitter map whose hooks add matching files to every prompt; 42% fewer tokens (8,070 to 4,650) and 4.2 to 2.3 calls on its authors' own 162-run benchmark | house build, usage stats, update check and npx launch removed (owner, 2026-10-20) |
 
-Not installed:
+Not installed (context-mode was removed, not just switched off):
 
 | Tool | What its own sources say | Verdict |
 |---|---|---|
 | graphify | tree-sitter graph plus a hook on every search; tied grep on 100 SWE-bench tasks and used 29% more tokens | skip |
 | Graphicle | Rust port of graphify, a week old; "tied grep on finding code, and we do not claim it saves tokens"; 16% more tokens | skip |
-| context-mode | two node processes on nearly every tool call, about 1,050 tokens at session start, redirects WebFetch; its 96% saving is on chosen fixtures | replaced by habit 5 |
+| context-mode | two node processes on nearly every tool call, about 1,050 tokens at session start, redirects WebFetch; its 96% saving is on chosen fixtures | removed 2026-10-21; habits 5, 7 and 8 do its useful part |
 
 Re-check the graph tools when a benchmark from someone other than their authors shows a win on
 code like yours.
+
+The think-in-code, save-once and index-once habits come from reading context-mode's own
+README and skills (Elastic-2.0, ideas only, no text or code taken).

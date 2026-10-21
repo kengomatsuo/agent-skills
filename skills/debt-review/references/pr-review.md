@@ -8,6 +8,7 @@ The standard: approve a change when it leaves the code healthier, even if it is 
 
 - Who owns what
 - Order of work
+- Merge-ready pass: review, verify, fix, open
 - The axes
 - Tests first, then the mutation check
 - Change sizing
@@ -44,6 +45,18 @@ A finding goes to the one owner above. Two owners reporting the same line is a d
 6. Lenses for the scope. Under about 300 changed lines, run the tiers that apply yourself in sequence, as SKILL.md says.
 7. Verify every finding (SKILL.md, "Verify every finding"), then label and rank.
 8. Verdict: approve, or request changes with the blockers listed.
+
+## Merge-ready pass: review, verify, fix, open
+
+When the owner asks to get a branch ready for their review (path B), run this around the steps above. Method from every-app/open-seo `merge-ready` at f569726, MIT, Copyright (c) 2026 Ben Senescu, rewritten.
+
+1. **Bring the branch up to date first.** Fetch and merge the base into the branch, resolve conflicts (the base wins where the branch did not mean to change the code), and commit the merge alone, so conflict resolution stays apart from review fixes.
+2. **Cover the whole scope.** The diff against the base, staged and unstaged changes, and every untracked file read in full. A new file the base lacks is still in the review.
+3. **Run the axes in parallel subagents**, one per lens the scope touches, each with the full scope and the intent sentence. Add a **billing and metering** axis when the diff touches money or usage: spend a user can trigger without being counted, a charge on a failed path, a retry loop that multiplies a paid call, an endpoint whose cost per call is far above the rest. Each finding returns `file:line`, a label and one line of reason; theoretical edge cases in an early-stage product are a Consider.
+4. **Verify each Required or Critical finding with its own subagent.** The verifier tries to disprove the finding against the code and answers one of three verdicts: APPLY (the finding stands), APPLY-MODIFIED (the problem is real and the proposed fix is wrong or too big; the verdict states the fix) or REJECT (the code already handles it or the finding misreads it). A rejected finding is dropped and, if it deserves a second opinion, listed in the PR's review notes. Considers and Nits need no verifier.
+5. **Fix in logical commits**, one per concern, so the fix history reads on its own. Then run the project's full gate (`ship-gate` finds it) and repeat from step 3 on the changed lines when a fix was more than formatting, until the gate is green and no verified finding is open.
+6. **Write the PR body** with three parts: what changed and why, in a few sentences with no per-file list; how to review (what to read first, which areas need judgment, what was left out); review notes (unfixed Nits, REJECT verdicts worth a second look). The title follows `house-commit`.
+7. **The agent never merges the PR.** The owner reviews last. The report gives the PR link, a paragraph of summary and the points that need the owner's judgment.
 
 ## The axes
 
