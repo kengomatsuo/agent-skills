@@ -54,10 +54,10 @@ Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on th
 - **D7** Benefit is a bag of optionals (types and state) · effort M
 
 ## Ready
-- **T5** Delete the old quote helpers · blocked by: T4 · finding D2
+- **T5** Delete the old quote helpers · blocked by: T4 · finding D2 · plan: 05-plan.md task T5 · done when: no import of the old helpers remains and `bun test packages/pos` passes · verify: `grep -rn oldQuote apps packages` prints nothing
 
 ## Doing (limit 1 per session)
-- **T4** Point callers at pos/rental/quote.ts · claim: <session>@<machine> 2026-10-05T14:02Z
+- **T4** Point callers at pos/rental/quote.ts · plan: 05-plan.md task T4 · done when: apps/admin and apps/ops import pos/rental/quote.ts only · verify: `bun test packages/pos` and `bun run typecheck` pass · claim: <session>@<machine> 2026-10-05T14:02Z
 
 ## Review
 - **T3** … · commit: abc1234 · check: `bun test packages/pos` 212 pass
@@ -68,8 +68,8 @@ Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on th
 
 | Column | Holds | Leaves when |
 |---|---|---|
-| Backlog | findings (D) not yet planned, and L findings waiting for path C | a plan turns it into tasks |
-| Ready | tasks (T) whose blockers are all in Review or Done | a session claims it |
+| Backlog | findings (D) not yet planned, and L findings waiting for path C | the plan turns it into tasks and `set` writes their three fields |
+| Ready | planned tasks (T): the line carries `plan:` (a link to the task in 05-plan.md, or inline steps), `done when:` and `verify:`; a card with open blockers waits behind them | a session claims it; `claim` refuses a Ready card without the three fields |
 | Doing | claimed tasks, one per session | its commit lands green |
 | Review | committed, waiting for the checkpoint checks or the owner | the checkpoint passes |
 | Done | finished tasks with their commit | 7 days after its `done:` date the card moves to `ARCHIVE.md` beside the board; the board script does this on every write (`BOARD_ARCHIVE_DAYS` sets the days, 0 turns it off), and `progress` still counts archived cards |
@@ -84,6 +84,10 @@ work lands. From a git worktree the script writes the main checkout's board (a r
 
 A project whose rules forbid the agent to commit keeps finished cards in Review with
 `commit: owner`; the owner's commit moves them to Done with its sha.
+
+The house board skill's `## Columns` table is the single definition of the columns. `add --to ready`
+and `move <ID> ready` need `--plan`, `--done-when` and `--verify`; `set <ID> --plan .. --done-when ..
+--verify ..` writes them on a card already on the board (2026-10-21, owner).
 
 Two card fields are enforced by the script. `blocked by: A, B` means the card cannot be claimed,
 and `next` skips it, until every blocker is in Review or Done. `parent: P` means the parent cannot

@@ -75,10 +75,10 @@ Copy this checklist into your reply and tick items off:
 - [ ] 0. git pull; existing BOARD.md read if any; path said; project rules read; the owner's requirement sources found and read (notes, department analyses, client briefs)
 - [ ] 0b. inventory.ts run; every row of 00-inventory.md walked: verdict, prior art, findings (board.ts fails on a blank row)
 - [ ] 1. measure.ts and model.ts run once; 01-current.md with diagrams
-- [ ] 2. Lenses run for the scope; line pass if asked; findings verified; 02-findings.md ranked; BOARD.md backlog; pushed (A stops)
+- [ ] 2. Lenses run for the scope; line pass if asked; findings verified; 02-findings.md ranked; BOARD.md backlog (findings stay unplanned); pushed (A stops)
 - [ ] 3. 03-spec.md written and self-reviewed              → GATE 1: owner approves
 - [ ] 4. Prior art researched and saved; 04-target.md opens with `## Prior art`, then 2-3 designs, wireframe, comparison  → GATE 2: owner picks
-- [ ] 5. 05-plan.md: Mikado graph, tasks                    → GATE 3: owner approves
+- [ ] 5. 05-plan.md: Mikado graph, tasks, each with Done when and Verify  → GATE 3: owner approves; each task then moves to Ready with `--plan --done-when --verify`
 - [ ] 6. Draft committed: new interfaces compile, behaviour unchanged
 - [ ] 7. Pull a card, claim, push; one commit per task with board + handoff; green (red: revert, return to 5)
 - [ ] 8. Re-measured, re-modelled, baseline ratchet + guard rule added, decision recorded
