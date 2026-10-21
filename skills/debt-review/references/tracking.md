@@ -54,7 +54,7 @@ Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on th
 - **D7** Benefit is a bag of optionals (types and state) · effort M
 
 ## Ready
-- **T5** Delete the old quote helpers · blocked by T4 · finding D2
+- **T5** Delete the old quote helpers · blocked by: T4 · finding D2
 
 ## Doing (limit 1 per session)
 - **T4** Point callers at pos/rental/quote.ts · claim: <session>@<machine> 2026-10-05T14:02Z
@@ -69,7 +69,7 @@ Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on th
 | Column | Holds | Leaves when |
 |---|---|---|
 | Backlog | findings (D) not yet planned, and L findings waiting for path C | a plan turns it into tasks |
-| Ready | tasks (T) whose "blocked by" are all Done | a session claims it |
+| Ready | tasks (T) whose blockers are all in Review or Done | a session claims it |
 | Doing | claimed tasks, one per session | its commit lands green |
 | Review | committed, waiting for the checkpoint checks or the owner | the checkpoint passes |
 | Done | finished tasks with their commit | 7 days after its `done:` date the card moves to `ARCHIVE.md` beside the board; the board script does this on every write (`BOARD_ARCHIVE_DAYS` sets the days, 0 turns it off), and `progress` still counts archived cards |
@@ -84,6 +84,11 @@ work lands. From a git worktree the script writes the main checkout's board (a r
 
 A project whose rules forbid the agent to commit keeps finished cards in Review with
 `commit: owner`; the owner's commit moves them to Done with its sha.
+
+Two card fields are enforced by the script. `blocked by: A, B` means the card cannot be claimed,
+and `next` skips it, until every blocker is in Review or Done. `parent: P` means the parent cannot
+move to Done until all its children are Done, and `status` shows its children as 3/5. Set them with
+`board.ts link <ID> --blocked-by A,B` or `board.ts link <ID> --parent P`.
 
 ## Pulling a card
 
