@@ -32,6 +32,9 @@ runs first, unasked, every time a screen is new or is being redesigned.
 Copy this checklist into your reply and tick items off as they pass:
 
 ```
+- [ ] 0. Read before the brief: the local notes (folder, house rules), `ui-patterns` reference file
+        for every component the screens use, the library catalog's component sources, and the
+        house design rules; the brief names each source the agents must pull from
 - [ ] 1. Brief written; every screen of the app listed in screens.md with an ID
 - [ ] 2. Agents launched: N. Completion notices received: N (numbers must match)
 - [ ] 2. check-notes.ts --screens screens.md --min 5 exits 0
@@ -71,7 +74,7 @@ One agent per source:
 
 | Agent | Source | Best output |
 |---|---|---|
-| GitHub | open-source apps with the same screen (Lago, Polar, Cal.com, Supabase Studio, Twenty, Dub, shadcn examples, Tremor) | **the whole look in `code/`**: app shell and navigation, theme tokens (colours, radius, fonts), page layout, and the screen's components, each with the permalink at the commit SHA in a header comment |
+| GitHub | the component sources the library catalog lists (its registries and the house's own kit) first, then open-source apps with the same screen (Lago, Polar, Cal.com, Supabase Studio, Twenty, Dub, shadcn examples, Tremor) | **the whole look in `code/`**: app shell and navigation, theme tokens (colours, radius, fonts), page layout, and the screen's components, each with the permalink at the commit SHA in a header comment |
 | Galleries | ui.shadcn.com blocks, tremor.so, tailwindcss.com/plus previews, saaspo, nicelydone, and vendor docs that show real dashboards (Stripe, Chargebee, Paddle, Linear, Vercel) | screenshots, plus code when the gallery exposes it |
 | Mobbin and Refero | public mobbin.com pages and CDN images; Refero's MCP (`api.refero.design/mcp`, Pro plan only) when it is connected, searched by screen or flow; when gated, the same apps' public help-centre screenshots | screenshots |
 | Dribbble | `dribbble.com/search/<terms>`, then the full-size image from each shot page | screenshots, skipping concept art no product would ship |
