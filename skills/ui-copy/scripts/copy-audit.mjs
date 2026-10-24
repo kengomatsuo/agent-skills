@@ -9,7 +9,7 @@ const SKIP_DIR = /^(node_modules|dist|build|\.git|coverage|ios|android|Pods)$/;
 
 // A string is CODE, not copy, when it looks like classes, a path, a token or an id.
 const CODE = [
-  /^[a-z0-9-]+(\s+[a-z0-9:\[\]\/.%_-]+)+$/i, // tailwind-ish class lists
+  /^(?=.*[-:\[])[a-z0-9-]+(\s+[a-z0-9:\[\]\/.%_-]+)+$/i, // tailwind-ish class lists
   /^[MLCZmlcz]\s*[\d.]/,                      // svg path data
   /^https?:\/\//, /^\//, /^\.\//,
   /^[A-Za-z0-9_-]+$/,                          // single token
@@ -69,7 +69,7 @@ function isProse(s) {
   const words = s.trim().split(/\s+/);
   if (words.length < 4) return false;
   const alpha = (s.match(/[A-Za-zÀ-ÿ]/g) ?? []).length;
-  if (alpha / s.length < 0.7) return false;
+  if (alpha / s.length < 0.6) return false;
   const lower = words.filter((w) => /^[a-zà-ÿ]/.test(w)).length;
   return lower / words.length > 0.4;
 }
