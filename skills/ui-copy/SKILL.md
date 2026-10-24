@@ -28,13 +28,23 @@ Three skills compose on a UI string, and they do not overlap:
 
 Run this one FIRST. Text you delete needs no voice.
 
+## A working screen shows no sentences (2026-10-24, owner-directed)
+
+**A working screen shows data, labels and controls. It never shows a sentence that narrates the data or explains how to use the screen. A not-found or empty state is a heading plus facts, and who, role and when are never comma-joined.** The owner found these in a mock (Integrindo, 2026-10-24: "wtf is wrong with your skills? fix them"):
+
+- ✗ "BU LINDA belum pernah membeli 266B. Terakhir ia membeli barang lain pada 03/10/2026." ✓ heading "Belum pernah dibeli" with rows Pelanggan, Barang, Pembelian terakhir.
+- ✗ "Bisa juga dari pencarian: ketik retur pak essa di Ctrl K, yang dibaca sebagai Retur Pelanggan PAK ESSA. Atau dari nota yang dibuka, lewat Retur barang." ✓ delete it; the control carries its label and a shortcut shows as a hint on it.
+- ✗ "Difoto Rina, 24/10/2026 09.12" and "Pak Hendra, pemilik, 20/10/2026 08.15" ✓ avatar, name, quiet role, timestamp in its own column.
+
+Layout of the fixed forms: `ui-patterns` references/empty-and-error-states.md ("No sentences on a working screen") and references/layout.md ("Numbers, identifiers and metadata"). The audit flags `sentence-shaped` and `comma-metadata` strings.
+
 ## The audit — run it before you claim a screen is done
 
 ```bash
 bun ${CLAUDE_SKILL_DIR}/scripts/copy-audit.mjs src/
 ```
 
-It flags six patterns and exits non-zero when any string is left.
+It flags eight patterns and exits non-zero when any string is left.
 
 It is a grep, so it produces false positives on prose-shaped constants. Read each hit;
 never bulk-rewrite from the report. The loop: run it, rewrite or delete each real hit,

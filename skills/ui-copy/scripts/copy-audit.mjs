@@ -29,6 +29,8 @@ const RULES = [
   { id: "explains-itself", test: (s) => /^(Note|Catatan|Tip|Info)[:,]/i.test(s), why: "starts by announcing itself" },
   { id: "addresses-reader", test: (s) => /\b(you can|anda (bisa|dapat)|kamu bisa|simply|just |cukup )\b/i.test(s), why: "instructs the reader instead of naming the state" },
   { id: "em-dash", test: (s) => /[—·]/.test(s), why: "em-dash or middot in user copy" },
+  { id: "sentence-shaped", test: (s) => /[.]\s*$/.test(s) && s.trim().split(/\s+/).length >= 6, why: "a full sentence; a working screen shows data, labels and controls" },
+  { id: "comma-metadata", test: (s) => /^[^,]{2,40},.*\b\d{1,2}[./]\d{1,2}[./]\d{2,4}\b/.test(s) && s.length < 80, why: "who, role and when comma-joined; use structure" },
   { id: "narrates-history", test: (s) => /\b(previously|before .* existed|sebelum(nya)? .* ada|used to)\b/i.test(s), why: "explains the system's own history" },
 ];
 
