@@ -23,6 +23,9 @@ const isCode = (s) =>
   /[a-z]-\[|:\w+-\w+|--[a-z]+-/.test(s) ||
   /\$\{|\bconsole\.|\bimport\b|=>|\(\)|\w+\(\w*\)/.test(s);
 
+// A name or word, optional role words, then a comma and a date or time. Any case.
+const COMMA_META = /^\p{L}[\p{L} ]{1,40}(,\s*\p{L}[\p{L} ]{1,30})*,\s*\d{1,2}[./:]\d{1,2}/u;
+
 const RULES = [
   { id: "too-long", test: (s) => s.length > LIMIT, why: `over ${LIMIT} characters` },
   { id: "two-sentences", test: (s) => (s.match(/[.!?]\s+[A-ZÀ-ÖØ-Þ]/g) ?? []).length >= 1 && s.length > 60, why: "more than one sentence" },
@@ -30,7 +33,7 @@ const RULES = [
   { id: "addresses-reader", test: (s) => /\b(you can|anda (bisa|dapat)|kamu bisa|simply|just |cukup )\b/i.test(s), why: "instructs the reader instead of naming the state" },
   { id: "em-dash", test: (s) => /[—·]/.test(s), why: "em-dash or middot in user copy" },
   { id: "sentence-shaped", test: (s) => /[.]\s*$/.test(s) && s.trim().split(/\s+/).length >= 6, why: "a full sentence; a working screen shows data, labels and controls" },
-  { id: "comma-metadata", test: (s) => /^[^,]{2,40},.*\b\d{1,2}[./]\d{1,2}[./]\d{2,4}\b/.test(s) && s.length < 80, why: "who, role and when comma-joined; use structure" },
+  { id: "comma-metadata", test: (s) => COMMA_META.test(s) && s.length < 80, why: "who, role and when comma-joined; use structure" },
   { id: "narrates-history", test: (s) => /\b(previously|before .* existed|sebelum(nya)? .* ada|used to)\b/i.test(s), why: "explains the system's own history" },
 ];
 
@@ -80,7 +83,9 @@ if (!targets.length) { console.error("usage: copy-audit.mjs <file-or-dir>..."); 
 let found = 0;
 for (const t of targets) for (const file of walk(t)) {
   for (const { text, line } of strings(file)) {
-    if (isCode(text) || !isProse(text)) continue;
+    // The metadata check runs on every string, before the prose filter.
+    const meta = COMMA_META.test(text) && text.length < 80;
+    if (!meta && (isCode(text) || !isProse(text))) continue;
     const broken = RULES.filter((r) => r.test(text));
     if (!broken.length) continue;
     found++;
