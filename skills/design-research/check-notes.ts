@@ -43,7 +43,7 @@ for (const file of notes) {
     });
     if (found) {
       ok++;
-      if (screenCol > 0) for (const id of new Set((cells[screenCol] ?? "").match(/S\d{2}/g) ?? [])) perScreen.set(id, (perScreen.get(id) ?? 0) + 1);
+      if (screenCol > 0) for (const id of new Set((cells[screenCol] ?? "").match(/\b[A-Z]{1,3}\d{1,3}\b/g) ?? [])) perScreen.set(id, (perScreen.get(id) ?? 0) + 1);
     }
     else { missing++; console.log(`MISSING  ${file.replace(root + "/", "")}  row ${cells[1]}: ${fileCell || "(no file named)"}`); }
   }
@@ -51,11 +51,13 @@ for (const file of notes) {
 console.log(`${ok} on disk, ${gated} gated, ${missing} missing across ${notes.length} notes files`);
 let thin = 0;
 if (screensFile) {
-  const ids = [...new Set(readFileSync(screensFile, "utf8").match(/^\|\s*(S\d{2})\s*\|/gm)?.map((m) => m.match(/S\d{2}/)![0]) ?? [])];
+  const ids = [...new Set(readFileSync(screensFile, "utf8").match(/^\|\s*([A-Z]{1,3}\d{1,3})\s*\|/gm)?.map((m) => m.match(/[A-Z]{1,3}\d{1,3}/)![0]) ?? [])];
+  // a screens file whose IDs the checker cannot read must not pass as "0 of 0"
+  if (!ids.length) { console.log(`NO IDS   ${screensFile} has no "| P1 |" style rows`); thin++; }
   for (const id of ids) {
     const n = perScreen.get(id) ?? 0;
     if (n < min) { thin++; console.log(`THIN     ${id}: ${n} of ${min} references`); }
   }
-  console.log(`${ids.length - thin} of ${ids.length} screens have ${min}+ saved references`);
+  console.log(`${Math.max(0, ids.length - thin)} of ${ids.length} screens have ${min}+ saved references`);
 }
 process.exit(missing ? 1 : thin ? 2 : 0);
