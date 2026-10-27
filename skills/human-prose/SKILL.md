@@ -294,6 +294,45 @@ Leftover model markup (`oaicite`, `[cite: 1]`, `grok_card`, stray 【】) and br
 text was never read before it was pasted. Read [references/machine-markup-and-citations.md](references/machine-markup-and-citations.md)
 for the per-model residue table and the citation checks, then strip and verify before shipping.
 
+### 20. Corrective framing and disclaimers (2026)
+
+Saying what the thing is not, or what a claim does not establish, before or instead of saying
+what it is. This is the 2026 growth form of §1: the same move without the "not X, it's Y" shape.
+English forms: **rather than · not simply · does not establish · should not be confused with ·
+less like a X and more like a Y**.
+
+- Avoid: "Stya is less like a till and more like a way of running the shop."
+- Write: "Stya takes the order at the table and sends it to the kitchen printer in the same second."
+
+Wikipedia (2026-10-26) and Graphite (2026-09-16) both rank it among the fastest-rising tells.
+More forms and the sources: [references/ai-tells-2026.md](references/ai-tells-2026.md).
+
+### 21. Importance flags and tradeoff-free promises (2026)
+
+Telling the reader a thing matters instead of showing what it costs: **matters because · the
+distinction matters · matters more than**. Its partner promises a benefit with no price:
+**without sacrificing · without losing · without compromising**.
+
+- Avoid: "Opening hours matter because they shape the day. Faster service without losing control of stock."
+- Write: "Opening is 07:00. The first order is keyed at 07:04, and the stock count waits until close."
+
+A real choice names what it gives up. A claim that gives up nothing reads as marketing.
+
+### 22. Evaluative adjectives that rate without describing (2026)
+
+**dependable, practical, steady, meaningful, deliberate, clearer, multifaceted, quietly**,
+and the superlatives **single most, arguably the most, genuinely**. They grade the thing and
+tell the reader nothing they can check. Delete the adjective and see what is left: if
+nothing, the sentence had no content (Contra's audit: highlight every adjective that adds no
+hard, measurable detail). Subtle positivity with no cost named is the form that survives a ban
+on "best" and "elevate".
+
+### 23. Premise stacking and announced counts (2026)
+
+The evidence paragraph comes before the point, so the point lands after it was made twice. Its
+sibling announces the count or shape of what follows: "Two constraints shape the design",
+"Four reasons why this will work". Lead with the point. Let the list show its own count.
+
 ---
 
 ## Part 2 — Desired patterns
@@ -428,6 +467,13 @@ own forms from Part 1 or `references/language-surface-forms.md`.
       `, contributing`. Delete the tail or promote it to a real sentence.
 - [ ] Search the significance words: `testament`, `pivotal`, `crucial`, `vital`,
       `indelible`, `tapestry`, `vibrant`, `nestled`, `groundbreaking`.
+- [ ] Search the 2026 frames (§20 to §23): `rather than`, `not simply`, `does not establish`,
+      `less like`, `matters because`, `without sacrificing|losing|compromising`, `single most`,
+      `genuinely`; an adjective like `dependable` or `practical` with no figure beside it; a
+      count announced before a list; an evidence paragraph ahead of its point.
+- [ ] Search headings for a Wh- opener ("Where the market is stuck", "What we do differently").
+- [ ] Ask of every claim: could a rival's page say it word for word? Name the person, the
+      price, the day, or the failure, or cut the line.
 - [ ] Check for sections that exist only because the shape expects them, and for a
       Conclusion that restates the intro.
 - [ ] Check formatting: a bold lead-in on every bullet, title case everywhere, emoji as
@@ -442,6 +488,11 @@ own forms from Part 1 or `references/language-surface-forms.md`.
 ---
 
 ## When the user pushes back
+
+A ban-list pass alone shifts the tell. Models trained against a list swap one device for another
+(Wikipedia 2026-10-26: no em dashes, so uniform commas; arXiv 2610.03110: "sound more human"
+made output easier to detect). After a word-level pass, check the structure: concrete detail,
+a cost beside each benefit, varied length, one name per thing.
 
 If someone says a draft still sounds like AI, do not reword the same sentence. Find which
 pattern from Part 1 is present, name it, and restructure. Rewording preserves the shape,
@@ -458,6 +509,7 @@ will fix that.
 Read these only when the task needs them. Every file is linked here, so none of them needs another one.
 
 - [references/language-surface-forms.md](references/language-surface-forms.md): inflated vocabulary and register rules for Japanese, Indonesian, Korean, Chinese and Spanish, and the method for deriving the forms of any other language (the six-step method that Part 0 points to). Read before writing or reviewing non-English prose.
+- [references/ai-tells-2026.md](references/ai-tells-2026.md): the 2026 tells with surface forms, before/after pairs and sources, grouped as framing, evaluation words, structure and process, plus the Indonesian rows. Read when a draft passed Part 4 and still reads as AI, and before writing a decision sheet.
 - [references/machine-read-text.md](references/machine-read-text.md): Simplified Technical English rules for text an agent or program parses with no human to resolve ambiguity (tool descriptions, error strings, inter-agent instructions, status lines). Read before writing or rewriting such text.
 - [references/machine-markup-and-citations.md](references/machine-markup-and-citations.md): per-model markup residue and citation checks for pasted text.
 - [references/sources.md](references/sources.md): the articles and standards this skill was built from.
