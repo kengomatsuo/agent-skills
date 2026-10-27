@@ -28,31 +28,51 @@ These supplement SKILL.md Part 1. Tells shift between model versions: Graphite f
 | "Where it actually lives" | where the complexity actually lives · where the money actually leaks | Give the answer, not its address. |
 | Genre glitch | an ad-like sensory phrase inside informational text ("tart bursts of flavor" in a sentence about inflation; Rettberg) | A pricing paragraph with "the warm hum of a busy dining room" has the glitch. |
 
+## Claudish words
+
+Readers call the Claude voice "Claudish" (slhck, crediting Ethan Mollick; Hacker News 2026). The words below come from `~/library/research/ai-prose-2026/opus/README.md` T3, T4, T9 and T11 (fetched 2026-10-27), each with the saved file in that folder's `src/`. Treat several on one page as the mark, since any single word can be chance. Replace each with the literal word for what happened, and for the verbs make a person or a named screen the subject (SKILL.md Part 1 §25).
+
+| Word | Evidence | Source |
+|---|---|---|
+| load-bearing | 41 Hacker News comments in the Claude threads; one says Deepseek picked up "a strong Claudish accent ... throwing around 'honest' and 'load-bearing'" | `hn-comments.txt`; `louisabraham-load-bearing-page.txt`; `jola-stop-load-bearing.txt` |
+| honest · honestly · "the honest X" · "Honestly?" | 14 HN comments; Claude Style Patch: "Don't say 'honestly' / 'Honestly?', 'the honest x:' or 'load-bearing', ever." | `hn-comments.txt`; `gh-andrewroxby-claude-style-patch-STYLE.md` |
+| genuinely | in 50% of Claude Sonnet posts against 1% of human ones (quiron); the Opus 4.8 system prompt said "Claude avoids using 'genuinely', 'honestly', or 'actually'." and the 5.5 prompt dropped the line | `gh-ilien-dev-quiron-word-choice.md`; `anthropic-system-prompt-opus-4-8.md` line 105 |
+| actually | in 64% of Opus posts against 24% of human ones (quiron); same system-prompt line | as above |
+| plainly · quietly | 31x and 28.5x in the load-bearing corpus's 2026 pull-request cluster | `louisabraham-load-bearing-lead-cluster.txt` |
+| precisely | a depth signal in slhck and the load-bearing list | `slhck-claudish.txt` |
+| seam · wedge · dodge | slhck's examples ("can't wedge the deep-link") | `slhck-claudish.txt` |
+| lands · earns · earns its keep | the corpus cluster (earns, pays); Anthropic's mannered-prose example "this point earns its keep" | `louisabraham-load-bearing-lead-cluster.txt`; `anthropic-prompting-fable-5-1.md` |
+| rests · holds · carries · owed · bites · survived · refused · outranks | top words of the same cluster, which "represented 41% of all human-attributed pull requests last month" | `louisabraham-load-bearing-lead-cluster.txt` |
+| lever · ladder · rung · backstop · tripwire · teeth · knob · dial · floor · ceiling | the mannered props in the load-bearing list (SKILL.md Part 1 §28) | `louisabraham-load-bearing-page.txt` |
+| the real issue underneath · at a more fundamental level · the single most important | depth signals | `slhck-claudish.txt`; Claude Style Patch |
+
+A ban on these words alone moves the tell to the next word (SKILL.md "What removes a tell, and what only moves it").
+
 ## Structure
 
 | Tell | Surface forms | Note |
 |---|---|---|
 | Premise stacking | the evidence paragraph before the point | Lead with the point. |
 | Preamble and counting | Two constraints shape the design · Four reasons why this will work · Five things we wish to discuss | Open with the first item. |
-| Quotable one-liner | a standalone line built to be pulled out: "Every metric that rewards volume punishes leverage." | If it carries no fact, cut it. |
 | Wh- headings | Where the market is stuck today · What we do differently · What it's worth to you | Name the topic: "Pricing", "Hours". |
-| Forced figurative language | a coined metaphor that clarifies nothing, sometimes a word from the prompt reused as a metaphor | Say the literal thing. |
 | Never-ending conclusion | clause after clause with no landing | End on one point. |
 | Comma-clipped tail | "above the content, and save." · "asked forty times, mentoring." | Finish the sentence or start a new one. |
 | Self-echo | a word from earlier paid off again as if planned | Vary or drop. |
 | Synonym cycling | the dashboard, the interface, the portal, the analytics hub | One noun, one name (SKILL.md Part 2 §3). |
-| Reasoning leak | narrating the text's own moves: "I want to be exact about what this means" | Do the thing. |
 | Narrator states the moral | every thread resolved; the lesson spelled out (StoryScope arXiv 2604.03136: 93.2% macro-F1 detection from narrative features alone; the 77% against 52% moral figures come from a secondary summary, unverified) | End an option on its fact. |
 | Uniform length and vocabulary | sentence lengths vary less; wider vocabulary within one article (Graphite) | A text that never repeats a noun reads as AI. |
 
+The quotable last line, the coined metaphor and the reasoning leak are SKILL.md Part 1 §30, §28 and §29, with the other Claude tells of 2026 in §24 to §27.
+
 ## Process
 
-1. A ban list moves the tell. Wikipedia: the newest models avoid the em dash and use uniform commas and periods instead. arXiv 2610.03110: asking a model to "sound more human" made detection easier. After a word pass, change the structure.
-2. Humans write what only they could know: a person, a price, a day, a failure. StationX: "No real failure, no real name, no actual Tuesday."
-3. Test each line with "why did you write this?" (Wikipedia, signs of human writing). The answer should be something seen or counted at the till.
-4. Ask whether a rival's page could say the line word for word.
-5. Human texts carry first person, direct address, small anecdotes, casual qualifiers, plain "is" and "has", and "the first" or "the only" where true (Graphite; Wikipedia). Flat register can overshoot into the clipped 8-to-20-word sentences current models now produce.
-6. Use the reader's own words, quoted, before any paraphrase. The 3x headline result in Microcopy Secrets is an unverified anecdote.
+What removes a tell and what only moves it is in SKILL.md under that title.
+
+1. Humans write what only they could know: a person, a price, a day, a failure. StationX: "No real failure, no real name, no actual Tuesday."
+2. Test each line with "why did you write this?" (Wikipedia, signs of human writing). The answer should be something seen or counted at the till.
+3. Ask whether a rival's page could say the line word for word.
+4. Human texts have first person, direct address, small anecdotes, casual qualifiers, plain "is" and "has", and "the first" or "the only" where true (Graphite; Wikipedia). The floor on flat register is SKILL.md Part 2 §6.
+5. Use the reader's own words, quoted, before any paraphrase. The 3x headline result in Microcopy Secrets is an unverified anecdote.
 
 ## Decision sheets for an owner
 

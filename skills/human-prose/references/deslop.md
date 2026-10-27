@@ -57,7 +57,7 @@ In scientific writing, maintain appropriate formality. Use "we" for your own wor
 
 ### 7. Vary rhythm
 
-Mix sentence lengths. Two items beat three. End paragraphs differently. No em dashes. Do not stack short punchy fragments for manufactured emphasis. Do not write listicles disguised as prose ("The first wall... The second wall...").
+Mix sentence lengths. List as many items as the content has, and never trade a triple for a pair. End paragraphs differently. No em dashes. Do not stack short punchy fragments for manufactured emphasis. Do not write listicles disguised as prose ("The first wall... The second wall...").
 
 ### 8. Trust readers
 
@@ -92,7 +92,7 @@ Run these before delivering any prose:
 - Same metaphor used more than twice? Replace or cut repeats.
 - "Despite these challenges..." formula? Rewrite.
 - Bold-first bullet pattern? Remove bold leads.
-- Tricolon (three-item list)? Use two items or one.
+- Tricolon (three-item list)? Keep it if the content has three things; otherwise write the sentence it stands for, never a pair.
 
 ## Scoring
 

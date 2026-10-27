@@ -1,6 +1,6 @@
 ---
 name: "human-prose"
-description: "Use BEFORE writing, rewriting or reviewing any prose a person will read, in any language: docs, README files, UI copy, error messages, commit messages, release notes, articles, emails, slides, marketing pages, and any draft that \"sounds like AI\" or ChatGPT. Strips the LLM tells (antithesis, rule of three, negative anaphora, participle tails, copula avoidance, inflated vocabulary, translationese and more) and applies human editorial patterns for English, Japanese, Indonesian, Korean, Chinese, Spanish and any other language. Also covers text an agent or program parses (tool descriptions, error strings, inter-agent instructions): STE100, disambiguate, rewrite so an agent cannot misread."
+description: "Use BEFORE writing, rewriting or reviewing any prose a person will read, in any language: docs, README files, UI copy, error messages, commit messages, release notes, articles, emails, slides, marketing pages, and any draft that \"sounds like AI\" or ChatGPT. Strips the LLM tells (antithesis, rule of three, the paired cadence, label colons, negative anaphora, participle tails, copula avoidance, inflated vocabulary, translationese and more) and applies human editorial patterns for English, Japanese, Indonesian, Korean, Chinese, Spanish and any other language. Also covers text an agent or program parses (tool descriptions, error strings, inter-agent instructions): STE100, disambiguate, rewrite so an agent cannot misread."
 ---
 
 # Human Prose (any language)
@@ -15,8 +15,8 @@ recognisable voice, and readers notice it even when they cannot name what they n
 The techniques below are not bad in themselves. Antithesis, tricolon, and parallelism
 are classical rhetoric and appear throughout good human writing. The problem is
 frequency: LLMs deploy them constantly, which turns a special effect into a tic. Colin
-Gorrie's rhetorical analysis of AI prose makes this point precisely, and it is the frame
-this skill works from. Use each device once when it earns its place, and not otherwise.
+Gorrie's rhetorical analysis of AI prose makes this point, and it is the frame this skill
+works from. Use a device where the content calls for it, and at most once per piece.
 
 Apply this to prose only. Do not apply it to code, config, data, or quoted material.
 
@@ -35,17 +35,17 @@ independently, and they all named the same thing:
 | Spanish | "lógica anglosajona" | Anglo sentence logic in Spanish clothes |
 | Indonesian | calqued clichés | "di era digital yang serba cepat" is "in today's fast-paced world" translated |
 
-**So the single strongest tell in any non-English language is English structure wearing
+**So the strongest tell in any non-English language is English structure wearing
 local vocabulary.** Every word is native, every sentence is grammatical, and the shape
 underneath is English. That is what a native reader flinches at, usually without being
 able to point to a word.
 
-Three consequences for how you work:
+When you write in another language:
 
 1. **Never translate the English draft.** Compose in the target language, from the
    meaning. A translated sentence keeps English clause order, English connector
    density, and English paragraph rhythm, which is the whole problem.
-2. **Do not port this file's fixes literally.** The pattern carries over to any language,
+2. **Do not port this file's fixes literally.** The pattern applies in any language,
    and each language needs its own repair. Splitting a sentence at an em dash is an English repair. In Japanese the same
    idea is repaired by moving the load into ので or ため.
 3. **A rule about a specific glyph or word is local, not universal.** See the dash rule
@@ -85,15 +85,19 @@ The most recognisable tell. Negating something in order to reveal the real point
 | Ini bukan sekadar laporan, melainkan alat kerja. | Laporan ini dipakai setiap hari saat tutup kasir. |
 | 问题不在于速度，而在于准确性。 | 准确性优先。速度只要在可接受范围内就够了。 |
 
-One antithesis per piece is fine if the contrast is genuinely the point. Zero is safer.
+Keep one antithesis per piece at most, and only when the contrast is the point.
 
 ### 2. Compulsive rule of three
 
-Three-item lists are over-represented because the rhythm feels resolved. Vary the count
-to two, four, or a sentence.
+Three-item lists are over-represented because the rhythm feels resolved. Write as many
+items as the content has. When a list is there for its rhythm, replace it with the
+sentence that says what you mean, and never cut it to two: a pair chosen to dodge a triple
+is the paired cadence in §4 (stop-slop's "Two items beat three" and this file's old "vary
+the count to two" both taught it, ONE-Y31.12, 2026-10-27).
 
 - Avoid: "fast, reliable, and secure" / "短く、弱く、はっきり言わない" / "cepat, andal, dan aman"
-- Write: "fast and reliable" or the full sentence that says what you actually mean.
+- Write: "A cold start takes 40 ms, and the service has kept its data through 400 days of
+  power cuts at the shop." Or one fact, if only one is true.
 
 Watch especially for adjective triplets, three-bullet lists where the third bullet is
 padding, and three-sentence paragraphs that each restate the last.
@@ -118,18 +122,63 @@ every sentence the SAME middling length. Chinese readers describe AI text as 每
 20字上下. Indonesian readers describe monotonous, uniformly long formal sentences. The
 tell is uniformity in either direction.
 
-### 4. Stacked parallelism
+### 4. Stacked parallelism and the paired cadence
 
-Balanced clause pairs and repeated sentence frames used as decoration. One deliberate
-parallel structure per piece is plenty.
+Two units of matched length and matched grammar set side by side so they read as a set.
+Rhetoric calls it isocolon. Readers now call the Claude voice "Claudish", and seven
+independent sources name this cadence as its mark (`~/library/research/ai-prose-2026/opus/README.md`
+T1, cited below as "research T1" and so on). It is also what a ban on threes turns into, so a draft that passed §2 is where to
+look for it.
+
+| Form | English | Indonesian (UNSURE, needs a native reader) |
+|---|---|---|
+| Comma couplet in a heading or slogan | Two jobs, one binary · Local loop, remote box | Cepat dipasang, murah dijalankan |
+| Clipped sentence pair | Shippers scan. Practitioners read. | Kasir mencatat. Dapur menyiapkan. |
+| Balanced declarative pair | X is the engine. Y is the moat. · Anyone can build the model. Nobody else has the data. | |
+| Announce, then deliver | On paper, X. In practice, Y. · X looks like the win. Y is the actual win. | Di atas kertas X. Kenyataannya Y. |
+| Imperative slogan | Emit 1,100 tokens. Ship 237KB. | |
+| Inside one sentence | simple and straightforward · X guards it from A; Y guards it from B · for X and for Y | |
+
+By eye, read each pair of adjacent sentences aloud. The pair is the tell when both run
+within a few words of the same length, have different subjects and close like a slogan.
+Deleting the first sentence often leaves the second still shaped as half of a pair, so
+read the survivor again.
+
+By search, in English:
+
+```
+grep -nE '^[A-Z][a-z]+( [a-z]+)?, [a-z]+( [a-z]+)?\.?$'   # comma couplets
+grep -nE '\. [A-Z][a-z]+ [a-z]+ [a-z]+\.$'               # a short closer; read the sentence before it
+grep -noE '\b[a-z]+ and [a-z]+\b' | sort | uniq -c        # doublets that repeat
+grep -nE '; [a-z]+ [a-z]+s '                              # semicolon balances
+grep -nE 'for [a-z ]+ and for '                           # the doubled "for"
+```
+
+Fix it in this order (claude-better-text-skill's ladder):
+
+1. Keep the half that makes the point and cut the other.
+2. If both halves are needed and one ranks above the other, make the lesser one a
+   subordinate clause (Part 2 §2).
+3. If they rank equal, give each its own line with its own fact, at whatever length the
+   fact needs.
+
+Jumping to step 2 when step 1 applies merges two subjects into one sentence with two
+verbs, and the pair is still there inside it.
+
+- Avoid: "Shops change hours. Stya changes with them."
+- Write: "When a shop moves its opening to 06:30, the till opens the first shift at 06:30
+  the next morning."
+
+Keep one deliberate parallel per piece at most, where the content itself is a comparison.
 
 ### 5. Dashes and connector punctuation — CHECK THE LANGUAGE FIRST
 
-This rule is genuinely different per language, and getting it wrong produces text that
-is not merely AI-flavoured but incorrect.
+This rule differs per language, and applying the wrong one makes the text incorrect in
+that language.
 
-- **English:** use a comma, colon, full stop, or parentheses. If a sentence only holds
-  together with a dash, rewrite it. Remove em dashes and en dashes.
+- **English:** use a comma, a full stop or parentheses, and never swap the dash for a
+  colon, which turns the sentence into the label-colon line in §24. If a sentence only
+  makes sense with a dash, rewrite it. Remove em dashes and en dashes.
 - **Japanese:** use 、and 。 normally, and avoid ― as a connector.
 - **Chinese:** the 破折号 (——) is STANDARD native punctuation, defined in GB/T
   15834-2011 as a two-character-width mark for annotation, supplement, or a shift in
@@ -137,72 +186,24 @@ is not merely AI-flavoured but incorrect.
   arriving far more often than a Chinese writer would use them, which readers name as
   翻译腔. Cut the frequency, keep the mark.
 - **Korean and Indonesian:** the dash is not a normal connector. Prefer a comma, a
-  colon, or a new sentence.
+  conjunction or a new sentence.
 - **Any other language:** ask whether the mark is native to its punctuation system
   before writing a rule about it (method in `references/language-surface-forms.md`).
 
 The underlying universal is: **do not carry a clause on punctuation that the language
 would carry on a conjunction.**
 
-### 6. Inflated vocabulary and filler
+### 6 to 12. General tells (index)
 
-**English:** delve, leverage, robust, seamless, effortless, unlock, harness, elevate,
-navigate (figurative), landscape (figurative), realm, testament to, at its core,
-it's worth noting, in today's fast-paced world, let's dive in.
+Each section keeps its full text and before/after in [references/general-tells.md](references/general-tells.md).
 
-**Other languages:** read `references/language-surface-forms.md` for the Japanese, Indonesian,
-Korean, Chinese and Spanish word lists before writing or reviewing in those languages.
-
-### 7. Over-scaffolding and footnote clutter
-
-Signs of it: a subtitle under every heading, a parenthetical gloss after every term, a
-grey caption at the foot of every slide, a "Note:" on every paragraph, bold lead-ins on
-every bullet, a summary that repeats the section that just ended.
-
-Rules:
-
-- Caveats and sourcing go in one place at the end, or in speaker notes, not scattered.
-- If a slide or card needs a footnote to make sense, fix the slide.
-- Small grey print teaches nothing. Either it matters and gets normal weight, or it goes.
-
-The connector-scaffold version of this is the clearest AI tell in Chinese and Korean:
-首先 / 其次 / 此外 / 最后 / 总之 in Chinese, and 그리고 / 하지만 / 그래서 / 또한 / 따라서
-in Korean, applied to every joint whether or not the logic needs marking. Human writers
-leave most joints unmarked and let the sentences carry the relation.
-
-### 8. Negation-then-reveal openings
-
-Building tension by ruling things out before saying the thing.
-
-- Avoid: "We won't cover X today. Instead, ..." / 「今日は〜はしません。そのかわり、〜」
-- Write: "Today covers X." Then move on.
-
-### 9. Uniform paragraph shape
-
-Every paragraph three sentences long, every section the same depth, every bullet the
-same length. Vary it. Some points need one line, some need six.
-
-### 10. Register drift and misjudged formality
-
-The model picks a register and then fails to hold it, or picks the wrong one for the
-language entirely. This barely shows in English and is glaring elsewhere (Korean speech
-levels, Japanese です・ます against だ・である, Indonesian school-essay passives, Chinese
-bureaucratic phrasing). Pick one register, hold it to the last sentence, and read
-`references/language-surface-forms.md` for the per-language rules.
-
-### 11. Borrowed authority
-
-Claims that sound sourced and are not: 大量实践证明, 相关研究表明, "studies show",
-"experts agree", "tak dapat dipungkiri", "es bien sabido". Chinese readers list this as
-a distinct marker: the argument is 很完整 but 证据不足. Either cite the actual source or
-make the claim in your own voice and own it.
-
-### 12. The uplift ending
-
-Closing on encouragement, synthesis, or a widened horizon that the piece did not earn.
-Chinese readers describe it as writing 像个好学生 hoping for the teacher's praise;
-Spanish readers describe an excess of empathy and motivational tone. English does it
-with "and that's the real power of X". Stop when the content stops.
+- **§6 Inflated vocabulary and filler.** Search `delve`, `leverage`, `robust`, `seamless`, `testament to`, `it's worth noting`. The other languages' lists are in the same file.
+- **§7 Over-scaffolding and footnote clutter.** Look for a subtitle under every heading, a gloss after every term and a `Note:` on every paragraph.
+- **§8 Negation-then-reveal openings.** Search `won't cover`, `Instead,` at the start of a piece.
+- **§9 Uniform paragraph shape.** Count sentences per paragraph and items per section.
+- **§10 Register drift and misjudged formality.** Check that one register holds from the first line to the last.
+- **§11 Borrowed authority.** Search `studies show`, `experts agree`, `相关研究表明`, `tak dapat dipungkiri`.
+- **§12 The uplift ending.** Read the last paragraph for encouragement or a widened horizon.
 
 ### 13. Negative anaphora and asyndeton: "no X, no Y"
 
@@ -244,7 +245,7 @@ information: **..., highlighting the importance of X · ..., underscoring its ro
 ..., ensuring compliance · ..., reflecting broader trends · ..., contributing to Y**.
 
 This is among the most recognisable English tells and it is nearly always empty. The
-tail asserts significance the sentence did not earn.
+tail claims a significance the sentence never showed.
 
 - Avoid: "The migration moved 15 money columns to int8, underscoring the importance of
   precision in financial systems."
@@ -253,40 +254,13 @@ tail asserts significance the sentence did not earn.
 Japanese produces the same effect by chaining 〜しており、〜を示している. Cut the chain and
 let the sentence end.
 
-### 16. Significance inflation and promotional adjectives
+### 16 to 18. Inflation, section formulas, decoration (index)
 
-Claiming importance instead of demonstrating it: **stands as a testament to, plays a
-pivotal/crucial/vital role, left an indelible mark, reflects broader trends, a rich
-tapestry of**. And the brochure adjectives: **vibrant, rich, nestled, diverse array,
-groundbreaking, seamless, robust**.
+Full text in [references/general-tells.md](references/general-tells.md).
 
-State the fact and let the reader judge the importance. If the significance genuinely
-needs saying, say it as a claim with a mechanism behind it (Part 2 §1).
-
-This is the same instinct that Chinese readers call 假大空 and Spanish readers call the
-motivational register. See §6 for those vocabularies.
-
-### 17. Section formulas and outline conclusions
-
-Whole sections that exist because the shape expects them, not because there is content:
-"Challenges and Future Prospects", "Awards and Recognition", any section opening
-"Despite its X, it faces several challenges", and a Conclusion that restates the
-introduction.
-
-Also: every section ending in a one-line summary of the section. Stop when the content
-stops. A reader who needed the recap will scroll up.
-
-### 18. Formatting used as decoration
-
-- A **bold lead-in on every bullet**, which cancels the emphasis it was meant to give.
-- Title Case On Every Heading.
-- Emoji as structure.
-- A thematic break between every section.
-- Headings that contain only subheadings and no prose.
-- Curly quotes mixed with straight ones inside one document.
-
-Bold is for the sentence a skimming reader must not miss. If every bullet has one, none
-of them do.
+- **§16 Significance inflation and promotional adjectives.** Search `pivotal`, `testament`, `indelible`, `vibrant`, `nestled`, `rich tapestry`.
+- **§17 Section formulas and outline conclusions.** Search `Challenges and Future Prospects`, `Despite its`, a closing `Conclusion` heading.
+- **§18 Formatting used as decoration.** Look for a bold lead-in on every bullet, Title Case headings and emoji.
 
 ### 19. Machine markup and citation damage (when reviewing pasted text)
 
@@ -294,46 +268,21 @@ Leftover model markup (`oaicite`, `[cite: 1]`, `grok_card`, stray 【】) and br
 text was never read before it was pasted. Read [references/machine-markup-and-citations.md](references/machine-markup-and-citations.md)
 for the per-model residue table and the citation checks, then strip and verify before shipping.
 
-### 20. Corrective framing and disclaimers (2026)
+### 20 to 30. The 2026 and Claude tells (index)
 
-Saying what the thing is not, or what a claim does not establish, before or instead of saying
-what it is. This is the 2026 growth form of §1: the same move without the "not X, it's Y" shape.
-English forms: **rather than · not simply · does not establish · should not be confused with ·
-less like a X and more like a Y**.
+Each section below keeps its full text, surface forms and before/after in the linked file. Search the draft for the forms named here, then read the section for the fix.
 
-- Avoid: "Stya is less like a till and more like a way of running the shop."
-- Write: "Stya takes the order at the table and sends it to the kitchen printer in the same second."
-
-Wikipedia (2026-10-26) and Graphite (2026-09-16) both rank it among the fastest-rising tells.
-More forms and the sources: [references/ai-tells-2026.md](references/ai-tells-2026.md).
-
-### 21. Importance flags and tradeoff-free promises (2026)
-
-Telling the reader a thing matters instead of showing what it costs: **matters because · the
-distinction matters · matters more than**. Its partner promises a benefit with no price:
-**without sacrificing · without losing · without compromising**.
-
-- Avoid: "Opening hours matter because they shape the day. Faster service without losing control of stock."
-- Write: "Opening is 07:00. The first order is keyed at 07:04, and the stock count waits until close."
-
-A real choice names what it gives up. A claim that gives up nothing reads as marketing.
-
-### 22. Evaluative adjectives that rate without describing (2026)
-
-**dependable, practical, steady, meaningful, deliberate, clearer, multifaceted, quietly**,
-and the superlatives **single most, arguably the most, genuinely**. They grade the thing and
-tell the reader nothing they can check. Delete the adjective and see what is left: if
-nothing, the sentence had no content (Contra's audit: highlight every adjective that adds no
-hard, measurable detail). Subtle positivity with no cost named is the form that survives a ban
-on "best" and "elevate".
-
-### 23. Premise stacking and announced counts (2026)
-
-The evidence paragraph comes before the point, so the point lands after it was made twice. Its
-sibling announces the count or shape of what follows: "Two constraints shape the design",
-"Four reasons why this will work". Lead with the point. Let the list show its own count.
-
----
+- **§20 Corrective framing and disclaimers.** Search `rather than`, `not simply`, `does not establish`, `less like a`. Full text in [references/tells-2026-framing.md](references/tells-2026-framing.md).
+- **§21 Importance flags and tradeoff-free promises.** Search `matters because`, `without sacrificing`, `without losing`. Same file.
+- **§22 Evaluative adjectives that rate without describing.** Search `dependable`, `practical`, `meaningful`, `genuinely`, `single most`. Same file.
+- **§23 Premise stacking and announced counts.** Search `Two constraints`, `Four reasons` and an evidence paragraph before the point. Same file.
+- **§24 Label, colon, sentence.** Search `The fix:`, `The catch:`, `Short version:`, `Intinya:`. Full text in [references/claude-tells.md](references/claude-tells.md).
+- **§25 Things given human verbs.** Search `refuses`, `holds`, `carries`, `bites`, `earns`, `lives`, `sits` with a thing as the subject. Same file.
+- **§26 Compressed noun stacks.** Search hyphenated noun runs such as `venue-plan unread state`. Same file.
+- **§27 One-fragment openers.** Search `grep -nE '^[A-Z][a-z]+( [a-z]+){0,3}\.$'` for lines like `One caution.` Same file.
+- **§28 Mannered prose.** Search `lever`, `dial`, `rung`, `backstop`, `tripwire`, `seam`, `wedge`. Same file.
+- **§29 Writing about the previous version, and reasoning leaks.** Search `Revised`, `Retracted`, `What changed in`, `I want to be exact`. Same file.
+- **§30 The coda and the quotable last line.** Search the last paragraph and the last line of the piece. Same file.
 
 ## Part 2 — Desired patterns
 
@@ -351,8 +300,9 @@ question, no punchline.
 
 ### 2. Carry logic in subordination, not in fragments
 
-Connected sentences explain. Short declaratives assert. Each language has its own
-machinery for this, and using the native machinery is what kills the translation accent.
+Put the reason in the same sentence as the claim, joined by the conjunction a person
+would say. Each language has its own machinery for this, and using the native machinery
+is what removes the translation accent.
 
 | Language | Use |
 |---|---|
@@ -360,7 +310,7 @@ machinery for this, and using the native machinery is what kills the translation
 | Japanese | ので, ため, と, 場合, たら |
 | Indonesian | karena, sehingga, setelah, kalau, saat |
 | Korean | 〜기 때문에, 〜도록, 〜면, 〜자마자 (verb-ending subordination, not connector adverbs) |
-| Chinese | 因为…所以, 只要…就, 一旦, 等到 (and often no connector at all: Chinese carries relation by order) |
+| Chinese | 因为…所以, 只要…就, 一旦, 等到 (and often no connector at all: Chinese shows the relation by word order) |
 | Spanish | porque, para que, una vez que, cuando, si |
 
 ### 3. Define a term once, then reuse the same word
@@ -382,13 +332,17 @@ Not: "This sound is difficult for many learners."
 > **やり方：** 音声を聞いて、A か B に丸をつけてください。
 > **Cara mengerjakan:** Dengarkan audio, lalu lingkari A atau B.
 
-### 6. Flat register
+### 6. Flat register, with a floor
 
-No exclamation marks. No promises of transformation. No "here's the interesting part".
-The material carries itself. In languages with grammatical politeness, flat means
-consistent, not cold: pick the level and hold it.
+Leave out exclamation marks, promises of transformation and announcements such as
+"here's the interesting part", and let the material make its own case. Flat has a lower
+limit too. quiron measured Opus 5 overshooting further than any model it tested when told
+to sound human, with rewrites more uneven and more fragmented than a person writes. A flat
+page still uses whole sentences, the connectors a person says aloud, and "I" or "you"
+where a person is speaking. In languages with grammatical politeness, flat means the same
+level from the first sentence to the last, at whatever warmth the reader expects.
 
-### 7. Say the difficulty plainly
+### 7. Name the difficulty in plain words
 
 > This sound takes most Japanese speakers a few weeks. That is normal.
 
@@ -396,46 +350,17 @@ Not: "It might seem hard at first, but don't worry, you'll get it in no time!"
 
 ### 8. Vary sentence length deliberately
 
-A long explanatory sentence followed by a short one lands. Six short ones in a row read
-as a machine reaching for emphasis, and twenty of the same middling length read as a
-machine that never stopped.
+A short sentence after a long one reads as emphasis, so put one where the content has a
+point to stress. Six short ones in a row read as a machine reaching for drama, and twenty
+of the same middling length read as a machine that never stopped. After any fix, measure
+in both directions, because cutting staccato tends to leave uniform length and breaking
+uniform length tends to leave staccato.
 
 ---
 
 ## Part 3 — Software and product copy
 
-The same rules, with specifics.
-
-**Error messages.** Say what happened, then what to do. No "Oops!", no "Something went
-wrong", no apologies.
-
-- Avoid: "Oops! Something went wrong. Please try again."
-- Write: "Couldn't save the file. The folder is read-only. Choose a different folder."
-
-**Buttons and labels.** Verb plus object. "Save draft", not "Get started". Avoid
-"Learn more" when you can name the thing: "Read the setup guide".
-
-**Empty states.** Say what goes here and how to add the first one. Skip the illustration
-caption that says "Nothing here yet!"
-
-**Commit messages.** Imperative mood, what changed and why. "Fix race condition in
-session refresh" rather than "This commit fixes...".
-
-**Docs and READMEs.** Open with what the thing does and who it is for. Cut "In this
-guide, we will explore", "Let's dive in", and the closing "Conclusion" section that
-restates the intro.
-
-**Code comments.** Explain why the code is the way it is. The what is already on screen.
-
-**Release notes.** One line per change, in the user's vocabulary, not the codebase's.
-
-**Localised UI copy.** A translated string carries the source language's rhythm into a
-UI that is read in fragments, which is where translationese is most obvious. Write each
-locale's string from the meaning, not from the English. Never concatenate translated
-fragments: word order moves. Where the project's own design rules bind, they
-win on structure; this file governs voice.
-
----
+Error messages, buttons, empty states, commit messages, docs, comments, release notes and localised UI copy each have their rules and before/after in [references/product-copy.md](references/product-copy.md). Read it before writing any of them.
 
 ## Part 4 — Revision checklist
 
@@ -446,7 +371,17 @@ own forms from Part 1 or `references/language-surface-forms.md`.
 - [ ] [L] Search the antithesis forms. English `not just`, `it's not`, `isn't about`;
       Japanese `ではなく`, `ではありません`, `というより`; Indonesian `bukan`, `melainkan`;
       Korean `아니라`; Chinese `不是……而是`, `与其说`; Spanish `sino`. Rewrite every hit.
-- [ ] Count three-item lists. More than one per section means change a count.
+- [ ] Count three-item lists. Keep each one whose content has three things, and rewrite
+      the rest as the sentence they stand for, never as a pair (§2).
+- [ ] [EN] Pair scan (§4). Read each pair of adjacent sentences aloud, run the §4 greps,
+      and take every hit down the ladder from step 1.
+- [ ] [EN] Colon-label scan (§24). `grep -nE '^[^:]{2,40}: [a-z]'` and
+      `grep -nE '\b(honest|key|real|short|best) [a-z]+: '`. Rewrite each hit as the sentence.
+- [ ] [EN] Human-verb scan (§25).
+      `grep -nwE 'refuses|refused|holds|carries|owes|owed|bites|survives|earns|outranks|decides|lands|wedge[sd]?'`
+      and give each hit a person or a named screen as its subject.
+- [ ] [EN] Search the Claudish words in `references/ai-tells-2026.md`, the fragment
+      openers (§27) and the metaphor props (§28).
 - [ ] Measure sentence-length spread. If every sentence is within a few words of every
       other, vary them. If a run of very short ones is doing drama, join them.
 - [ ] [L] Apply the dash rule FOR THIS LANGUAGE (Part 1 §5). Strip in English. Thin out,
@@ -477,22 +412,26 @@ own forms from Part 1 or `references/language-surface-forms.md`.
 - [ ] Check for sections that exist only because the shape expects them, and for a
       Conclusion that restates the intro.
 - [ ] Check formatting: a bold lead-in on every bullet, title case everywhere, emoji as
-      structure, a rule between every section. Cut to what earns it.
+      structure, a rule between every section. Keep only what a reader needs.
 - [ ] For pasted text: search `oaicite`, `contentReference`, `[cite:`, `grok_card`, `【`,
       and `utm_source=`. Verify every citation resolves.
-- [ ] Check the ending. If it widens, uplifts, or summarises what was just said, cut it.
+- [ ] Does the last line restate the piece or sign off (§12, §30)? Delete the last
+      paragraph and see whether anything is lost.
+- [ ] On a revised page, search `revised`, `retracted`, `no longer`, `now`, `changed`
+      (§29). A new reader needs only what is true.
+- [ ] Check that no fix made another tell. A three cut to a pair, a dash turned into a
+      colon label and staccato turned into uniform length are the usual swaps.
 - [ ] Read it aloud. Anywhere it sounds like a speech, flatten it.
 - [ ] For any non-English draft: would a native reader say this was translated? If the
       words are native but the clause order is English, rewrite from the meaning.
 
 ---
 
-## When the user pushes back
+## What removes a tell, and what only moves it
 
-A ban-list pass alone shifts the tell. Models trained against a list swap one device for another
-(Wikipedia 2026-10-26: no em dashes, so uniform commas; arXiv 2610.03110: "sound more human"
-made output easier to detect). After a word-level pass, check the structure: concrete detail,
-a cost beside each benefit, varied length, one name per thing.
+Read this before you change a draft's style. The findings, with their sources, are in [references/what-removes-a-tell.md](references/what-removes-a-tell.md).
+
+## When the user pushes back
 
 If someone says a draft still sounds like AI, do not reword the same sentence. Find which
 pattern from Part 1 is present, name it, and restructure. Rewording preserves the shape,
@@ -509,15 +448,19 @@ will fix that.
 Read these only when the task needs them. Every file is linked here, so none of them needs another one.
 
 - [references/language-surface-forms.md](references/language-surface-forms.md): inflated vocabulary and register rules for Japanese, Indonesian, Korean, Chinese and Spanish, and the method for deriving the forms of any other language (the six-step method that Part 0 points to). Read before writing or reviewing non-English prose.
-- [references/ai-tells-2026.md](references/ai-tells-2026.md): the 2026 tells with surface forms, before/after pairs and sources, grouped as framing, evaluation words, structure and process, plus the Indonesian rows. Read when a draft passed Part 4 and still reads as AI, and before writing a decision sheet.
+- [references/ai-tells-2026.md](references/ai-tells-2026.md): the 2026 tells with surface forms, before/after pairs and sources, grouped as framing, evaluation words, the Claudish word list, structure and process, plus the Indonesian rows. Read when a draft passed Part 4 and still reads as AI, and before writing a decision sheet.
 - [references/machine-read-text.md](references/machine-read-text.md): Simplified Technical English rules for text an agent or program parses with no human to resolve ambiguity (tool descriptions, error strings, inter-agent instructions, status lines). Read before writing or rewriting such text.
 - [references/machine-markup-and-citations.md](references/machine-markup-and-citations.md): per-model markup residue and citation checks for pasted text.
+- [references/general-tells.md](references/general-tells.md), [references/tells-2026-framing.md](references/tells-2026-framing.md) and [references/claude-tells.md](references/claude-tells.md) hold the full text of Part 1 §6 to §12, §16 to §18 and §20 to §30, which the body indexes.
+- [references/product-copy.md](references/product-copy.md) holds Part 3, the rules for error messages, buttons, empty states, commits, docs, comments and release notes.
+- [references/what-removes-a-tell.md](references/what-removes-a-tell.md) lists the editing methods the sources tested and how each one changed the reader's verdict.
 - [references/sources.md](references/sources.md): the articles and standards this skill was built from.
 
 ### Absorbed catalogues
 
 Two third-party prose skills were merged in rather than left competing for the same trigger. They are
-English-only and do not outrank this file; where one disagrees with it, this file stands. Reach for them
+English-only and do not outrank this file; where one disagrees with it, this file stands. Their
+advice to answer a triple with two items was changed in the copies here on 2026-10-27 (§2). Reach for them
 when you want a longer catalogue of a specific tell or a worked before/after. The unslop entry file routes
 to `commands/`, `presets/`, `scripts/` and `maintenance` files that are not bundled: skip those routes and
 use the files listed here.

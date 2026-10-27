@@ -109,7 +109,7 @@ Overuse of the rule-of-three pattern. A single tricolon is fine; multiple back-t
 | "identity, payments, compute, distribution" | Extended lists masquerading as analysis |
 | "workflows, decisions, and interactions" | Three-item groupings everywhere |
 
-**Fix:** Use two items or one. Break the three-item habit.
+**Fix:** Write as many items as the content has, or the sentence the list stands for. Never cut a triple to two for rhythm, because a pair is its own tell (human-prose SKILL.md §2 and §4).
 
 ## False Agency
 
@@ -233,7 +233,7 @@ Wh- openers become a crutch. "What makes this hard is..." becomes "The constrain
 
 | Pattern | Fix |
 |---------|-----|
-| Three-item lists | Use two items or one |
+| Three-item lists | Write the count the content has, or a sentence; never a pair for rhythm |
 | Questions answered immediately | Let questions breathe or cut them |
 | Every paragraph ends punchily | Vary endings |
 | Em dashes | Remove. Use commas or periods. |
