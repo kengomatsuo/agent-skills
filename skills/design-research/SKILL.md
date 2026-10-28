@@ -248,3 +248,4 @@ session builds the same thing. Production screens are ports of the mock files an
 checked code against code: the same tree, classes and copy, then a pixel comparison of the
 production route and the mock route rendered from one shared seed. Rebuilding a screen from
 its screenshot is how differences creep in, so never do it.
+The hand-off also holds a build spec data file (every figure's data, ranges, geometry, timings and copy keys) and the check script that prints any number on a slide or mock that the file lacks; both are written before any build card is briefed (owner, 2026-10-28).
