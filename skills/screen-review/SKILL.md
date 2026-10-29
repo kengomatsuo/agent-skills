@@ -87,6 +87,10 @@ another product), "it looks like it" is decided side by side, never from memory:
 4. A pixel-diff score can point at where to look; it never passes a screen. The eye on
    the side-by-side does.
 
+## Send the shots
+
+A shot the owner should see is copied, in the turn it is taken, to the Mac's `~/Downloads/<plain-topic>/` (from WSL: `~/mac/Downloads/<plain-topic>/`, with `timeout 60 cp`). Folder and file names say what the shot shows, never a card id or internal code, and the reply names the folder. A path in a shared folder, the repo or a scratchpad is not delivery, and SendUserFile does not reach the owner (2026-10-29, owner: "just put into downloads on my mac"; notes in `references/research.md`).
+
 ## Say what you saw
 
 Report the screenshot, not the intention. "The row's action button is clipped at 320px"
