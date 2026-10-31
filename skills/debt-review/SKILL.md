@@ -32,252 +32,18 @@ another process), authorisation and security checks, protection against data los
 accessibility affordances, and behaviour somebody asked for. Removing one is a behaviour change,
 never a cleanup, however redundant it looks.
 
-## The pipeline
+## Steps
 
-```mermaid
-flowchart LR
-  P0[0 Pick path] --> M1[1 Measure + model] --> R2[2 Review, 5 lenses] --> S3[3 Spec]
-  S3 -->|gate: spec approved| D4[4 Design twice + wireframe]
-  D4 -->|gate: design picked| P5[5 Mikado plan]
-  P5 -->|gate: plan approved| W6[6 Draft compiles] --> E7[7 One commit per task] --> V8[8 Verify + record]
-  E7 -->|red: revert, new prerequisite| P5
-```
+Read the file for the step you are on; each holds the full text, gates and commands.
 
-| Path | When | Stages |
-|---|---|---|
-| A, answer | "how healthy is this?" | 0, 1, 2, report; optionally the [line pass](references/line-pass.md) over the hotspots |
-| B, small fix | one file or finding, effort S, no interface changes | 0, 1, 2, 7, 8 |
-| PR, one diff before merge | "review this PR", "code review", "before I merge" | 0, 1 on the diff, 2 on the lenses the diff touches, then the [PR review reference](references/pr-review.md): tests first, mutation check, change sizing, labelled findings, verdict. No gates; it edits nothing unless the owner asks for the fixes (then path B, with the merge-ready pass in that reference: update from base, parallel axes, a verifier per blocker, logical fix commits, PR body, never merge). |
-| C, full | interfaces change, several files, a hotspot split, effort M or L | all, three gates |
-
-Say the path in one line at the start. The owner may raise it; it never drops mid-job. Every
-stage writes one numbered file into the job folder ([references/pipeline.md](references/pipeline.md)
-holds the spec and plan templates). Anything over 100 lines goes to a file, and its point goes into chat in plain words, because the owner reads only the chat.
-
-**THE REPO IS THE ONLY MEMORY EVERY SESSION SHARES.** Findings, plan and a kanban board
-(`BOARD.md`) live in the job folder, committed and pushed, so any session on any account can
-pick the job up at any moment. Every task commit carries the code, the card's move and a fresh
-Handoff block together. Picking up: `git pull`, then
-`bun ${CLAUDE_SKILL_DIR}/scripts/board.ts <job>/BOARD.md` (the job checks), then pull the next
-card. Every card change is one call to the house **board** skill's script (`set --plan --done-when --verify --move ready --claim`; `move review --commit --note`), never a hand edit; its hook refuses one.
-[references/tracking.md](references/tracking.md) has the board, the claim rule and the
-handoff block.
-
-**The progress bar follows the board.** Give the project the board skill's one-line
-`scripts/progress.sh`; the progress bar reads its last line.
-
-Copy this checklist into your reply and tick items off:
-
-```
-- [ ] 0. git pull; existing BOARD.md read if any; path said; project rules read; the owner's requirement sources found and read (notes, department analyses, client briefs)
-- [ ] 0b. inventory.ts run; every row of 00-inventory.md walked: verdict, prior art, findings (board.ts fails on a blank row)
-- [ ] 1. measure.ts and model.ts run once; 01-current.md with diagrams
-- [ ] 2. Lenses run for the scope; line pass if asked; findings verified; 02-findings.md ranked; BOARD.md backlog (findings stay unplanned); pushed (A stops)
-- [ ] 3. 03-spec.md written and self-reviewed              → GATE 1: owner approves
-- [ ] 4. Prior art researched and saved; 04-target.md opens with `## Prior art`, then 2-3 designs, wireframe, comparison  → GATE 2: owner picks
-- [ ] 5. 05-plan.md: Mikado graph, tasks, each with Done when and Verify  → GATE 3: owner approves; each task then moves to Ready with `--plan --done-when --verify`
-- [ ] 6. Draft committed: new interfaces compile, behaviour unchanged
-- [ ] 7. Pull a card, claim, push; one commit per task with board + handoff; green (red: revert, return to 5)
-- [ ] 8. Re-measured, re-modelled, baseline ratchet + guard rule added, decision recorded
-```
-
-An approval covers only what was shown at that gate. Never run past a gate on an earlier yes.
-
-**Ask each gate through the choices UI (AskUserQuestion) the moment it is reached, with the
-content in the question in plain words.** A gate decides direction and scope; a defect found
-along the way is fixed in the same turn without one. The owner reads only the chat, so a board line "awaits
-the owner" is a stall nobody sees. Record in the Handoff `asked via the choices UI at <time>`
-and, once answered, the answer. `board.ts` fails a Handoff that waits on the owner with no
-such line.
-
-## 0b. Inventory: every action, walked once
-
-**A HOTSPOT RANKING DECIDES THE ORDER, NEVER THE SCOPE.** Sampling the busiest files skipped
-a feature that every review then missed (2026-10-09: a ticket move built as two client
-writes with a half-done state no mature POS has). So every job whose scope is a whole app, a
-core, or "every feature" starts from a list of every action, made by a script so it is the same
-every run:
-
-```bash
-bun ${CLAUDE_SKILL_DIR}/scripts/inventory.ts --sql <schema snapshot> --src apps --src packages --out <job>/00-inventory.md
-```
-
-One row per server function a client can call, and one per client hook that writes a table
-directly, each with the hooks that call it and the screens that use them. Rerunning keeps what
-reviewers wrote. Then walk the rows, hottest first, in batches an agent can finish (about ten
-related rows: one feature):
-
-1. Read the action end to end: the screen, the hook, the server function, the tables and
-   triggers it writes, and the tests that pin it.
-2. Compare it with how shipped systems do the same thing, from a saved prior-art note
-   (`prior-art`, `backend-research`, or their saved folder): one transaction or several, which
-   row is the truth, what a second device or a lost answer does, how it is undone.
-3. Write the verdict in the row: **keep**, **refactor** (a shape that drifts, a second door, a
-   half-state only a client-side sequence creates), **defect** (a wrong answer, with its
-   sequence), or **dead** (nothing calls it). Give the prior-art path, or `n/a: <why>`, and the
-   findings, each also filed in `02-findings.md`.
-
-`board.ts` fails while any row has a blank verdict or prior-art cell. A row is never marked
-from its name alone.
-
-## 1. Measure and model
-
-```bash
-bun ${CLAUDE_SKILL_DIR}/scripts/measure.ts [path...]
-bun ${CLAUDE_SKILL_DIR}/scripts/model.ts --focus=<path> <root-folders...>
-```
-
-Both write outside the repo (the temp folder; an `--out` inside the repo is redirected) and
-print where. `measure.ts` writes `report.md` and `summary.json`: hotspots (commits × lines), import cycles, unused files,
-exports and dependencies, copy-paste clones, and functions over the limits. `model.ts` writes
-Mermaid graphs of the packages and of the scope's neighbourhood. Both need `git`, `bun` and,
-on the first run, the network; [references/tools.md](references/tools.md) lists what they run and what to do when a
-number looks wrong. Run them ONCE and hand the output to every lens; lenses never run heavy
-checks of their own.
-
-Scope by request:
-
-| Asked for | Scope |
+| Step | File |
 |---|---|
-| Review a change, a PR, "before I merge" | `git diff <base>...HEAD`, plus the files it touches; method in [references/pr-review.md](references/pr-review.md) |
-| Clean up a folder, a module, a feature | that path |
-| "The codebase", "optimise everything" | the top 10 to 20 hotspots, never the whole tree |
-| "The whole app", "audit it deeper", "every line" | every lens over the top 10 to 20 hotspots, the [line pass](references/line-pass.md) over the same files, and the data-layer lens over ALL database functions, policies and triggers (they are few lines each and nothing ranks them by churn) |
-| "Wasted network calls", "layout shifts" | network and layout stability over the screens named, measured on a running app |
-| "Why does this keep breaking?" | bandages over the files and their history, then the lens the root points to |
-
-Then draw by hand what no tool can: a flowchart of each main flow through the scope, and a
-state diagram wherever the code holds a real state machine. Rules for diagrams are in
-[references/pipeline.md](references/pipeline.md).
-
-## 2. Lenses, in parallel
-
-Spawn one read-only subagent per lens in the tier below, on a mid-tier model with Read, Grep, Glob and Bash only (a lens never edits). Pass each the whole text of its prompt file, since a summary
-drops the rules that keep its findings honest, the scope, the report and model paths, the rules files, and
-[references/conventions.md](references/conventions.md).
+| The pipeline and its gates, 0b inventory, 1 measure and model | [references/steps-0-1.md](references/steps-0-1.md) |
+| 2 lenses in parallel, verify every finding, rank | [references/step-2-lenses.md](references/step-2-lenses.md) |
+| 3 to 8 spec, design, plan, draft, execute, verify | [references/steps-3-8.md](references/steps-3-8.md) |
+| Numeric thresholds | [references/thresholds.md](references/thresholds.md) |
 
 The twelve lens prompts: [Structure](references/lenses/structure.md), [Duplication](references/lenses/duplication.md), [Dead code](references/lenses/dead-code.md), [Types and state](references/lenses/types-and-state.md), [Slop](references/lenses/slop.md), [Network](references/lenses/network.md), [Layout stability](references/lenses/layout-stability.md), [Data layer](references/lenses/data-layer.md), [Backend structure](references/lenses/backend-structure.md), [Model](references/lenses/model.md), [Product](references/lenses/product.md), [Bandages](references/lenses/bandages.md). What each finds is in [references/lenses.md](references/lenses.md). Pass each lens the whole text of its prompt file.
-
-**Every path runs the core five (structure, duplication, dead code, types and state, slop) and bandages.** The other six
-run only when the scope holds client code, SQL, server handlers or crossing screens, or when the owner asks for the whole app. A lens that runs and finds nothing in scope reports "nothing in scope". A lens that needs the running app or the database
-and cannot run now (the machine is held, no app is up) becomes a board card with an id, done
-before gate 1, never dropped; "not asked for in the brief" is not a reason. Model and product
-read the project's design and feature documents first. `02-findings.md` has a `## Which lenses
-ran` section naming the lenses that ran, and `board.ts` fails a job that omits a core lens or lists a
-skipped lens with no card. The research
-behind this set, and what each source checks, is in [references/research.md](references/research.md).
-
-The measuring lenses (network, layout stability, data layer) use the running app and the
-database for counts, plans and timings; they take the dev server the project already shares,
-and run no whole-repo test, lint or build (the project's rules on heavy checks apply). The
-**line pass** ([references/line-pass.md](references/line-pass.md)) is the other way in: one
-verdict per function (keep, simplify, delete, merge) over the top hotspots, cut into
-non-overlapping ranges with `scripts/chunks.ts` when a file is too big for one reader. Offer
-it on path A, and run it whenever the request says "every line" or "the whole app".
-
-Small scope (one file, a diff under ~300 lines; a PR review follows [references/pr-review.md](references/pr-review.md)): run the prompts of the tiers that apply yourself in sequence.
-
-Where each principle is checked:
-
-| Principle | Lens |
-|---|---|
-| KISS | structure (layers, nesting), duplication (speculative generality), slop (premature structure) |
-| DRY, rule of three, wrong abstraction | duplication |
-| YAGNI | duplication, dead code (options nothing sets), slop (compatibility for nothing) |
-| SOLID: single responsibility | structure (divergent change) |
-| SOLID: open-closed | duplication (repeated switches) |
-| SOLID: Liskov, interface segregation, dependency inversion | structure (shallow modules, dependency direction), duplication (one-implementation seams) |
-| Command-query separation | types and state |
-| Fowler's smells | across all lenses, by name |
-| Readable code, JSDoc | structure, slop, against [references/jsdoc.md](references/jsdoc.md) |
-| Web Vitals (loading, interactivity, visual stability) | network, layout stability |
-| Effects and state (React) | network (effects for data flow), model (redundant and contradictory state) |
-| Query cost, RLS cost, locking | data layer |
-| Service layer, idempotent webhooks, one rule one decider | backend structure |
-| Consistency, one source of truth for a decision | model (gating), product (screens and copy), duplication |
-| Accessibility (WCAG 2.2) | product; the floor in every lens |
-| Root cause (five whys), a fix that prevents recurrence | bandages |
-| Every line read | [references/line-pass.md](references/line-pass.md) |
-
-The principles, with sources and the cases where each is WRONG:
-[references/principles.md](references/principles.md). The numeric limits and TypeScript rules:
-[references/conventions.md](references/conventions.md).
-
-### Verify every finding
-
-A lens reports leads. Before a finding enters the table, open the code and confirm it:
-
-- **"Unused"**: search the whole repo for the name as a string too (routes, RPC and SQL names,
-  i18n keys, computed imports, scripts, other apps, older clients in the field). Use
-  `blast-radius` if the project has it.
-- **"Duplicate"**: name the single rule both copies encode. No rule: they only look alike.
-- **"Too big"**: name the two reasons it changes. One reason: size alone is not a finding.
-- **"Redundant guard"**: prove untrusted data cannot reach it. If it can, it is the floor.
-- **Against the rules**: if a project rule endorses it, drop it.
-
-Drop what fails. Keep what you could not check, marked UNSURE, at the bottom.
-
-### Rank
-
-`02-findings.md`, most expensive first:
-
-| # | Where | Finding | Principle | Fix | End state | Cost to keep | Hotspot rank | Effort |
-|---|---|---|---|---|---|---|---|---|
-
-**End state** is what proves the fix landed, checkable by someone else: a count that must fall
-("11 requests on open, target 3"), a plan that must show an index scan, a constraint that
-rejects the bad row, a test that fails without the change. A finding with no end state is not
-finished. **Cost to keep** is concrete ("every new tender type edits these three switches"), never
-"hurts readability". **Effort** is S (one commit), M (a few commits) or L (needs path C).
-Order by cost × hotspot rank, then effort. Show the top of the table in the reply.
-
-## 3 to 8. Spec, design, plan, draft, execute, verify
-
-Path C only, except 7 and 8, which path B also runs. The detail and templates are in
-[references/pipeline.md](references/pipeline.md). The rules that matter:
-
-- **Spec before design.** What must not change is written down, with the test that pins it.
-- **Prior art before any design.** A path C job on a rule or feature other systems have shipped (pricing, billing, booking, stock, auth, queues, sync) runs `prior-art`, and `backend-research` or `code-to-copy` when the answer is code, BEFORE a design is drawn. `04-target.md` opens with `## Prior art`: the saved folder, one row per project (how it shapes the thing, which file), what we take and reject. One design is the shape the mature projects use. `board.ts` fails a job whose `04-target.md` has no such section (2026-10-08, plan 0120 designed its shapes from the codebase alone).
-- **The recommendation ranks by future debt, never by rewrite size**: pick the shape that leaves the fewest places a rule can drift and the least for the next feature to know; backfills and migration count are handled by characterisation tests and staging, not by choosing the smaller shape.
-- **Design twice.** At least two target shapes, each with a module diagram, a wireframe of
-  exported signatures with JSDoc (no bodies), and a sequence diagram of the flows that cross
-  new seams. Delete any module that fails the deletion test, and any seam with one
-  implementation.
-- **Plan backwards** with a Mikado graph; leaves first; one commit per task; at most about
-  five files per task; every file marked `[NEW]`, `[MODIFY]` or `[DELETE]`.
-- **Draft first.** The wireframe goes into the repo as compiling files that delegate to the
-  old code, before anything moves.
-- **One task, one commit, shape only.** A bug found is its own commit. Pin behaviour with a
-  test before changing it. Green after every step; red means revert and add a prerequisite.
-  Delete the old shape once nothing reaches it. Never start a sweep the owner did not ask for.
-  Use the project's `refactor` skill where it has one.
-- **Pin untested behaviour with characterisation tests** (record what the code does today,
-  assert exactly that) before anything moves.
-- **Verify and lock in.** Re-measure and re-model; set the new diagrams beside the target;
-  commit `summary.json` as the job's `baseline.json` and run `measure.ts --baseline=…` in the
-  project's pre-push or ship check so no count can grow back; add a rule forbidding the old
-  import direction; record the decision where the project keeps its rules. Never report a
-  quality score.
-- **Teach the next build.** Every path, A included, ends by adding each finding that holds
-  beyond this project as one line, with project and date, under its area in
-  `claude-house-rules/docs/build-checklist.md`, which the building skills read before writing;
-  the project's own copy goes in a path-scoped rule pointing at `02-findings.md`.
-
-## Thresholds
-
-Defaults, overridden by the project's lint config; `measure.ts` uses these:
-
-| Measure | Flag above | Source |
-|---|---|---|
-| Function length | 50 lines | ESLint `max-lines-per-function` default; Everything Claude Code |
-| File length | 800 lines without a stated reason | Everything Claude Code |
-| Cyclomatic complexity | 20 | ESLint `complexity` default |
-| Cognitive complexity | 15 | `sonarjs/cognitive-complexity` default |
-| Nesting depth | 4 | ESLint `max-depth` default |
-| Parameters | 4 | ESLint `max-params` defaults to 3; 4 leaves room for an options object |
-| Clone | 50 tokens and 5 lines | jscpd `--min-tokens` / `--min-lines` |
-
-A threshold opens a question; the finding is the answer to it.
 
 ## When NOT to
 
@@ -294,3 +60,7 @@ A threshold opens a question; the finding is the answer to it.
 
 `evals/evals.json` holds six scenarios (a spaghetti module, a PR review, resuming a job, a whole-app depth audit, a network and layout audit, a bandages hunt)
 with the behaviour each must show; `evals/results.md` records each run.
+
+## Other references
+
+[conventions](references/conventions.md), [jsdoc](references/jsdoc.md), [line-pass](references/line-pass.md), [pipeline diagrams](references/pipeline.md), [PR review](references/pr-review.md), [principles](references/principles.md), [research](references/research.md), [tools](references/tools.md), [tracking and board](references/tracking.md).
