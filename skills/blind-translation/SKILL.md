@@ -1,7 +1,6 @@
 ---
 name: "blind-translation"
 description: "Localises by having each language written from the screen without the source string, then checked back. Use before adding a locale or when strings read as translated."
-when_to_use: "Triggers: requests to localise, translate or add a language, complaints that a locale sounds machine-translated, and per-storefront or per-locale copy."
 ---
 
 # Blind translation

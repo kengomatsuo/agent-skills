@@ -1,7 +1,6 @@
 ---
 name: blast-radius
 description: "Finds everything a delete, rename or signature change can break and moves users off first. Use before deleting, renaming, deprecating or replacing anything shared."
-when_to_use: "Triggers: questions about whether something can be deleted or renamed, whether it is still used, and what a change would break; requests to deprecate, sunset or retire a feature, API, library or service, or to migrate users from one implementation to another."
 user-invocable: true
 ---
 

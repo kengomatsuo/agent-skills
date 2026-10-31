@@ -1,7 +1,6 @@
 ---
 name: ui-copy
 description: "Decides which on-screen text may exist and deletes the rest; audits a repo's strings. Use before writing any UI string or when the UI is wordy."
-when_to_use: "Triggers: complaints about wordy or chatty UI text, requests to rewrite a label, button, empty state or error message, and questions about what a control should say."
 user-invocable: true
 ---
 

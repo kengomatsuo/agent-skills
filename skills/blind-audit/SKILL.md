@@ -1,7 +1,6 @@
 ---
 name: blind-audit
 description: "Audits a subsystem against its promise by writing assertions before reading its code. Use for an end-to-end audit or when all tests pass and behaviour is still suspect."
-when_to_use: "Triggers: requests to audit, sweep or check a whole system end to end, and distrust of a system whose tests all pass."
 user-invocable: true
 ---
 

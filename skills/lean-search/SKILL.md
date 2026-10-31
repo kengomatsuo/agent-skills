@@ -1,7 +1,6 @@
 ---
 name: lean-search
 description: "Searches code with counts first, batched calls and ast-grep, and reduces big output by script. Use before a search or command whose output size is unknown."
-when_to_use: "Triggers: a search that returned too much, a session that feels slow or expensive, questions about who calls a function or where something is defined, and any proposal to install a code graph, a language server plugin or an output sandbox."
 user-invocable: true
 ---
 

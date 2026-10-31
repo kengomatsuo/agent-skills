@@ -1,7 +1,6 @@
 ---
 name: code-to-copy
 description: "Finds open-source projects that already built a feature and lists what to copy. Use before designing a feature others have likely shipped or paying for an API."
-when_to_use: "Triggers: requests to find open source to copy or search wider, questions about whether an open-source version or free alternative exists or who else built this, and any reluctance to pay for a service."
 user-invocable: true
 ---
 

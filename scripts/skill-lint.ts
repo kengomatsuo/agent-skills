@@ -76,6 +76,7 @@ function lintSkill(dir: string) {
   if (!desc) err(rel(skillMd), "frontmatter has no description");
   // every call carries every description: 250 chars keeps the listing small (2026-10-31)
   if (desc.length > 250) err(rel(skillMd), `description is ${desc.length} chars, max 250`);
+  if (fm.when_to_use) err(rel(skillMd), "when_to_use adds to the listing every call pays for; put the trigger in the description");
   // an incident note is history, kept in docs, never in the loaded skill
   if (/[Oo]wner,? 20\d\d-\d\d-\d\d/.test(body)) err(rel(skillMd), "body holds a dated owner note; move it to docs");
   if (/\b(I can|I will|I'll|I help|you can use|lets you)\b/i.test(desc))

@@ -1,7 +1,6 @@
 ---
 name: design-research
 description: "Researches how real products solved a screen and draws mocks from saved references. Use before designing or restyling a screen or when one looks unfinished."
-when_to_use: "Triggers: complaints about how a screen looks (half-baked, looks bad, where is the colour-coding), requests for a redesign, mocks, inspiration or references (inspo, dribbble, mobbin, refero), and questions about how other products do it."
 user-invocable: true
 ---
 

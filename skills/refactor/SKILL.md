@@ -1,7 +1,6 @@
 ---
 name: refactor
 description: "Changes code shape without changing behaviour: extract, rename, move, split, deduplicate. Use before cleaning up or simplifying existing code."
-when_to_use: "Triggers: requests to clean up, simplify, extract, split a large file, deduplicate logic or tidy naming."
 user-invocable: true
 ---
 

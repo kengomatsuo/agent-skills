@@ -1,7 +1,6 @@
 ---
 name: backend-research
 description: "Researches how competitors and open-source apps built a backend feature, then designs tables, statuses and API from it. Use before designing a backend feature, endpoint or webhook."
-when_to_use: "Triggers: questions about how others or named products (Stripe, Square, Toast) model a feature, requests to look at competitors, and designing tables, schema, status flows, state machines, webhooks, refunds, subscriptions, inventory, loyalty, multi-tenancy, an API shape, \"design an API\", an endpoint, a module boundary, a type contract, error shape, pagination or versioning."
 user-invocable: true
 ---
 

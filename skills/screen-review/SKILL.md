@@ -1,7 +1,6 @@
 ---
 name: screen-review
 description: "Runs the app and screenshots it at the widths and themes that matter. Use after any UI change and before saying a screen is done."
-when_to_use: "Triggers: questions about whether a screen looks right, requests for a screenshot or a phone, width or dark-mode check."
 user-invocable: true
 ---
 

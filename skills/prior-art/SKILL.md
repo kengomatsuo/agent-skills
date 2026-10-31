@@ -1,7 +1,6 @@
 ---
 name: prior-art
 description: "Finds mature systems that solved a subsystem and records use, copy or build. Use at the start of a non-trivial feature."
-when_to_use: "Triggers: questions about building versus using a library or service, whether a package exists for something, and how others solve a problem."
 user-invocable: true
 ---
 

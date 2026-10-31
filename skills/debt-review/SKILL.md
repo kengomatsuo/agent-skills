@@ -1,7 +1,6 @@
 ---
 name: debt-review
 description: "PR review and maintainability audit: tests first, mutation check, twelve lenses, then a plan and board. Use for reviewing a PR or diff, tech debt, or a multi-file refactor plan."
-when_to_use: "Triggers: review this PR, review before merge, code review, review this diff, is this ready to merge, tech debt, maintainability review, code smells, too many comments, JSDoc, hand off a refactor, unspaghettify, optimise or minimise code, audit the whole app, wasted network calls, layout shifts, slow queries, flag or plan gating sprawl, fixes that keep coming back (bandages), review every line."
 user-invocable: true
 ---
 

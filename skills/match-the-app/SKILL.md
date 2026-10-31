@@ -1,7 +1,6 @@
 ---
 name: match-the-app
 description: "Builds a new screen from the app's existing pages and services. Use before adding any page, view, dialog, form, list or component to an existing app."
-when_to_use: "Triggers: any request to add or build a screen, page, view, form, list, dialog, sheet, tab or component, and complaints that a new screen looks off next to the others."
 user-invocable: true
 ---
 
