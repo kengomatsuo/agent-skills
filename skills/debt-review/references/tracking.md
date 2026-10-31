@@ -76,7 +76,7 @@ Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on th
 
 **A card changes only through the house `board` skill's script**, never by editing its line:
 `bun ~/.claude/skills/board/scripts/board.ts --board BOARD.md move T4 done --commit abc1234 --check "what ran"`,
-and `add`, `claim`, `note`, `next`, `merge-named`, `progress` the same way; the `board-guard`
+and `add`, `claim`, `note`, `next`, `merge-named` the same way; the `board-guard`
 hook refuses any other write to a `BOARD.md` (2026-10-13: in-place marks left done cards in
 Backlog; 2026-10-15: hand edits by python left 61 finished cards unmarked). `scripts/card.ts
 move` still works and calls it. An agent never moves cards; the coordinator does, after the

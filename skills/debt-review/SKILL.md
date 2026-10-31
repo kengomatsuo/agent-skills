@@ -59,14 +59,12 @@ holds the spec and plan templates). Anything over 100 lines goes to a file, and 
 pick the job up at any moment. Every task commit carries the code, the card's move and a fresh
 Handoff block together. Picking up: `git pull`, then
 `bun ${CLAUDE_SKILL_DIR}/scripts/board.ts <job>/BOARD.md` (the job checks), then pull the next
-card. Every card change (`add`, `claim`, `move`, `note`, `next`, `progress`) goes through the
-house **board** skill's script, never a hand edit; its hook refuses one.
+card. Every card change is one call to the house **board** skill's script (`set --plan --done-when --verify --move ready --claim`; `move review --commit --note`), never a hand edit; its hook refuses one.
 [references/tracking.md](references/tracking.md) has the board, the claim rule and the
 handoff block.
 
 **The progress bar follows the board.** Give the project the board skill's one-line
-`scripts/progress.sh`; the savvy-progress mod reads it every minute. Never open a manual
-`mcp__savvy-progress__progress` flow over it.
+`scripts/progress.sh`; the progress bar reads its last line.
 
 Copy this checklist into your reply and tick items off:
 
@@ -158,29 +156,14 @@ Spawn one read-only subagent per lens in the tier below, on a mid-tier model wit
 drops the rules that keep its findings honest, the scope, the report and model paths, the rules files, and
 [references/conventions.md](references/conventions.md).
 
-| Lens | Prompt | Finds |
-|---|---|---|
-| Structure | [references/lenses/structure.md](references/lenses/structure.md) | size, nesting, parameters, names, magic values, comments the code could say, shallow modules, cycles, divergent change |
-| Duplication | [references/lenses/duplication.md](references/lenses/duplication.md) | one rule in two places, missed reuse, wrong abstractions, speculative generality |
-| Dead code | [references/lenses/dead-code.md](references/lenses/dead-code.md) | unused code, flags that stopped deciding, stale words, needless guards |
-| Types and state | [references/lenses/types-and-state.md](references/lenses/types-and-state.md) | type escapes, illegal states, redundant state, swallowed errors |
-| Slop | [references/lenses/slop.md](references/lenses/slop.md) | model-written padding, defensive bloat, leftovers, verification theatre, test bloat |
-| Network | [references/lenses/network.md](references/lenses/network.md) | request waterfalls, duplicate and N+1 requests, over-fetching, refetch storms, polling beside a push, missing prefetch, cache keys that defeat dedupe, critical-path weight, effects used for data flow; each counted per screen or action |
-| Layout stability | [references/lenses/layout-stability.md](references/lenses/layout-stability.md) | content inserted above content, media and skeletons without matching size, font swaps, layout-triggering animation, long tasks on interaction, useless memoisation; each measured |
-| Data layer | [references/lenses/data-layer.md](references/lenses/data-layer.md) | per-call SQL cost, missing and unused indexes, RLS cost per row, volatility labels, trigger chains, predicates copied across migrations, round trips one RPC could replace, locking order |
-| Backend structure | [references/lenses/backend-structure.md](references/lenses/backend-structure.md) | handlers that do every job, one rule decided in several entry points, duplicate webhook deliveries running a side effect twice, work before the acknowledgement, several writes that should be one transaction, more than one error shape, jobs that copy handlers; each counted |
-| Model | [references/lenses/model.md](references/lenses/model.md) | concepts that should be one or two, status spread over flags, illegal states the schema allows, flag and plan gating resolved in several places (proposes the single resolver), settings that decide nothing |
-| Product | [references/lenses/product.md](references/lenses/product.md) | one job done two ways, breaks of the design language and personality, copy drift, extra presses, accessibility misses, features that do not connect |
-| Bandages | [references/lenses/bandages.md](references/lenses/bandages.md) | fixes that patch a symptom: sleeps and retries over races, swallowed errors, special cases, growing exception lists, copied predicates, flags set to dodge a bug; bandages are grouped by shared root, SQL history is traced by `git log -S` over migrations, churn is a ratio over 30 days, and each root is traced by five whys to a design decision or a process with no feedback loop |
+The twelve lens prompts: [Structure](references/lenses/structure.md), [Duplication](references/lenses/duplication.md), [Dead code](references/lenses/dead-code.md), [Types and state](references/lenses/types-and-state.md), [Slop](references/lenses/slop.md), [Network](references/lenses/network.md), [Layout stability](references/lenses/layout-stability.md), [Data layer](references/lenses/data-layer.md), [Backend structure](references/lenses/backend-structure.md), [Model](references/lenses/model.md), [Product](references/lenses/product.md), [Bandages](references/lenses/bandages.md). What each finds is in [references/lenses.md](references/lenses.md). Pass each lens the whole text of its prompt file.
 
-**Every lens runs on a path C job and on any request for the whole app.**
-Paths A and B run the lenses their scope touches: the core five and bandages always, the rest
-when the scope holds client code, SQL, server handlers or crossing screens. A lens with nothing
-in scope still reports "nothing in scope". A lens that needs the running app or the database
+**Every path runs the core five (structure, duplication, dead code, types and state, slop) and bandages.** The other six
+run only when the scope holds client code, SQL, server handlers or crossing screens, or when the owner asks for the whole app. A lens that runs and finds nothing in scope reports "nothing in scope". A lens that needs the running app or the database
 and cannot run now (the machine is held, no app is up) becomes a board card with an id, done
 before gate 1, never dropped; "not asked for in the brief" is not a reason. Model and product
 read the project's design and feature documents first. `02-findings.md` has a `## Which lenses
-ran` section naming all twelve, and `board.ts` fails a path C job that omits one or lists a
+ran` section naming the lenses that ran, and `board.ts` fails a job that omits a core lens or lists a
 skipped lens with no card. The research
 behind this set, and what each source checks, is in [references/research.md](references/research.md).
 

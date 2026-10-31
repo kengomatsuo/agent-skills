@@ -78,8 +78,9 @@ if (existsSync(findings)) {
   const text = readFileSync(findings, "utf8");
   const ranSection = text.split(/^## /m).find((x) => /^Which lenses ran/i.test(x)) ?? "";
   const lenses = ["structure", "duplication", "dead code", "types and state", "slop", "network", "layout stability", "data layer", "backend structure", "model", "product", "bandages"];
-  for (const lens of lenses)
-    if (!new RegExp(lens, "i").test(ranSection)) problems.push(`02-findings.md does not name the ${lens} lens under 'Which lenses ran': all twelve run`);
+  const core = ["structure", "duplication", "dead code", "types and state", "slop", "bandages"];
+  for (const lens of core)
+    if (!new RegExp(lens, "i").test(ranSection)) problems.push(`02-findings.md does not name the ${lens} lens under 'Which lenses ran': the core five and bandages always run`);
   for (const lens of lenses) {
     const line = ranSection.split("\n").find((l) => new RegExp(lens, "i").test(l));
     if (line && !/\.md|\b[A-Z]\d{1,3}\b|nothing in scope/.test(line))
