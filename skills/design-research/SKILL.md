@@ -10,7 +10,7 @@ user-invocable: true
 > holds this user's own folders, project rules and examples, and where it disagrees with
 > this file, it wins.
 
-**If the `ui-patterns` skill is installed, read it first** (its Step 0 and the component's reference file) for the motion, easing, state-coverage and token numbers; the project's own tokens win over them.
+Read `ui-patterns` only when the screen has motion, states or tokens in question; the project's own tokens win over it.
 
 ## RESEARCH FIRST. NOTHING IS DRAWN UNTIL EVERY AGENT HAS REPORTED.
 
@@ -25,8 +25,10 @@ While the agents run, the only allowed work is unrelated to this screen, or noth
 A mock started in parallel is built from memory, and the research then only decorates
 it: that is the failure this skill exists to stop.
 
-A screen proposed from memory comes out as a table with a word in each cell. Research
-runs first, unasked, every time a screen is new or is being redesigned.
+A screen proposed from memory comes out as a table with a word in each cell. The full
+research runs for a new app, a redesign, or when the owner asks. A single new screen takes
+three saved references (the project's own siblings plus Galleries and Real products) and the
+same rule: nothing is drawn before they are saved.
 
 Copy this checklist into your reply and tick items off as they pass:
 
@@ -36,7 +38,7 @@ Copy this checklist into your reply and tick items off as they pass:
         house design rules; the brief names each source the agents must pull from
 - [ ] 1. Brief written; every screen of the app listed in screens.md with an ID
 - [ ] 2. Agents launched: N. Completion notices received: N (numbers must match)
-- [ ] 2. check-notes.ts --screens screens.md --min 5 exits 0
+- [ ] 2. check-notes.ts --screens screens.md --min 5 (3 for a single screen) exits 0
         (exit 2: launch the next wave on the screens it lists, return to step 2)
 - [ ] 3. check-notes.ts on the whole folder exits 0 (non-zero: send the owning agent back to step 2)
 - [ ] 3. README.md written, each pattern named with its source file
@@ -55,196 +57,47 @@ Dependencies: `bun`, `gh` (`brew install gh`), `curl`, and Playwright for the sc
 For a new app or a redesign, first list EVERY screen the requirements imply (each role's
 list, detail, form, approval, report, printout, empty and error state), and brief the
 agents on the whole list. Mocking a sample of screens leaves the rest to be drawn from
-memory later. The research target is at least five saved references per screen, counted
+memory later. The research target is at least five saved references per screen (three for one screen), counted
 per screen in the notes, before anything is drawn.
 
 What the screen is for, who reads it, every state it must show (e.g. Paid, Due soon,
 Grace, Lapsed, Not enforced), the device widths, and the app's component kit (shadcn,
 the project's own UI package and so on). Every agent gets the same brief.
 
-## 2. Fan out: five agents in parallel, in the background (six for commerce)
+## 2. Fan out (only for a new app, a redesign or when asked)
 
-The notes table carries a `screen` column naming which screen(s) of the list each
-reference serves. Write the list as a table with IDs (`| S01 | ... |`) in `screens.md`,
-then `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <folder> --screens screens.md --min 5` prints every
-screen short of five saved references and exits 2; the next wave of agents targets those.
+One agent per source, in the background, five (six for commerce): GitHub, Galleries, Mobbin and
+Refero, Dribbble, Real products, and UX research for commerce. For one screen, run one agent over
+Galleries and Real products. The notes table carries a `screen` column; list the screens as a
+table with IDs (`| S01 | ... |`) in `screens.md`, and `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <folder> --screens screens.md --min 5`
+prints every screen short of its references and exits 2; the next wave targets those.
 
-One agent per source:
-
-| Agent | Source | Best output |
-|---|---|---|
-| GitHub | the component sources the library catalog lists (its registries and the house's own kit) first, then open-source apps with the same screen (Lago, Polar, Cal.com, Supabase Studio, Twenty, Dub, shadcn examples, Tremor) | **the whole look in `code/`**: app shell and navigation, theme tokens (colours, radius, fonts), page layout, and the screen's components, each with the permalink at the commit SHA in a header comment |
-| Galleries | ui.shadcn.com blocks, tremor.so, tailwindcss.com/plus previews, saaspo, nicelydone, and vendor docs that show real dashboards (Stripe, Chargebee, Paddle, Linear, Vercel) | screenshots, plus code when the gallery exposes it |
-| Mobbin and Refero | public mobbin.com pages and CDN images; Refero's MCP (`api.refero.design/mcp`, Pro plan only) when it is connected, searched by screen or flow; when gated, the same apps' public help-centre screenshots | screenshots |
-| Dribbble | `dribbble.com/search/<terms>`, then the full-size image from each shot page | screenshots, skipping concept art no product would ship |
-| Real products | the domain's competitors and the local apps the users already open daily (their help centres, docs and app-store listings carry real in-app screenshots) | one `languages/<product>.md` card each, the source a direction is built from; a shipped product outranks a Dribbble concept |
-| UX research (commerce and ordering screens) | Baymard Institute, Nielsen Norman Group, and primary market surveys on how local buyers pay and ship | a rule per step with a short quote and URL; a paywalled page is written down as gated |
-
-**A screen meant to feel like a named product starts with that product's DESIGN.md.**
-[VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) (MIT) holds
-84 brand files in Google Stitch's DESIGN.md format (Vercel, Linear, Stripe, Apple, Airbnb,
-Notion, Supabase, Expo and more); the full file is `design-md/<brand>/DESIGN.md` in the
-repo, and getdesign.md hosts the same with previews. When the user names a product the
-screen should resemble, the real-products agent reads that file's `## Layout` section
-(spacing base, container width, gutters, columns per section, breakpoints, collapse
-order) as a first measurement, saves it as `<brand>-DESIGN.md` with the URL and commit on
-line 1, and checks each number against a screenshot of the live site before the language
-card uses it. When VoltAgent has no file for the brand, Refero Styles
-(styles.refero.design) has 2,000+ more, opened one at a time and copied with its Copy
-button, never scraped (Refero's terms forbid it). Both sets were written from the public sites, so a file is a secondary
-source: the live site wins where they differ. The project's own tokens and `ui-patterns`
-still win over both. Never copy one in as a project's `docs/design.md`: it is another
-company's look.
-
-**For a shop, checkout or any ordering screen, the real-products agents study flows before
-looks.** One agent per market leader the users already know (the local marketplaces plus
-Amazon and eBay), each covering the buyer side (search, filters, product page, variant,
-cart, checkout, payment, tracking, review, return) and the seller side (new order to
-shipped, add a product with variants, stock, promotions, returns). Each writes `flow.md`:
-step | screen | what it shows, with the exact labels in the users' language | taps from the
-last step | source. Seller screens behind a login come from the platform's public seller
-education pages. The synthesis compares the app's own flow step by step against them;
-the look is chosen after the flow is settled. Brand sites and Dribbble alone produce a
-restyled screen with the wrong flow.
-
-Each agent writes into `<research>/<project>-<topic>/<source>/`, where `<research>` is a
-folder outside every repo (the user's choice; default `~/design-research/`):
-- `NN-<site>-<what>.png`, each opened with Read to confirm it shows the thing, junk deleted
-- `code/<repo>--<File>.tsx` when code is available (code beats a picture)
-- `notes.md`: a table of # | URL | file | what to take, in one concrete sentence. The
-  file column names a file in this folder for EVERY row, or says `gated: <reason>`
-- `../languages/<product>.md`: one card per real product seen (competitor, open-source app
-  or vendor): navigation, page skeleton, density, how figures, lists, tables and status
-  look, component shapes, type, colour, and 2–4 signature moves, each backed by a saved
-  image or code file. A mock direction copies one card end to end, so the cards are what
-  make directions differ in layout and not only in colour
-
-**Looked at is not captured.** A source counts only when its bytes are in the folder:
-- An image: download the original with `curl` (full resolution, not a thumbnail).
-- A page Playwright cannot load: open it in Claude in Chrome, read the image URLs with
-  `javascript_tool` (`[...document.images].map(i => i.currentSrc)`, CSS backgrounds too)
-  and `curl` them; for rendered text, save `get_page_text` output to a `.md` file with the
-  URL and date on line 1. A Chrome screenshot ID is not a file.
-- Code: the raw file from `gh api repos/<o>/<r>/contents/<path>?ref=<sha>`, never a
-  paraphrase.
-
-Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
-batches navigate and read in one call, and never closes a tab it did not open. They share
-the scratch folder too: each works in its own subfolder and deletes only files it created.
-
-**That browser is the user's own, logged in to their real accounts, so research in it is
-read-only.** Every brief that sends an agent to Claude in Chrome says so in words:
-navigate, scroll, read and screenshot only; never click add to cart, buy, wishlist,
-follow, chat, claim a voucher, or anything that changes an account, cart or order; the
-flow behind such a button comes from the site's help centre. An agent that changed
-something undoes it and reports exactly what it did, and the coordinator checks the
-account page itself before telling the user it is clean.
-
-Screenshots come from `bun ${CLAUDE_SKILL_DIR}/shot.ts <url> <out.png> [w] [h] [selector]`
-(Playwright from the current project, or `PLAYWRIGHT=<path>`).
-When a site blocks it (bot wall, login, Cloudflare), open it in a real browser session
-such as Claude in Chrome and screenshot there; never write a blocked site off as blocked
-without trying one. Agents never fabricate a URL or an image. A gated source is written
-down as gated.
-In a repo that forbids agents from running heavy checks, say so in the brief.
-
-Before reporting, each agent runs `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <its folder>`; it lists
-every row whose file is missing or empty and exits 1. An agent reports only after it
-exits 0.
-
-The folder sits outside the repo on purpose: the references stay out of the product's
-history, and one project's references are reusable in the next.
+The source table, the named-product DESIGN.md route, the shop-flow study, the folder layout, the
+capture rules and the screenshot tool are in [references/fan-out.md](references/fan-out.md). The
+shared-browser rules (own tab per agent, read-only in the user's logged-in browser) are in
+[references/browser-tabs.md](references/browser-tabs.md); put them in every brief that sends an
+agent to Claude in Chrome. Each agent runs `check-notes.ts <its folder>` and reports only at exit 0.
+References live outside the repo (default `~/design-research/`).
 
 ## 3. Synthesise
 
 Run `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
-sends the agent that owns the missing rows back. Then read every `notes.md` file and `flow.md`, the
-`languages/` cards and the strongest images. Write
-`<research>/<project>-<topic>/README.md` with the patterns worth copying, each named
-with the file it came from, and the ones rejected with the reason (it breaks one of the
-project's design rules, or suits a marketing page and not a working tool).
+sends the agent that owns the missing rows back. Then read every `notes.md`, `flow.md`, the
+`languages/` cards and the strongest images. Write `<research>/<project>-<topic>/README.md` with the
+patterns worth copying, each named with the file it came from, and the ones rejected with the reason.
 
 ## 4. Mock, then show
 
-Only after step 3's README exists. Build the mock as a route in the app itself, from the
-files in `code/`: install the kit's primitives, port the saved components, and change
-tokens and copy (read the app's CSS and two sibling screens first, as `match-the-app`
-says). Never a hand-written static HTML page.
-A kit preset ships its own control heights, radius and weights: replace them with the
-project's tokens before the first screen is built on it, and screenshot one form beside the
-token sheet. Screens built on the preset's numbers read as the stock kit however the
-colours change.
-For a brand direction that touches every page, add a development-only switch instead of a
-separate route: a cookie set by a dev route, read in the root layout into a
-`data-brand` attribute, with each direction's tokens and fonts scoped under
-`html[data-brand="…"]`. Then one script shoots the same real pages, storefront and admin,
-in every direction, and the user can flip them live.
-Placeholder tiles make any direction look like a template: show real photos, from the
-client or from a free-licence library whose licence page you quoted, downloaded only with
-the user's yes and each file's source recorded. When the app has no brand yet, each
-direction takes ONE `languages/` card whole, layout and navigation included; two
-directions sharing a skeleton are one direction, and the kit's stock neutral theme is not
-a direction.
-**Before shooting, check the mock against the project's own design rules**, not only its
-tokens: list rules, row targets, borders, how status is shown, and real brand marks
-(never a text lockup) when a payment method or partner has a logo. A mock that copied a
-screen which already broke them repeats the defect: fix the screen too.
-Then check the render itself: compute the contrast of each direction's accent against its
-backgrounds with a script (4.5:1 for text) and darken what fails before anyone sees it;
-every script in the content has a glyph (a Latin-only font
-shows Chinese or Arabic as empty boxes, so load a fallback), words are not run together by
-a font's narrow space, the framework's dev badge is off, and the route answers 200 on the
-port you shot (another project's server may hold the default port; pin one). A style
-generator's suggested palette and fonts are input, never a direction: when they do not
-fit the audience, drop them and say so.
-A direction covers every surface the product has. When the app has a back office, each
-direction's admin copies the SAME product's seller or merchant side (its seller centre,
-merchant admin or partner app), captured into its own `languages/admin-<product>.md` card;
-recolouring one shared admin is not a direction.
-**No page of any direction is built until `bun ${CLAUDE_SKILL_DIR}/check-directions.ts
-<research>/<project>-<topic>` exits 0.** It reads `directions.md`: one row per page the
-product has (storefront and back office, every route), one column per direction, each cell
-citing the saved file(s) that page copies, in backticks. A cell with no saved source, a
-missing file, or the same source as another direction fails. A page with no captured
-source gets a capture agent, never a shared fallback layout.
-The checker proves sources exist, never that the build copied them. Build agents drift
-to one shared component with a note added or a section renamed per direction; the brief
-says in words that this is restyling, and that each page rebuilds its source's structure
-(sections, order, columns, controls) on one shared data layer. After every build round,
-shoot each page in every direction and run `bun ${CLAUDE_SKILL_DIR}/review-grid.ts <shots>
-<dir1,dir2,...> <page>...`, then open every sheet. Two columns with the same structure
-send that page back with its source files named, before anyone else sees it.
-Before rendering, write a skeleton table: one row per structural choice (header and
-navigation, home hero, category entry, product card, listing and filters, product page,
-admin shell, admin dashboard, admin order list) and one column per direction, each cell naming the file it came from. When
-more than half the rows are the same across two directions, they are one direction:
-rebuild one of them from a different card before anyone sees it. A direction whose cells
-cite no research file is built from memory.
-Run `bun ${CLAUDE_SKILL_DIR}/check-siblings.ts <url>...` on every mock route: components of one
-kind sitting together (info cards, tiles, list items) must share one height and one inner
-layout, and a badge never repeats its card's title. `--selftest` must fail, proving the
-check can see. A screen that fails is fixed before it is shot.
-Render it with `shot.ts` at desktop and phone widths, save the PNGs beside the research as
-`mock-<name>-<width>.png`, and show them to the user **in the same turn**, with the
-reference each decision came from. Offer three or four directions, each copying a different kind of
-product the users know: the local marketplace, the global leader, a small-shop theme, a
-specialist in the domain. Mock each one and let the
-user pick, as one contact sheet with each direction's name and source product printed above
-its row (rendered with `shot.ts`), never a batch of unlabelled PNGs under one caption.
-The sheet shows every page the product has, not a chosen few, and labels each one as
-copied from the source ("own layout") or only restyled ("shell and colours only"). A
-summary never says a direction "copies" a product when only some pages do; it names the
-pages that do. Overclaiming coverage reads as a lie.
-Name a direction by what the user sees ("red accent, Mekari Talenta"), not by an internal
-key.
+Only after step 3's README exists. Build the mock as a route in the app itself, from the saved
+`code/` files, never a static HTML page; read the app's CSS and two sibling screens first, as
+`match-the-app` says. Replace a kit preset's heights, radius and weights with the project's tokens
+before the first screen.
 
-Only then propose the implementation, and wait for yes.
+Hard gates, all detailed in [references/mock.md](references/mock.md):
 
-Once a direction is approved, the mock code IS the spec. Write the whole plan to disk in the
-repo (every screen with its mock file, the tokens, each approved revision in the owner's
-words and the exact code change, the build order, and the parity check) so any later
-session builds the same thing. Production screens are ports of the mock files and are
-checked code against code: the same tree, classes and copy, then a pixel comparison of the
-production route and the mock route rendered from one shared seed. Rebuilding a screen from
-its screenshot is how differences creep in, so never do it.
-The hand-off also holds a build spec data file (every figure's data, ranges, geometry, timings and copy keys) and the check script that prints any number on a slide or mock that the file lacks; both are written before any build card is briefed.
+- `check-directions.ts <research>/<project>-<topic>` exits 0 before any page of any direction is built (every page cites a saved source per direction).
+- After every build round, shoot each page in every direction and open the `review-grid.ts` sheets; two columns with the same structure go back to be rebuilt from a different card.
+- `check-siblings.ts <url>...` passes on every mock route (`--selftest` fails first).
+- Check contrast, glyph coverage and the project's own design rules before shooting.
+- Show one labelled contact sheet of three or four directions in the same turn, each naming its source product and the pages it truly copies; then propose the implementation and wait for yes.
+- An approved direction's mock code is the spec: write the plan to disk and port the mock files, never rebuild from a screenshot.

@@ -10,7 +10,7 @@ user-invocable: true
 > holds this user's own folders, project rules and examples, and where it disagrees with
 > this file, it wins.
 
-**If the `ui-patterns` skill is installed, read it first** (its Step 0 and the component's reference file) for the motion, easing, state-coverage and token numbers; the project's own tokens win over them; its `audit-checklist.md` lists what to look for on the screenshots.
+Read `ui-patterns` only when the screen has motion, states or tokens in question; the project's own tokens win over it; its `audit-checklist.md` lists what to look for on the screenshots.
 
 **A LAYOUT CLAIM MADE FROM SOURCE IS A HYPOTHESIS.** Overflow, contrast, a control the
 row swallows, a sheet that travels past the viewport, a skeleton the wrong height — none

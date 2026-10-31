@@ -65,9 +65,7 @@ An English-only search that finds nothing close is a signal to go local, never a
 that nothing exists. Keep going until at least four candidates survive step 3 beyond the
 ones already known.
 
-Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
-batches navigate and read in one call, and never closes a tab it did not open. They share
-the scratch folder too: each works in its own subfolder and deletes only files it created.
+Parallel agents share one browser, read-only: the tab and read-only rules are in `../design-research/references/browser-tabs.md`; put them in every brief that sends an agent to a browser.
 
 ## 3. Verify each candidate from its own repo
 

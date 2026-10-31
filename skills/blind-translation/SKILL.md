@@ -46,7 +46,7 @@ Copy this checklist into your reply and tick items off:
    empty state), the length budget in characters, and every variable with an example
    value. Name the register: who is speaking to whom. This is the only thing the
    writers receive.
-2. **Spawn one writer per language, in parallel.** A subagent per locale. Give it the brief, the target language, the repo's copy rules
+2. **Spawn one writer subagent per batch of up to 4 languages, in parallel across batches, unless the owner asks for one per language.** Give it the brief, the target language, the repo's copy rules
    (`human-prose`, the project's own copy and design docs) and nothing else. Tell it
    explicitly that no source string exists and that it must not ask for one.
 3. **Collect drafts.** Each writer returns, per key: the string, a literal

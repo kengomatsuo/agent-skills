@@ -10,7 +10,7 @@ user-invocable: true
 > holds this user's own folders, project rules and examples, and where it disagrees with
 > this file, it wins.
 
-**If the `ui-patterns` skill is installed, read it first** (its Step 0 and the component's reference file) for the motion, easing, state-coverage and token numbers; the project's own tokens win over them.
+Read `ui-patterns` only when the screen has motion, states or tokens in question; the project's own tokens win over it.
 
 **THE APP IS NOT TALKING TO THE DEVELOPER.** Verbose text that explains the build makes
 an app read like a conversation between the agent and the developer. An agent that just built a feature knows why the feature is
@@ -131,7 +131,7 @@ Copy this checklist into your reply and tick items off:
 - [ ] Deleted every sentence whose only reader knows the code
 - [ ] copy-audit.mjs on the touched files exits 0 (hits left: return to the line above)
 - [ ] Every string is inside its budget (over budget: cut, then re-run the audit)
-- [ ] Project design rules checked, then human-prose run on what survived
+- [ ] Project design rules checked, then human-prose run on what survived (only on strings longer than a label)
 ```
 
 **Non-English strings are composed in that language.** A translated sentence keeps English

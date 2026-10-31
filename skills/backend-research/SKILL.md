@@ -31,7 +31,7 @@ Copy this checklist into your reply and tick items off as they pass:
 - [ ] 2. Agents launched: N. Completion notices received: N (numbers must match)
 - [ ] 2. Each agent's check-notes.ts exited 0 before it reported
 - [ ] 3. check-notes.ts on the whole folder exits 0 (non-zero: send the owning agent back to step 2)
-- [ ] 3. Every number in the README re-read from the saved source; README.md written
+- [ ] 3. Numbers the design relies on (timeouts, limits) re-read from the saved source; README.md written
 - [ ] 4. Schema ported clean-room from the saved code; design shown as a table, diagram or API shape; yes received
 ```
 
@@ -43,7 +43,7 @@ actors, every state you already know of, the edge cases you suspect, and the con
 that are this project's alone: multi-tenancy, offline clients, the local payment
 gateways, the runtime (serverless, edge, a queue or none). Every agent gets the same brief.
 
-## 2. Fan out: four agents in parallel, in the background
+## 2. Fan out (one agent over Open-source code and Failure record; one agent per source below only for a full research or when asked)
 
 | Agent | Source | Best output |
 |---|---|---|
@@ -69,12 +69,7 @@ folder outside every repo (the user's choice; default `~/backend-research/`):
 Before reporting, each agent runs `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <its folder>` and reports
 only when it exits 0.
 
-Parallel agents share one browser window: each opens its own tab (`tabs_create_mcp`),
-batches navigate and read in one call, and never closes a tab it did not open. They share
-the scratch folder too: each works in its own subfolder and deletes only files it created. That
-browser is the user's own and logged in, so research in it is read-only: never click
-buy, add to cart, sign up, claim or any control that changes an account, and say so in
-every brief.
+Parallel agents share one browser, read-only: the tab and read-only rules are in `../design-research/references/browser-tabs.md`; put them in every brief that sends an agent to a browser.
 
 Primary sources only: the project's own repo and docs, never a comparison blog. Verify a
 project is alive with `gh api repos/<owner>/<repo> --jq
@@ -90,8 +85,7 @@ project's research serves the next.
 
 Run `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
 sends the agent that owns the missing rows back. A row an agent marked "unconfirmed" goes
-back to it once, with a real browser session, before synthesis starts. Every number and
-rule in the README is re-read from the saved source, never from an agent's summary:
+back to it once, with a real browser session, before synthesis starts. Every number the design relies on (timeouts, limits, windows) is re-read from the saved source, never from an agent's summary; `check-notes.ts` covers the rest:
 summaries drift (a refund window reported as 30 days read 7 in the vendor's own article).
 A known bug in the failure record that touches the project's own stack (its driver, ORM,
 runtime) gets a short probe against the installed version before it changes a decision;
