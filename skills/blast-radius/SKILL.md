@@ -1,6 +1,6 @@
 ---
 name: blast-radius
-description: "Use before deleting, renaming, deprecating or replacing anything, before changing an RPC signature or a database column, before a refactor, and whenever a change looks local but the thing being changed is reached from more than one place. Works out everything the change can break (callers, policies, generated types, other apps in the monorepo, other tenants, the clients still running last week's bundle), then moves the old thing's users off it before it goes."
+description: "Finds everything a delete, rename or signature change can break and moves users off first. Use before deleting, renaming, deprecating or replacing anything shared."
 when_to_use: "Triggers: questions about whether something can be deleted or renamed, whether it is still used, and what a change would break; requests to deprecate, sunset or retire a feature, API, library or service, or to migrate users from one implementation to another."
 user-invocable: true
 ---

@@ -74,7 +74,10 @@ function lintSkill(dir: string) {
   }
   const desc = fm.description ?? "";
   if (!desc) err(rel(skillMd), "frontmatter has no description");
-  if (desc.length > 1024) err(rel(skillMd), `description is ${desc.length} chars, max 1024`);
+  // every call carries every description: 250 chars keeps the listing small (2026-10-31)
+  if (desc.length > 250) err(rel(skillMd), `description is ${desc.length} chars, max 250`);
+  // an incident note is history, kept in docs, never in the loaded skill
+  if (/[Oo]wner,? 20\d\d-\d\d-\d\d/.test(body)) err(rel(skillMd), "body holds a dated owner note; move it to docs");
   if (/\b(I can|I will|I'll|I help|you can use|lets you)\b/i.test(desc))
     err(rel(skillMd), "description is not third person (I can / you can use)");
   if (/<[a-z][^>]*>/i.test(desc)) err(rel(skillMd), "description contains an XML tag");

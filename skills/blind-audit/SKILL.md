@@ -1,6 +1,6 @@
 ---
 name: blind-audit
-description: Audits a whole subsystem against the promise its users were given, by writing assertions BEFORE reading the code underneath. Use when asked to audit, sweep or check a system end to end, when a subsystem has grown past what anyone has verified, before a release that touches money or access, and whenever every existing test passes and the behaviour is still suspect. Produces findings, not reassurance.
+description: "Audits a subsystem against its promise by writing assertions before reading its code. Use for an end-to-end audit or when all tests pass and behaviour is still suspect."
 when_to_use: "Triggers: requests to audit, sweep or check a whole system end to end, and distrust of a system whose tests all pass."
 user-invocable: true
 ---

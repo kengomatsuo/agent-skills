@@ -1,7 +1,8 @@
 ---
 name: "app-store-aso"
-description: "Researches and writes an app's App Store listing so people can find it: the name, subtitle, keyword field, promo text, screenshot captions, custom product pages and release notes for one or many storefronts. Measures what people actually type and how crowded each query is per country, reads competitors' real listings, follows Apple's indexing rules and practitioners' tactics, then has every non-English line written blind. Also covers Apple Search Ads campaigns, a scored ASO audit of a live listing, and the App Store screenshot panels with Apple's sizes. Use before a release, when an app ranks for nothing, or when the store copy was written without research."
+description: "Researches and writes App Store listings per storefront: name, subtitle, keywords, screenshots, Search Ads, ASO audits. Use before a release or when an app ranks for nothing."
 when_to_use: "Triggers: ASO or app store optimization requests, complaints that nobody finds the app or it needs to rank higher, and any work on the subtitle, keyword field, store listing, custom product pages or per-storefront localisation; Apple Search Ads, ASA, search ads bidding, match types, Search Match, TTR or CPT; an ASO audit, ASO score or listing review; App Store screenshots, screenshot sizes, device frames or translating screenshots."
+disable-model-invocation: true
 ---
 
 # App Store optimization

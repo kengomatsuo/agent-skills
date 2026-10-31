@@ -1,6 +1,6 @@
 ---
 name: "blind-translation"
-description: "Use BEFORE adding a language or locale to any product (an iOS String Catalog or .xcstrings, Android strings, a web _locales or i18n folder, App Store copy per storefront), and when existing non-English strings read as translated or someone says a locale sounds off. Localises by having each language written from the screen by a writer who never sees the source string, then checks the draft back against meaning, for the tells of translation and for fit."
+description: "Localises by having each language written from the screen without the source string, then checked back. Use before adding a locale or when strings read as translated."
 when_to_use: "Triggers: requests to localise, translate or add a language, complaints that a locale sounds machine-translated, and per-storefront or per-locale copy."
 ---
 

@@ -1,6 +1,6 @@
 ---
 name: "human-prose"
-description: "Use BEFORE writing, rewriting or reviewing any prose a person will read, in any language: docs, README files, UI copy, error messages, commit messages, release notes, articles, emails, slides, marketing pages, and any draft that \"sounds like AI\" or ChatGPT. Strips the LLM tells (antithesis, rule of three, the paired cadence, label colons, negative anaphora, participle tails, copula avoidance, inflated vocabulary, translationese and more) and applies human editorial patterns for English, Japanese, Indonesian, Korean, Chinese, Spanish and any other language. Also covers text an agent or program parses (tool descriptions, error strings, inter-agent instructions): STE100, disambiguate, rewrite so an agent cannot misread."
+description: "Removes LLM tells and applies human editing in any language, and writes text agents parse. Use before writing or reviewing prose a person reads."
 ---
 
 # Human Prose (any language)

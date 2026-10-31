@@ -1,6 +1,6 @@
 ---
 name: lean-search
-description: "Use BEFORE searching a codebase or running a command whose output size is unknown (grep, rg, find, logs, test runs, JSON, git log), and when a code-graph index (graphify, Graphicle, Graft or Trail-code), an LSP plugin or an output sandbox plugin is suggested. Finds code with counts before content, batches searches into one call, answers structure questions with ast-grep, and reduces many files or big output to the answer in one script."
+description: "Searches code with counts first, batched calls and ast-grep, and reduces big output by script. Use before a search or command whose output size is unknown."
 when_to_use: "Triggers: a search that returned too much, a session that feels slow or expensive, questions about who calls a function or where something is defined, and any proposal to install a code graph, a language server plugin or an output sandbox."
 user-invocable: true
 ---
@@ -90,8 +90,8 @@ the context-mode sandbox plugin (removed 2026-10-21) measured no better than thi
 
 | Tool | What its own sources say | Verdict |
 |---|---|---|
-| house-lsp | Anthropic's typescript-lsp, swift-lsp and pyright-lsp configs in one house plugin | installed everywhere (owner, 2026-10-20) |
-| Trail-code (was Graft) | tree-sitter map whose hooks add matching files to every prompt; 42% fewer tokens (8,070 to 4,650) and 4.2 to 2.3 calls on its authors' own 162-run benchmark | house build, usage stats, update check and npx launch removed (owner, 2026-10-20) |
+| house-lsp | Anthropic's typescript-lsp, swift-lsp and pyright-lsp configs in one house plugin | installed everywhere |
+| Trail-code (was Graft) | tree-sitter map whose hooks add matching files to every prompt; 42% fewer tokens (8,070 to 4,650) and 4.2 to 2.3 calls on its authors' own 162-run benchmark | house build, usage stats, update check and npx launch removed |
 
 Not installed (context-mode was removed, not just switched off):
 

@@ -1,6 +1,6 @@
 ---
 name: debt-review
-description: "Use BEFORE reviewing a diff or PR before merge (\"review this PR\", \"code review\", \"review before merge\") and before auditing code for maintainability: spaghetti, a file too big to work in, code every change has to touch, slop or comments, KISS, DRY, YAGNI or SOLID, dead code, a refactor plan across several files, and resuming a job folder with a BOARD.md. A PR review reads tests first, runs a mutation check and sizes the change; correctness bugs may also go to /code-review. Runs a gated pipeline: measures, diagrams, reviews with twelve lenses, then a spec, two target designs, a Mikado plan and one commit per task on a board any session can resume. One known cleanup in one place belongs to refactor."
+description: "PR review and maintainability audit: tests first, mutation check, twelve lenses, then a plan and board. Use for reviewing a PR or diff, tech debt, or a multi-file refactor plan."
 when_to_use: "Triggers: review this PR, review before merge, code review, review this diff, is this ready to merge, tech debt, maintainability review, code smells, too many comments, JSDoc, hand off a refactor, unspaghettify, optimise or minimise code, audit the whole app, wasted network calls, layout shifts, slow queries, flag or plan gating sprawl, fixes that keep coming back (bandages), review every line."
 user-invocable: true
 ---
@@ -67,7 +67,7 @@ handoff block.
 
 **The progress bar follows the board.** Give the project the board skill's one-line
 `scripts/progress.sh`; the savvy-progress mod reads it every minute. Never open a manual
-`mcp__savvy-progress__progress` flow over it (owner, 2026-10-15: the bar sat at 0% for a day).
+`mcp__savvy-progress__progress` flow over it.
 
 Copy this checklist into your reply and tick items off:
 
@@ -174,7 +174,7 @@ drops the rules that keep its findings honest, the scope, the report and model p
 | Product | [references/lenses/product.md](references/lenses/product.md) | one job done two ways, breaks of the design language and personality, copy drift, extra presses, accessibility misses, features that do not connect |
 | Bandages | [references/lenses/bandages.md](references/lenses/bandages.md) | fixes that patch a symptom: sleeps and retries over races, swallowed errors, special cases, growing exception lists, copied predicates, flags set to dodge a bug; bandages are grouped by shared root, SQL history is traced by `git log -S` over migrations, churn is a ratio over 30 days, and each root is traced by five whys to a design decision or a process with no feedback loop |
 
-**Every lens runs on a path C job and on any request for the whole app (owner, 2026-10-08: all twelve).**
+**Every lens runs on a path C job and on any request for the whole app.**
 Paths A and B run the lenses their scope touches: the core five and bandages always, the rest
 when the scope holds client code, SQL, server handlers or crossing screens. A lens with nothing
 in scope still reports "nothing in scope". A lens that needs the running app or the database
@@ -256,7 +256,7 @@ Path C only, except 7 and 8, which path B also runs. The detail and templates ar
 
 - **Spec before design.** What must not change is written down, with the test that pins it.
 - **Prior art before any design.** A path C job on a rule or feature other systems have shipped (pricing, billing, booking, stock, auth, queues, sync) runs `prior-art`, and `backend-research` or `code-to-copy` when the answer is code, BEFORE a design is drawn. `04-target.md` opens with `## Prior art`: the saved folder, one row per project (how it shapes the thing, which file), what we take and reject. One design is the shape the mature projects use. `board.ts` fails a job whose `04-target.md` has no such section (2026-10-08, plan 0120 designed its shapes from the codebase alone).
-- **The recommendation ranks by future debt, never by rewrite size** (owner, 2026-10-08: "I never care about rewrites, I just care about future potential debt"): pick the shape that leaves the fewest places a rule can drift and the least for the next feature to know; backfills and migration count are handled by characterisation tests and staging, not by choosing the smaller shape.
+- **The recommendation ranks by future debt, never by rewrite size**: pick the shape that leaves the fewest places a rule can drift and the least for the next feature to know; backfills and migration count are handled by characterisation tests and staging, not by choosing the smaller shape.
 - **Design twice.** At least two target shapes, each with a module diagram, a wireframe of
   exported signatures with JSDoc (no bodies), and a sequence diagram of the flows that cross
   new seams. Delete any module that fails the deletion test, and any seam with one

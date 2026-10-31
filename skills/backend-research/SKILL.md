@@ -1,6 +1,6 @@
 ---
 name: backend-research
-description: "Use when designing a backend feature or its API: tables, statuses, an endpoint, an RPC, a webhook, a module boundary or a type contract. Researches how competitors and open-source apps built a backend feature (tables, statuses, an API, a webhook, a job, permissions, billing or stock logic) before it is designed: fans out parallel agents to open-source codebases (migrations, schema and service code), competitors' public API and webhook references, the bug and incident record of both, and the specs that bind the feature, saves everything into a research folder outside the repo, then designs from it. The backend twin of design-research. Its design step links the house reference for designing an API or interface (contract first, errors, boundary validation, idempotency, additive changes, type contracts). Use whenever a backend feature is new or being reworked."
+description: "Researches how competitors and open-source apps built a backend feature, then designs tables, statuses and API from it. Use before designing a backend feature, endpoint or webhook."
 when_to_use: "Triggers: questions about how others or named products (Stripe, Square, Toast) model a feature, requests to look at competitors, and designing tables, schema, status flows, state machines, webhooks, refunds, subscriptions, inventory, loyalty, multi-tenancy, an API shape, \"design an API\", an endpoint, a module boundary, a type contract, error shape, pagination or versioning."
 user-invocable: true
 ---

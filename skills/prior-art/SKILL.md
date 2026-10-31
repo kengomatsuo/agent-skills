@@ -1,6 +1,6 @@
 ---
 name: prior-art
-description: Finds the mature systems that already solved a subsystem, then decides on the record whether to use one, copy its design, or build. Use at the start of any non-trivial feature (booking, auth, payments, search, scheduling, PDF, sync, queueing, i18n) and whenever a plan proposes writing something a well-known project already does. Records the decision so it is not relitigated.
+description: "Finds mature systems that solved a subsystem and records use, copy or build. Use at the start of a non-trivial feature."
 when_to_use: "Triggers: questions about building versus using a library or service, whether a package exists for something, and how others solve a problem."
 user-invocable: true
 ---

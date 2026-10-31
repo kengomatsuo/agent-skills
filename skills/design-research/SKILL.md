@@ -1,6 +1,6 @@
 ---
 name: design-research
-description: "Use BEFORE designing, redesigning or restyling any screen, and whenever a screen looks unfinished, bare, half-baked or wrong. Researches how real products solved it: fans out parallel agents to open-source apps (component code), UI galleries, Mobbin, Dribbble and the products the users already know, saves the references as screenshots and code into a research folder outside the repo, then draws mocks from them and sends the screenshots. A new screen in an existing app starts at match-the-app."
+description: "Researches how real products solved a screen and draws mocks from saved references. Use before designing or restyling a screen or when one looks unfinished."
 when_to_use: "Triggers: complaints about how a screen looks (half-baked, looks bad, where is the colour-coding), requests for a redesign, mocks, inspiration or references (inspo, dribbble, mobbin, refero), and questions about how other products do it."
 user-invocable: true
 ---
@@ -248,4 +248,4 @@ session builds the same thing. Production screens are ports of the mock files an
 checked code against code: the same tree, classes and copy, then a pixel comparison of the
 production route and the mock route rendered from one shared seed. Rebuilding a screen from
 its screenshot is how differences creep in, so never do it.
-The hand-off also holds a build spec data file (every figure's data, ranges, geometry, timings and copy keys) and the check script that prints any number on a slide or mock that the file lacks; both are written before any build card is briefed (owner, 2026-10-28).
+The hand-off also holds a build spec data file (every figure's data, ranges, geometry, timings and copy keys) and the check script that prints any number on a slide or mock that the file lacks; both are written before any build card is briefed.

@@ -1,6 +1,6 @@
 ---
 name: match-the-app
-description: "Use BEFORE adding or building any new page, screen, view, component, dialog, sheet, form, list, tab or section in an existing app, and when a new screen looks off next to the others. Reads the code of the app's existing pages, tables and services first and builds the new one from them, or opens a design canvas first when nothing in the app resembles it (a new page type or a new mechanic)."
+description: "Builds a new screen from the app's existing pages and services. Use before adding any page, view, dialog, form, list or component to an existing app."
 when_to_use: "Triggers: any request to add or build a screen, page, view, form, list, dialog, sheet, tab or component, and complaints that a new screen looks off next to the others."
 user-invocable: true
 ---

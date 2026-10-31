@@ -1,6 +1,6 @@
 ---
 name: refactor
-description: "Use BEFORE cleaning up, simplifying, splitting or deduplicating existing code: a file that has grown too big, the same logic in two places, confusing names, or code about to be built on. Changes the shape of the code without changing what it does (extract, rename, move, split, deduplicate, simplify), and decides what may change in one commit and what must wait. A whole-app, PR or multi-file audit belongs to debt-review."
+description: "Changes code shape without changing behaviour: extract, rename, move, split, deduplicate. Use before cleaning up or simplifying existing code."
 when_to_use: "Triggers: requests to clean up, simplify, extract, split a large file, deduplicate logic or tidy naming."
 user-invocable: true
 ---

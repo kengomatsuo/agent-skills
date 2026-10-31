@@ -1,6 +1,6 @@
 ---
 name: ui-copy
-description: Decides what text is allowed to exist on a screen and deletes the rest, for every string a user reads inside an app (labels, buttons, empty states, errors, toasts, settings rows, placeholders, onboarding, tooltips) in any language. Also audits a repo's existing strings with scripts/copy-audit.mjs. Use BEFORE writing or editing any such string, and whenever the user says the UI is verbose, chatty, over-explained, or reads like a conversation between the agent and the developer.
+description: "Decides which on-screen text may exist and deletes the rest; audits a repo's strings. Use before writing any UI string or when the UI is wordy."
 when_to_use: "Triggers: complaints about wordy or chatty UI text, requests to rewrite a label, button, empty state or error message, and questions about what a control should say."
 user-invocable: true
 ---
