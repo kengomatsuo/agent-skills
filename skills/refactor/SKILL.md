@@ -12,11 +12,11 @@ user-invocable: true
 
 Two rules decide almost every question here.
 
-**ONE COMMIT IS A REFACTOR OR A BEHAVIOUR CHANGE, NEVER BOTH.** A rename mixed into a bug
+**A commit is a refactor or a behaviour change, not both.** A rename mixed into a bug
 fix makes the fix unreviewable and un-revertable, and `git log -S` stops finding when the
 behaviour actually moved. Split them, refactor first.
 
-**NEVER START A SWEEP UNPROMPTED.** A repo-wide rename, a convention change, a
+**Do not start a sweep unprompted.** A repo-wide rename, a convention change, a
 dependency-wide migration: propose it, name the file count, and wait. When joining a
 codebase that already mixes two conventions, match the file you are editing and say so.
 This is a global rule, written because painful rename sweeps were needed after somebody

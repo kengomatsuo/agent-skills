@@ -56,6 +56,13 @@ function frontmatter(text: string): Record<string, string> | null {
   }
 }
 
+// Claude Code ignores a misspelled field without an error (code.claude.com/docs/en/skills)
+const CLAUDE_CODE_FIELDS = new Set([
+  "name", "description", "when_to_use", "argument-hint", "arguments", "disable-model-invocation",
+  "user-invocable", "allowed-tools", "disallowed-tools", "model", "effort", "context", "agent",
+  "background", "hooks", "paths", "shell", "metadata", "license", "compatibility",
+]);
+
 function lintSkill(dir: string) {
   const root = resolve(dir);
   const skillMd = join(root, "SKILL.md");
@@ -82,6 +89,10 @@ function lintSkill(dir: string) {
   if (/\b(I can|I will|I'll|I help|you can use|lets you)\b/i.test(desc))
     err(rel(skillMd), "description is not third person (I can / you can use)");
   if (/<[a-z][^>]*>/i.test(desc)) err(rel(skillMd), "description contains an XML tag");
+  else if (/[<>]/.test(desc)) warn(rel(skillMd), "description holds < or >, which Claude Code shows as &lt; / &gt;; use [square brackets]");
+  const unknown = Object.keys(fm).filter((k) => !CLAUDE_CODE_FIELDS.has(k));
+  if (unknown.length) err(rel(skillMd), `unknown frontmatter field ${unknown.join(", ")}; Claude Code ignores it silently`);
+  if ((fm.compatibility ?? "").length > 500) err(rel(skillMd), "compatibility is over 500 chars");
 
   // Size: body under 500 lines
   const bodyLines = body.split("\n").length;
@@ -107,6 +118,10 @@ function lintSkill(dir: string) {
         err(rel(f), `links ${relative(root, target)}, which SKILL.md does not link directly (nested reference)`);
     }
   }
+
+  // Windows paths break on Unix: scripts\\run.py, reference\\guide.md
+  const winPath = body.match(/\b(?:scripts|reference|references|assets|examples)\\[\w.-]+/);
+  if (winPath) warn(rel(skillMd), `backslash path "${winPath[0]}"; use forward slashes`);
 
   // Shouting in the body (warn): emphasis stops carrying information when frequent
   const caps = body.match(/\b(MUST|NEVER|ALWAYS|CRITICAL|IMPORTANT)\b/g)?.length ?? 0;

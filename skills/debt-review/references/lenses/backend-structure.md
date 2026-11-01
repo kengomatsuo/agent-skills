@@ -10,7 +10,7 @@ Read the project's rules first (CLAUDE.md, `.claude/rules/`, the function and mo
 documented convention beats every heuristic below. Do not run whole-repo tests, lint or builds;
 count with `rg` and read the saved report.
 
-**MEASURE, NEVER GUESS.** Every finding carries a count: lines and complexity of the handler
+**Measure, do not guess.** Every finding carries a count: lines and complexity of the handler
 (from the report), branches per action, places a rule is decided, writers of one table.
 
 **The number of functions is not a finding.** Supabase's own guidance recommends "fat

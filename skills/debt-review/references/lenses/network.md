@@ -12,7 +12,7 @@ data-layer notes). A documented project convention beats every heuristic below: 
 project endorses something a heuristic flags (a poll kept because a push channel is
 unreliable, a refetch kept for money), drop the finding.
 
-**COUNT, NEVER GUESS.** Every finding states the number of requests per screen load or per
+**Count, do not guess.** Every finding states the number of requests per screen load or per
 action, from one of: the browser's network panel or `PerformanceObserver` `resource` entries on
 a real run, a Playwright trace, the database's `pg_stat_statements` `calls` column
 (https://www.postgresql.org/docs/current/pgstatstatements.html), or a trace of the code that

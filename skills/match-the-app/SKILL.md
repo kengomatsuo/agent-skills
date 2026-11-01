@@ -12,7 +12,7 @@ user-invocable: true
 
 Read `ui-patterns` only when the screen has motion, states or tokens in question; the project's own tokens win over it.
 
-**NEVER WRITE A SCREEN FROM MEMORY. Read the source of the ones already there first.**
+**Read the source of the existing screens before writing a new one.**
 That is the whole skill. An agent that writes a list page from its own idea of a list page
 produces one that is defensible alone and wrong beside the four already in the app.
 

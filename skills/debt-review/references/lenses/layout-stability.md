@@ -12,7 +12,7 @@ longer to answer than they should. Report; do not edit.
 Read the project's rules first (CLAUDE.md, `.claude/rules/`, the design language, the screen
 contract). A documented project convention beats every heuristic below.
 
-**MEASURE, NEVER GUESS.** A layout shift is a number, and so is an interaction delay. A finding
+**Measure, do not guess.** A layout shift is a number, and so is an interaction delay. A finding
 without a measurement is a lead. How:
 
 - **Layout shifts, in the page:** `new PerformanceObserver(cb).observe({type: 'layout-shift',

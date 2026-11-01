@@ -12,7 +12,7 @@ design language, the screen inventory, the feature map, the copy rules, the refe
 and shows the screen that breaks it. A documented project decision beats every heuristic
 below. Where no document covers it, the reference is what the app's own most-used screens do.
 
-**WALK IT, NEVER ONLY READ IT.** Run the app (one dev server, the project's own way), open
+**Walk it; do not only read it.** Run the app (one dev server, the project's own way), open
 each screen in scope in its states (empty, loading, error, full) and at phone width, and take
 a screenshot. Count presses and screens for each task. Code reading finds a different
 set of issues from the screen.

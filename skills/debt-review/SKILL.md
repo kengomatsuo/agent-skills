@@ -12,7 +12,7 @@ user-invocable: true
 
 Four rules decide most questions here.
 
-**RANK BY COST, NEVER BY UGLINESS.** Most changes land in a few files. Debt in a file that
+**Rank by cost, not by ugliness.** Most changes land in a few files. Debt in a file that
 changed 400 times this half-year costs every one of those changes; the same debt in a file
 untouched for a year costs nothing until someone opens it. CodeScene's guidance: low code
 health in a hotspot is expensive, in stable code it has lower priority
@@ -27,7 +27,7 @@ meaning. An exported symbol gets a JSDoc block a caller can use; a reason goes i
 history goes in the commit or the docs. An inline comment survives only for a hazard no name
 can carry, in one short line. [references/jsdoc.md](references/jsdoc.md) has the convention.
 
-**THE FLOOR IS NEVER CUT.** Validation at a trust boundary (user input, network, database rows,
+**Never cut the floor.** Validation at a trust boundary (user input, network, database rows,
 another process), authorisation and security checks, protection against data loss,
 accessibility affordances, and behaviour somebody asked for. Removing one is a behaviour change,
 never a cleanup, however redundant it looks.

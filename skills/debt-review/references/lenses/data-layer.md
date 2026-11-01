@@ -15,7 +15,7 @@ Read the project's rules first (CLAUDE.md, `.claude/rules/`, the schema docs, th
 rules). A documented convention beats every heuristic below. Migrations that already shipped
 are append-only: a finding on one proposes a new migration, never an edit.
 
-**MEASURE, NEVER GUESS.** A cost claim comes from a plan or from counters, taken on data of the
+**Measure, do not guess.** A cost claim comes from a plan or from counters, taken on data of the
 size production has. `EXPLAIN` shows the plan; `EXPLAIN ANALYZE` executes the statement and
 adds real time and `loops` per node, so run a write inside a transaction you roll back
 (https://www.postgresql.org/docs/current/using-explain.html). Read `Rows Removed by Filter`,
