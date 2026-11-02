@@ -75,6 +75,10 @@ up at scale. Write those down even when you decide to build.
 Then one headline pointing at that page, in whatever rules file the project keeps for the
 code it covers.
 
+## Before calling something a gap in your own system
+
+A missing table name proves nothing: read how the domain is modelled, because a hierarchy can already do what another system calls tenancy. A decision quoted from a plan is what the plan said, so name the plan and ask whether it still holds. Read a module's entities before judging it by its name. Measure performance on the running system before ranking it (owner, 2026-11-02: a report called the org tree "no multi-company", quoted a stale payroll decision as current, and judged a job module by its name).
+
 ## When the answer changes
 
 New evidence reopens it: the project was abandoned, the licence changed, the constraint
