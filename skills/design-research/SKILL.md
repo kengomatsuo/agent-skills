@@ -20,6 +20,7 @@ research agent has come back AND `README.md` (step 3) is written, you do not:
 1. write a mock, a canvas, an HTML page or a line of screen code
 2. read the app's CSS or sibling screens "to get ahead on the mock"
 3. propose a layout, a table of columns or a status list
+4. answer how a screen should look, offer options for it, or estimate one: "is it high effort?" about a screen sends this skill first, and the reply is the mocks (2026-11-02: a table of two calendar options and an estimate went out from memory)
 
 While the agents run, the only allowed work is unrelated to this screen, or nothing.
 A mock started in parallel is built from memory, and the research then only decorates
