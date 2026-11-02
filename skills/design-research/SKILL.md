@@ -99,6 +99,7 @@ Hard gates, all detailed in [references/mock.md](references/mock.md):
 - `check-directions.ts <research>/<project>-<topic>` exits 0 before any page of any direction is built (every page cites a saved source per direction).
 - After every build round, shoot each page in every direction and open the `review-grid.ts` sheets; two columns with the same structure go back to be rebuilt from a different card.
 - `check-siblings.ts <url>...` passes on every mock route (`--selftest` fails first).
+- Mock data carries the screen's worst case: the most items the live screen allows in one place, and each direction is judged on it (2026-11-02: a week grid mocked with one overlap hid that height by length spends the vertical axis stacking needs).
 - Check contrast, glyph coverage and the project's own design rules before shooting.
 - Show one labelled contact sheet of three or four directions in the same turn, each naming its source product and the pages it truly copies; then propose the implementation and wait for yes.
 - An approved direction's mock code is the spec: write the plan to disk and port the mock files, never rebuild from a screenshot.
