@@ -73,7 +73,7 @@ Galleries and Real products. The notes table carries a `screen` column; list the
 table with IDs (`| S01 | ... |`) in `screens.md`, and `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <folder> --screens screens.md --min 5`
 prints every screen short of its references and exits 2; the next wave targets those.
 
-The source table, the named-product DESIGN.md route, the shop-flow study, the folder layout, the
+The gallery sources the Galleries agent searches (Kombai Gallery and the rest) are in [references/galleries.md](references/galleries.md). The source table, the named-product DESIGN.md route, the shop-flow study, the folder layout, the
 capture rules and the screenshot tool are in [references/fan-out.md](references/fan-out.md). The
 shared-browser rules (own tab per agent, read-only in the user's logged-in browser) are in
 [references/browser-tabs.md](references/browser-tabs.md); put them in every brief that sends an
