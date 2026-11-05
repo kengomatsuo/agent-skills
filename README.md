@@ -16,7 +16,7 @@ Each works on its own; they name each other where one hands off to the next.
 | `debt-review` | code is hard to change or someone asks to clean it up: measure and diagram it, review it with five lenses, then spec, design twice, plan and refactor one commit at a time |
 | `match-the-app` | you are adding a screen to an existing app: read its sibling pages first |
 | `screen-review` | you changed UI: run the app, screenshot it, check it before calling it done |
-| `human-prose` | Claude writes anything a person reads (docs, UI copy, commits, emails), in any language: it removes the tells of model-written prose |
+| `human-prose` | Claude writes and edits anything a person reads (docs, landing pages, UI copy, emails), in any language, so it reads as a person's |
 | `blind-translation` | you add a language to an app or a store listing: one writer per language works from the screen, never from the English |
 | `app-store-aso` | an app's App Store listing needs to be found: measure what people type per storefront, read competitors, follow Apple's indexing rules, write every non-English line blind |
 | `ui-copy` | you write any string inside an app: it decides what text may exist at all, then how short |
@@ -81,4 +81,4 @@ To rebuild the ZIPs: `bash scripts/package.sh`.
 
 ## Licence
 
-MIT. `human-prose` bundles files from two MIT projects; see NOTICE.
+MIT. Some skills adapt files from other MIT projects; see NOTICE.

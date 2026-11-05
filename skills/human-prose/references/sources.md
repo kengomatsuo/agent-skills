@@ -1,49 +1,45 @@
 # Sources
 
-Gorrie, C. (2025). *Why ChatGPT writes like that: a rhetorical analysis of AI "slop"*.
-Dead Language Society. https://www.deadlanguagesociety.com/p/rhetorical-analysis-ai
+Fetched 2026-11-05 unless noted.
 
-Proofed. *AI editing checklist: how to spot and fix AI writing patterns*.
-https://proofed.com/knowledge-hub/ai-editing-checklist-how-to-spot-and-fix-ai-writing-patterns/
+## Machine-written text
 
-GPTZero. *How to break free from GPT's rule of three in writing*.
-https://gptzero.me/news/the-rule-of-three/
+- Wikipedia. *Signs of AI writing*, revid 1383697236 (2026-11-04).
+  https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
+- Reinhart, A., et al. (2025). *Do LLMs write like humans? Variation in grammatical and rhetorical
+  styles*. PNAS. https://arxiv.org/abs/2410.16107
+- Russell, J., Karpinska, M., & Iyyer, M. (2025). *People who frequently use ChatGPT for writing
+  tasks are accurate and robust detectors of AI-generated text*. https://arxiv.org/abs/2501.15654
+- Chakrabarty, T., Laban, P., & Wu, C.-S. (2025). *Can AI writing be salvaged? Mitigating
+  idiosyncrasies and improving human-AI alignment in the writing process through edits* (LAMP).
+  CHI 2025. https://arxiv.org/abs/2409.14509
+- Kobak, D., et al. (2024). *Delving into LLM-assisted writing in biomedical publications through
+  excess vocabulary*. https://arxiv.org/abs/2406.07016
+- Anthropic. *Claude prompting best practices*.
+  https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-prompting-best-practices
+- House research on Claude-specific tells (2026-10-27): `~/library/research/ai-prose-2026/`.
 
-Guskaroska, A., Zawadzki, Z., Levis, J. M., Challis, K., & Prikazchikov, M. (2024).
-*Teaching Pronunciation with Confidence*. Iowa State University Digital Press.
-https://iastate.pressbooks.pub/teachingpronunciation/chapter/7-rhythm/
+## Copywriting
 
-*一眼看穿AI：AI中文写作的常见特征*. Sohu. https://www.sohu.com/a/1014931596_523187
-(Chinese: 排比/对偶 overuse, 不是……而是……, 破折号 density as 翻译腔, uniform ~20字
-sentences, 假大空 vocabulary, evidence-free authority phrases.)
+- Dry, H. *Marketing Examples*: https://marketingexamples.com/copywriting/tips ,
+  https://marketingexamples.com/copywriting/conversational ,
+  https://marketingexamples.com/copywriting/customers ,
+  https://marketingexamples.com/copywriting/adjectives
+- Wiebe, J. *Copyhackers*: https://copyhackers.com/2014/09/buttons-vs-headlines/ ,
+  https://copyhackers.com/2013/09/writing-powerful-headlines/ ,
+  https://copyhackers.com/2020/07/how-to-write-a-landing-page-examples/
+- 37signals. *Getting Real*, ch. 52 "Copywriting is Interface Design".
+  https://basecamp.com/gettingreal/09.7-copywriting-is-interface-design
+- Mailchimp. *Content Style Guide: Voice and Tone*. https://styleguide.mailchimp.com/voice-and-tone/
 
-GB/T 15834-2011 《标点符号用法》 (Chinese national standard on punctuation; defines the
-破折号 as a two-character-width mark for annotation and supplement).
-https://www2.abc.edu.cn/xbbjb/upload/2025-09/25092916252720.pdf
+## Other languages (kept from the earlier skill)
 
-*AI vs 인간의 글쓰기: ChatGPT의 가장 흔한 100가지 표현*. Rebrandb.
-https://www.rebrandb.com/special/ai-vs-인간의-글쓰기-chatgpt의-가장-흔한-100가지-표현
-(Korean: mechanical connectives, adverb overuse, formality inconsistency, filler openers.)
-
-*4 Ciri Tulisan yang Dihasilkan oleh ChatGPT*. Tempo.
-https://www.tempo.co/digital/4-ciri-tulisan-yang-dihasilkan-oleh-chatgpt-2025609
-and *Cara Mendeteksi Tulisan Hasil ChatGPT*. CNN Indonesia.
-https://www.cnnindonesia.com/teknologi/20250711135904-185-1249601/cara-mendeteksi-tulisan-hasil-chatgpt-ini-ciri-cirinya
-(Indonesian: passive-heavy formal register, uniform sentence length, calqued clichés.)
-
-Wikipedia. *Signs of AI writing* (WikiProject AI Cleanup).
-https://en.wikipedia.org/wiki/Wikipedia:Signs_of_AI_writing
-(English: copula avoidance, present-participle tails, significance inflation,
-promotional adjectives, section formulas, formatting tells, per-model leftover markup,
-citation damage. The most complete English catalogue available, maintained by editors
-who clean up this text daily.)
-
-Doherty, T. E. *Is your AI writing suffering from anaphora?* Medium.
-https://medium.com/@tdoherty_96508/is-your-ai-writing-suffering-from-anaphora-e123e754e7a9
-(Names the "no X, no Y" pattern as anaphora plus asyndeton, and explains why oral
-rhetoric transplanted to the page reads as performance.)
-
-*11 señales de que ChatGPT escribió tu texto*.
-https://luisorlandolencarpio.substack.com/p/11-senales-de-que-chatgpt-escribio
-(Spanish: "lógica anglosajona" in sentence construction, forced connectors, hedge
-reflexes, worn metaphors, motivational tone.)
+- *一眼看穿AI：AI中文写作的常见特征*. Sohu. https://www.sohu.com/a/1014931596_523187
+- GB/T 15834-2011 《标点符号用法》. https://www2.abc.edu.cn/xbbjb/upload/2025-09/25092916252720.pdf
+- *AI vs 인간의 글쓰기: ChatGPT의 가장 흔한 100가지 표현*. Rebrandb.
+  https://www.rebrandb.com/special/ai-vs-인간의-글쓰기-chatgpt의-가장-흔한-100가지-표현
+- *4 Ciri Tulisan yang Dihasilkan oleh ChatGPT*. Tempo.
+  https://www.tempo.co/digital/4-ciri-tulisan-yang-dihasilkan-oleh-chatgpt-2025609
+- *Cara Mendeteksi Tulisan Hasil ChatGPT*. CNN Indonesia.
+  https://www.cnnindonesia.com/teknologi/20250711135904-185-1249601/cara-mendeteksi-tulisan-hasil-chatgpt-ini-ciri-cirinya
+- ASD-STE100 Simplified Technical English (for `machine-read-text.md`).

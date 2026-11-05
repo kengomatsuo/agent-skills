@@ -1,8 +1,6 @@
 # Software and product copy
 
-Part 3 of SKILL.md, moved here on 2026-10-27 with the text unchanged.
-
-The same rules, with specifics.
+Rules for the text inside software. Landing pages and other selling copy follow `marketing-copy.md`.
 
 **Error messages.** Say what happened, then what to do. No "Oops!", no "Something went
 wrong", no apologies.
@@ -10,14 +8,14 @@ wrong", no apologies.
 - Avoid: "Oops! Something went wrong. Please try again."
 - Write: "Couldn't save the file. The folder is read-only. Choose a different folder."
 
-**Buttons and labels.** Verb plus object. "Save draft", not "Get started". Avoid
-"Learn more" when you can name the thing: "Read the setup guide".
+**Buttons and labels.** Name what happens when it is pressed, usually a verb and its object:
+"Save draft", "Read the setup guide".
 
 **Empty states.** Say what goes here and how to add the first one. Skip the illustration
 caption that says "Nothing here yet!"
 
-**Commit messages.** Imperative mood, what changed and why. "Fix race condition in
-session refresh" rather than "This commit fixes...".
+**Commit messages.** Follow the repo's own convention (the house one is the `house-commit`
+skill). Say what changed and why.
 
 **Docs and READMEs.** Open with what the thing does and who it is for. Cut "In this
 guide, we will explore", "Let's dive in", and the closing "Conclusion" section that

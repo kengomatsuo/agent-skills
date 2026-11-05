@@ -1,14 +1,41 @@
-# Surface forms by language
+# Writing in a language other than English
 
-These sections were split out of `SKILL.md` Part 1 (§6, §10) and Part 5. The pattern each one
-serves is described there; this file holds the per-language vocabulary, register rules and the
-method for deriving a language that is not listed.
+Kept from the earlier skill on 2026-11-05, with the English dash ban removed. Read before writing
+or reviewing any non-English prose.
 
 ## Contents
 
+- Compose from the meaning
+- Dashes by language
 - Inflated vocabulary and filler (Japanese, Indonesian, Korean, Chinese, Spanish)
 - Register drift and misjudged formality (Korean, Japanese, Indonesian, Chinese)
 - Deriving the forms for a language not covered
+
+## Compose from the meaning
+
+Readers in each language have named machine text, and they named the same thing: Chinese 翻译腔
+and Korean 번역투 (translation accent), Spanish "lógica anglosajona", Indonesian calqued clichés
+such as "di era digital yang serba cepat". Every word is native and the clause order underneath is
+English. So:
+
+1. Compose in the target language from the meaning. Never translate an English draft.
+2. Use the language's own machinery for joining ideas: ので and ため in Japanese, karena, sehingga
+   and kalau in Indonesian, verb endings such as 〜기 때문에 in Korean, word order and 因为…所以 in
+   Chinese, porque and para que in Spanish.
+3. Every language has a "not X but Y" frame (ではなく, bukan…melainkan, 아니라, 不是……而是, sino).
+   The SKILL.md rule on repeated shapes applies to it.
+
+## Dashes by language
+
+- **English:** the em dash is ordinary punctuation; several spaced dashes in one paragraph is the
+  tell (SKILL.md).
+- **Japanese:** use 、 and 。; avoid ― as a connector.
+- **Chinese:** the 破折号 (——) is standard punctuation (GB/T 15834-2011). The tell is density:
+  破折号, 冒号, 分号, 括号 and 引号 arriving far more often than a Chinese writer uses them. Cut the
+  frequency and keep the mark.
+- **Korean and Indonesian:** the dash is not a normal connector. Use a comma, a conjunction or a new
+  sentence.
+- **Any other language:** check whether the mark is native before writing a rule about it.
 
 ## Inflated vocabulary and filler
 
