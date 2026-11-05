@@ -91,6 +91,11 @@ product does for this reader in the words they use, put the checkable fact (pric
 name) in the line, and name the button after what happens when it is pressed. Copyhackers moved a
 button from "Sign up now" to "Show me outfits I'll love" and clicks rose 124%.
 
+A company's own page (a parent of several products) is written to the buyer of a product, never to
+the company: nothing under the wordmark starts with the name followed by "is", the Products list is
+the brand-to-company link, and the headline holds everything the company sells. The section "A
+company's own page" in the marketing reference has the measurements.
+
 ## Other text
 
 | Text | Read |

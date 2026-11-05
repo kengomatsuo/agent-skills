@@ -13,6 +13,7 @@ Copyhackers, and 19 small SaaS and restaurant-software landing pages fetched the
 - Feature lines
 - Buttons and calls to action
 - Proof, pricing and FAQ
+- A company's own page
 - Lines from real pages
 
 ## Before writing
@@ -82,6 +83,31 @@ free trial · From $15/month · Cancel anytime" (Fathom).
 - Answer FAQs in the voice of the person who asked: Campfire answers "Can I host it myself?" with
   "Absolutely. Wherever you can host something like WordPress, you can host Campfire."
 - A promise needs its terms: Buttondown says "we'll get you migrated within one business day".
+
+## A company's own page
+
+A company that owns several products (a studio, a holdco, an umbrella trade name) writes to the
+person who might buy one of them, never to itself. Measured on 19 parent-company sites on
+2026-11-05 (37signals, Panic, Iconfactory, Bending Spoons, Tiny, Automattic, thoughtbot, Metalab,
+Sindre Sorhus, levels.io, Rogue Amoeba, Omni, MacPaw, Mekari, GoTo, Kitabisa and others; the
+layout side is in `site-design`'s `references/company-profile.md`):
+
+- Under a wordmark at display size, no line starts with the name followed by "is". None of the 19
+  defines itself under its own logo. When the name does return as a subject it does a job for
+  someone: "Panic codes Mac apps for developers."
+- On the parent's page, a product listed under Products is the parent link. "Notes is an Acme
+  product" beside the product says to the reader what the layout already says. The explicit line
+  belongs in the product site's footer, in the form Meta's display-name article uses ("Fruit Snacks
+  by Fresh Produce") or 37signals uses ("Basecamp is designed, built, and backed by 37signals").
+- The headline of an umbrella holds everything it sells, or names the products ("We code apps,
+  publish games, and make Playdate"). A headline about the first product's market makes the
+  umbrella look like that product.
+- A product line on the parent's page speaks to the product's user, 16 to 74 characters: "Record any
+  audio" (Rogue Amoeba). It never says who owns the product.
+- One person does not write "we" or "small"; noun lines ("Quality Crafted Apps") or "I" (levels.io)
+  are what solo makers use.
+- Read each line as a stranger who wants the product. A line that explains the setup, the way a
+  chat reply to the owner would, is cut or moved to the legal footer.
 
 ## Lines from real pages
 
