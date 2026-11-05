@@ -85,6 +85,19 @@ repeated down the page, then for rhythm. Changing words is the last thing to try
 
 ## Marketing and landing-page copy
 
+**Every copy pass starts with the scanner and ends with it.** Run
+`bun scripts/ai-prose-scan.ts <file...>` on the existing strings before writing (a copy deck, a
+`copy.json`, a `.md` or `.txt` with one string per line), then on the draft. It flags, per line with
+its rule: "not X but Y" and "rather than", three-item lists, negation lists, participle tails,
+"serves as", inflation words, em dashes, label colons, uplift endings, "and more", ownership lines
+("X is a [Parent] service"), a phone number sold as a headline, a registration number in copy, and
+the Indonesian tells: the phrases most Indonesian POS and WhatsApp rivals print (solusi, terbaik,
+mudah, tingkatkan, maksimalkan, satu platform, terintegrasi), "Anda" where the register is kamu, and
+English clause order ("yang mana", "di mana" as a relative, "melakukan pembayaran"). It exits 1 on any
+hit (`--warn-caps` lets the capped shapes pass when each is a choice you can name). A clean scan is
+the floor: then apply the swap test against the rivals' saved pages, and record both results beside
+each line in the deck.
+
 Headlines, subheads, feature lines and buttons follow
 [references/marketing-copy.md](references/marketing-copy.md). The short version: say what the
 product does for this reader in the words they use, put the checkable fact (price, time, count,

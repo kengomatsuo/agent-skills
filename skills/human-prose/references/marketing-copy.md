@@ -14,6 +14,7 @@ Copyhackers, and 19 small SaaS and restaurant-software landing pages fetched the
 - Buttons and calls to action
 - Proof, pricing and FAQ
 - A company's own page
+- A product's own page
 - Lines from real pages
 
 ## Before writing
@@ -108,6 +109,30 @@ layout side is in `site-design`'s `references/company-profile.md`):
   are what solo makers use.
 - Read each line as a stranger who wants the product. A line that explains the setup, the way a
   chat reply to the owner would, is cut or moved to the legal footer.
+
+## A product's own page
+
+Measured on 20 pages on 2026-11-05 (Indonesian POS: Moka, majoo, Qasir, Olsera, Pawoon, ESB;
+billiard billing: Starfield, BilliardPOS; WhatsApp senders: Mekari Qontak, Wati, Fonnte, Zenziva,
+Barantum, SleekFlow, Kirim.chat, WABLAS, Woowa, Twilio; for the receiving person: WhatsApp's Help
+Center and BCA). The layout side is `site-design`'s `references/product-landing-copy.md`.
+
+- Write a fact sheet before a line: who it is for, the 3 to 5 jobs it does today with the file that
+  proves each, what is coming. A coming capability never carries the headline or the description.
+- The description line is 6 to 12 words with the buyer's noun: "Aplikasi kasir di HP Android untuk
+  usaha kecil." (Qasir). Headlines in the set run 19 to 98 characters, median 49; the long ones are
+  category lists.
+- Indonesian rivals share one vocabulary: "mudah" is on all 16 pages counted, "solusi" on 15,
+  "lengkap" 15, "terintegrasi" 12, "tingkatkan" and "terbaik" 10. Those words fail the swap test by
+  definition. 13 of 16 say "Anda"; kamu is both the house register and a difference.
+- Sender identity (which number sends, is it official, will it ask for your OTP) is a lookup fact.
+  Senders selling to businesses put "official partner" in a small strip above the hero and the
+  number and ban questions in the FAQ, 86 to 95% down the page (Fonnte, Woowa). Brands writing to
+  the public put the number in the footer contact line and the warning on a help or security page
+  (BCA's footer and its "Awas Modus" pages; WhatsApp's help article on verified badges). None
+  makes the number a headline.
+- A page for the person who just received a message is help-article length. The rivals' sales
+  pages run 7,000 to 40,000 px at 390 because they sell to many segments.
 
 ## Lines from real pages
 
