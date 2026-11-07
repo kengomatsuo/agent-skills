@@ -114,6 +114,8 @@ sat unread.)
 
 Design any API, RPC, webhook or module interface with [references/interface-design.md](references/interface-design.md): it holds the contract, error, validation, idempotency and type rules, and defers to `supabase-conventions` and `lessons-money-ledger` where they rule.
 
+Choosing a pattern (feed fan-out, Bloom filter, shared sessions, monolith or services, idempotency keys, CQRS, server-sent events)? [references/system-design-patterns.md](references/system-design-patterns.md) gives the rule, the deciding check and the primary source for each.
+
 Present the design as a table, status diagram or API shape, never paragraphs. This is new
 work, so propose it and wait for yes. When the research ends in a use, copy or build decision, record it in
 `docs/<thing>-is-<choice>.md` as `prior-art` describes.
