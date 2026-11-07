@@ -75,6 +75,7 @@ Read the tests before the implementation; they show what the author thinks the c
 - Do tests exist for the change, and do they fail without it?
 - Do they check behaviour through the public interface, not the implementation?
 - Are the edge cases the diff introduces covered? Are the names readable?
+- Crash and rollback behaviour is tested at the real boundary: a thrown exception is not process termination, and a mocked transaction call is not a database rollback (addyosmani/agent-skills@301b02b).
 - A bug fix carries the regression test that failed first.
 
 Then answer "would these tests catch a regression?" by experiment, not by reading:
@@ -109,6 +110,8 @@ A removal finding carries the evidence tier the lenses use: HIGH, MEDIUM, LOW ([
 | Consider: | Worth doing, not required |
 | Nit: | Style the formatter or the author may ignore |
 | FYI | No action |
+
+Before a finding is reported, check it against the callers, guards and tests that reach the changed code, and drop it when they rule it out. Label a defect that already exists in the base separately from a regression this change introduces. Zero findings is a valid result; never invent one (addyosmani/agent-skills@301b02b). Report conformance to the repo's written standards and fit to the originating spec or card under separate headings, because a diff can pass one and fail the other and a merged list hides it (mattpocock/skills@4ae2317 code-review).
 
 Every finding gives `file:line` and the concrete fix. Order by leverage: correctness and security, then structural regressions and missed simplifications, then the rest. One structural problem and ten nits means the structural problem is the review. Never report a quality score.
 

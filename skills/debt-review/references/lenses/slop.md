@@ -34,7 +34,24 @@ Look for:
    produced it; a test whose only oracle is the implementation it tests; a test and a
    production construct that justify only each other (delete both).
 9. **Test bloat.** Several tests on the same branch with the same oracle; keep the one that
-   goes through the public interface and checks an observable result.
+   goes through the public interface and checks an observable result. The kinds to hunt
+   (garrytan/gstack@52d6c46 test-audit, adapted from openclaw's test-audit):
+   - assertion-free coverage probes and self-comparisons or identity copies;
+   - copied fixtures, inventories or export lists;
+   - exact source, import or string greps that are not a declared contract;
+   - private predicate or call-shape tests duplicated at a real boundary;
+   - the same contract invoked twice, or a shared helper's tests replayed once per caller;
+   - tests whose only job is to keep a test-only export, global or wrapper alive, and production
+     code whose only callers are tests (delete both together).
+   **Retention bar.** Keep a test that independently enforces a public API, protocol, config,
+   migration, storage, security, platform, default, golden-output, package, release or
+   architecture contract; being static or slow is no reason to delete it.
+   **Retirement card.** A test is rated retire only with: what it detects, its non-test callers
+   (a repo search that skips test paths, command shown), the stronger test that already proves
+   the behaviour, and why it was added (`git log --follow`). A card missing a field is "not
+   ready", never a deletion. Verdicts: retire, rewrite at the owning boundary, fold into an
+   existing table as a row, or retain. Production code goes only when typecheck or the dead-code
+   tool passes with it removed, never on grep evidence alone.
 
 Each finding: `file:line`, the slop, the tier with its evidence (or the named gap), and the
 deletion. Default budget: the fix adds no dependency, no abstraction and no test. If nothing qualifies, say so. The coordinator merges five
