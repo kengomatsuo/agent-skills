@@ -130,6 +130,7 @@ subtitle; exit 0 means every field fits).
 ## Paid search, audits and screenshot panels
 
 - Apple Search Ads (campaign structure, match types, bids, custom product page routing, ROAS): [references/apple-search-ads.md](references/apple-search-ads.md). Spend and campaign changes are shown to the owner first.
+- Measuring a live app (downloads, conversion and sources per period, price periods, ranks against a baseline), country pricing, in-app events, featuring, ratings and promo codes: [references/performance.md](references/performance.md).
 - A scored health audit of a live listing: [references/audit.md](references/audit.md).
 - Screenshot panels and Apple's sizes: [references/screenshots.md](references/screenshots.md).
 

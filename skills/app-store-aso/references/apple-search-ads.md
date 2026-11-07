@@ -20,17 +20,21 @@ Read this when planning, auditing or tuning paid placement in the App Store. Eve
 - The person is already searching the store, so intent is the highest of any paid channel.
 - The ad looks like an organic result, marked only by an "Ad" badge.
 - Targeting is by keyword. There is no demographic or interest audience.
-- Install and tap data come from Apple directly, so attribution does not depend on ATT or SKAdNetwork.
-- Cost per install runs higher than on other channels; judge it against lifetime value, not against other channels' CPI.
+- Install and tap data come from Apple directly (Apple registered with AdAttributionKit in April 2025).
+- Two products (<https://ads.apple.com/app-store/help/apple-ads-basic/0001-compare-apple-ads-solutions>, checked 2026-11-07): **Basic** charges per install at a maximum you set, up to $10,000 a month per app, search results only; **Advanced** charges per tap, all placements, keywords and bidding. No minimum spend is stated. A paid app may advertise.
+- New accounts get a one-time $100 credit once an app is on sale (<https://ads.apple.com/app-store/help/billing/0032-apple-ads-promo-credit>).
+- "Installs" include redownloads within 30 days of a tap. A paid app earns nothing from a redownload and still pays for it.
+- Break-even before VAT: CPI = proceeds per sale; CPT = proceeds x tap-to-install rate. Use the app's own product-page conversion as the floor for that rate; published medians (AppTweak 2025: US Utilities CPT $1.23, conversion 63%) come mostly from free apps.
+- A paid app converting a few percent of page views cannot pay benchmark CPTs: fix the page and the ratings first. Apple does not say ad installs lift organic rank.
 
 ## Placements
 
 | Placement | Where it shows | Use |
 |---|---|---|
-| Search results | Below the first organic result for a keyword | Capturing a typed intent; start here, it is the most measurable and controllable |
+| Search results | At the top of search results (Apple announced more slots further down in 2026) | Capturing a typed intent; start here, it is the most measurable and controllable |
 | Search tab | Top of the Search tab before anything is typed | Reach and brand |
 | Today tab | App Store home | Brand moments, high visibility |
-| Product pages | Competitor and related app pages | Conquesting |
+| Product pages | The bottom of other apps' product pages; no choice of which pages | Reach |
 
 ## Account structure
 
@@ -75,7 +79,7 @@ The source gave this rule: target CPT = target CPI x historical tap-to-install r
 | High install rate, spend not growing | Raise bid or budget cap |
 | CPT rising, install rate flat | Lower the bid or pause the keyword |
 
-Automated bidding toward a target CPA or ROAS is for later: only after manual bidding set a CPT baseline and the ad group gets about 50 conversions a week (a figure from the source, unverified).
+Automated bidding toward a target CPA or ROAS is for later: only after manual bidding set a CPT baseline and the ad group gets a budget that allows at least five conversions a day for two weeks (<https://ads.apple.com/app-store/best-practices/maximize-conversions>).
 
 ## Custom product page routing
 
@@ -123,4 +127,4 @@ Report per app: which of the five campaigns exist; impressions, taps with TTR, i
 
 ## Sources and unsourced figures
 
-Rewritten in own words from the third-party `apple-search-ads` skill (no author, repo or licence in the files; copied 2026-09-10). Every number above (starting bids of a few dollars, the thresholds, the 15 to 30 percent, the 50 conversions) came from that skill with no citation. Apple's own Search Ads documentation was not fetched for this file. Fetch it before relying on a threshold or on a placement name, since Apple renames and changes these. The source's starting-bid table is dropped because a bid depends on storefront and category, and `rank.py` crowding data is a better guide.
+Rewritten in own words from the third-party `apple-search-ads` skill (no author, repo or licence in the files; copied 2026-09-10). Every number above (starting bids of a few dollars, the thresholds, the 15 to 30 percent, the 50 conversions) came from that skill with no citation. On 2026-11-07 Apple's Ads pages were fetched: placements, campaign split, match types, ad variations and bid moves are confirmed; the product-page conquesting row and the 50-conversions rule were wrong and are corrected above; the CTR and conversion thresholds, the impression-share rule and the 15 to 30 percent uplift remain unsourced. Fetch it before relying on a threshold or on a placement name, since Apple renames and changes these. The source's starting-bid table is dropped because a bid depends on storefront and category, and `rank.py` crowding data is a better guide.
