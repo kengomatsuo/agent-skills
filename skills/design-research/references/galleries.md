@@ -11,6 +11,17 @@ Add a gallery here only after opening it and reading what it says about itself. 
 - **Origin of the designs.** The page does not say who made them. The brands are invented (Oriel, Hollis, Tidewell), so treat a design as a layout idea and never as proof that a real product shipped it. Pair each one with a real product from the Real products agent.
 - **Use.** The Galleries agent searches the category that matches the screen (dashboard, forms, sign in, pricing) and saves a screenshot with its URL. The "copy a reference" button hands a prompt to a coding agent; do not use it, since the brief decides what each agent does.
 
+## Added from the owner's saved reels (2026-11-07)
+
+Each was opened on 2026-11-07 and is described from its own page or README.
+
+- **MotionSites** ([motionsites.ai](https://motionsites.ai)): landing-page designs sold as copy-paste prompts, sorted by section (hero, features, pricing), plus animated backgrounds and video heroes. Premium tiers; the free Claude skill is `Motionsites-AI/claude-skill` (licence not declared outside the code folders). Use: hero and section layouts for a public page in `site-design`; take the layout idea, never the prompt or media.
+- **Transitions.dev** ([transitions.dev](https://transitions.dev)): a library of 43+ UI transitions with a motion skill and an MCP, Pro tier paid, custom licence. Use: timing and choreography references for a component's open, close or state change; its values are already in `ui-patterns` buttons-and-motion.
+- **Eyecandy** (eyecannndy.com, three n's; answers 403 to curl, open it in Chrome): about 150 named visual techniques for video and motion (match cut, speed ramp, whip pan). Use: shot names for a `product-video` storyboard.
+- **Prompt Motion** ([prompt-motion.com](https://prompt-motion.com)): motion videos made with Claude, each with its prompt and skills; no licence shown. Use: what Claude-built motion looks like today; nothing to copy.
+- **Web Gradients** ([webgradients.com](https://webgradients.com), `itmeo/webgradients`, MIT): 180 gradients with a JSON dataset. Use: a gradient only where the page kind allows one (`site-design` page-kind: tech kinds only).
+- **Awesome Design Tools** (`goabstract/Awesome-Design-Tools`, MIT, last push 2024-07-28, so stale): a list of design tools and plugins. Use: finding a tool by job; check each tool's own page before naming it.
+
 ## Others already in the house
 
 - Refero (145,000 real screens, paid MCP): see `library-catalog`, "Not libraries".
