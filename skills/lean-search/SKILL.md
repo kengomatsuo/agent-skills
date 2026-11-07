@@ -63,6 +63,10 @@ the context-mode sandbox plugin (removed 2026-10-21) measured no better than thi
    - JSON: `gh api ... | jq '[.[] | select(.state=="open")] | length'`
    - anything else: `| bun -e 'const t = await Bun.stdin.text(); console.log(...)'`
 
+   Report a filter's saving against the whole session, not against the output it filtered: bash
+   output is one part of the input and input is one part of the bill, so a 90% cut of one tool's
+   output moves the total far less (rtk-ai/rtk@bd7f87e, its own savings page).
+
    Claude Code already saves Bash output over 30,000 characters to a file and shows a
    2,000-character preview. Search that file with `rg` instead of running the command again.
 
@@ -85,6 +89,12 @@ the context-mode sandbox plugin (removed 2026-10-21) measured no better than thi
    `db.clearQueryCache()` before dropping or renaming the table) and ask ranked questions
    with `MATCH` and `ORDER BY rank`; put all the terms of one question in one query.
 
+9. **Take the CLI when a tool ships as both a CLI and an MCP server.** An MCP server loads its
+   tool schemas and, for a browser, a full accessibility tree into every request; a CLI call
+   returns only what the command prints. Playwright's own README says this for coding agents and
+   keeps its MCP server for loops that need persistent browser state
+   (microsoft/playwright-mcp@404be8e). The house runs `playwright-cli` for that reason.
+
 ## What is installed, and what not
 
 | Tool | What its own sources say | Verdict |
@@ -98,10 +108,16 @@ Not installed (context-mode was removed, not just switched off):
 |---|---|---|
 | graphify | tree-sitter graph plus a hook on every search; tied grep on 100 SWE-bench tasks and used 29% more tokens | skip |
 | Graphicle | Rust port of graphify, a week old; "tied grep on finding code, and we do not claim it saves tokens"; 16% more tokens | skip |
+| codegraph | MCP code graph; its own 7-repo run on architecture questions (Opus 4.8, 4 runs per arm) shows 62% fewer tokens processed, and its own note says the answer then stays resident: about 80% more retrieval context at session end | skip: the win is on questions that cost 28 or more search calls, and LSP, Trail-code and ast-grep cover those |
+| Serena | MCP server of IDE-style symbol tools over language servers (app GPL-3.0, SolidLSP MIT); its evidence is agents' own opinions | skip: the LSP tool does the lookup |
+| RTK | PreToolUse hook that rewrites Bash commands to compress their output; fires on Bash only, and its docs say savings dilute against the bill | skip: habit 5 and the build filter do it per command |
+| Headroom | local proxy in front of every API call; its table saves 21% on code search, 57% on incident logs | skip: a proxy on every request for a small gain on code |
+| Caveman | terse-reply skill, input compressors and a router; an outside paired test measured 8.5% fewer output tokens against 65% advertised | skip: the Concise output style does the voice, see lessons-token-cost |
 | context-mode | two node processes on nearly every tool call, about 1,050 tokens at session start, redirects WebFetch; its 96% saving is on chosen fixtures | removed 2026-10-21; habits 5, 7 and 8 do its useful part |
 
 Re-check the graph tools when a benchmark from someone other than their authors shows a win on
-code like yours.
+code like yours. Every graph number so far is the tool's own (codegraph, Trail-code, graphify's
+cloud claim).
 
 The think-in-code, save-once and index-once habits come from reading context-mode's own
 README and skills (Elastic-2.0, ideas only, no text or code taken).
