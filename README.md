@@ -19,6 +19,7 @@ Each works on its own; they name each other where one hands off to the next.
 | `human-prose` | Claude writes and edits anything a person reads (docs, landing pages, UI copy, emails), in any language, so it reads as a person's |
 | `blind-translation` | you add a language to an app or a store listing: one writer per language works from the screen, never from the English |
 | `app-store-aso` | an app's App Store listing needs to be found: measure what people type per storefront, read competitors, follow Apple's indexing rules, write every non-English line blind |
+| `youtube-visibility` | a video or Short is about to go on YouTube, or a live one gets no views: measure what people type, then set title, thumbnail, chapters, captions, languages and the Short-to-video link from YouTube's own help pages |
 | `ui-copy` | you write any string inside an app: it decides what text may exist at all, then how short |
 | `product-video` | you need a promo film or App Store preview of your app; lives in [its own repo](https://github.com/kengomatsuo/product-video) and installs from this marketplace too |
 
