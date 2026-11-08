@@ -23,6 +23,8 @@ the context-mode sandbox plugin (removed 2026-10-21) measured no better than thi
      `files_with_matches`; switch to `content` only for the few files that matter.
    - Read content once the list is under about 20 files. Over that, narrow the pattern or the path.
 
+   - A file the owner calls ready or finished is found by time, never by name: `ls -lt ~/Downloads | head -20` first, then open the newest candidates (a frame for a video). Renders are named for their content (`explainer2-en-portrait.mp4`), so a name search for the product misses them.
+
 2. **Read only the lines you need.** Locate with `rg -n -m 5 -M 200 'pattern' file`
    (`-m` caps matches per file, `-M` cuts minified lines), then `Read` with `offset` and `limit`
    of 40 to 80 lines around the hit. Add `-C 2` only when the match alone does not answer.
