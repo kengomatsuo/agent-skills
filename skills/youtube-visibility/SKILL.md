@@ -66,8 +66,11 @@ query), engagement and quality. Measure what people type before writing a word:
   typed, never volume): `curl -s "https://suggestqueries.google.com/complete/search?client=firefox&ds=yt&hl=LANG&gl=CC&q=STEM"`.
   Seed short stems in that language's own words for the problem (the symptom the viewer
   sees, not the product's vocabulary), then the English stems locals type.
-- Search each chosen phrase on YouTube and read the top results' titles and thumbnails.
-  The video must answer the phrase better than they do.
+- Sample the leaders by data, never by eye: `bun ~/Repositories/claude-house-rules/scripts/youtube-compete.ts out.json <lang> <short|any> "phrase" ...`
+  lists the top 10 per phrase with views, length, tags, hashtags and the tags shared by
+  the 20k+ view videos. Copy the leaders' title phrasing (task words such as "block pop
+  ups safari iphone") and their shared tags; the video must answer the phrase better
+  than they do.
 - Keep two or three phrases per video. A phrase the video does not answer is dropped:
   a title that misleads loses viewers and then recommendations.
 
@@ -84,7 +87,9 @@ query), engagement and quality. Measure what people type before writing a word:
   each at least 10 seconds. Name each chapter with words a viewer would search.
 - **Hashtags**: in the title or description; up to three show above the title; over 60
   and all are ignored.
-- **Tags** play a minimal role: a handful, misspellings of the product and topic included.
+- **Tags** play a minimal role per YouTube, and in a sample of 48 top results tag count
+  did not track views (a 632k-view Short had none). They cost nothing, so fill 10 to 15:
+  the leaders' shared tags, the searched phrases, and misspellings of the product.
 - **Links**: URLs in Shorts descriptions and Shorts comments are not clickable; in
   long-form descriptions they are clickable only with advanced features. Each App Store
   link is an App Store Connect campaign link, one `ct` per video and language:
