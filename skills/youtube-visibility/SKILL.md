@@ -166,8 +166,8 @@ and thumbnail in the upload request itself.
 | custom thumbnail (`thumbnails.set`) | end screens, cards |
 | captions (`captions.insert`) | pinning a comment |
 | translated title and description (`localizations`) | A/B test of title and thumbnail |
-| playlists and their items (`playlists`, `playlistItems`) | channel trailer and Spotlight (sections via `channelSections` exist in the API) |
-| channel description and keywords (`channels.update` with `brandingSettings`) | upload defaults, audience default, feature eligibility and verification |
+| playlists and their items (`playlists`, `playlistItems`) | Spotlight and section order (sections via `channelSections` exist in the API) |
+| channel description, keywords and trailer (`channels.update` with `brandingSettings`; `channel.unsubscribedTrailer` is the trailer; every omitted field is deleted) | upload defaults, audience default, feature eligibility and verification |
 | top-level comment (`commentThreads.insert`) | multi-language audio tracks |
 
 ## Sources
