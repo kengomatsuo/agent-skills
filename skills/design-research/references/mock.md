@@ -6,6 +6,8 @@ Only after step 3's README exists. Build the mock as a route in the app itself, 
 files in `code/`: install the kit's primitives, port the saved components, and change
 tokens and copy (read the app's CSS and two sibling screens first, as `match-the-app`
 says). Never a hand-written static HTML page.
+
+A picture shown to the owner as how something will look is shot from real kit parts on the device. A sketch drawn any other way says on its face that it is a sketch, and names each part the kit lacks with a proposed new component; a kit part that cannot reach the look is grounds to propose a new one, never to ship the kit part and call it done.
 A kit preset ships its own control heights, radius and weights: replace them with the
 project's tokens before the first screen is built on it, and screenshot one form beside the
 token sheet. Screens built on the preset's numbers read as the stock kit however the
