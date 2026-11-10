@@ -55,6 +55,8 @@ Dependencies: `bun`, `gh` (`brew install gh`), `curl`, and Playwright for the sc
 (`bun add -d playwright && bunx playwright install chromium` in the project, or
 `PLAYWRIGHT=<path to playwright/index.js>`).
 
+**A screen staff use is researched from staff software.** Saved rivals and any reference source the project bought come before customer apps, and a design artboard is one source to question, never the answer.
+
 ## 1. Brief (one paragraph, you write it)
 
 For a new app or a redesign, first list EVERY screen the requirements imply (each role's
