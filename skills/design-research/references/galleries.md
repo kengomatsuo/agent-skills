@@ -24,6 +24,7 @@ Each was opened on 2026-11-07 and is described from its own page or README.
 
 ## Others already in the house
 
+- Mobbin (paid MCP, `ios` and `web`): searched first by every research run that looks at galleries; query rule in fan-out.md.
 - Refero (145,000 real screens, paid MCP): see `library-catalog`, "Not libraries".
 - awesome-design-md: brand DESIGN.md files; it holds no file for our competitors.
 - Skiper UI, Arc UI, Planes UI, React Bits: ideas only, in `library-catalog`.

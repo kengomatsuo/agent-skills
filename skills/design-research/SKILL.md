@@ -31,7 +31,7 @@ research runs for a new app, a redesign, or when the owner asks. A single new sc
 three saved references (the project's own siblings plus Galleries and Real products) and the
 same rule: nothing is drawn before they are saved.
 
-**Direct competitors come first.** Before any adjacent or best-in-class reference, save the product's own rivals: the services a buyer in its market would compare it with, same job and same country (an Indonesian WhatsApp sender: Qontak, Wati, Fonnte, Zenziva; an Indonesian POS: Moka, Majoo, Qasir, Olsera). At least half of the saved references are direct rivals, the brief names them, and the README says what each one does in its hero, its sections and its copy, and how the mocks differ (owner, 2026-11-05: three tolk.id rounds were drawn from Postmark, Resend and Twilio, and none from the services Tolk competes with: "so tolk doesn't scout competitors?").
+**Direct competitors come first.** Before any adjacent or best-in-class reference, save the product's own rivals: the services a buyer in its market would compare it with, same job and same country (an Indonesian WhatsApp sender: Qontak, Wati, Fonnte, Zenziva; an Indonesian POS: Moka, Majoo, Qasir, Olsera). At least half of the saved references are direct rivals, the brief names them, and the README says what each one does in its hero, its sections and its copy, and how the mocks differ.
 
 Copy this checklist into your reply and tick items off as they pass:
 
