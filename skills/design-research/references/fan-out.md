@@ -20,8 +20,6 @@ One agent per source:
 | Real products | the domain's competitors and the local apps the users already open daily (their help centres, docs and app-store listings carry real in-app screenshots) | one `languages/<product>.md` card each, the source a direction is built from; a shipped product outranks a Dribbble concept |
 | UX research (commerce and ordering screens) | Baymard Institute, Nielsen Norman Group, and primary market surveys on how local buyers pay and ship | a rule per step with a short quote and URL; a paywalled page is written down as gated |
 
-**A Mobbin query names the product's own niche, in the words its users say.** Each query describes one screen with the kind of venue or business and the trade's term for the act; a category word alone ("POS app", "payment") returns consumer checkout. Search `ios` and `web`, in screens and flows, name real apps from adjacent trades that do the same job, and count only references from the same side of the counter toward a screen's total.
-
 **Connect Mobbin's MCP on any account or machine before the Mobbin lane.** `claude mcp list` names `mobbin`; when it is absent run `claude mcp add mobbin --scope user --transport http https://api.mobbin.com/mcp`, and when it says "Needs authentication" run `claude mcp login mobbin` in a real terminal (a tmux pane), which signs in through the browser with the paid Mobbin account (docs.mobbin.com/mcp/clients/claude-code-cli). A session sees the tools only if it started after the connection, so a Mobbin agent launched from an older session uses Claude in Chrome on mobbin.com.
 
 **A screen meant to feel like a named product starts with that product's DESIGN.md.**

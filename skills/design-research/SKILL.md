@@ -28,7 +28,7 @@ it: that is the failure this skill exists to stop.
 
 A screen proposed from memory comes out as a table with a word in each cell. The full
 research runs for a new app, a redesign, or when the owner asks. A single new screen takes
-three saved references (the project's own siblings plus Galleries and Real products) and the
+three saved references (the project's own siblings plus Mobbin, Galleries and Real products) and the
 same rule: nothing is drawn before they are saved.
 
 **Direct competitors come first.** Before any adjacent or best-in-class reference, save the product's own rivals: the services a buyer in its market would compare it with, same job and same country (an Indonesian WhatsApp sender: Qontak, Wati, Fonnte, Zenziva; an Indonesian POS: Moka, Majoo, Qasir, Olsera). At least half of the saved references are direct rivals, the brief names them, and the README says what each one does in its hero, its sections and its copy, and how the mocks differ.
@@ -73,7 +73,11 @@ the project's own UI package and so on). Every agent gets the same brief.
 
 One agent per source, in the background, five (six for commerce): GitHub, Galleries, Mobbin and
 Refero, Dribbble, Real products, and UX research for commerce. For one screen, run one agent over
-Galleries and Real products. The notes table carries a `screen` column; list the screens as a
+Mobbin, Galleries and Real products.
+
+**A Mobbin query names the product's own niche, in the words its users say.** Each query describes one screen with the kind of venue or business and the trade's term for the act; a category word alone ("POS app", "payment") returns consumer checkout. Search `ios` and `web`, in screens and flows, name real apps from adjacent trades that do the same job, and count only references from the same side of the counter toward a screen's total.
+
+The notes table carries a `screen` column; list the screens as a
 table with IDs (`| S01 | ... |`) in `screens.md`, and `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <folder> --screens screens.md --min 5`
 prints every screen short of its references and exits 2; the next wave targets those.
 
