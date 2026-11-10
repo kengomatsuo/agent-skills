@@ -15,10 +15,12 @@ One agent per source:
 |---|---|---|
 | GitHub | the component sources the library catalog lists (its registries and the house's own kit) first, then open-source apps with the same screen (Lago, Polar, Cal.com, Supabase Studio, Twenty, Dub, shadcn examples, Tremor) | **the whole look in `code/`**: app shell and navigation, theme tokens (colours, radius, fonts), page layout, and the screen's components, each with the permalink at the commit SHA in a header comment |
 | Galleries | ui.shadcn.com blocks, tremor.so, tailwindcss.com/plus previews, saaspo, nicelydone, and vendor docs that show real dashboards (Stripe, Chargebee, Paddle, Linear, Vercel) | screenshots, plus code when the gallery exposes it |
-| Mobbin and Refero | public mobbin.com pages and CDN images; Refero's MCP (`api.refero.design/mcp`, Pro plan only) when it is connected, searched by screen or flow; when gated, the same apps' public help-centre screenshots | screenshots |
+| Mobbin and Refero | the Mobbin MCP first (`search_screens`, `search_flows`, `search_sections`; connect it as below); public mobbin.com pages and CDN images; Refero's MCP (`api.refero.design/mcp`, Pro plan only) when it is connected, searched by screen or flow; when gated, the same apps' public help-centre screenshots | screenshots |
 | Dribbble | `dribbble.com/search/<terms>`, then the full-size image from each shot page | screenshots, skipping concept art no product would ship |
 | Real products | the domain's competitors and the local apps the users already open daily (their help centres, docs and app-store listings carry real in-app screenshots) | one `languages/<product>.md` card each, the source a direction is built from; a shipped product outranks a Dribbble concept |
 | UX research (commerce and ordering screens) | Baymard Institute, Nielsen Norman Group, and primary market surveys on how local buyers pay and ship | a rule per step with a short quote and URL; a paywalled page is written down as gated |
+
+**Connect Mobbin's MCP on any account or machine before the Mobbin lane.** `claude mcp list` names `mobbin`; when it is absent run `claude mcp add mobbin --scope user --transport http https://api.mobbin.com/mcp`, and when it says "Needs authentication" run `claude mcp login mobbin` in a real terminal (a tmux pane), which signs in through the browser with the paid Mobbin account (docs.mobbin.com/mcp/clients/claude-code-cli). A session sees the tools only if it started after the connection, so a Mobbin agent launched from an older session uses Claude in Chrome on mobbin.com.
 
 **A screen meant to feel like a named product starts with that product's DESIGN.md.**
 [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) (MIT) holds
