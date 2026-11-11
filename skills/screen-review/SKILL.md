@@ -12,15 +12,14 @@ user-invocable: true
 
 Read `ui-patterns` only when the screen has motion, states or tokens in question; the project's own tokens win over it; its `audit-checklist.md` lists what to look for on the screenshots.
 
-**A LAYOUT CLAIM MADE FROM SOURCE IS A HYPOTHESIS.** Overflow, contrast, a control the
+A layout claim made from source is a hypothesis. Overflow, contrast, a control the
 row swallows, a sheet that travels past the viewport, a skeleton the wrong height — none
 of them are visible in the diff. Run the app.
 
 ## Web
 
 1. `.claude/launch.json` holds the dev servers. Start the one you need with
-   `preview_start` by NAME. Never `bun run dev` in a Bash tool: the Browser pane is what
-   takes the screenshots.
+   `preview_start` by name; the Browser pane takes the screenshots, and a server started by `bun run dev` in Bash is not in it.
 2. If no configuration fits, add one. Give it a `//`-prefixed sibling key saying what it
    is for and which session it belongs to — the entries pile up without it.
 3. Walk the screen: `navigate`, then `computer` for the interactions, `read_page` to check
@@ -40,7 +39,7 @@ this: that belongs to the project's walk notes or a real browser session.
 
 ## iOS
 
-`mcp__Claude_Code_iOS_Simulator__control` — call `attach` FIRST, before the build, so the
+`mcp__Claude_Code_iOS_Simulator__control` — call `attach` first, before the build, so the
 panel is already open. Screenshots and taps are headless and need no panel.
 
 For Swift edited outside Xcode, a phantom `No such module 'UIKit'` is a missing or stale

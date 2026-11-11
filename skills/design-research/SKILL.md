@@ -12,22 +12,21 @@ user-invocable: true
 
 Read `ui-patterns` only when the screen has motion, states or tokens in question; the project's own tokens win over it.
 
-## RESEARCH FIRST. NOTHING IS DRAWN UNTIL EVERY AGENT HAS REPORTED.
+## Research first: draw after every agent has reported
 
-The steps below run in order, and each one waits for the one before it. Until the last
-research agent has come back AND `README.md` (step 3) is written, you do not:
+The steps below run in order, and each one waits for the one before it. A mock drawn
+before the research is built from memory and the research then only decorates it. Until the
+last research agent has come back and `README.md` (step 3) is written, hold off on:
 
 1. write a mock, a canvas, an HTML page or a line of screen code
 2. read the app's CSS or sibling screens "to get ahead on the mock"
 3. propose a layout, a table of columns or a status list
 4. answer how a screen should look, offer options for it, or estimate one: "is it high effort?" about a screen sends this skill first, and the reply is the mocks (2026-11-02: a table of two calendar options and an estimate went out from memory)
 
-While the agents run, the only allowed work is unrelated to this screen, or nothing.
-A mock started in parallel is built from memory, and the research then only decorates
-it: that is the failure this skill exists to stop.
+While the agents run, work on something unrelated to this screen, or wait.
 
 A screen proposed from memory comes out as a table with a word in each cell. The full
-research runs for a new app, a redesign, or when the owner asks. A single new screen takes
+research fits a new app, a redesign, or an owner ask. A single new screen takes
 three saved references (the project's own siblings plus Mobbin, Galleries and Real products) and the
 same rule: nothing is drawn before they are saved.
 
@@ -40,7 +39,7 @@ Copy this checklist into your reply and tick items off as they pass:
         for every component the screens use, the library catalog's component sources, and the
         house design rules; the brief names each source the agents must pull from
 - [ ] 1. Brief written; every screen of the app listed in screens.md with an ID
-- [ ] 2. Agents launched: N. Completion notices received: N (numbers must match)
+- [ ] 2. Agents launched: N. Completion notices received: N (numbers match)
 - [ ] 2. check-notes.ts --screens screens.md --min 5 (3 for a single screen) exits 0
         (exit 2: launch the next wave on the screens it lists, return to step 2)
 - [ ] 3. check-notes.ts on the whole folder exits 0 (non-zero: send the owning agent back to step 2)
@@ -69,9 +68,9 @@ What the screen is for, who reads it, every state it must show (e.g. Paid, Due s
 Grace, Lapsed, Not enforced), the device widths, and the app's component kit (shadcn,
 the project's own UI package and so on). Every agent gets the same brief.
 
-## 2. Fan out (only for a new app, a redesign or when asked)
+## 2. Fan out (for a new app, a redesign or when asked)
 
-One agent per source, in the background, five (six for commerce): GitHub, Galleries, Mobbin and
+One agent per source suits the volume, in the background, five (six for commerce): GitHub, Galleries, Mobbin and
 Refero, Dribbble, Real products, and UX research for commerce. For one screen, run one agent over
 Mobbin, Galleries and Real products.
 

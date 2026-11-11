@@ -13,16 +13,16 @@ user-invocable: true
 Read `ui-patterns` only when the screen has motion, states or tokens in question; the project's own tokens win over it.
 
 **Read the source of the existing screens before writing a new one.**
-That is the whole skill. An agent that writes a list page from its own idea of a list page
+An agent that writes a list page from its own idea of a list page
 produces one that is defensible alone and wrong beside the four already in the app.
 
 ## When nothing in the app is like it — canvas first
 
 If no existing page shares its archetype, OR it needs a mechanic no page has yet (a new
-flow, gesture, interaction, layout behaviour), there is nothing to read. Do not invent it
-in code. Open a canvas first:
+flow, gesture, interaction, layout behaviour), there is nothing to read, and a mechanic invented
+directly in code is hard for the owner to compare. Open a canvas first:
 
-0. Run `design-research` and WAIT for every agent and its README before drawing anything.
+0. Run `design-research` and wait for every agent and its README before drawing, since a canvas drawn first decorates memory.
 1. Open a multi-artboard design canvas.
 2. Draw two or three directions, pulling in whatever design references and taste tools are
    available to the project.
@@ -69,7 +69,7 @@ recently added sibling. Read two, not one.
   sections from the app's skeleton kit; a shared generic fallback is not a skeleton (zhixing
   2026-10-07: one stood in for 73 of 80 pages). A list sends one page of rows, never all of
   them, and a sibling's header keeps its actions in one container.
-- Tokens for every colour, space, radius, duration. Never a literal.
+- Tokens for every colour, space, radius and duration, so a theme change reaches the screen.
 - Naming: file, component, props, handlers.
 
 Copy the CONTENT decisions, not only the skeleton. Getting the padding right while
