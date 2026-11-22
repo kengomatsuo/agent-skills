@@ -1,0 +1,85 @@
+# agent-skills
+
+Skills for Claude that make it look before it builds and check before it changes.
+Each works on its own; they name each other where one hands off to the next.
+
+| Skill | Use it when |
+|---|---|
+| `design-research` | a screen is new or being redesigned: agents collect GitHub code, gallery and Mobbin screenshots, then you mock from them |
+| `backend-research` | a backend feature is new: agents collect competitors' schemas, APIs, bug history and specs before any migration |
+| `prior-art` | a plan proposes building something mature projects already solved: use, copy or build, decided and written down |
+| `code-to-copy` | you want open-source code to copy: search by topic and by the market's own words, read each project's schema, record what to take and what to leave |
+| `blast-radius` | you are about to delete, rename or change a signature: list everything it can break first |
+| `lean-search` | you search a codebase or run a command with unknown output: count before reading, batch searches, ast-grep for call sites, reduce big output in a script |
+| `blind-audit` | a subsystem needs checking end to end: assertions come from its promise, before reading its code |
+| `refactor` | working code is hard to read or duplicated: reshape it without changing behaviour |
+| `debt-review` | code is hard to change or someone asks to clean it up: measure and diagram it, review it with five lenses, then spec, design twice, plan and refactor one commit at a time |
+| `match-the-app` | you are adding a screen to an existing app: read its sibling pages first |
+| `screen-review` | you changed UI: run the app, screenshot it, check it before calling it done |
+| `human-prose` | Claude writes and edits anything a person reads (docs, landing pages, UI copy, emails), in any language, so it reads as a person's |
+| `blind-translation` | you add a language to an app or a store listing: one writer per language works from the screen, never from the English |
+| `app-store-aso` | an app's App Store listing needs to be found: measure what people type per storefront, read competitors, follow Apple's indexing rules, write every non-English line blind |
+| `youtube-visibility` | a video or Short is about to go on YouTube, or a live one gets no views: measure what people type, then set title, thumbnail, chapters, captions, languages and the Short-to-video link from YouTube's own help pages |
+| `ui-copy` | you write any string inside an app: it decides what text may exist at all, then how short |
+| `product-video` | you need a promo film or App Store preview of your app; lives in [its own repo](https://github.com/kengomatsuo/product-video) and installs from this marketplace too |
+
+## Mods
+
+A mod is a Claude Code plugin that runs code in the session (panes, commands) instead of giving the model instructions.
+
+| Mod | What it shows |
+|---|---|
+| [`board-view`](mods/board-view/README.md) | the project's kanban board (`docs/plans/**/BOARD.md`) in a pane: one lane per section with its count, done/total, each card opened whole; `/kanban` toggles it |
+
+## Install
+
+### Claude Code
+
+```bash
+claude plugin marketplace add https://github.com/kengomatsuo/agent-skills.git
+```
+
+Then install the ones you want, for example:
+
+```bash
+claude plugin install design-research@kengomatsuo-skills
+```
+
+The full HTTPS URL matters: the `kengomatsuo/agent-skills` shorthand clones over SSH and
+fails without a GitHub SSH key.
+
+Claude Code only auto-updates Anthropic's own marketplaces unless told otherwise, so turn
+it on once: `/plugin`, then **Marketplaces**, pick `kengomatsuo-skills`, then **Enable auto-update**. Or
+add the marketplace to `~/.claude/settings.json` with auto-update already on:
+
+```json
+"extraKnownMarketplaces": {
+  "kengomatsuo-skills": {
+    "source": { "source": "git", "url": "https://github.com/kengomatsuo/agent-skills.git" },
+    "autoUpdate": true
+  }
+}
+```
+
+With it on, every push reaches you in a session or two. By hand:
+`claude plugin marketplace update kengomatsuo-skills && claude plugin update <skill>@kengomatsuo-skills`.
+
+
+### Claude app (claude.ai, desktop, mobile)
+
+1. Download a skill's ZIP from the [latest release](https://github.com/kengomatsuo/agent-skills/releases/latest).
+   Do not unzip it.
+2. Turn on **Code execution and file creation** in
+   [Settings > Capabilities](https://claude.ai/settings/capabilities).
+3. In [Customize > Skills](https://claude.ai/customize/skills), click **+**, then
+   **Create skill**, then **Upload a skill**, and choose the ZIP.
+
+The research skills run parallel agents and save screenshots with Playwright, so they
+work best in Claude Code. `design-research/shot.ts` uses Playwright from the current
+project or from `PLAYWRIGHT=<path>`.
+
+To rebuild the ZIPs: `bash scripts/package.sh`.
+
+## Licence
+
+MIT. Some skills adapt files from other MIT projects; see NOTICE.

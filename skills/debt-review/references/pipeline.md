@@ -1,0 +1,218 @@
+# The pipeline in detail
+
+## Contents
+- Where the files go
+- Stage 0: pick the path
+- Stage 1: measure and model the current structure
+- Stage 2: review
+- Stage 3: spec
+- Stage 4: design it twice
+- Stage 5: plan
+- Stage 6: draft
+- Stage 7: execute
+- Stage 8: verify and record
+- Diagram rules
+- Templates
+
+## Where the files go
+
+The job folder, the board and the handoff are in [tracking.md](tracking.md). Each stage
+writes one numbered file there and pushes it, so the next stage, a reviewer, or another
+session after a hard stop picks up from the repo. Anything over 100 lines goes to a file,
+never into chat; chat gets the path and the decision needed.
+
+## Stage 0: pick the path
+
+| Path | When | Stages |
+|---|---|---|
+| A, answer | a question about the code's health | 1 and 2, then report |
+| B, small fix | one file or one finding, effort S, no interface changes | 1, 2, 7, 8 |
+| C, full | anything touching an interface, several files, a hotspot split, or effort M/L | all, with the three picks |
+
+Say the path in one line. The owner may move it up; it never moves down mid-job.
+
+**Read the owner's requirement sources before any lens.** The repo's plans say what was
+decided; the owner's own notes (Apple Notes per department, an analysis sheet, a client
+brief) say what is still wanted, and they move faster than the plans. Find them (ask the
+project's memory and rules where they live) and map them with the house `notes-to-cards` skill, one line per row against the code
+(covered, partial, conflicts, missing, context), and hand the map to every lens. A finding
+that contradicts a note line is a conflict card, and so is code the job is about to cement.
+
+## Stage 1: measure and model the current structure
+
+Run `measure.ts` and `model.ts` ([tools.md](tools.md)). Write `01-current.md` holding:
+
+- the hotspot table and the report's totals;
+- `packages.mmd`: one box per package or app, arrows for imports, generated;
+- `focus.mmd`: the files in the scope and their direct neighbours, generated;
+- the import cycles touching the scope;
+- a **flowchart** of each main flow through the scope (entry → decisions → effects), drawn by
+  hand from reading the code;
+- a **state diagram** wherever the code holds a real state machine (an order's status, a
+  booking's life), drawn from the code's own status values.
+
+Every diagram's first line is a `%%` comment naming the command, or the files read, and the
+commit it reflects.
+
+## Stage 2: review
+
+The lenses run against the scope ([step-2-lenses.md](step-2-lenses.md)). Verified findings go into
+`02-findings.md` as the ranked table. Path A stops here.
+
+## Stage 3: spec
+
+`03-spec.md` (template below): the problem in the owner's words, the outcome, the behaviour
+that must not change, the invariants, what is out of scope, and how the result will be
+checked. Self-review it for placeholders, contradictions and anything two readers could take
+two ways.
+
+For every "must not change" line with no test, write a **characterisation test** before
+stage 7: run the code as it is today, record what it actually returns or writes, and assert
+exactly that, odd results included (Michael Feathers' term; it pins what the code does, not
+what it should do). Through the public interface, on real inputs taken from the code's
+callers, fixtures or the database. A bug it reveals goes on the board as its own card; the
+test keeps asserting the current behaviour until that card is done.
+
+**The session picks the spec, the design and the plan on the rule "least future debt, never rewrite size", records each pick and its reason in the Handoff, and says it in plain words in chat; it asks only where the change alters what users see or a public contract.**
+
+## Stage 4: design it twice
+
+**Research first.** Run `prior-art` (and `backend-research` or `code-to-copy` when the answer is code) on the feature the job touches, and save the sources outside the repo. Start `04-target.md` with `## Prior art`: the folder path, a table of project | how it shapes the thing | file, what we take, what we reject and why. A job nothing else has shipped says `## Prior art` then `none found:` and the searches run. `scripts/board.ts` fails without the heading.
+
+Draw the target at least two ways, ideally three, each under a different pull: smallest
+interface; easiest for the most common caller; the shape the codebase already uses elsewhere; the shape the mature projects in `## Prior art` use.
+Spawn one subagent per design, each on Fable at high effort, allowed to write plan files and nothing else. Each design gives:
+
+- a target module diagram (`flowchart`) with the allowed import direction;
+- the **wireframe**: every new or changed module's exported signatures with their JSDoc
+  summaries, no bodies, as a `classDiagram` or a TypeScript block;
+- a `sequenceDiagram` for the one or two flows that cross the new seams;
+- what each module hides, and what the old shape's callers must change.
+
+Compare the designs in a table: interface size, what moves, what callers change, risk. Apply
+the deletion test to every new module, and drop any seam with only one implementation.
+`04-target.md` holds all designs, the comparison and a recommendation.
+
+**The session picks a design, by the same rule.**
+
+## Stage 5: plan
+
+Before the graph, answer `~/claude-house-rules/docs/design-questions.md` for the target: its contexts and the neighbours of every write it adds. Each answer lands on the card that builds it. Work backwards from the target with a Mikado graph: the goal at the top, and under it each
+change that must happen first. Try the goal; whatever breaks becomes a prerequisite; revert;
+repeat until the leaves can be done without breaking anything. Draw it as `flowchart BT`.
+
+`05-plan.md` (template below) turns the leaves-first order into tasks. Each task is one
+commit that keeps the build and tests green, touches at most about five files, and has no
+"and" in its title. Mark every file `[NEW]`, `[MODIFY]` or `[DELETE]`. A checkpoint (full
+scoped checks, a look at the diagrams) every two or three tasks.
+
+For a huge file use branch by abstraction: put the new module's interface in front, move the
+callers to it, move the body behind it, delete the old copy. The build stays green at every
+step. For a wide rename, expand then contract: add the new name, move callers, remove the old.
+
+**The session picks the plan, by the same rule.**
+
+## Stage 6: draft
+
+Write the wireframe into the repo: the new files with their exported signatures and JSDoc,
+each body delegating to the existing code. It compiles and changes no behaviour. This is the
+first commit, and it proves the target interfaces type-check before any code moves.
+
+## Stage 7: execute
+
+Task by task, in plan order:
+
+1. Read the task; check its "blocked by" tasks are done.
+2. Make the change. Shape only (a bug found is its own commit, before or after).
+3. Run its verification command and read the output.
+4. Green: commit with the task's message. Red: revert, write the new prerequisite into the
+   plan, return to stage 5 for that branch of the graph.
+
+The board tracks every task (tracking.md). Where reality forces a change to the plan, write a
+`Ruling:` line under the task in `05-plan.md` in the same commit.
+
+## Stage 8: verify and record
+
+**A report page for the owner is rendered before it is called done.** Serve it locally,
+open it in the browser, and count rendered diagrams against `pre.mermaid` blocks with no
+error SVG (`svg[aria-roledescription=error]`); a second colon inside a state-diagram
+transition label is the usual break. Stop the local server afterwards.
+
+Re-run `measure.ts` and `model.ts`. `08-verify.md` sets the new diagrams beside the target and
+the numbers beside stage 1's. Then make the target permanent:
+
+- **the ratchet**: commit the new `summary.json` as `baseline.json` in the job folder, and run
+  `measure.ts --baseline=<job>/baseline.json <scope>` in the project's ship check (`ship-gate`), never on commit or push.
+  It exits 1 when any count (unused code, cycles, cloned lines, functions over a limit) grew,
+  so the debt paid cannot quietly come back; a deliberate rise updates the baseline in the
+  same commit, with the reason in its message;
+- a dependency-cruiser rule (or the project's lint) that forbids the old import directions, so
+  the structure cannot drift back;
+- the architecture decision in the project's docs (the one-line rule where the project keeps
+  rules, the account in its docs), so the next plan starts from it.
+
+## Diagram rules
+
+- Mermaid in fenced `mermaid` blocks; GitHub renders them in Markdown files, issues and PRs.
+- Names in diagrams are the names in the code: file paths, function names, status values.
+- Generated diagrams are regenerated, never edited by hand.
+- One idea per diagram; split past about 30 nodes.
+- Prefer `flowchart`, `classDiagram`, `sequenceDiagram` and `stateDiagram-v2`; Mermaid's C4
+  syntax is still marked experimental.
+
+## Templates
+
+### 03-spec.md
+
+```markdown
+# <job>: spec
+Path: C. Commit: <sha>.
+
+## Problem
+<the owner's words, then one paragraph of what the measurements show>
+
+## Outcome
+<what is true when this is done, checkable>
+
+## Must not change
+- <behaviour, with the test that pins it, or "test to write: …">
+
+## Invariants
+- <rules from the project that this work touches>
+
+## Out of scope
+- <…>
+
+## How we will know
+- <commands and the numbers they must show>
+```
+
+### 05-plan.md
+
+```markdown
+# <job>: plan
+Goal: <one sentence>. Spec: 03-spec.md. Design: 04-target.md option <X>.
+
+## Constraints
+<exact values copied from the spec>
+
+## Mikado graph
+```mermaid
+flowchart BT
+  leaf1[...] --> step[...] --> goal[...]
+```
+
+## Tasks
+### T1 <title, no "and">
+- Blocked by: none
+- Files: [NEW] path, [MODIFY] path:lines, [DELETE] path
+- Interfaces: consumes `…`, produces `…`
+- Contexts: <each context it opens in, or n/a: why> (design-questions.md §1)
+- Neighbours: <exits, other routes, ownership, replay, partial failure, lock order, time, old client; each a check or n/a: why> (§2)
+- Doors: <every path that reads or writes the fact this card touches (live, after the fact, offline, another app, a job), the one function they all call, and the case table that runs them all on the same inputs, boundaries included; or one door: why> (a second copy of a rule is how a door drifts)
+- Done when: <at most three checks>
+- Verify: `<command>` → <expected>
+- Revert if: <what red means>
+- Commit: <message>
+
+```

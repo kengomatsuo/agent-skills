@@ -1,0 +1,21 @@
+{
+  "name": "board-view",
+  "version": "0.1.0",
+  "description": "The project's kanban BOARD.md in a pane: a column per section with counts, the progress figure, and each card's full text on a press. Reads the file itself; never calls the model.",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "openOnStart": {
+      "type": "boolean",
+      "title": "Open on start",
+      "description": "Open the board pane when a session starts in a project that has a board",
+      "default": true
+    }
+  },
+  "author": {
+    "name": "kengomatsuo",
+    "url": "https://github.com/kengomatsuo"
+  },
+  "homepage": "https://github.com/kengomatsuo/agent-skills/tree/main/mods/board-view",
+  "repository": "https://github.com/kengomatsuo/agent-skills",
+  "license": "MIT"
+}

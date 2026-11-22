@@ -1,0 +1,190 @@
+{
+  "name": "kengomatsuo-skills",
+  "owner": {
+    "name": "kengomatsuo",
+    "url": "https://github.com/kengomatsuo"
+  },
+  "metadata": {
+    "description": "Research-first and change-safety skills for Claude."
+  },
+  "plugins": [
+    {
+      "name": "design-research",
+      "description": "Research how real products built a screen (GitHub code, UI galleries, Mobbin, Dribbble) before mocking it.",
+      "source": "./skills/design-research",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "backend-research",
+      "description": "Research how competitors and open-source apps modelled a backend feature before designing it.",
+      "source": "./skills/backend-research",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "prior-art",
+      "description": "Decide deliberately whether to use, copy or build a subsystem, after finding who already solved it.",
+      "source": "./skills/prior-art",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "code-to-copy",
+      "description": "Find open-source projects worldwide that already built a feature, read their schema and code, and record what to copy and what to leave.",
+      "source": "./skills/code-to-copy",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "blast-radius",
+      "description": "Work out everything a change can break before making it: callers, policies, generated types, other apps, old clients.",
+      "source": "./skills/blast-radius",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "blind-audit",
+      "description": "Audit a subsystem against the promise its users were given, writing assertions before reading the code.",
+      "source": "./skills/blind-audit",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "refactor",
+      "description": "Change the shape of existing code without changing what it does: extract, rename, move, split, deduplicate.",
+      "source": "./skills/refactor",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "debt-review",
+      "description": "Measure and diagram code debt, review it with five lenses (KISS, DRY, YAGNI, SOLID, slop, JSDoc), then spec, design twice, plan and refactor one commit at a time.",
+      "source": "./skills/debt-review",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "screen-review",
+      "description": "Run the real app, screenshot the UI you changed, and check it against the repo's reference screens.",
+      "source": "./skills/screen-review",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "match-the-app",
+      "description": "Read the code of the app's existing pages before writing a new one, or open a design canvas when nothing is like it.",
+      "source": "./skills/match-the-app",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "human-prose",
+      "description": "Write prose people read, in any language, without the tells of model-written text.",
+      "source": "./skills/human-prose",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "blind-translation",
+      "description": "Localise an app by writing each language from the screen, never from the English string, then checking it back against the meaning.",
+      "source": "./skills/blind-translation",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "ui-copy",
+      "description": "Decide which text may exist on an app screen, and delete the rest: budgets per element, one sentence per state, errors that name what happened.",
+      "source": "./skills/ui-copy",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "product-video",
+      "description": "Promo videos and App Store previews of your own apps: gather and study references, propose a storyboard, wireframe it, then build from real recordings in Remotion.",
+      "source": {
+        "source": "git-subdir",
+        "url": "https://github.com/kengomatsuo/product-video.git",
+        "path": "skills/product-video"
+      },
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/product-video"
+    },
+    {
+      "name": "lean-search",
+      "description": "Search a codebase in few calls and few tokens: counts before content, batched searches, ast-grep for call sites, big output reduced in a script.",
+      "source": "./skills/lean-search",
+      "strict": false,
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    },
+    {
+      "name": "board-view",
+      "description": "A Claude Code mod that shows the project's kanban board (docs/plans/**/BOARD.md) in a pane: lanes, counts, progress, each card opened whole. Reads the file itself, so it spends no tokens.",
+      "source": "./mods/board-view",
+      "author": {
+        "name": "kengomatsuo"
+      },
+      "homepage": "https://github.com/kengomatsuo/agent-skills/tree/main/mods/board-view",
+      "repository": "https://github.com/kengomatsuo/agent-skills"
+    }
+  ]
+}

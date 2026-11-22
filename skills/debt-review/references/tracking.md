@@ -1,0 +1,135 @@
+# Tracking and handoff
+
+## Contents
+- The rule
+- The job folder
+- The board
+- Pulling a card
+- Handoff at any moment
+- Checking the board
+
+## The rule
+
+**THE REPO IS THE ONLY MEMORY THAT EVERY SESSION SHARES.** A chat transcript, a scratchpad
+and Claude Code's auto memory all live on one machine (auto memory sits in
+`~/.claude/projects/<project>/memory/`); another account or another laptop never sees them.
+So findings, plan, board and handoff are files in the repo, committed and pushed, and a
+session can stop at any second without losing more than the step it was in.
+
+## The job folder
+
+```
+<plans folder>/<slug>/
+  01-current.md     measurements and diagrams
+  02-findings.md    ranked findings, each with an id D1, D2 …
+  03-spec.md
+  04-target.md
+  05-plan.md        Mikado graph and tasks T1, T2 …
+  BOARD.md          the kanban board and the handoff block
+  08-verify.md
+```
+
+The plans folder is the project's own (`docs/plans/`, `docs/refactor/`), else
+`docs/refactor/`. Raw tool output (`measure/`, `model/`) stays outside the repo or gitignored;
+the numbered files quote what matters from it.
+
+## The board
+
+Kanban (看板) is Toyota's card system: work is pulled by whoever has capacity, never pushed,
+and each column caps how much may sit in it at once. `BOARD.md`:
+
+```markdown
+# <job>: board
+
+Run by the debt-review skill: load it, then `bun <skill>/scripts/board.ts` on this file.
+
+## Handoff
+- Updated: 2026-10-05T14:20Z by <session name> on <machine>
+- Last commit: abc1234 T3 Move rental quoting into pos/rental/quote.ts
+- In hand: T4, step 2 of 4: callers in apps/admin moved, apps/ops not yet
+- Next action: `bun test packages/pos` then move apps/ops/src/data.ts:1180 to the new import
+- Blocked on: nothing | owner's answer on <question>
+
+## Backlog
+- **D7** Benefit is a bag of optionals (types and state) · effort M
+
+## Ready
+- **T5** Delete the old quote helpers · blocked by: T4 · finding D2 · plan: 05-plan.md task T5 · done when: no import of the old helpers remains and `bun test packages/pos` passes · verify: `grep -rn oldQuote apps packages` prints nothing
+
+## Doing (limit 1 per session)
+- **T4** Point callers at pos/rental/quote.ts · plan: 05-plan.md task T4 · done when: apps/admin and apps/ops import pos/rental/quote.ts only · verify: `bun test packages/pos` and `bun run typecheck` pass · claim: <session>@<machine> 2026-10-05T14:02Z
+
+## Review
+- **T3** … · commit: abc1234 · check: `bun test packages/pos` 212 pass
+
+## Done
+- **T1** Draft: pos/rental/quote.ts delegates to data.ts · commit: 9f8e7d6
+```
+
+**A card changes only through the house `board` skill's script**, never by editing its line:
+`bun ~/.claude/skills/board/scripts/board.ts --board BOARD.md move T4 done --commit abc1234 --check "what ran"`,
+and `add`, `claim`, `note`, `next`, `merge-named` the same way; the `board-guard`
+hook refuses any other write to a `BOARD.md`, because a mark written in place or a hand edit
+leaves a finished card in a column where no count finds it. `scripts/card.ts
+move` still works and calls it. An agent never moves cards; the coordinator does, after the
+work lands.
+
+A project whose rules forbid the agent to commit keeps finished cards in Review with
+`commit: owner`; the owner's commit moves them to Done with its sha.
+
+The house board skill's `## Columns` table is the single definition of the columns. `add --to ready`
+and `move <ID> ready` need `--plan`, `--done-when` and `--verify`; `set <ID> --plan .. --done-when ..
+--verify ..` writes them on a card already on the board.
+
+Two card fields are enforced by the script. `blocked by: A, B` means the card cannot be claimed,
+and `next` skips it, until every blocker is in Review or Done. `parent: P` means the parent cannot
+move to Done until all its children are Done, and `status` shows its children as 3/5. Set them with
+`board.ts link <ID> --blocked-by A,B` or `board.ts link <ID> --parent P`.
+
+## Pulling a card
+
+1. `git pull --no-rebase`. Read `BOARD.md`, the Handoff block first.
+2. Take the top card in Ready (or resume your own in Doing). Move it to Doing with your claim,
+   commit only `BOARD.md` with the message `Claim T4`, and push at once. A push that is
+   rejected means someone else moved first: pull, read again, pick again.
+3. Work the task as the plan says.
+4. The task's commit carries the code AND the board move to Review (with the check that
+   passed) AND a fresh Handoff block. One commit, so board and code never disagree.
+
+A claim older than two hours with no commit after it is stale; another session may take it
+over, writing `taken over from <old claim>` on the card.
+
+## Handoff at any moment
+
+A session can end mid-step: usage runs out, the laptop sleeps, context compacts. So the
+Handoff block is rewritten at every commit, never only at the end, and it says enough for a
+stranger to continue with no transcript:
+
+- what was last committed;
+- what is in hand right now, down to the step and the file;
+- the exact next command or edit;
+- anything waiting on the owner.
+
+Uncommitted work at a hard stop is lost by design: steps are small enough that losing one
+costs minutes.
+
+Everything another session needs lives in the job folder from the start, never in the
+session's scratchpad: agent briefs (`briefs/`), exported source notes, generator scripts.
+A scratchpad dies with the session and the next account cannot read it. When the budget
+runs low, follow the house `session-handoff` skill: stop every background agent first (they keep spending), write `HANDOFF.md` beside
+the board with state, next actions, owner decisions and gotchas, and point the Handoff block
+at it. When a session sees its budget running low, it finishes or reverts the current
+step, commits the board, and pushes.
+
+The next session, on any account, starts with "continue the debt-review job in
+`<plans folder>/<slug>`"; the skill sends it to `BOARD.md`.
+
+## Checking the board
+
+```bash
+bun ${CLAUDE_SKILL_DIR}/scripts/board.ts <plans folder>/<slug>/BOARD.md
+```
+
+Prints the Handoff block and the next card to pull, and fails when a Done or Review card names
+a commit git does not have, when a session holds more than one Doing card, or when a claim is
+stale. Run it when picking up.

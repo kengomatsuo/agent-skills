@@ -1,0 +1,121 @@
+---
+name: backend-research
+description: "Researches how competitors and open-source apps built a backend feature, then designs tables, statuses and API from it. Use before designing a backend feature, endpoint or webhook."
+user-invocable: true
+---
+
+# Read how others built the feature, then design
+
+> **Local notes.** If `~/.claude/skill-notes/backend-research.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
+`prior-art` asks whether to use an existing system, copy its design, or build. This skill
+gathers the evidence for the second and third answers: how the mature products shaped the
+same data, and what broke for them. When the question is "should we adopt X", run
+`prior-art` and hand its step 3 to the agents below.
+
+## Research first: no migration is written until the research is in
+
+No migration is written until the research is in and the README exists, because a schema
+with data in it is costly to change; sketch tables and states freely meanwhile and redraw
+them against what the research finds. Count the agents launched against the completion notices.
+
+Dependencies: `gh` (`brew install gh`, then `gh auth login`), `curl`, `bun`.
+
+Copy this checklist into your reply and tick items off as they pass:
+
+```
+- [ ] 1. Brief written without a solution in it; every agent gets the same one
+- [ ] 2. Agents launched: N. Completion notices received: N (numbers must match)
+- [ ] 2. Each agent's check-notes.ts exited 0 before it reported
+- [ ] 3. check-notes.ts on the whole folder exits 0 (non-zero: send the owning agent back to step 2)
+- [ ] 3. Every number in the README re-read from the saved source; README.md written
+- [ ] 4. Schema started from the saved code, fresh parts named; design shown as a table, diagram or API shape; yes received
+```
+
+## 1. Brief (one paragraph, you write it)
+
+The feature in one sentence without your solution in it ("a customer pays part of a bill
+now and the rest later, and the cashier never loses track of what is owed"). Then the
+actors, every state you already know of, the edge cases you suspect, and the constraints
+that are this project's alone: multi-tenancy, offline clients, the local payment
+gateways, the runtime (serverless, edge, a queue or none). Every agent gets the same brief.
+
+## 2. Fan out: one agent per source below, in parallel, in the background
+
+| Agent | Source | Best output |
+|---|---|---|
+| Open-source code | apps that ship the same feature, found with `gh search repos` and `gh search code` (for commerce and POS: Medusa, Saleor, Odoo, ERPNext, Invoice Ninja; for billing: Lago, Polar, Kill Bill; for booking: Cal.com, Hi.Events; for CRM and ops: Twenty, Chatwoot, Plane) | **their migrations, schema files and service code** in `code/`, each with the permalink at the commit SHA in a header comment |
+| Competitor APIs | public API and webhook references of the commercial products (Stripe, Square, Toast, Shopify, Adyen and whoever leads the domain), plus the help centres of the platforms the users already use | the object model: fields, statuses and allowed transitions, idempotency keys, the webhook event list, versioning, and every "if nobody acts" rule with its number (auto-cancel after N hours, auto-complete after N days, a return approved when the seller is silent for N days) |
+| Failure record | issues, changelogs, migration guides and postmortems of the projects above, searched for `race`, `duplicate`, `double`, `timezone`, `rounding`, `refund`, `idempotent`, `offline`, `migration` | each bug they hit, dated and linked, with the fix they chose |
+| Specs | the rules the feature cannot negotiate: the payment network's or central bank's spec, tax and invoicing rules, the gateway's settlement rules, Standard Webhooks, ISO 4217 minor units; for anything buyers pay for, primary survey data on how the local market pays and ships (cash on delivery, e-wallets, transfer) | constraints, each quoted briefly with the link; a payment method most local buyers use and the design lacks is an open question for the user |
+
+Each agent writes into `<research>/<project>-<topic>/<source>/`, where `<research>` is a
+folder outside every repo (the user's choice; default `~/backend-research/`):
+- `code/<repo>--<path-with-dashes>` for copied source, never paraphrased
+- `notes.md`: a table of # | URL | file | what to take, in one concrete sentence. The file
+  column names a file in this folder for EVERY row, or says `gated: <reason>`
+
+**Looked at is not captured.** Every source is saved before it is cited:
+- an issue: `gh issue view <n> --repo <o>/<r> --json number,title,state,createdAt,closedAt,url,body,comments > issues/<o>-<r>-<n>.json`
+- an API reference or doc page: its text as `<vendor>-<page>.md`, URL and date on line 1
+  (a JS-rendered page through Claude in Chrome `get_page_text`)
+- a regulation or spec: the PDF itself with `curl`, checked with `file` so an HTML error
+  page never lands as `.pdf`
+- code: the raw file at the commit SHA, never a paraphrase
+
+Before reporting, each agent runs `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <its folder>` and reports
+only when it exits 0.
+
+Parallel agents share one browser, read-only: the tab and read-only rules are in `../design-research/references/browser-tabs.md`; put them in every brief that sends an agent to a browser.
+
+Primary sources only: the project's own repo and docs, never a comparison blog. Verify a
+project is alive with `gh api repos/<owner>/<repo> --jq
+'{stars:.stargazers_count,pushed:.pushed_at,archived:.archived}'` before learning from it.
+A gated or paywalled source is written down as gated. JS-rendered docs are opened in a
+real browser session such as Claude in Chrome, never guessed. In a repo that forbids
+agents from running heavy checks, say so in the brief.
+
+The folder sits outside the repo for the same reason as in `design-research`: one
+project's research serves the next.
+
+## 3. Synthesise
+
+Run `bun ${CLAUDE_SKILL_DIR}/check-notes.ts <research>/<project>-<topic>` first; a non-zero exit
+sends the agent that owns the missing rows back. A row an agent marked "unconfirmed" goes
+back to it once, with a real browser session, before synthesis starts. Every number and
+rule in the README is re-read from the saved source, never from an agent's summary:
+summaries drift (a refund window an agent reports as 30 days can read 7 in the vendor's own article).
+A known bug in the failure record that touches the project's own stack (its driver, ORM,
+runtime) gets a short probe against the installed version before it changes a decision;
+the probe decides, the issue title does not. Then read the four `notes.md` files and
+the strongest code. Write
+`<research>/<project>-<topic>/README.md` with:
+
+- a table, one row per product, showing how each models the core entity: its tables or
+  objects, its statuses, who may move it between them
+- every edge case at least one of them handles, with the file it came from
+- what we take, and what we reject with the reason (it assumes one tenant, it needs a
+  queue we do not run, it solves a scale we will not reach)
+- every timeout from the competitors, and for each one in the design: the number, the job
+  that enforces it, and the screen that tells the user the date
+- open questions only the user can answer
+
+## 4. Design, then propose
+
+Only after the README exists. **The schema starts from the saved code, read file by file
+and never from the README's summary of it; where this product's core flow differs from
+every source, design that part fresh and say which source each kept part came from.** For
+the kept parts run `code-to-copy` step 8 (spec from the source,
+cut to what the requirements need, code written by an agent that never read the source,
+blended with the app, verified by the source's own scenarios). The README decides which
+source wins where they disagree; it never stands in for reading the code.
+
+Design any API, RPC, webhook or module interface with [references/interface-design.md](references/interface-design.md): it holds the contract, error, validation, idempotency and type rules, and defers to `supabase-conventions` and `lessons-money-ledger` where they rule.
+
+Choosing a pattern (feed fan-out, Bloom filter, shared sessions, monolith or services, idempotency keys, CQRS, server-sent events)? [references/system-design-patterns.md](references/system-design-patterns.md) gives the rule, the deciding check and the primary source for each.
+
+Present the design as a table, status diagram or API shape, never paragraphs. This is new
+work, so propose it and wait for yes. When the research ends in a use, copy or build decision, record it in
+`docs/<thing>-is-<choice>.md` as `prior-art` describes.

@@ -1,0 +1,101 @@
+#!/usr/bin/env bun
+// Reads a debt-review BOARD.md: handoff, next card, problems.
+// Usage: bun board.ts <path/to/BOARD.md> [--stale-hours=2]
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join } from "node:path";
+
+const args = process.argv.slice(2);
+const file = args.find((a) => !a.startsWith("--"));
+if (!file) throw new Error("usage: bun board.ts <BOARD.md>");
+const staleHours = Number(args.find((a) => a.startsWith("--stale-hours="))?.split("=")[1] ?? 2);
+
+type Card = { id: string; line: string; column: string; claim?: string; claimedAt?: Date; commit?: string };
+
+const sections = new Map<string, string[]>();
+let current = "";
+for (const line of readFileSync(file, "utf8").split("\n")) {
+  const heading = line.match(/^## (\w+)/);
+  if (heading) current = heading[1]!.toLowerCase();
+  else if (current) sections.set(current, [...(sections.get(current) ?? []), line]);
+}
+
+const cards: Card[] = [];
+for (const column of ["backlog", "ready", "doing", "review", "done"])
+  for (const line of sections.get(column) ?? []) {
+    const id = line.match(/^- \*\*([\w.-]+)\*\*/)?.[1];
+    if (!id) continue;
+    const claim = line.match(/claim: (\S+) (\S+Z)/);
+    cards.push({
+      id,
+      line,
+      column,
+      claim: claim?.[1],
+      claimedAt: claim ? new Date(claim[2]!) : undefined,
+      commit: line.match(/commit: ([0-9a-f]{7,40})/)?.[1],
+    });
+  }
+
+const problems: string[] = [];
+// a card written in another shape, such as "- [ ] W1", is counted by nobody
+const stray = readFileSync(file, "utf8").split("\n").filter((l) => /^- \[[ x]\] \w+\d/.test(l)).length;
+if (stray) problems.push(`${stray} card(s) written as "- [ ] ID"; write "- **ID** ..." under ## Backlog/Ready/Doing/Review/Done`);
+/* A CARD MOVES WITH card.ts, NEVER BY AN INLINE MARK: " · done" written in place leaves a
+   done card in Backlog, where every count of the board disagrees */
+for (const card of cards)
+  if (card.column !== "done" && /\s·\sdone\b/.test(card.line))
+    problems.push(`${card.id} says done but sits in ${card.column}: run bun card.ts move <BOARD.md> ${card.id} done --commit <sha>`);
+const commitExists = (sha: string) => Bun.spawnSync(["git", "cat-file", "-e", `${sha}^{commit}`]).exitCode === 0;
+for (const card of cards) {
+  // a project whose rules forbid agent commits marks the card "commit: owner"
+  const ownerCommits = card.column === "review" && /commit: owner\b/.test(card.line);
+  if ((card.column === "done" || card.column === "review") && !card.commit && !ownerCommits)
+    problems.push(`${card.id} is in ${card.column} with no commit (write "commit: owner" if the project forbids agent commits)`);
+  if (card.commit && !commitExists(card.commit))
+    problems.push(`${card.id} names commit ${card.commit}, which this clone does not have (pull?)`);
+  if (card.column === "doing" && !card.claim) problems.push(`${card.id} is in doing with no claim`);
+  if (card.claimedAt && Date.now() - card.claimedAt.getTime() > staleHours * 3_600_000)
+    problems.push(`${card.id} claim by ${card.claim} is over ${staleHours}h old: stale, may be taken over`);
+}
+/* EVERY ACTION IS WALKED: a hotspot sample skips the actions outside the busiest files. */
+const inventory = join(dirname(file), "00-inventory.md");
+if (existsSync(inventory)) {
+  const rows = readFileSync(inventory, "utf8").split("\n").filter((l) => /^\| `/.test(l));
+  const open = rows.filter((l) => {
+    const c = l.split("|").map((s) => s.trim());
+    return !c[5] || !c[6];
+  });
+  if (open.length) problems.push(`00-inventory.md: ${open.length} of ${rows.length} rows have no verdict or no prior art yet; walk them`);
+}
+const target = join(dirname(file), "04-target.md");
+if (existsSync(target) && !/^## Prior art\s*\n+\S/m.test(readFileSync(target, "utf8")))
+  problems.push("04-target.md has no filled '## Prior art' section: run prior-art/backend-research first, or write 'none found:' with the searches run");
+const handoffText = (sections.get("handoff") ?? []).join("\n");
+if (/await(s|ing)? the owner|blocked on:[^\n]*owner/i.test(handoffText) && !/asked (via|through) the choices UI/i.test(handoffText))
+  problems.push("the Handoff waits on the owner but never says 'asked via the choices UI at <time>': ask it through AskUserQuestion now");
+const findings = join(dirname(file), "02-findings.md");
+if (existsSync(findings)) {
+  const text = readFileSync(findings, "utf8");
+  const ranSection = text.split(/^## /m).find((x) => /^Which lenses ran/i.test(x)) ?? "";
+  const lenses = ["structure", "duplication", "dead code", "types and state", "slop", "network", "layout stability", "data layer", "backend structure", "model", "product", "bandages"];
+  const core = ["structure", "duplication", "dead code", "types and state", "slop", "bandages"];
+  for (const lens of core)
+    if (!new RegExp(lens, "i").test(ranSection)) problems.push(`02-findings.md does not name the ${lens} lens under 'Which lenses ran': the core five and bandages always run`);
+  for (const lens of lenses) {
+    const line = ranSection.split("\n").find((l) => new RegExp(lens, "i").test(l));
+    if (line && !/\.md|\b[A-Z]\d{1,3}\b|nothing in scope/.test(line))
+      problems.push(`the ${lens} lens has neither a report file nor a board card: ${line.trim().slice(0, 80)}`);
+  }
+}
+const perClaimant = new Map<string, string[]>();
+for (const card of cards.filter((c) => c.column === "doing" && c.claim))
+  perClaimant.set(card.claim!, [...(perClaimant.get(card.claim!) ?? []), card.id]);
+for (const [who, ids] of perClaimant) if (ids.length > 1) problems.push(`${who} holds ${ids.join(", ")}: limit is one`);
+
+console.log((sections.get("handoff") ?? []).join("\n").trim() || "(no Handoff block)");
+const next = cards.find((c) => c.column === "ready");
+console.log(`\nNext to pull: ${next ? next.line.slice(2) : "nothing in Ready"}`);
+console.log(`Cards: ${["backlog", "ready", "doing", "review", "done"].map((c) => `${c} ${cards.filter((x) => x.column === c).length}`).join(", ")}`);
+if (problems.length) {
+  console.log(`\nProblems:\n${problems.map((p) => `- ${p}`).join("\n")}`);
+  process.exit(1);
+}

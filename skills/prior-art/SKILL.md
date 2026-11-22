@@ -1,0 +1,85 @@
+---
+name: prior-art
+description: "Finds mature systems that solved a subsystem and records use, copy or build. Use at the start of a non-trivial feature."
+user-invocable: true
+---
+
+# Look at what already works before designing
+
+> **Local notes.** If `~/.claude/skill-notes/prior-art.md` exists, read it before starting. It
+> holds this user's own folders, project rules and examples, and where it disagrees with
+> this file, it wins.
+
+**Look before building: find how mature systems solved it and what it cost them, then use,
+copy or build on that evidence.** A project that switched a booking flow onto an
+off-the-shelf scheduling platform kept a `docs/booking-is-<choice>.md` record of what was
+rejected to get there — including its own earlier booking engine, with an exclusion
+constraint stopping two parties holding one slot at once, rate bands, and an anon-callable
+offer RPC. The decision is dated, signed off by whoever owns the product, and says what would change it. That page is the shape this skill produces.
+
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] 1. Problem named in one sentence, without a solution in it
+- [ ] 2. Mature implementations found; stars and pushed_at verified with gh api
+- [ ] 3. Their hard-won constraints written down (a project bigger than one library: run backend-research)
+- [ ] 4. Choice made: use, copy its design, or build, with the cost named
+- [ ] 5. docs/<thing>-is-<choice>.md written and one headline added to the rules file
+        (no search recorded: Build is not yet a legitimate answer, return to step 2)
+```
+
+## 1. Name the problem in one sentence, without your solution in it
+
+"Guests pick a time and a table, and cannot double-book." Not "build a booking table with
+a range type". The sentence is what you search with.
+
+## 2. Find the mature implementations — primary sources only
+
+- GitHub, sorted by stars, then **verify the numbers with `gh api repos/<owner>/<name>`**.
+  Listicles and comparison sites invent them, sometimes by a factor of a thousand.
+- Check `pushed_at`. A 40k-star project last pushed more than a year ago is a museum piece.
+- Read the project's OWN docs and source, never an SEO comparison page.
+- For an installed dependency, `node_modules/` beats every docs site — the `exports` map
+  for the real import path, the `.d.ts` for the typed API, the compiled JS for runtime
+  behaviour the docs do not surface.
+
+## 3. Read how they solved it, especially the parts you would have got wrong
+
+For anything bigger than one library, run `backend-research` here: its agents read the
+schemas, API references and bug record this step needs.
+
+The value is rarely the code. It is the constraint they discovered: what they do about
+concurrent writes, about timezones, about partial failure, about the thing that only shows
+up at scale. Write those down even when you decide to build.
+
+## 4. Choose, on the record
+
+| Choice | When | Cost to name |
+|---|---|---|
+| **Use it** | it is maintained, the licence fits, and the shape it imposes is acceptable | the integration surface, and what happens when it is down |
+| **Copy its design** | it solves it well but drags a stack you will not adopt | the parts you are NOT copying, and why |
+| **Build** | your constraint genuinely differs, or the surface is small | what the mature ones do that you are choosing to skip |
+
+"Build" is a legitimate answer. It is only illegitimate when nobody looked.
+
+## 5. Write the page
+
+`docs/<thing>-is-<choice>.md`, in the shape the opening paragraph describes:
+
+- **The decision, the date, who directed it, and what would change this decision.**
+- **What was rejected**, in detail — including your own existing systems. That section is
+  what stops the next session rebuilding it.
+- What is missing or unbuilt, named precisely, so the door stays open.
+
+Then one headline pointing at that page, in whatever rules file the project keeps for the
+code it covers.
+
+## Before calling something a gap in your own system
+
+A missing table name proves nothing: read how the domain is modelled, because a hierarchy can already do what another system calls tenancy. A decision quoted from a plan is what the plan said, so name the plan and ask whether it still holds. Read a module's entities before judging it by its name. Measure performance on the running system before ranking it.
+
+## When the answer changes
+
+New evidence reopens it: the project was abandoned, the licence changed, the constraint
+you were told about turned out not to hold. Amend the page with the date and the evidence
+rather than starting a fresh argument.

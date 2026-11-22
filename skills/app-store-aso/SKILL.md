@@ -1,0 +1,145 @@
+---
+name: "app-store-aso"
+description: "Researches and writes App Store listings per storefront: name, subtitle, keywords, screenshots, Search Ads, ASO audits. Use before a release or when an app ranks for nothing."
+disable-model-invocation: true
+---
+
+# App Store optimization
+
+> **Local notes.** If `~/.claude/skill-notes/app-store-aso.md` exists, read it before starting.
+
+Store copy written without research ranks for nothing but the words in its own keyword
+field, because a listing written from slogans holds words nobody types.
+Every claim below about Apple or about ranking is a starting hypothesis; fetch the
+current source in the session before acting on it, and cite it.
+
+## The order. No step is skipped
+
+Dependencies: Python 3 with the standard library only for the scripts; `curl` for fetches.
+
+Copy this checklist into your reply and tick items off:
+
+```
+- [ ] 1. Apple's rules fetched live            -> docs/aso/sources.md
+- [ ] 2. Practitioner tactics                  -> docs/aso/research.md
+- [ ] 3. Measured what people type and how crowded it is, per storefront -> docs/aso/data/
+        (a seed with no type-ahead and no results: drop it or reseed, return to 3)
+- [ ] 4. Competitors' real listings            -> docs/aso/research.md
+- [ ] 5. Proposed per locale                   -> docs/aso/proposal.json, keywords.md
+- [ ] 6. Every non-English visible line written blind -> per-locale drafts
+        (a length over its limit: rewrite the line, return to 6)
+- [ ] 7. Screenshots and custom product pages  -> sets per device per locale
+- [ ] 8. Shipped and read back; re-measured at 48 hours and 3 to 4 weeks -> read-back, data/ reruns
+        (a field that reads back differently: fix the upload, return to 8)
+```
+
+An instruction not to ask questions never skips research. A name change, a rating prompt and custom
+product pages are the owner's decisions: propose them with the evidence, then build.
+
+## 1. Apple's rules (fetch each time)
+
+- Search inputs: <https://developer.apple.com/app-store/search/> and App Store Connect's
+  platform version information. Name, subtitle, keyword field and primary category, plus
+  downloads and ratings. Promo text and description are not search inputs.
+- Keyword field: 100 bytes (count UTF-8 bytes, not characters), commas, no spaces needed,
+  no words already in the name or subtitle, no competitor trademarks, no category names.
+  Guideline 2.3.7 for what metadata may claim.
+- Which extra languages each country lists:
+  <https://developer.apple.com/help/app-store-connect/reference/app-store-localizations>.
+  English (U.K.) is listed in nearly every storefront, so en-GB is usually the most
+  valuable locale an app owns. Whether listed locales are also *searched* is a vendor
+  claim (AppTweak, MobileAction), not Apple's; say so.
+- Custom product pages, product page optimization, in-app events, ratings
+  (<https://developer.apple.com/app-store/ratings-and-reviews/>): read the current limits.
+
+## 2. Practitioner tactics
+
+Fetch current guides from Appfigures, AppTweak, Sensor Tower, MobileAction,
+SplitMetrics, Phiture and indie developers who published results; Reddit if reachable.
+Record where they disagree. Points they agreed on in 2026, to re-check:
+
+- The name carries the most weight; words earlier in it rank better. Brand first, then a
+  descriptor: "Brand - Descriptor". Hyphen and colon index the same; pick one house style.
+- Name and subtitle words combine into phrases; keep them on one theme.
+- Phrases form inside one locale's fields, so a term split across locales does not make
+  a phrase.
+- Screenshot caption text may be read for ranking (Appfigures, June 2025); treat it as a
+  free reinforcement, never the only home of a keyword.
+- Change keywords once, then wait: ranks move in 12 to 48 hours and settle over weeks.
+
+## 3. Measure
+
+`python3 ${CLAUDE_SKILL_DIR}/scripts/hints.py seeds.json hints.json`: Apple's type-ahead per storefront. It shows what
+people type and in what order, not volume. Seed each country with short stems in its own
+language and script, plus the English stems locals use.
+
+`python3 ${CLAUDE_SKILL_DIR}/scripts/rank.py APP_ID queries.json ranks.json`: the live App Store search per country.
+For each query: result count (crowding; Apple caps near 250), the app's rank, the top 15
+with rating counts. A query returning few apps is open; one returning 250 led by apps with
+tens of thousands of ratings is closed to a new app. Keep both files and rerun later.
+
+Store ids are in `${CLAUDE_SKILL_DIR}/scripts/storefronts.py`; add one only after checking it live.
+
+## 4. Competitors
+
+Read the real name, subtitle, first screenshots and preview of the 10 to 20 apps a person
+would see beside this one, in the major storefronts (apps.apple.com through fetch, or a
+real browser for pages that render with JavaScript). Note which typed terms they hold in
+their names: a typed term no leader holds in its name is an opportunity.
+
+## 5. Propose
+
+`docs/aso/proposal.json`, per locale: `name`, `subtitle` (meaning plus `mustContain` terms
+for non-English), `keywords` (final list, at most 100 bytes), `promo`, `why` (the
+measurement behind it), `storefronts` it serves. Rules:
+
+- Only words people type. Drop words with no type-ahead and no results.
+- Do not claim what the app is not (a pop-up blocker is not a general ad blocker).
+- English variants that a country indexes together get complementary keyword sets, never
+  copies.
+- A must-contain term that does not fit the subtitle goes into that locale's keyword field,
+  pushing out the lowest-value words (platform names first). Use the inflected form people
+  type (Russian genitive "всплывающих окон", not the nominative).
+
+## 6. Write blind
+
+Every non-English visible line (subtitle, promo, captions, release notes) is composed by a
+native writer subagent who sees only the meaning, the must-contain terms and that
+language's existing store copy, never an English line. Use the `blind-translation` and
+`human-prose` skills. Then a second native pass on any subtitle that reads as a keyword
+list. Check every length with code, and rewrite until it passes:
+`python3 ${CLAUDE_SKILL_DIR}/scripts/check-lengths.py docs/aso/proposal.json` (name and
+subtitle 30 characters, promo 170, keywords 100 bytes, no keyword already in the name or
+subtitle; exit 0 means every field fits).
+
+## 7. Screenshots and custom product pages
+
+- Facts the designer works with: Apple shows about the first three frames, at about one
+  sixth size in search, and may read caption text for ranking; a preview autoplays muted.
+  How many frames, what they show and how is the designer's call.
+- Render every locale, right to left where needed, with fonts for every script; validate
+  sizes and look at a contact sheet of every locale.
+- The `product-video` skill makes the preview video.
+- Custom product pages: one per clear search intent the research found, each with its own
+  screenshots, promo and deep link, in every locale.
+- Sizes, file rules, ways to make the set, captures, localising and uploading: [references/screenshots.md](references/screenshots.md).
+- A rating prompt (SwiftUI `requestReview`) after a real moment of value, never at launch
+  or from a button, once per version.
+
+## Paid search, audits and screenshot panels
+
+- Apple Search Ads (campaign structure, match types, bids, custom product page routing, ROAS): [references/apple-search-ads.md](references/apple-search-ads.md). Spend and campaign changes are shown to the owner first.
+- Measuring a live app (downloads, conversion and sources per period, price periods, ranks against a baseline), country pricing, in-app events, featuring, ratings and promo codes: [references/performance.md](references/performance.md).
+- A scored health audit of a live listing: [references/audit.md](references/audit.md).
+- Screenshot panels and Apple's sizes: [references/screenshots.md](references/screenshots.md).
+
+## 8. Ship and read back
+
+Upload to the editable version only, never the version on sale, and never submit for
+review: that is the owner's call. Read every field back from App Store Connect (names and
+subtitles live on the app-info record, keywords and promo on the version). Rerun
+`rank.py` at 48 hours and at 3 to 4 weeks into new files and compare.
+
+## Sources
+
+The three references were distilled on 2026-10-21 from third-party skills the house no longer installs. `apple-search-ads.md` and `audit.md` come from the `apple-search-ads` and `aso-audit` skills (no author, repository or licence stated; copied 2026-09-10; written in own words, no text copied). `screenshots.md` comes from `hypershots` by HyperSocial Incorporated (MIT; see NOTICE). Each file ends with what was unsourced or dropped.
